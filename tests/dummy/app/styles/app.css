@@ -1,0 +1,107 @@
+.ice-tooltip {
+    position: absolute;
+    background: #FFC107;
+    color: black;
+    border-radius: 3px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    padding: 10px;
+    text-align: center;
+}
+
+.ice-tooltip .popper-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 5px;
+}
+
+.ice-tooltip .popper-arrow {
+    border-color: #FFC107;
+}
+
+.ice-tooltip[x-placement^="top"] {
+    margin-bottom: 5px;
+}
+
+.ice-tooltip[x-placement^="top"] .popper-arrow {
+    border-width: 5px 5px 0 5px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    bottom: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.ice-tooltip[x-placement^="bottom"] {
+    margin-top: 5px;
+}
+
+.ice-tooltip[x-placement^="bottom"] .popper-arrow {
+    border-width: 0 5px 5px 5px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    top: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.ice-tooltip[x-placement^="right"] {
+    margin-left: 5px;
+}
+
+.ice-tooltip[x-placement^="right"] .popper-arrow {
+    border-width: 5px 5px 5px 0;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    left: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.ice-tooltip[x-placement^="left"] {
+    margin-right: 5px;
+}
+
+.ice-tooltip[x-placement^="left"] .popper-arrow {
+    border-width: 5px 0 5px 5px;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    right: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+.scroll-container {
+    height: 800px;
+    width: 400px;
+    overflow: scroll;
+    margin: auto;
+}
+
+.item-container {
+    height: 2000px;
+    width: 400px;
+
+    background-color: maroon;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-target {
+    width: 100px;
+    height: 50px;
+
+    background-color: lightgrey;
+}

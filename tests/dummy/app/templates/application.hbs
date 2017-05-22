@@ -1,5 +1,10 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<div class="scroll-container">
+  <div class="item-container">
+    <div class="scroll-target">
+      {{#ice-tooltip modifiers=popperModifiers}}
+        Pop
+        <div class="popper-arrow" x-arrow></div>
+      {{/ice-tooltip}}
+    </div>
+  </div>
+</div>

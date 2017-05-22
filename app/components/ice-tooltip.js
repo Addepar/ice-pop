@@ -1,0 +1,1 @@
+export { default } from 'ice-pop/components/ice-tooltip';
