@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^6.0.0",
-    "ice-box": "git+ssh://git@github.com:Addepar/ice-box.git#51250c786dbdf85ca67cfe322bfc6c23897747b0",
+    "ice-box": "git+ssh://git@github.com:Addepar/ice-box.git#69a3585006a4dbabac4d61e3af3ce5d12e7b6251",
     "ice-popper": "git+ssh://git@github.com:Addepar/ice-popper.git#7da3b4ce0c51899084e94e09c8f512b425be9f2a"
   },
   "devDependencies": {

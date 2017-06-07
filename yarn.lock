@@ -3161,9 +3161,9 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-"ice-box@git+ssh://git@github.com:Addepar/ice-box.git#51250c786dbdf85ca67cfe322bfc6c23897747b0":
+"ice-box@git+ssh://git@github.com:Addepar/ice-box.git#69a3585006a4dbabac4d61e3af3ce5d12e7b6251":
   version "0.0.0"
-  resolved "git+ssh://git@github.com:Addepar/ice-box.git#51250c786dbdf85ca67cfe322bfc6c23897747b0"
+  resolved "git+ssh://git@github.com:Addepar/ice-box.git#69a3585006a4dbabac4d61e3af3ce5d12e7b6251"
   dependencies:
     ember-cli-babel "^6.0.0"
 

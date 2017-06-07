@@ -1,5 +1,11 @@
 {{#if isShowing}}
-  {{#ice-popper target=_target class="ice-tooltip"}}
+  {{#ice-popper
+    target=_target
+    placement=placement
+    class=popperClass
+    classNameBindings="isVisible"
+  }}
     {{yield}}
+    <div class="popper-arrow" x-arrow></div>
   {{/ice-popper}}
 {{/if}}
