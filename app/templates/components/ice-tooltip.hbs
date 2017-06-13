@@ -1,8 +1,9 @@
 {{#if isShowing}}
   {{#ice-popper
+    id=_popperId
     target=_target
     placement=placement
-    class=popperClass
+    class="ice-tooltip"
     classNameBindings="isVisible"
   }}
     {{yield}}

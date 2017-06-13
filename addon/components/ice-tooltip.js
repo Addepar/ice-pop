@@ -1,17 +1,34 @@
 import Ember from 'ember';
 
 const {
-  Component
+  Component,
+  run,
+  generateGuid
 } = Ember;
 
 export default Component.extend({
+  // ----- Public Settings ------
 
-  popperClass: 'ice-tooltip',
-
+  // Used to determine the placement of the tooltip
   placement: 'auto',
+
+  // ----- Private Variables -----
 
   // Used to track whether fade in/out animation should trigger
   isVisible: false,
+
+  // Used to target/select the popper element after it's been inserted
+  _popperId: null,
+
+  // Used to store the popper element for adding/removing event listeners
+  _popperElement: null,
+
+  // ----- Lifecycle Hooks -----
+
+  init() {
+    this._super(...arguments);
+    this._popperId = generateGuid();
+  },
 
   didInsertElement() {
     let target = this.get('target') || this.element.parentNode;
@@ -26,19 +43,36 @@ export default Component.extend({
     this._target = target;
 
     this._mouseEnterHandler = () => {
-      this.set('isShowing', true);
-      // Hack to delay fade in animation after popper is rendered
-      Ember.run.debounce(this, function() {
-        this.set('isVisible', true);
-      }, 20);
+      // Schedule these separately so that the element gets fully attached by setting
+      // `isShowing` to true, and only _then_ setting `isVisible` to true, triggering the
+      // CSS transition
+      run(() => this.set('isShowing', true));
+      run(() => this.set('isVisible', true));
+
+      this._popperElement = document.getElementById(this._popperId);
+
+      // Adds the same mouseenter/mouseleave handlers as the target object. If
+      // the tooltip is entered before the transition has completed, `isVisible` will
+      // be reset to true and when `transitionend` fires it will do nothing.
+      this._popperElement.addEventListener('mouseenter', this._mouseEnterHandler);
+      this._popperElement.addEventListener('mouseleave', this._mouseLeaveHandler);
+      this._popperElement.addEventListener('transitionend', this._transitionEndHandler);
     };
 
     this._mouseLeaveHandler = () => {
-      this.set('isVisible', false);
-      // Delay hiding of popper until fade out animation is done
-      Ember.run.debounce(this, function() {
-        this.set('isShowing', false);
-      }, 200);
+      run(() => this.set('isVisible', false));
+    };
+
+    this._transitionEndHandler = () => {
+      if (this.get('isVisible') === false) {
+        run(() => this.set('isShowing', false));
+
+        this._popperElement.removeEventListener('mouseenter', this._mouseEnterHandler);
+        this._popperElement.removeEventListener('mouseleave', this._mouseLeaveHandler);
+        this._popperElement.removeEventListener('transitionend', this._transitionEndHandler);
+
+        this._popperElement = null;
+      }
     };
 
     this._target.addEventListener('mouseenter', this._mouseEnterHandler);
