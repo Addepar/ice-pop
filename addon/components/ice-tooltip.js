@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from '../templates/components/ice-tooltip';
 
 const {
   Component,
@@ -6,29 +7,31 @@ const {
   generateGuid
 } = Ember;
 
-export default Component.extend({
-  // ----- Public Settings ------
-
-  // Used to determine the placement of the tooltip
-  placement: 'auto',
-
-  // ----- Private Variables -----
-
-  // Used to track whether fade in/out animation should trigger
-  isVisible: false,
-
-  // Used to target/select the popper element after it's been inserted
-  _popperId: null,
-
-  // Used to store the popper element for adding/removing event listeners
-  _popperElement: null,
-
-  // ----- Lifecycle Hooks -----
-
+export default class IceTooltip extends Component {
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
+
+    // ----- Public Settings ------
+
+    // Used to determine the placement of the tooltip
+    this.placement = this.placement || 'auto';
+
+    // ----- Private Variables -----
+
+    this.layout = layout;
+
+    // Used to track if the tooltip is open and appended to the DOM
+    this.isOpen = false;
+
+    // Used to track whether fade in/out animation should trigger
+    this.isShowing = false;
+
+    // Used to store the popper element for adding/removing event listeners
+    this._popperElement = null;
+
+    // Used to target/select the popper element after it's been inserted
     this._popperId = generateGuid();
-  },
+  }
 
   didInsertElement() {
     let target = this.get('target') || this.element.parentNode;
@@ -46,8 +49,11 @@ export default Component.extend({
       // Schedule these separately so that the element gets fully attached by setting
       // `isShowing` to true, and only _then_ setting `isVisible` to true, triggering the
       // CSS transition
-      run(() => this.set('isShowing', true));
-      run(() => this.set('isVisible', true));
+      run(() => this.set('isOpen', true));
+
+      this._insertFrame = requestAnimationFrame(() => {
+        run(() => this.set('isShowing', true));
+      });
 
       this._popperElement = document.getElementById(this._popperId);
 
@@ -60,12 +66,12 @@ export default Component.extend({
     };
 
     this._mouseLeaveHandler = () => {
-      run(() => this.set('isVisible', false));
+      run(() => this.set('isShowing', false));
     };
 
     this._transitionEndHandler = () => {
-      if (this.get('isVisible') === false) {
-        run(() => this.set('isShowing', false));
+      if (this.get('isShowing') === false) {
+        run(() => this.set('isOpen', false));
 
         this._popperElement.removeEventListener('mouseenter', this._mouseEnterHandler);
         this._popperElement.removeEventListener('mouseleave', this._mouseLeaveHandler);
@@ -77,10 +83,11 @@ export default Component.extend({
 
     this._target.addEventListener('mouseenter', this._mouseEnterHandler);
     this._target.addEventListener('mouseleave', this._mouseLeaveHandler);
-  },
+  }
 
   willDestroyElement() {
+    cancelAnimationFrame(this._insertFrame);
     this._target.removeEventListener('mouseenter', this._mouseEnterHandler);
     this._target.removeEventListener('mouseleave', this._mouseLeaveHandler);
   }
-});
+}
