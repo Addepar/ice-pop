@@ -1,0 +1,93 @@
+//
+// Core tooltip CSS
+// -----------------------------------------------------------------------------
+
+.ice-tooltip {
+  position: absolute;
+  z-index: $ice-tooltip-z-index;
+
+  background: $ice-tooltip-background-color;
+  max-width: $ice-tooltip-max-width;
+  padding: $ice-tooltip-spacing;
+
+  border-radius: $ice-tooltip-border-radius;
+  box-shadow: $ice-tooltip-box-shadow;
+
+  color: $ice-tooltip-text-color;
+  text-align: $ice-tooltip-text-align;
+  font-weight: $ice-tooltip-font-weight;
+  font-size: $ice-tooltip-font-size;
+  line-height: $ice-tooltip-line-height;
+  font-family: $ice-tooltip-font-family;
+
+  transition: $ice-tooltip-fade-transition;
+  opacity: 0;
+
+  .popper-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: $ice-tooltip-spacing;
+    border: $ice-tooltip-spacing solid transparent;
+  }
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &[x-placement^="top"] {
+    margin-bottom: $ice-tooltip-spacing;
+
+    .popper-arrow {
+      border-bottom-width: 0;
+      border-top-color: $ice-tooltip-background-color;
+      bottom: -$ice-tooltip-spacing;
+      @extend %tooltip-vertical-presets;
+    }
+  }
+
+  &[x-placement^="bottom"] {
+    margin-top: $ice-tooltip-spacing;
+
+    .popper-arrow {
+      border-top-width: 0;
+      border-bottom-color: $ice-tooltip-background-color;
+      top: -$ice-tooltip-spacing;
+      @extend %tooltip-vertical-presets;
+    }
+  }
+
+  &[x-placement^="right"] {
+    margin-left: $ice-tooltip-spacing;
+
+    .popper-arrow {
+      border-left-width: 0;
+      border-right-color: $ice-tooltip-background-color;
+      left: -$ice-tooltip-spacing;
+      @extend %tooltip-horizontal-presets;
+    }
+  }
+
+  &[x-placement^="left"] {
+    margin-right: $ice-tooltip-spacing;
+
+    .popper-arrow {
+      border-right-width: 0;
+      border-left-color: $ice-tooltip-background-color;
+      right: -$ice-tooltip-spacing;
+      @extend %tooltip-horizontal-presets;
+    }
+  }
+}
+
+%tooltip-vertical-presets {
+  margin-top: 0;
+  margin-bottom: 0;
+  left: calc(50% - #{$ice-tooltip-spacing});
+}
+
+%tooltip-horizontal-presets {
+  margin-left: 0;
+  margin-right: 0;
+  top: calc(50% - #{$ice-tooltip-spacing});
+}

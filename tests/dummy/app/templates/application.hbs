@@ -1,9 +1,16 @@
+<p class="info-text">Scroll around to see demo tooltip dots.</p>
 <div class="scroll-container">
   <div class="item-container">
     <div class="scroll-target">
-      {{#ice-tooltip modifiers=popperModifiers}}
-        Pop
-        <div class="popper-arrow" x-arrow></div>
+      {{#ice-tooltip placement="top"}}
+        Here is an example tooltip.
+        It is a glorious example tooltip, with roughly the average amount of content.
+      {{/ice-tooltip}}
+    </div>
+
+    <div class="scroll-target">
+      {{#ice-tooltip}}
+        Here is a small tooltip.
       {{/ice-tooltip}}
     </div>
   </div>
