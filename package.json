@@ -1,6 +1,6 @@
 {
-  "name": "ice-pop",
-  "version": "0.0.0",
+  "name": "@addepar/ice-pop",
+  "version": "0.0.1",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
     "ember-addon"
@@ -20,7 +20,7 @@
   "dependencies": {
     "ember-cli-babel": "^6.0.0",
     "ember-cli-htmlbars": "^1.1.1",
-    "ice-box": "git+ssh://git@github.com:Addepar/ice-box.git#69a3585006a4dbabac4d61e3af3ce5d12e7b6251",
+    "@addepar/ice-box": "^0.0.1",
     "ice-popper": "git+ssh://git@github.com:Addepar/ice-popper.git#c844fa4d3f63deeac739b0493ff33e1f64de8101"
   },
   "devDependencies": {

@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@addepar/ice-box@^0.0.1":
+  version "0.0.1"
+  resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/ice-box/-/@addepar/ice-box-0.0.1.tgz#4f8c7467093c85e84a45d4932ae82d9e9df6ccc3"
+  dependencies:
+    ember-cli-babel "^6.0.0"
+
 "@glimmer/di@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@glimmer/di/-/di-0.2.0.tgz#73bfd4a6ee4148a80bf092e8a5d29bcac9d4ce7e"
@@ -3176,12 +3182,6 @@ http-signature@~1.1.0:
     assert-plus "^0.2.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
-
-"ice-box@git+ssh://git@github.com:Addepar/ice-box.git#69a3585006a4dbabac4d61e3af3ce5d12e7b6251":
-  version "0.0.0"
-  resolved "git+ssh://git@github.com:Addepar/ice-box.git#69a3585006a4dbabac4d61e3af3ce5d12e7b6251"
-  dependencies:
-    ember-cli-babel "^6.0.0"
 
 "ice-popper@git+ssh://git@github.com:Addepar/ice-popper.git#c844fa4d3f63deeac739b0493ff33e1f64de8101":
   version "0.0.0"
