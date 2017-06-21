@@ -42,7 +42,7 @@ export default class IceTooltip extends Component {
      * @type String
      * @default 'auto'
      */
-    this.placement = this.placement || 'auto';
+    this.placement = this.placement !== undefined ? this.placement : 'auto';
 
     /**
      * Selector or Element

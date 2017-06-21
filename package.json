@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "@addepar/ice-box": "^0.0.1",
+    "@addepar/ice-popper": "^0.0.2",
     "ember-cli-babel": "^6.0.0",
-    "ember-cli-htmlbars": "^1.1.1",
-    "ice-popper": "git+ssh://git@github.com:Addepar/ice-popper.git#c844fa4d3f63deeac739b0493ff33e1f64de8101"
+    "ember-cli-htmlbars": "^1.1.1"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
