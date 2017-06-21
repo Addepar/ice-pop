@@ -7,29 +7,91 @@ const {
   generateGuid
 } = Ember;
 
+/**
+ * @module Ice Pop
+ * @main ice-pop
+ */
+
+/**
+ * Super simple tooltip component that uses popper.js. By default it targets its
+ * parent element for placement and warps itself to the root of the DOM, but it
+ * can also take a target selector as an option.
+ *
+ * ```hbs
+ * <div class="target">
+ *   \{{#ice-tooltip placement="bottom"}}
+ *     Some text
+ *   {{/ice-tooltip}}
+ * </div>
+ * ```
+ *
+ * @class IceTooltip
+ * @extends Ember.Component
+ */
 export default class IceTooltip extends Component {
   init() {
     super.init(...arguments);
 
     // ----- Public Settings ------
 
-    // Used to determine the placement of the tooltip
+    /**
+     * Used to determine the placement of the tooltip
+     *
+     * @public
+     * @property placement
+     * @type String
+     * @default 'auto'
+     */
     this.placement = this.placement || 'auto';
+
+    /**
+     * Selector or Element
+     *
+     * @public
+     * @property target
+     * @type String|HTMLElement
+     * @default null
+     */
+    this.target = this.target || null;
 
     // ----- Private Variables -----
 
     this.layout = layout;
 
-    // Used to track if the tooltip is open and appended to the DOM
+    /**
+     * Used to track if the tooltip is open and appended to the DOM
+     *
+     * @private
+     * @property isOpen
+     * @type Boolean
+     */
     this.isOpen = false;
 
-    // Used to track whether fade in/out animation should trigger
+    /**
+     * Used to track whether fade in/out animation should trigger
+     *
+     * @private
+     * @property isShowing
+     * @type Boolean
+     */
     this.isShowing = false;
 
-    // Used to store the popper element for adding/removing event listeners
+    /**
+     * Used to store the popper element for adding/removing event listeners
+     *
+     * @private
+     * @property _popperElement
+     * @type HTMLElement
+     */
     this._popperElement = null;
 
-    // Used to target/select the popper element after it's been inserted
+    /**
+     * Used to target/select the popper element after it's been inserted
+     *
+     * @private
+     * @property _popperId
+     * @type String
+     */
     this._popperId = generateGuid();
   }
 
