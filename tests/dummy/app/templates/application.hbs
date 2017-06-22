@@ -5,12 +5,19 @@
       {{#ice-tooltip placement="top"}}
         Here is an example tooltip.
         It is a glorious example tooltip, with roughly the average amount of content.
+        Placement is top.
       {{/ice-tooltip}}
     </div>
 
     <div class="scroll-target">
       {{#ice-tooltip}}
-        Here is a small tooltip.
+        Here is a small tooltip with auto placement.
+      {{/ice-tooltip}}
+    </div>
+
+    <div class="scroll-target">
+      {{#ice-tooltip class="error" placement='top-start'}}
+        Here is a warning tooltip with top right placement.
       {{/ice-tooltip}}
     </div>
   </div>

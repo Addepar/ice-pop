@@ -1,7 +1,22 @@
+// Ice Tooltip
 //
-// Core tooltip CSS
-// -----------------------------------------------------------------------------
-
+// A small tooltip that is triggered on hover over a target element.
+//
+// ### Important!
+// *Note that tooltips are an offical ember addon in ice-pop,
+// so please do not use this example HTML directly.
+// Please use the Ember component instead.
+// [See Ice Tooltip Docs >>](https://component-library.addepar.com/ice-pop/ice-tooltip/)*
+//
+// Markup:
+// <div class="ice-tooltip is-visible {{modifier_class}}" x-placement="top">
+//  I'm Mr. Meseeks look at me!
+//  <div class="popper-arrow" x-arrow></div>
+// </div>
+//
+// .error - Error tooltip type.
+//
+// Styleguide Components.Ice-Pop.Ice-Tooltip
 .ice-tooltip {
   position: absolute;
   z-index: $ice-tooltip-z-index;
@@ -28,54 +43,67 @@
     width: 0;
     height: 0;
     margin: $ice-tooltip-spacing;
-    border: $ice-tooltip-spacing solid transparent;
+    border: $ice-tooltip-spacing solid $ice-tooltip-background-color;
   }
 
   &.is-visible {
     opacity: 1;
   }
 
+  // When the tooltip is placed above the target
   &[x-placement^="top"] {
     margin-bottom: $ice-tooltip-spacing;
 
     .popper-arrow {
       border-bottom-width: 0;
-      border-top-color: $ice-tooltip-background-color;
+      border-bottom-color: transparent;
       bottom: -$ice-tooltip-spacing;
       @extend %tooltip-vertical-presets;
     }
   }
 
+  // When the tooltip is placed below the target
   &[x-placement^="bottom"] {
     margin-top: $ice-tooltip-spacing;
 
     .popper-arrow {
       border-top-width: 0;
-      border-bottom-color: $ice-tooltip-background-color;
+      border-top-color: transparent;
       top: -$ice-tooltip-spacing;
       @extend %tooltip-vertical-presets;
     }
   }
 
+  // When the tooltip is placed to the right of the target
   &[x-placement^="right"] {
     margin-left: $ice-tooltip-spacing;
 
     .popper-arrow {
       border-left-width: 0;
-      border-right-color: $ice-tooltip-background-color;
+      border-left-color: transparent;
       left: -$ice-tooltip-spacing;
       @extend %tooltip-horizontal-presets;
     }
   }
 
+  // When the tooltip is placed to the left of the target
   &[x-placement^="left"] {
     margin-right: $ice-tooltip-spacing;
 
     .popper-arrow {
       border-right-width: 0;
-      border-left-color: $ice-tooltip-background-color;
+      border-right-color: transparent;
       right: -$ice-tooltip-spacing;
       @extend %tooltip-horizontal-presets;
+    }
+  }
+
+  &.error {
+    background-color: $ice-tooltip-error-bg;
+    color: $ice-tooltip-error-text;
+
+    .popper-arrow {
+      border-color: $ice-tooltip-error-bg;
     }
   }
 }
@@ -83,11 +111,15 @@
 %tooltip-vertical-presets {
   margin-top: 0;
   margin-bottom: 0;
+  border-right-color: transparent;
+  border-left-color: transparent;
   left: calc(50% - #{$ice-tooltip-spacing});
 }
 
 %tooltip-horizontal-presets {
   margin-left: 0;
   margin-right: 0;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
   top: calc(50% - #{$ice-tooltip-spacing});
 }
