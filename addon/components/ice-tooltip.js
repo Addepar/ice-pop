@@ -14,6 +14,8 @@ export default class IceTooltip extends Component {
     // ----- Public Settings ------
 
     // Used to determine the placement of the tooltip
+    // Can choose between auto, top, right, bottom, left
+    // Can also add -start or -end modifier
     this.placement = this.placement || 'auto';
 
     // ----- Private Variables -----

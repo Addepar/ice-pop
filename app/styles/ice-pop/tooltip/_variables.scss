@@ -21,3 +21,7 @@ $ice-tooltip-border-radius:                 0 !default;
 $ice-tooltip-box-shadow:                    none !default;
 
 $ice-tooltip-z-index:                       10 !default;
+
+// Tooltip Types
+$ice-tooltip-error-bg:                      $background-red;
+$ice-tooltip-error-text:                    $text-red;
