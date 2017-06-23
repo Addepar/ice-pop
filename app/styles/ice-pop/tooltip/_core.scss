@@ -2,11 +2,19 @@
 //
 // A small tooltip that is triggered on hover over a target element.
 //
-// ### Important!
-// *Note that tooltips are an offical ember addon in ice-pop,
-// so please do not use this example HTML directly.
+//
+// You can implement a tooltip type class with the Ember addon like this:
+// ```
+// {{#ice-tooltip class="error"}}
+//  I'm Mr. Meseeks look at me!
+// {{/ice-tooltip}}
+// ```
+//
+// #### Important
+// Note that tooltips are an offical Ember addon in ice-pop,
+// so please do not use the below example HTML directly.
 // Please use the Ember component instead.
-// [See Ice Tooltip Docs >>](https://component-library.addepar.com/ice-pop/ice-tooltip/)*
+// [See Ice Tooltip Docs >>](https://component-library.addepar.com/ice-pop/ice-tooltip/)
 //
 // Markup:
 // <div class="ice-tooltip is-visible {{modifier_class}}" x-placement="top">
@@ -14,9 +22,10 @@
 //  <div class="popper-arrow" x-arrow></div>
 // </div>
 //
-// .error - Error tooltip type.
+// .error-tooltip - Error tooltip type.
 //
-// Styleguide Components.Ice-Pop.Ice-Tooltip
+// Styleguide Ice Pop - Ice Tooltip
+
 .ice-tooltip {
   position: absolute;
   z-index: $ice-tooltip-z-index;
