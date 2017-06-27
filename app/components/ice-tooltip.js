@@ -1,1 +1,1 @@
-export { default } from 'ice-pop/components/ice-tooltip';
+export { default } from '@addepar/ice-pop/components/ice-tooltip';

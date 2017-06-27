@@ -1,37 +1,70 @@
 import Ember from 'ember';
+import { property } from '@addepar/ice-box/utils/class';
+
 import layout from '../templates/components/ice-tooltip';
 
 const {
-  Component,
   run,
-  generateGuid
+  generateGuid,
+  Component
 } = Ember;
 
+/**
+ * Super simple tooltip component that uses popper.js. By default it targets its
+ * parent element for placement and warps itself to the root of the DOM, but it
+ * can also take a target selector as an option.
+ *
+ * ```hbs
+ * <div class="target">
+ *   \{{#ice-tooltip placement="bottom"}}
+ *     Some text
+ *   {{/ice-tooltip}}
+ * </div>
+ * ```
+ *
+ */
 export default class IceTooltip extends Component {
+  @property layout = layout
+
+  // ----- Public Settings ------
+
+  /**
+   * Used to determine the placement of the tooltip
+   * Can choose between auto, top, right, bottom, left
+   * Can also add -start or -end modifier
+   */
+  @property placement = 'auto'
+
+  /**
+   * Selector or Element
+   */
+  @property target = null
+
+  // ----- Private Variables -----
+
+  /**
+   * Used to track if the tooltip is open and appended to the DOM
+   */
+  @property isOpen = false
+
+  /**
+   * Used to track whether fade in/out animation should trigger
+   */
+  @property isShowing = false
+
+  /**
+   * Used to store the popper element for adding/removing event listeners
+   */
+  @property _popperElement = null
+
+  /**
+   * Used to target/select the popper element after it's been inserted
+   */
+  @property _popperId = ''
+
   init() {
     super.init(...arguments);
 
-    // ----- Public Settings ------
-
-    // Used to determine the placement of the tooltip
-    // Can choose between auto, top, right, bottom, left
-    // Can also add -start or -end modifier
-    this.placement = this.placement || 'auto';
-
-    // ----- Private Variables -----
-
-    this.layout = layout;
-
-    // Used to track if the tooltip is open and appended to the DOM
-    this.isOpen = false;
-
-    // Used to track whether fade in/out animation should trigger
-    this.isShowing = false;
-
-    // Used to store the popper element for adding/removing event listeners
-    this._popperElement = null;
-
-    // Used to target/select the popper element after it's been inserted
     this._popperId = generateGuid();
   }
 
@@ -49,7 +82,7 @@ export default class IceTooltip extends Component {
 
     this._mouseEnterHandler = () => {
       // Schedule these separately so that the element gets fully attached by setting
-      // `isShowing` to true, and only _then_ setting `isVisible` to true, triggering the
+      // `isOpen` to true, and only _then_ setting `isShowing` to true, triggering the
       // CSS transition
       run(() => this.set('isOpen', true));
 
