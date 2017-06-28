@@ -4,6 +4,12 @@
 //
 // Styleguide Ice Pop
 
+// Imported Ice Box Styles
 @import '../ice-box/index';
 
+// Common styles/tools shared by mulitple components
+@import 'common/mixins';
+
+// Core styles for each component
 @import 'tooltip/index';
+@import 'popover/index';

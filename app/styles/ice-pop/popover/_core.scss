@@ -1,0 +1,89 @@
+/*
+Ice Popover
+
+A popover that is triggered upon clicking a target element.
+
+You can implement a popover type class with the Ember addon like this:
+```
+{{#ice-popover class="type"}}
+ I'm Mr. Meseeks look at me!
+{{/ice-popover}}
+```
+
+#### Important
+Note that popovers are an offical Ember addon in ice-pop,
+so please do not use the below example HTML directly.
+Please use the Ember component instead.
+[See Ice Popover Docs >>](https://component-library.addepar.com/ice-pop/ice-popover/)
+
+Markup:
+<div class="ice-popover is-visible {{modifier_class}}" x-placement="top">
+ I'm Mr. Meseeks look at me!
+ <div class="popper-arrow" x-arrow></div>
+</div>
+
+Styleguide Ice Pop - Ice Popover
+*/
+
+$popover-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'vertical', 'bottom': 'vertical');
+
+@include arrow-box(
+  'ice-popover',
+  $popover-placements,
+  $ice-popover-z-index,
+  $ice-popover-background-color,
+  $ice-popover-max-width,
+  $ice-popover-box-padding,
+  $ice-popover-border-width,
+  $ice-popover-border-style,
+  $ice-popover-border-color,
+  $ice-popover-border-radius,
+  $ice-popover-box-shadow,
+  $ice-popover-text-color,
+  $ice-popover-text-align,
+  $ice-popover-font-weight,
+  $ice-popover-font-size,
+  $ice-popover-line-height,
+  $ice-popover-font-family,
+  $ice-popover-fade-transition,
+  $ice-popover-arrow-size
+  );
+
+// Popovers can have an optional header determined by whether a title is passed in.
+// This means tricky consequences for the arrow color, which needs to match if
+// it is visually touching the title header.
+// ----------------------------------------
+// Currently the below method is to guess what the arrow color should be based
+// on its predicted placement in relation to the header, but this can be incorrect
+// if the popover needs to adjust the arrow placement due to limited room on the screen.
+// A better solution would be to change the color with JS depending on the
+// y-placement of the arrow and whether it is in range of the header.
+
+.ice-popover.has-title {
+  // When the arrow position is at the top (tooltip placement being bottom),
+  // its always touching the title header
+  &[x-placement^="bottom"] {
+    @include update-arrow-color('bottom', $ice-popover-title-background-color, $ice-popover-border-color);
+  }
+
+  // When the arrow placement is at the top right
+  &[x-placement="left-start"] {
+    @include update-arrow-color('left', $ice-popover-title-background-color, $ice-popover-border-color);
+  }
+
+  // When the arrow placement is at top left
+  &[x-placement="right-start"] {
+    @include update-arrow-color('right', $ice-popover-title-background-color, $ice-popover-border-color);
+  }
+}
+
+.ice-popover-title {
+  background-color: $ice-popover-title-background-color;
+  padding: $ice-popover-header-padding;
+  font-size: $ice-popover-title-font-size;
+  font-weight: $ice-popover-title-font-weight;
+}
+
+.ice-popover-content {
+  padding: $ice-popover-content-padding;
+}

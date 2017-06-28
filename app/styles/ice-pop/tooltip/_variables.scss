@@ -5,17 +5,21 @@
 // Core tooltip variables
 
 $ice-tooltip-background-color:              $background-dark !default;
+$ice-tooltip-border-color:                  none !default;
+$ice-tooltip-border-width:                  0 !default;
+$ice-tooltip-border-style:                  none !default;
 $ice-tooltip-fade-transition:               opacity 0.2s ease-in-out !default;
 
 $ice-tooltip-text-align:                    left !default;
 $ice-tooltip-text-color:                    $text-white !default;
-$ice-tooltip-font-weight:                   normal;
+$ice-tooltip-font-weight:                   normal !default;
 $ice-tooltip-font-size:                     $font-size-smaller !default;
 $ice-tooltip-line-height:                   $font-size-base !default;
 $ice-tooltip-font-family:                   $font-family-sans-serif !default;
 
 $ice-tooltip-max-width:                     200px !default;
-$ice-tooltip-spacing:                       $spacing-default !default;
+$ice-tooltip-box-padding:                   $spacing-default !default;
+$ice-tooltip-arrow-size:                    $spacing-default !default;
 
 $ice-tooltip-border-radius:                 0 !default;
 $ice-tooltip-box-shadow:                    none !default;
@@ -23,5 +27,5 @@ $ice-tooltip-box-shadow:                    none !default;
 $ice-tooltip-z-index:                       10 !default;
 
 // Tooltip Types
-$ice-tooltip-error-bg:                      $background-red;
-$ice-tooltip-error-text:                    $text-red;
+$ice-tooltip-error-bg:                      $background-red !default;
+$ice-tooltip-error-text:                    $text-red !default;
