@@ -1,0 +1,17 @@
+{{#if isOpen}}
+  {{#ice-popper
+    id=_popperId
+    target=_target
+    placement=placement
+    class="ice-popover"
+    classNameBindings="isShowing:is-visible popoverTitle:has-title class"
+  }}
+    {{#if popoverTitle}}
+      <header class="ice-popover-title">{{popoverTitle}}</header>
+    {{/if}}
+    <div class="ice-popover-content">
+      {{yield}}
+    </div>
+    <div class="popper-arrow" x-arrow></div>
+  {{/ice-popper}}
+{{/if}}
