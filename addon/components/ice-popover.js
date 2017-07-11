@@ -34,7 +34,7 @@ export default class IcePopover extends Component {
    * Can choose between auto, top, right, bottom, left
    * Can also add -start or -end modifier
    */
-  @property placement = 'auto'
+  @property placement = 'right-start'
 
   /**
    * Selector or Element

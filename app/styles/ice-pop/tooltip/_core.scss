@@ -35,7 +35,12 @@ $tooltip-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'verti
   $tooltip-placements,
   $ice-tooltip-z-index,
   $ice-tooltip-background-color,
+  $ice-tooltip-width,
+  $ice-tooltip-min-width,
   $ice-tooltip-max-width,
+  $ice-tooltip-height,
+  $ice-tooltip-min-height,
+  $ice-tooltip-max-height,
   $ice-tooltip-box-padding,
   $ice-tooltip-border-width,
   $ice-tooltip-border-style,
@@ -53,5 +58,5 @@ $tooltip-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'verti
   );
 
 .error-tooltip {
-  @include arrow-box-color-variation($ice-tooltip-error-bg, $ice-tooltip-error-text);
+  @include arrow-box-color-variation($ice-tooltip-error-bg, $ice-tooltip-error-text, $ice-tooltip-border-color);
 }

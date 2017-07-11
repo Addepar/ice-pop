@@ -6,10 +6,10 @@
     class="ice-popover"
     classNameBindings="isShowing:is-visible popoverTitle:has-title class"
   }}
-    {{#if popoverTitle}}
-      <header class="ice-popover-title">{{popoverTitle}}</header>
-    {{/if}}
     <div class="ice-popover-content">
+      {{#if popoverTitle}}
+        <header class="ice-popover-title">{{popoverTitle}}</header>
+      {{/if}}
       {{yield}}
     </div>
     <div class="popper-arrow" x-arrow></div>

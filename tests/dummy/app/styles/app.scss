@@ -1,7 +1,14 @@
 @import '../styles/ice-pop/index';
 
+$demo-container-width: 400px;
+
+.demo-header,
+.title {
+  text-align: center;
+}
+
 .scroll-container {
-  height: 800px;
+  height: 400px;
   width: 400px;
   overflow: scroll;
   margin: auto;
@@ -9,7 +16,7 @@
 }
 
 .item-container {
-  height: 2000px;
+  height: 1000px;
   width: 800px;
 
   background-color: white;
@@ -20,23 +27,37 @@
   justify-content: center;
 }
 
-.scroll-target {
+.info-text {
+  text-align: center;
+}
+
+.demo-container {
+  margin: 50px auto;
+  width: $demo-container-width;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.demo-item {
+  flex: 1 0 $demo-container-width/3;
+  margin-bottom: 20px;
+}
+
+
+// Tooltips
+
+.tooltip-target {
   width: 20px;
   height: 20px;
   border-radius: 50%;
 
   background-color: grey;
-  margin: 50px;
-
-  &:nth-child(2n) {
-    margin-left: -50px;
-  }
 }
+
+
+// Popovers
 
 .popover-target {
   margin: 20px;
-}
-
-.info-text {
-  text-align: center;
 }

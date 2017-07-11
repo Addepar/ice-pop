@@ -9,6 +9,8 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('popover');
+  this.route('tooltip');
 });
 
 export default Router;

@@ -11,6 +11,8 @@ Generates a box with an arrow attached on a specified side
   $popover-placements,
   $ice-popover-z-index,
   $ice-popover-background-color,
+  $ice-popover-width,
+  $ice-popover-min-width,
   $ice-popover-max-width,
   $ice-popover-box-padding,
   $ice-popover-border-width,
@@ -57,7 +59,12 @@ Generates a box with an arrow attached on a specified side
   position: absolute;
   z-index: 10;
   background: #333333;
+  width: auto;
+  min-width: auto;
   max-width: 200px;
+  height: auto;
+  min-height: auto;
+  max-height: auto;
   padding: 8px;
   border: 0 none none;
   border-radius: 0;
@@ -126,7 +133,12 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box()
   $box-placements,
   $z-index,
   $background-color,
+  $width,
+  $min-width,
   $max-width,
+  $height,
+  $min-height,
+  $max-height,
   $box-padding,
   $border-width,
   $border-style,
@@ -143,14 +155,13 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box()
   $arrow-size
   ) {
 
-  $has-border: non-zero-value($border-width);
+  $has-border: non-zero-value($border-color);
 
   .#{$name} {
     position: absolute;
     z-index: $z-index;
 
     background: $background-color;
-    max-width: $max-width;
     padding: $box-padding;
 
     border: $border-width $border-style $border-color;
@@ -167,6 +178,10 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box()
     transition: $fade-transition;
     opacity: 0;
 
+    &.is-visible {
+      opacity: 1;
+    }
+
     .popper-arrow {
       position: absolute;
       width: 0;
@@ -176,7 +191,7 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box()
       border-style: solid;
 
       @if $has-border {
-        border-color: $border-color;
+        border-color: adjust-arrow-border-color($border-color);
 
         &::before {
           content: '';
@@ -188,10 +203,6 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box()
       } @else {
         border-color: $background-color;
       }
-    }
-
-    &.is-visible {
-      opacity: 1;
     }
 
     @each $box-placement, $direction in $box-placements {
@@ -220,6 +231,16 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box()
         }
       }
     }
+  }
+
+  .#{$name}-content {
+    // Initial sizing of the box is controlled with this div
+    width: $width;
+    min-width: $min-width;
+    max-width: $max-width;
+    height: $height;
+    min-height: $min-height;
+    max-height: $max-height;
   }
 
   %#{$name}-vertical-presets {
@@ -259,9 +280,9 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box()
 arrow-box-color-variation()
 
 Create an arrow-box variation based on color.
-Only add a border if your base element also has a border, otherwise
-it will render improperly. Be careful to not make the selector containing this
-mixin overly specific or it will overwrite the x-placement colors.
+Be careful to not make the selector containing this
+mixin overly specific or it will overwrite the x-placement colors,
+causing the new colors to not apply.
 
 ### Example Usage:
 
@@ -273,7 +294,7 @@ mixin overly specific or it will overwrite the x-placement colors.
 
 * $background-color = New background color for the box and arrow
 * $text-color = New text color for the box
-* $border-color = New border color for the arrow, only if there was already a border
+* $border-color (optional) = New border color for the box and arrow
 
 ### Example Output:
   ```
@@ -301,13 +322,15 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box-color-variation()
 @mixin arrow-box-color-variation($background-color, $text-color, $border-color: false) {
   background-color: $background-color;
   color: $text-color;
-  @if $border-color {
+
+  $has-border: non-zero-value($border-color);
+  @if $has-border {
     border-color: $border-color;
   }
 
   .popper-arrow {
-    @if $border-color {
-      border-color: $border-color;
+    @if $has-border {
+      border-color: adjust-arrow-border-color($border-color);
 
       &::before {
         border-color: $background-color;
@@ -324,8 +347,6 @@ update-arrow-color()
 Used when a specific arrow needs to be updated from the defaults,
 such as for when the arrow needs to match something in the box, like the header.
 Note that this uses BOX position, not the visible arrow position.
-Only add a border if your base element also has a border, otherwise
-it will render improperly.
 
 ### Example Usage:
 
@@ -337,7 +358,7 @@ it will render improperly.
 
 * $box-position = The current position of the box you want to target (NOT the arrow). ('left', 'right', 'top', 'bottom', 'left-start', 'right-start'...etc)
 * $background-color = New background color for the arrow
-* $border-color = New border color for the arrow, only use if there was already a border
+* $border-color = New border color for the arrow
 
 ### Example Output:
   ```
@@ -359,9 +380,11 @@ Styleguide: Ice Pop - Common - Mixins - @update-arrow-color()
 // for the arrow coloring, but there is no support in IE (except for lastest
 // version of Edge, but even that does not support pseudo elements, which we would need)
 @mixin update-arrow-color($box-position, $background-color, $border-color: false) {
+  $has-border: non-zero-value($border-color);
+
   .popper-arrow {
-    @if $border-color {
-      border-#{$box-position}-color: $border-color;
+    @if $has-border {
+      border-#{$box-position}-color: adjust-arrow-border-color($border-color);
 
       &::before {
         border-#{$box-position}-color: $background-color;

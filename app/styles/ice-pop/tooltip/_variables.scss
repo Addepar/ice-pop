@@ -17,7 +17,13 @@ $ice-tooltip-font-size:                     $font-size-smaller !default;
 $ice-tooltip-line-height:                   $font-size-base !default;
 $ice-tooltip-font-family:                   $font-family-sans-serif !default;
 
+$ice-tooltip-width:                         auto !default;
+$ice-tooltip-min-width:                     auto !default;
 $ice-tooltip-max-width:                     200px !default;
+$ice-tooltip-height:                        auto !default;
+$ice-tooltip-min-height:                    auto !default;
+$ice-tooltip-max-height:                    auto !default;
+
 $ice-tooltip-box-padding:                   $spacing-default !default;
 $ice-tooltip-arrow-size:                    $spacing-default !default;
 
