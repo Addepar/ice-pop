@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@addepar/ice-box@^0.0.4":
-  version "0.0.4"
-  resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/ice-box/-/@addepar/ice-box-0.0.4.tgz#1754610de441a24c4fc862adb0fee26b26f473f7"
+"@addepar/ice-box@^0.0.5":
+  version "0.0.5"
+  resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/ice-box/-/@addepar/ice-box-0.0.5.tgz#868cd45be9c5d49b20f021e6254b0f195fb48282"
   dependencies:
     ember-cli-babel "^6.0.0"
 

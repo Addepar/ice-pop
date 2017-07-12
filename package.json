@@ -1,6 +1,6 @@
 {
   "name": "@addepar/ice-pop",
-  "version": "0.0.4",
+  "version": "0.0.3",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
     "ember-addon"
@@ -18,7 +18,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "@addepar/ice-box": "^0.0.4",
+    "@addepar/ice-box": "^0.0.5",
     "@addepar/ice-popper": "^0.0.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
