@@ -51,10 +51,18 @@ $demo-container-width: 400px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-
+  display: inline-block;
   background-color: grey;
 }
 
+// tooltip-icon is temporarily defined here for the sake of testing,
+// until font awesome gets included by ice box
+.fa-question-circle::before {
+  content: '?';
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+}
 
 // Popovers
 
