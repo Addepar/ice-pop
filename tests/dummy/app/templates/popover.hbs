@@ -1,0 +1,287 @@
+<h2 class="title">Popover</h2>
+
+<div class="info-text">Basic popovers, all possible positions</div>
+<div class="demo-container">
+  <div class="demo-item">
+    <button class="popover-target">
+      Top Middle
+      {{#ice-popover placement='top'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Top Right
+      {{#ice-popover placement='top-start'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Top Left
+      {{#ice-popover placement='top-end'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+
+  <div class="demo-item">
+    <button class="popover-target">
+      Bottom Middle
+      {{#ice-popover placement='bottom'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Bottom Right
+      {{#ice-popover placement='bottom-start'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Bottom Left
+      {{#ice-popover placement='bottom-end'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+
+  <div class="demo-item">
+    <button class="popover-target">
+      Right Middle
+      {{#ice-popover placement='right'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Right Bottom
+      {{#ice-popover placement='right-start'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Right Top
+      {{#ice-popover placement='right-end'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+
+  <div class="demo-item">
+    <button class="popover-target">
+      Left Middle
+      {{#ice-popover placement='left'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Left Bottom
+      {{#ice-popover placement='left-start'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Left Top
+      {{#ice-popover placement='left-end'}}
+        <div class="ice-popover-body">
+          <p>This is a popover!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+
+</div>
+
+<div class="info-text">Popovers with titles</div>
+<div class="demo-container">
+
+  <div class="demo-item">
+    <button class="popover-target">
+      Open top
+      {{#ice-popover placement='top' popoverTitle="Foo Bar Baz Foo Bar Baz Foo Bar Baz Foo Bar Baz"}}
+        <div class="ice-popover-body">
+          <p>This is a popover with a long title!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Open mid right
+      {{#ice-popover placement='right' popoverTitle="Foo Bar Baz"}}
+        <div class="ice-popover-body">
+          <p>This is a popover with a title and a footer!</p>
+          <input type="text" value="type something" />
+        </div>
+        <footer class="ice-popover-footer">
+          <button class="button-primary">do the thing</button>
+          <button class="button-default pull-right">nevermind</button>
+        </footer>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Open top right
+      {{#ice-popover placement='right-start' popoverTitle="Foo Bar Baz"}}
+        <div class="ice-popover-body">
+          <p>This is a popover with a title!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Open mid left
+      {{#ice-popover placement='left' popoverTitle="Foo Bar Baz"}}
+        <div class="ice-popover-body">
+          <p>This is a popover with a title!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Open top left
+      {{#ice-popover placement='left-start' popoverTitle="Foo Bar Baz"}}
+        <div class="ice-popover-body">
+          <p>This is a popover with a title!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      Open bottom
+      {{#ice-popover placement='bottom' popoverTitle="Foo Bar Baz"}}
+        <div class="ice-popover-body">
+          <p>This is a popover with a title!</p>
+          <button>Look a button</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+</div>
+
+<div class="info-text">Popovers with footers</div>
+<div class="demo-container">
+
+  <div class="demo-item">
+    <button class="popover-target">
+      just footer
+      {{#ice-popover placement='top'}}
+        <div class="ice-popover-body">
+          <p>This is a popover with just a footer!</p>
+          <input type="text" value="type something" />
+        </div>
+        <footer class="ice-popover-footer">
+          <button class="button-primary">do the thing</button>
+          <button class="button-default pull-right">nevermind</button>
+        </footer>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      title / footer
+      {{#ice-popover placement='top' popoverTitle="Foo Bar Baz"}}
+        <div class="ice-popover-body">
+          <p>This is a popover with a title and a footer!</p>
+          <input type="text" value="type something" />
+        </div>
+        <footer class="ice-popover-footer">
+          <button class="button-primary">do the thing</button>
+          <button class="button-default pull-right">nevermind</button>
+        </footer>
+      {{/ice-popover}}
+    </button>
+  </div>
+</div>
+
+<div class="info-text">Popovers with content size variations</div>
+<div class="demo-container">
+
+  <div class="demo-item">
+    <button class="popover-target">
+      500px width
+      {{#ice-popover placement='top' popoverTitle="Foo Bar Baz"}}
+        <div class="ice-popover-body" style="width:500px;">
+          <p>This is a popover with content that has a custom width set on the content.
+          Not setting a width means the popover can grow really wide without wrapping content.</p>
+          <input type="text" value="type something" />
+        </div>
+        <footer class="ice-popover-footer">
+          <button class="button-primary">do the thing</button>
+          <button class="button-default pull-right">nevermind</button>
+        </footer>
+      {{/ice-popover}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="popover-target">
+      max tall
+      {{#ice-popover placement='top' popoverTitle="Foo Bar Baz"}}
+        <div class="ice-popover-body" style="width:200px">
+          <p>This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height. This is a popover with a a ton of content that hits the max height.</p>
+          <input type="text" value="type something" />
+        </div>
+        <footer class="ice-popover-footer">
+          <button class="button-primary">do the thing</button>
+          <button class="button-default pull-right">nevermind</button>
+        </footer>
+      {{/ice-popover}}
+    </button>
+  </div>
+</div>

@@ -6,7 +6,9 @@
     class="ice-tooltip"
     classNameBindings="isShowing:is-visible class"
   }}
-    {{yield}}
+    <div class="ice-tooltip-content">
+      {{yield}}
+    </div>
     <div class="popper-arrow" x-arrow></div>
   {{/ice-popper}}
 {{/if}}
