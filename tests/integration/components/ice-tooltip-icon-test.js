@@ -1,19 +1,12 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { find, triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('ice-tooltip-icon', 'Integration | Component | ice tooltip icon', {
   integration: true
 });
 
-test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{ice-tooltip-icon}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
+test('it renders', async function(assert) {
   // Template block usage:
   this.render(hbs`
     {{#ice-tooltip-icon}}
@@ -21,5 +14,7 @@ test('it renders', function(assert) {
     {{/ice-tooltip-icon}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  await triggerEvent('.tooltip-icon', 'mouseenter');
+
+  assert.equal(find('.ice-tooltip').textContent.trim(), 'template block text');
 });
