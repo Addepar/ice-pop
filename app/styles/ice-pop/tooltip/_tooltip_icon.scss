@@ -16,12 +16,11 @@ You can implement the icon tooltip component with the Ember addon like this:
 Note that tooltips are an offical Ember addon in ice-pop,
 so please do not use the below example HTML directly.
 Please use the Ember component instead.
-[See Ice Tooltip Docs >>](/docs/ice-pop/class/addon/components/ice-tooltip.js~IceTooltip.html)
+[See Ice Tooltip Docs >>](/docs/ice-pop/class/addon/components/ice-tooltip-icon.js~IceTooltipIcon.html)
 
 Markup:
-
 <i class="fa {{modifier_class}} tooltip-icon">
-  <!--tooltip code inserted by addon -->
+  <!--tooltip code inserted by addon will go here -->
 </i>
 
 .fa-question-circle - The default font awesome icon class. This will be used if you do not pass in your own via `iconClass`.

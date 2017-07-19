@@ -16,7 +16,7 @@ const {
  *
  * ```hbs
  * <div class="target">
- *   \{{#ice-tooltip placement="bottom"}}
+ *   {{#ice-tooltip placement="bottom"}}
  *     Some text
  *   {{/ice-tooltip}}
  * </div>
@@ -29,8 +29,8 @@ export default class IceTooltip extends Component {
   // ----- Public Settings ------
 
   /**
-   * Used to determine the placement of the tooltip
-   * Can choose between auto, top, right, bottom, left
+   * Used to determine the placement of the tooltip;
+   * Can choose between auto, top, right, bottom, left;
    * Can also add -start or -end modifier
    */
   @property placement = 'auto'

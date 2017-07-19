@@ -15,12 +15,14 @@ You can implement a tooltip type class with the Ember addon like this:
 Note that tooltips are an offical Ember addon in ice-pop,
 so please do not use the below example HTML directly.
 Please use the Ember component instead.
-[See Ice Tooltip Docs >>](https://component-library.addepar.com/ice-pop/ice-tooltip/)
+[See Ice Tooltip Docs >>](/docs/ice-pop/class/addon/components/ice-tooltip.js~IceTooltip.html)
 
 Markup:
 <div class="ice-tooltip is-visible {{modifier_class}}" x-placement="top">
- I'm Mr. Meseeks look at me!
- <div class="popper-arrow" x-arrow></div>
+  <div class="ice-tooltip-content">
+    I'm Mr. Meseeks look at me!
+  </div>
+  <div class="popper-arrow" x-arrow></div>
 </div>
 
 .error-tooltip - Error tooltip type.
