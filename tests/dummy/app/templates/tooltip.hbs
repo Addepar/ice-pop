@@ -155,6 +155,29 @@
 
 </div>
 
+<div class="demo-container">
+  <div class="demo-item">
+    Icon tooltip default
+    {{#ice-tooltip-icon placement="top"}}
+      Here is a tooltip with the icon baked in.
+    {{/ice-tooltip-icon}}
+  </div>
+
+  <div class="demo-item">
+    Icon tooltip with overwritten icon class
+    {{#ice-tooltip-icon placement="top" iconClass="tooltip-target"}}
+      Here is a tooltip with the icon class overwritten.
+    {{/ice-tooltip-icon}}
+  </div>
+
+  <div class="demo-item">
+    Icon tooltip with custom tooltip
+    {{#ice-tooltip-icon placement="top" tooltipClass="error-tooltip"}}
+      Here is an icon tooltip with error tooltip style.
+    {{/ice-tooltip-icon}}
+  </div>
+</div>
+
 <p class="info-text">
   Test to see how tooltip behaves in a scrolling area. Scroll around to see demo tooltip dot.
 </p>

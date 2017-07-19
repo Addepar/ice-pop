@@ -3,10 +3,12 @@ Ice Popover
 
 A popover that is triggered upon clicking a target element.
 
-You can implement a popover type class with the Ember addon like this:
+You can implement a popover type class and custom placement with the Ember addon like this:
 ```
-{{#ice-popover class="type"}}
- I'm Mr. Meseeks look at me!
+{{#ice-popover class="type" placement="top"}}
+  <div class="ice-popover-body">
+    I'm Mr. Meseeks look at me!
+  </div>
 {{/ice-popover}}
 ```
 
@@ -14,12 +16,16 @@ You can implement a popover type class with the Ember addon like this:
 Note that popovers are an offical Ember addon in ice-pop,
 so please do not use the below example HTML directly.
 Please use the Ember component instead.
-[See Ice Popover Docs >>](https://component-library.addepar.com/ice-pop/ice-popover/)
+[See Ice Popover Docs >>](/docs/ice-pop/class/addon/components/ice-popover.js~IcePopover.html)
 
 Markup:
-<div class="ice-popover is-visible {{modifier_class}}" x-placement="top">
- I'm Mr. Meseeks look at me!
- <div class="popper-arrow" x-arrow></div>
+<div class="ice-popover is-visible" x-placement="top">
+  <div class="ice-popover-content">
+    <div class="ice-popover-body">
+      I'm Mr. Meseeks look at me!
+    </div>
+  </div>
+  <div class="popper-arrow" x-arrow></div>
 </div>
 
 Styleguide Ice Pop - Ice Popover
@@ -111,10 +117,33 @@ $popover-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'verti
     // will not have been set in the mixin (we give the mixin the vh var by default)
     max-height: $ice-popover-max-height-px;
   }
-
-
 }
 
+/*
+Ice Popover with title
+
+You can add a popover title with the Ember addon like this:
+```
+{{#ice-popover popoverTitle="Popover Title"}}
+  <div class="ice-popover-body">
+    I'm Mr. Meseeks look at me!
+  </div>
+{{/ice-popover}}
+```
+
+Markup:
+<div class="ice-popover is-visible has-title" x-placement="top-right">
+  <div class="ice-popover-content">
+    <header class="ice-popover-title">Popover Title</header>
+    <div class="ice-popover-body">
+      I'm Mr. Meseeks look at me!
+    </div>
+  </div>
+  <div class="popper-arrow" x-arrow></div>
+</div>
+
+Styleguide Ice Pop - Ice Popover - Popover with title
+*/
 .ice-popover-title {
   background-color: $ice-popover-title-background-color;
   padding: $ice-popover-header-padding;
@@ -124,6 +153,8 @@ $popover-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'verti
   flex: none;
 }
 
+// Body should generally always be used and is demonstrated in the base component,
+// so not adding css doc entry for now
 .ice-popover-body {
   padding: $ice-popover-content-padding;
   flex: 1;
@@ -131,6 +162,36 @@ $popover-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'verti
   max-width: 100%;
 }
 
+/*
+Ice Popover with footer
+
+To add a popover footer with the Ember addon, you just manually put it in the HTML like this:
+```
+{{#ice-popover}}
+  <div class="ice-popover-body">
+    I'm Mr. Meseeks look at me!
+  </div>
+  <div class="ice-popover-footer">
+    <button>Click me</button>
+  </div>
+{{/ice-popover}}
+```
+
+Markup:
+<div class="ice-popover is-visible" x-placement="top-right">
+  <div class="ice-popover-content">
+    <div class="ice-popover-body">
+      I'm Mr. Meseeks look at me!
+    </div>
+    <div class="ice-popover-footer">
+      <button>Click me</button>
+    </div>
+  </div>
+  <div class="popper-arrow" x-arrow></div>
+</div>
+
+Styleguide Ice Pop - Ice Popover - Popover with footer
+*/
 .ice-popover-footer {
   padding: $ice-popover-footer-padding;
   border-top: $ice-popover-footer-border;

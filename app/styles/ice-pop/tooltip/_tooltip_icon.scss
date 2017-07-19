@@ -1,0 +1,36 @@
+/*
+Ice Tooltip Icon
+
+A tooltip with a target icon baked in. It is designed to be a font awesome icon
+for now, until Addepar comes up with its own icon system.
+
+
+You can implement the icon tooltip component with the Ember addon like this:
+```
+{{#ice-tooltip-icon}}
+ I'm Mr. Meseeks look at me!
+{{/ice-tooltip-icon}}
+```
+
+#### Important
+Note that tooltips are an offical Ember addon in ice-pop,
+so please do not use the below example HTML directly.
+Please use the Ember component instead.
+[See Ice Tooltip Docs >>](/docs/ice-pop/class/addon/components/ice-tooltip-icon.js~IceTooltipIcon.html)
+
+Markup:
+<i class="fa {{modifier_class}} tooltip-icon">
+  <!--tooltip code inserted by addon will go here -->
+</i>
+
+.fa-question-circle - The default font awesome icon class. This will be used if you do not pass in your own via `iconClass`.
+.fa-warning - Example of an alternative font awesome icon class you could pass in via `iconClass`. You can pass in any font awesome icon class.
+
+Styleguide Ice Pop - Ice Tooltip - Tooltip Icon
+*/
+
+.tooltip-icon {
+  width: $tooltip-icon-height;
+  height: $tooltip-icon-height;
+  font-size: $tooltip-icon-height;
+}
