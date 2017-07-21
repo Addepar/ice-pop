@@ -64,9 +64,11 @@ export default class IcePopover extends Component {
   @property _popperId = ''
 
   init() {
-    super.init(...arguments);
-
+    this._popperClass = this.class || '';
+    this._popperClass += this.classNames.join(' ');
     this._popperId = generateGuid();
+
+    super.init(...arguments);
   }
 
   didInsertElement() {

@@ -63,12 +63,16 @@ export default class IceTooltip extends Component {
   @property _popperId = ''
 
   init() {
-    super.init(...arguments);
-
+    this._popperClass = this.class || '';
+    this._popperClass += this.classNames.join(' ');
     this._popperId = generateGuid();
+
+    super.init(...arguments);
   }
 
   didInsertElement() {
+    this.element.className = '';
+
     let target = this.get('target') || this.element.parentNode;
 
     if (typeof target === 'string') {

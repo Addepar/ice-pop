@@ -1,10 +1,10 @@
 {{#if isOpen}}
-  {{#ice-popper
+  {{#ember-popper
     id=_popperId
     target=_target
     placement=placement
     class="ice-popover"
-    classNameBindings="isShowing:is-visible popoverTitle:has-title class"
+    classNameBindings="isShowing:is-visible popoverTitle:has-title _popperClass"
   }}
     <div class="ice-popover-content">
       {{#if popoverTitle}}
@@ -13,5 +13,5 @@
       {{yield}}
     </div>
     <div class="popper-arrow" x-arrow></div>
-  {{/ice-popper}}
+  {{/ember-popper}}
 {{/if}}
