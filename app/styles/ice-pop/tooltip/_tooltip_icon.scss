@@ -33,4 +33,9 @@ Styleguide Ice Pop - Ice Tooltip - Tooltip Icon
   width: $tooltip-icon-height;
   height: $tooltip-icon-height;
   font-size: $tooltip-icon-height;
+  color: $tooltip-icon-color;
+
+  &:hover {
+    color: $tooltip-icon-color-hover;
+  }
 }
