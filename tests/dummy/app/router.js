@@ -11,6 +11,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('popover');
   this.route('tooltip');
+  this.route('dropdown');
 });
 
 export default Router;

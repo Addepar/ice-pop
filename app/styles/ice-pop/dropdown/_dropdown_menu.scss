@@ -1,0 +1,142 @@
+/*
+Ice Dropdown Menu
+
+A specific menu list style that is used inside dropdowns (and selects).
+
+The dropdown menu list itself is not an Ember addon, so you should use the HTML examples below.
+However you should only use it inside the ice-dropdown Ember addon like this:
+```
+{{#ice-dropdown}}
+  <ul class="ice-dropdown-menu">
+    <li><a {{action 'foo'}}>Foo bar baz</a></li>
+    <li><a {{action 'bar'}}>I'm Mr. Meseeks</a></li>
+    <li><a {{action 'baz'}}>Lorem ipsum</a></li>
+    <li><a class="disabled">I'm disabled</a></li>
+  </ul>
+{{/ice-dropdown}}
+{{#ice-dropdown closeItems=false}}
+  <ul class="ice-dropdown-menu">
+    <li><a {{action 'foo'}} data-dropdown-close>Foo bar baz</a></li>
+    <li class="list-group-header">Header Text</li>
+    <li><a {{action 'bar'}} data-dropdown-close>I'm Mr. Meseeks</a></li>
+    <li><a {{action 'baz'}}>Don't close the dropdown yet</a></li>
+  </ul>
+{{/ice-dropdown}}
+```
+
+Markup:
+  <ul class="ice-dropdown-menu">
+    <li><a data-dropdown-close>Foo bar baz</a></li>
+    <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
+    <li><a data-dropdown-close>Lorem ipsum</a></li>
+    <li><a class="disabled">I'm disabled</a></li>
+  </ul>
+  <ul class="ice-dropdown-menu">
+    <li><a data-dropdown-close>Foo bar baz</a></li>
+    <li class="list-group-header">Header Text</li>
+    <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
+    <li><a>Don't close the dropdown yet</a></li>
+  </ul>
+
+Class Options:
+`list-divider`: A horizontal divider between list items. Place this class on an empty `<li>`
+`list-group-header`: A header to go above a group of items in the list. Place on an `<li>` with the header text.
+`disabled`: Marks a list item as disabled. Place class directly on the `<a>` that is to be disabled.
+`data-dropdown-close`: Lets Ember know it needs to close the dropdown after clicking. All `<a>` will do this by default unless you set closeItems=false on the dropdown component. In which case you can add them manually to any element.
+
+Styleguide Ice Pop - Ice Dropdown - Ice Dropdown Menu
+*/
+
+// Main class for the dropdown menu ul
+.ice-dropdown-menu {
+  @include reset-list();
+  padding-top: $ice-dropdown-item-spacing-vertical;
+  padding-bottom: $ice-dropdown-item-spacing-vertical;
+
+  > li {
+    position: relative; // needed for absolutely positioned caret
+    display: block;
+    color: $ice-dropdown-item-color;
+    line-height: $ice-dropdown-item-line-height;
+
+    // Items with actions should have anchor tags
+    a {
+      display: block;
+      height: 100%;
+      padding: $ice-dropdown-item-spacing-vertical $ice-dropdown-item-spacing-horizontal;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background-color: $ice-dropdown-item-hover-bg-color;
+      }
+
+      &.is-selected,
+      &.is-active {
+        background-color: $ice-dropdown-item-active-bg-color;
+      }
+
+    }
+
+    &.disabled,
+    a.disabled {
+      @include disabled-input();
+      opacity: 0.6; // TODO: update to $disabled-opacity; from ice-box
+    }
+
+    // TODO: investigate if this will cause any issues
+    .ice-dropdown-caret {
+      @include anchor-element($top: 50%, $right: $ice-dropdown-item-spacing-horizontal / 2);
+      transform: translateY(-50%);
+    }
+
+    &.list-divider {
+      border-top: $ice-dropdown-item-border-style;
+      margin: $ice-dropdown-item-spacing-vertical 0;
+    }
+
+    &.list-group-header {
+      background-color: $ice-dropdown-item-group-header-bg;
+      font-weight: $ice-dropdown-item-group-header-weight;
+      padding: $ice-dropdown-item-spacing-vertical $ice-dropdown-item-spacing-horizontal;
+    }
+  }
+}
+
+
+// Prevent the focus on the dropdown toggle when closing dropdowns
+.ice-dropdown-toggle:focus {
+  // outline: 0;
+}
+
+
+// TODO: The caret here is currently temporary for development.
+// Update this whole section with font awesome (when it makes it to ice-box) BEFORE using in Iverson.
+.ice-dropdown-caret {
+  display: inline-block;
+  margin-left: $spacing-small;
+
+  &::after {
+    content: '\0203A';
+    display: block;
+    color: inherit;
+  }
+
+  .ice-dropdown-toggle[dropdown-placement^="right"] > & {
+    // nothing
+  }
+
+  .ice-dropdown-toggle[dropdown-placement^="left"] > & {
+    transform: rotate(180deg);
+  }
+
+  .ice-dropdown-toggle[dropdown-placement^="bottom"] > & {
+    transform: rotate(90deg);
+  }
+
+  .ice-dropdown-toggle[dropdown-placement^="top"] > & {
+    transform: rotate(-90deg);
+  }
+}

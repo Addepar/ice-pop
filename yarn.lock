@@ -10,11 +10,11 @@
     eslint-plugin-ember-suave "^1.0.0"
     eslint-plugin-import "^2.3.0"
 
-"@addepar/ice-box@^0.0.5":
-  version "0.0.5"
-  resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/ice-box/-/@addepar/ice-box-0.0.5.tgz#868cd45be9c5d49b20f021e6254b0f195fb48282"
+"@addepar/ice-box@^0.0.6":
+  version "0.0.6"
+  resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/ice-box/-/@addepar/ice-box-0.0.6.tgz#571d6b96b5966038b904f4da2a745425c83ba0ca"
   dependencies:
-    ember-cli-babel "^6.0.0"
+    ember-cli-babel "^6.3.0"
 
 "@addepar/sass-lint-config@^1.0.0":
   version "1.0.0"

@@ -91,6 +91,22 @@ export default class IcePopover extends Component {
       }
     };
 
+    this._handleBodyClick = (event) => {
+      // we want the body click to trigger on everything BUT the current target or popover,
+      // otherwise the click handler would get triggered twice when clicking the target,
+      // causing unforseen chaos down the line
+      if ((event.target !== this._target) && (!this._popperElement.contains(event.target))) {
+        this._removePopover();
+      }
+      // Close the popover if click target has [data-popover-close] attribute,
+      // regardless of where it is in the dom.
+      // This could be problematic in the future if we ever have the use case for
+      // multiple popovers open. This would close all of them at the same time.
+      if (event.target.attributes['data-popover-close']) {
+        this._removePopover();
+      }
+    };
+
     this._transitionEndHandler = () => {
       if (this.get('isShowing') === false) {
         run(() => this.set('isOpen', false));
@@ -98,6 +114,11 @@ export default class IcePopover extends Component {
         this._popperElement.removeEventListener('transitionend', this._transitionEndHandler);
 
         this._popperElement = null;
+
+        // remove body listener here instead of _removePopover, so we are sure
+        // the popover is actually closed first, otherwise a popover can be left
+        // open with no way to close
+        document.body.removeEventListener('click', this._handleBodyClick);
       }
     };
 
@@ -114,11 +135,8 @@ export default class IcePopover extends Component {
       this._popperElement = document.getElementById(this._popperId);
 
       this._popperElement.addEventListener('transitionend', this._transitionEndHandler);
-      document.body.addEventListener('click', this._removePopover);
 
-      // Temporarily prevent the popover from closing if you click inside it
-      // (This is a bad hack we need to replace)
-      this._popperElement.addEventListener('click', this._insertPopover);
+      document.body.addEventListener('click', this._handleBodyClick);
     };
 
     this._removePopover = () => {
@@ -131,6 +149,6 @@ export default class IcePopover extends Component {
   willDestroyElement() {
     cancelAnimationFrame(this._insertFrame);
     this._target.removeEventListener('click', this._clickHandler);
-    document.body.removeEventListener('click', this._removePopover);
+    document.body.removeEventListener('click', this._handleBodyClick);
   }
 }

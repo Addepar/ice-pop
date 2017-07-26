@@ -17,7 +17,7 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "@addepar/ice-box": "^0.0.5",
+    "@addepar/ice-box": "^0.0.6",
     "ember-cli-babel": "^6.3.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-decorators": "^1.2.1",
