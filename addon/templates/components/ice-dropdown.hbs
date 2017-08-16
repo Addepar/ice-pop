@@ -1,0 +1,14 @@
+{{#if isOpen}}
+  {{#ember-popper
+    id=_popperId
+    target=_target
+    placement=placement
+    renderInPlace=renderInPlace
+    class="ice-dropdown"
+    classNameBindings="isShowing:is-visible _popperClass"
+  }}
+    <div class="ice-dropdown-content">
+      {{yield}}
+    </div>
+  {{/ember-popper}}
+{{/if}}

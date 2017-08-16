@@ -1,0 +1,70 @@
+/*
+Ice Sub Dropdown
+
+A sub dropdown that is ONLY embedded in a list item inside of a regular dropdown menu.
+It is triggered when hovering over its target list element.
+
+You can implement a sub dropdown within a regular dropdown with the Ember addon like this:
+```
+{{#ice-dropdown}}
+  <ul class="ice-dropdown-menu">
+    <li>Foo bar baz</li>
+    <li>I'm Mr. Meseeks
+    {{#ice-sub-dropdown}}
+      <ul class="ice-dropdown-menu">
+        <li>Foo bar baz</li>
+        <li>I'm Mr. Meseeks</li>
+        <li>Lorem ipsum</li>
+      </ul>
+    {{/ice-sub-dropdown}}
+    </li>
+    <li>Lorem ipsum</li>
+  </ul>
+{{/ice-dropdown}}
+```
+
+#### Important
+Note that sub dropdowns are an offical Ember addon in ice-pop,
+so please do not use the below example HTML directly.
+Please use the Ember component instead.
+[See Ice Dropdown Docs >>](/docs/ice-pop/class/addon/components/ice-sub-dropdown.js~IceSubDropdown.html)
+
+Markup:
+<div class="ice-dropdown ice-sub-dropdown is-visible" x-placement="right-start">
+  <div class="ice-dropdown-content">
+    <ul class="ice-dropdown-menu">
+      <li>Foo bar baz</li>
+      <li>I'm Mr. Meseeks</li>
+      <li>Lorem ipsum</li>
+    </ul>
+  </div>
+</div>
+
+Styleguide Ice Pop - Ice Dropdown - Ice Sub Dropdown
+*/
+
+.ice-sub-dropdown {
+  margin-top: $ice-sub-dropdown-offset;
+
+  // Determine placement of box shadow and offset depending on direction
+  // TODO: Make a fancy mixin/function for this
+  &[x-placement^="bottom"] {
+    box-shadow: $ice-sub-dropdown-box-shadow;
+    margin-top: -$ice-dropdown-offset;
+  }
+
+  &[x-placement^="top"] {
+    box-shadow: $ice-sub-dropdown-box-shadow;
+    margin-bottom: -$ice-dropdown-offset;
+  }
+
+  &[x-placement^="left"] {
+    box-shadow: $ice-sub-dropdown-box-shadow;
+    margin-right: -$ice-dropdown-offset;
+  }
+
+  &[x-placement^="right"] {
+    box-shadow: $ice-sub-dropdown-box-shadow;
+    margin-left: -$ice-dropdown-offset;
+  }
+}

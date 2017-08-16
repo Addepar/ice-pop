@@ -1,0 +1,64 @@
+@import '../../ice-box/variables/colors';
+@import '../../ice-box/variables/typography';
+@import '../../ice-box/variables/spacing';
+
+// Core dropdown variables
+// -----------------
+
+$ice-dropdown-background-color:           $background-white !default;
+$ice-dropdown-title-background-color:     $background-extra-light !default;
+$ice-dropdown-offset:                     $spacing-small;
+
+$ice-dropdown-text-align:                 left !default;
+$ice-dropdown-text-color:                 $text-dark !default;
+$ice-dropdown-font-weight:                normal !default;
+$ice-dropdown-font-size:                  $font-size-base !default;
+$ice-dropdown-line-height:                auto !default;
+$ice-dropdown-font-family:                $font-family-sans-serif !default;
+
+$ice-dropdown-width:                      auto !default;
+$ice-dropdown-min-width:                  160px !default;
+$ice-dropdown-max-width:                  auto !default;
+$ice-dropdown-height:                     auto !default;
+$ice-dropdown-min-height:                 auto !default;
+$ice-dropdown-max-height-vh:              80vh !default;
+$ice-dropdown-max-height-px:              600px !default; // (not passed to the arrow box mixin)
+
+$ice-dropdown-box-padding:                0 !default;
+$ice-dropdown-content-padding:            0 !default;
+
+$ice-dropdown-border-color:               $border-item !default;
+$ice-dropdown-border-width:               1px !default;
+$ice-dropdown-border-style:               solid !default;
+$ice-dropdown-border-radius:              0 !default;
+// Default shadows set for a downward dropdown
+$ice-dropdown-box-shadow:                 0 3px 8px 2px rgba(51,51,51,0.20) !default;
+
+// Want to have no transition but currently it breaks if we do that, so making very short for now
+$ice-dropdown-fade-transition:            opacity 0.1s ease-in-out !default;
+
+$ice-dropdown-z-index:                    10 !default;
+
+
+// Dropdown menus
+// -----------------
+
+$ice-dropdown-item-spacing-vertical:      $spacing-default !default;
+$ice-dropdown-item-spacing-horizontal:    $spacing-double !default;
+$ice-dropdown-item-line-height:           1 !default;
+
+$ice-dropdown-item-color:                 $ice-dropdown-text-color !default;
+$ice-dropdown-item-hover-bg-color:        $background-hover !default;
+$ice-dropdown-item-active-bg-color:       $background-hover-active;
+
+$ice-dropdown-item-border-style:          1px solid $border-item !default;
+
+$ice-dropdown-item-group-header-bg:       $background-extra-light !default;
+$ice-dropdown-item-group-header-weight:   $font-bold !default;
+
+
+// Sub dropdowns
+// -----------------
+// Offset is needed to align the submenu items with the main dropdown menu's items
+$ice-sub-dropdown-offset:                 -$ice-dropdown-item-spacing-vertical !default;
+$ice-sub-dropdown-box-shadow:             $ice-dropdown-box-shadow !default;
