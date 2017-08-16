@@ -210,7 +210,4 @@ export default class IceDropdown extends Component {
     }
     document.body.removeEventListener('click', this._handleBodyClick);
   }
-
-  // ----- Private Functions -----
-
 }
