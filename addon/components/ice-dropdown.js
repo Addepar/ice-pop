@@ -107,8 +107,6 @@ export default class IceDropdown extends Component {
     this._clickHandler = (event) => {
       if (this.get('isOpen') === false) {
         this._insertDropdown();
-      } else {
-        this._removeDropdown();
       }
     };
 
@@ -144,16 +142,18 @@ export default class IceDropdown extends Component {
     };
 
     this._handleBodyClick = (event) => {
-      // We want the body click to trigger on everything BUT the current target or dropdown,
-      // otherwise the click handler would get triggered twice when clicking the target,
-      // causing unforseen chaos down the line
-      if ((event.target !== this._target) && (!this._popperElement.contains(event.target))) {
+      // We do not want _removeDropdown to trigger yet when clicking inside of the dropdown.
+      // Here we check whether the body click event was also a dropdown container click event.
+      // We are comparing the click events because tracking the click element itself can
+      // be buggy if the content within the dropdown ever changes while its still open.
+      if (event !== this.eventClick) {
         this._removeDropdown();
       }
-      // Close the dropdown if click target has [data-popover-close] attribute,
-      // regardless of where it is in the dom.
-      // This could be problematic in the future if we ever have the use case for
-      // multiple dropdowns open. This would close all of them at the same time.
+      // We still want to allow purposeful closing of the dropdown from within,
+      // so this closes the dropdown if the click target has [data-dropdown-close]
+      // attribute, regardless of where it is in the dom.
+      // (This could be problematic in the future if we ever have the use case for
+      // multiple dropdowns open. This would close all of them at the same time.)
       if (event.target.attributes['data-dropdown-close']) {
         this._removeDropdown();
       }
@@ -172,6 +172,12 @@ export default class IceDropdown extends Component {
       this._popperElement = document.getElementById(this._popperId);
 
       this._popperElement.addEventListener('transitionend', this._transitionEndHandler);
+
+      // We are storing the click event that happens directly on the dropdown container
+      // so that we can later compare it to the body click for closing logistics
+      this._popperElement.addEventListener('click', (event) => {
+        this.eventClick = event;
+      });
 
       document.body.addEventListener('click', this._handleBodyClick);
 
