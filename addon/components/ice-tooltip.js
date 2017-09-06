@@ -125,7 +125,6 @@ export default class IceTooltip extends Component {
 
     this._target.addEventListener('mouseenter', this._mouseEnterHandler);
     this._target.addEventListener('mouseleave', this._mouseLeaveHandler);
-    this._target.setAttribute('data-test-tooltip-icon', '');
   }
 
   willDestroyElement() {

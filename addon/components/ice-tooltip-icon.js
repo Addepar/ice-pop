@@ -29,6 +29,10 @@ export default class IceTooltipIcon extends Component {
 
   @property classNameBindings = [':fa', 'iconClass', ':tooltip-icon']
 
+  @property attributeBindings = ['testAttr:data-test-tooltip-icon']
+
+  @property testAttr = true
+
   // ----- Public Settings ------
 
   /**
