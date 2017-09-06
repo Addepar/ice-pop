@@ -147,7 +147,7 @@ test('tooltip box direction can be modified', async function(assert) {
     </div>
   `);
 
-  await tooltipHelpers.openTooltip(tooltipHelpers.TOOLTIP_ICON_SELECTORS);
+  await tooltipHelpers.openTooltip(tooltipHelpers.TOOLTIP_ICON_SELECTOR);
   await waitForAnimations(tooltipHelpers.TOOLTIP_SELECTOR);
 
   assert.equal(tooltipHelpers.getTooltip().getAttribute('x-placement'), 'bottom-end',
