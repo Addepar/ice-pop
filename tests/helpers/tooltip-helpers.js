@@ -1,35 +1,35 @@
 import { find, findAll, triggerEvent } from 'ember-native-dom-helpers';
 
-const TOOLTIP_CLASS = '.ice-tooltip';
-const TOOLTIP_ICON_CLASS = '.tooltip-icon';
+const TOOLTIP_SELECTOR = '[data-test-tooltip]';
+const TOOLTIP_ICON_SELECTOR = '[data-test-tooltip-icon]';
 
 /**
  * Get count of currently rendered tooltips in the DOM
  * @return {number}
  */
 const getTooltipsCount = () =>
-  findAll(TOOLTIP_CLASS).length;
+  findAll(TOOLTIP_SELECTOR).length;
 
 /**
  * Get count of currently rendered tooltip icons in the DOM
  * @return {number}
  */
 const getTooltipIconsCount = () =>
-  findAll(TOOLTIP_ICON_CLASS).length;
+  findAll(TOOLTIP_ICON_SELECTOR).length;
 
 /**
  * Find currently rendered tooltip in the DOM
  * @return {object}
  */
 const getTooltip = () =>
-  find(TOOLTIP_CLASS);
+  find(TOOLTIP_SELECTOR);
 
 /**
  * Find currently rendered tooltip icon in the DOM
  * @return {object}
  */
 const getTooltipIcon = () =>
-  find(TOOLTIP_ICON_CLASS);
+  find(TOOLTIP_ICON_SELECTOR);
 
 /**
  * Mimic mousing over the tooltip trigger point to open the tooltip box
@@ -46,8 +46,8 @@ const closeTooltip = (target) =>
   triggerEvent(target, 'mouseleave');
 
 export {
-  TOOLTIP_CLASS,
-  TOOLTIP_ICON_CLASS,
+  TOOLTIP_SELECTOR,
+  TOOLTIP_ICON_SELECTOR,
   getTooltipsCount,
   getTooltipIconsCount,
   getTooltip,

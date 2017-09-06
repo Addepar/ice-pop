@@ -32,16 +32,16 @@ test('tooltip works as expected', async function(assert) {
     {{/ice-tooltip-icon}}
   `);
 
-  await tooltipHelpers.openTooltip(tooltipHelpers.TOOLTIP_ICON_CLASS);
-  await waitForAnimations(tooltipHelpers.TOOLTIP_CLASS);
+  await tooltipHelpers.openTooltip(tooltipHelpers.TOOLTIP_ICON_SELECTOR);
+  await waitForAnimations(tooltipHelpers.TOOLTIP_SELECTOR);
 
   assert.equal(tooltipHelpers.getTooltipsCount(), 1,
     'hovering icon target renders a tooltip');
   assert.equal(tooltipHelpers.getTooltip().textContent.trim(), 'template block text',
     'tooltip content renders');
 
-  await tooltipHelpers.closeTooltip(tooltipHelpers.TOOLTIP_ICON_CLASS);
-  await waitForAnimations(tooltipHelpers.TOOLTIP_CLASS);
+  await tooltipHelpers.closeTooltip(tooltipHelpers.TOOLTIP_ICON_SELECTOR);
+  await waitForAnimations(tooltipHelpers.TOOLTIP_SELECTOR);
 
   assert.equal(tooltipHelpers.getTooltipsCount(), 0,
     'tooltip removed after exiting the tooltip icon');
@@ -71,8 +71,8 @@ test('tooltip box modifier class can be added', async function(assert) {
     {{/ice-tooltip-icon}}
   `);
 
-  await tooltipHelpers.openTooltip(tooltipHelpers.TOOLTIP_ICON_CLASS);
-  await waitForAnimations(tooltipHelpers.TOOLTIP_CLASS);
+  await tooltipHelpers.openTooltip(tooltipHelpers.TOOLTIP_ICON_SELECTOR);
+  await waitForAnimations(tooltipHelpers.TOOLTIP_SELECTOR);
 
   assert.equal(tooltipHelpers.getTooltip().classList.contains('error-tooltip'), true,
     'tooltip box reflects additional class');
@@ -87,8 +87,8 @@ test('tooltip box direction can be modified', async function(assert) {
     {{/ice-tooltip-icon}}
   `);
 
-  await tooltipHelpers.openTooltip(tooltipHelpers.TOOLTIP_ICON_CLASS);
-  await waitForAnimations(tooltipHelpers.TOOLTIP_CLASS);
+  await tooltipHelpers.openTooltip(tooltipHelpers.TOOLTIP_ICON_SELECTOR);
+  await waitForAnimations(tooltipHelpers.TOOLTIP_SELECTOR);
 
   assert.equal(tooltipHelpers.getTooltip().getAttribute('x-placement'), 'bottom-end',
     'tooltip box reflects correct direction');

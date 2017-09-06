@@ -102,6 +102,9 @@ export default class IceTooltip extends Component {
       this._popperElement.addEventListener('mouseenter', this._mouseEnterHandler);
       this._popperElement.addEventListener('mouseleave', this._mouseLeaveHandler);
       this._popperElement.addEventListener('transitionend', this._transitionEndHandler);
+
+      // need to check if this gets stripped in prod
+      this._popperElement.setAttribute('data-test-tooltip', '');
     };
 
     this._mouseLeaveHandler = () => {
@@ -122,6 +125,7 @@ export default class IceTooltip extends Component {
 
     this._target.addEventListener('mouseenter', this._mouseEnterHandler);
     this._target.addEventListener('mouseleave', this._mouseLeaveHandler);
+    this._target.setAttribute('data-test-tooltip-icon', '');
   }
 
   willDestroyElement() {
