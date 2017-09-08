@@ -122,7 +122,7 @@ test('tooltip box modifier class can be added', async function(assert) {
   this.render(hbs`
     <div data-test-tooltip-target>
       Target
-      {{#ice-tooltip class="error-tooltip"}}
+      {{#ice-tooltip tooltipClass="error-tooltip"}}
         template block text
       {{/ice-tooltip}}
     </div>
