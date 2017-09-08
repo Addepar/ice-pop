@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { property } from '@addepar/ice-box/utils/class';
+import { DEBUG } from '@glimmer/env';
 
 import layout from '../templates/components/ice-tooltip';
 
@@ -34,6 +35,11 @@ export default class IceTooltip extends Component {
    * Can also add -start or -end modifier
    */
   @property placement = 'auto'
+
+  /**
+   * An optional class to pass to the tooltip itself.
+   */
+  @property tooltipClass = null
 
   /**
    * Selector or Element
@@ -102,6 +108,11 @@ export default class IceTooltip extends Component {
       this._popperElement.addEventListener('mouseenter', this._mouseEnterHandler);
       this._popperElement.addEventListener('mouseleave', this._mouseLeaveHandler);
       this._popperElement.addEventListener('transitionend', this._transitionEndHandler);
+
+      // Add attribute used for tests, is not used in prod
+      if (DEBUG) {
+        this._popperElement.setAttribute('data-test-tooltip', '');
+      }
     };
 
     this._mouseLeaveHandler = () => {
