@@ -131,7 +131,7 @@ test('popover box modifier class can be added', async function(assert) {
   this.render(hbs`
     <div data-test-popover-target>
       Target
-      {{#ice-popover popoverClass="foobar" placement="bottom-start"}}
+      {{#ice-popover class="foobar" placement="bottom-start"}}
         template block text
       {{/ice-popover}}
     </div>

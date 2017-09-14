@@ -37,11 +37,6 @@ export default class IceTooltip extends Component {
   @property placement = 'auto'
 
   /**
-   * An optional class to pass to the tooltip itself.
-   */
-  @property tooltipClass = null
-
-  /**
    * Selector or Element
    */
   @property target = null
@@ -69,11 +64,18 @@ export default class IceTooltip extends Component {
   @property _popperId = ''
 
   init() {
-    this._popperClass = this.class || '';
-    this._popperClass += this.classNames.join(' ');
-    this._popperId = generateGuid();
-
     super.init(...arguments);
+
+    this._popperClass = this.class || '';
+    this._popperClass += ` ${this.classNames.join(' ')}`;
+
+    for (const binding of this.classNameBindings) {
+      if (binding.value) {
+        this._popperClass += ` ${binding.value()}`;
+      }
+    }
+
+    this._popperId = generateGuid();
   }
 
   didInsertElement() {

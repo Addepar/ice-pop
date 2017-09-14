@@ -6,7 +6,7 @@ A small tooltip that is triggered on hover over a target element.
 
 You can implement a tooltip type class with the Ember addon like this:
 ```
-{{#ice-tooltip tooltipClass="error"}}
+{{#ice-tooltip class="error"}}
  I'm Mr. Meseeks look at me!
 {{/ice-tooltip}}
 ```
