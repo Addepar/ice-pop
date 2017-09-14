@@ -83,7 +83,7 @@ test('tooltip remains rendered when tooltip box itself is hovered', async functi
   assert.equal(tooltipHelpers.getTooltipsCount(), 1,
     'tooltip rendered after entering the target');
 
-  await triggerEvent('[data-test-tooltip-target]', 'mouseleave');
+  triggerEvent('[data-test-tooltip-target]', 'mouseleave');
   await triggerEvent(tooltipHelpers.TOOLTIP_SELECTOR, 'mouseenter');
   await waitForAnimations(tooltipHelpers.TOOLTIP_SELECTOR);
 
