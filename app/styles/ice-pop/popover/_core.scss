@@ -3,9 +3,9 @@ Ice Popover
 
 A popover that is triggered upon clicking a target element.
 
-You can implement a popover type class and custom placement with the Ember addon like this:
+You can implement a popover custom class and custom placement with the Ember addon like this:
 ```
-{{#ice-popover class="type" placement="top"}}
+{{#ice-popover popoverClass="custom-class" placement="top"}}
   <div class="ice-popover-body">
     I'm Mr. Meseeks look at me!
   </div>
@@ -19,7 +19,7 @@ Please use the Ember component instead.
 [See Ice Popover Docs >>](/docs/ice-pop/class/addon/components/ice-popover.js~IcePopover.html)
 
 Markup:
-<div class="ice-popover is-visible" x-placement="top">
+<div class="ice-popover is-visible custom-class" x-placement="top">
   <div class="ice-popover-content">
     <div class="ice-popover-body">
       I'm Mr. Meseeks look at me!

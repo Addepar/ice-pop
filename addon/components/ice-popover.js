@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { property } from '@addepar/ice-box/utils/class';
+import { DEBUG } from '@glimmer/env';
 
 import layout from '../templates/components/ice-popover';
 
@@ -35,6 +36,11 @@ export default class IcePopover extends Component {
    * Can also add -start or -end modifier
    */
   @property placement = 'right-start'
+
+  /**
+   * An optional class to pass to the popover itself.
+   */
+  @property popoverClass = null
 
   /**
    * Selector or Element
@@ -144,6 +150,11 @@ export default class IcePopover extends Component {
       });
 
       document.body.addEventListener('click', this._handleBodyClick);
+
+      // Add attribute used for tests, is not used in prod
+      if (DEBUG) {
+        this._popperElement.setAttribute('data-test-popover', '');
+      }
     };
 
     this._removePopover = () => {
