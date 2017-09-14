@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { triggerEvent } from 'ember-native-dom-helpers';
 
 import waitForAnimations from '../../helpers/wait-for-animations';
-import tooltipHelpers from '../../helpers/tooltip-helpers';
+import tooltipHelpers from '../../helpers/components/tooltip-helpers';
 
 moduleForComponent('ice-tooltip', 'Integration | Component | ice tooltip', {
   integration: true

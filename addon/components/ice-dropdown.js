@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { property } from '@addepar/ice-box/utils/class';
+import { DEBUG } from '@glimmer/env';
 
 import layout from '../templates/components/ice-dropdown';
 
@@ -19,7 +20,7 @@ const {
  * <button class="button-default">
  *   Target text
  *   <div class="ice-dropdown-caret"></div>
- *   {{#ice-dropdown}}
+ *   {{#ice-dropdown class="custom-class"}}
  *     Menu
  *   {{/ice-dropdown}}
  * </button>
@@ -77,15 +78,23 @@ export default class IceDropdown extends Component {
   @property _popperId = ''
 
   init() {
-    this._popperClass = this.class || '';
-    this._popperClass += this.classNames.join(' ');
-    this.classNames = [];
-    this._popperId = generateGuid();
-
     super.init(...arguments);
+
+    this._popperClass = this.class || '';
+    this._popperClass += ` ${this.classNames.join(' ')}`;
+
+    for (const binding of this.classNameBindings) {
+       if (binding.value) {
+         this._popperClass += ` ${binding.value()}`;
+       }
+     }
+
+    this._popperId = generateGuid();
   }
 
   didInsertElement() {
+    this.element.className = '';
+
     let target = this.get('target') || this.element.parentNode;
 
     if (typeof target === 'string') {
@@ -191,6 +200,13 @@ export default class IceDropdown extends Component {
         dropdownItems.forEach(function(item) {
           item.setAttribute('data-dropdown-close', '');
         });
+      }
+
+      // Add attribute used for tests, is not used in prod
+      if (DEBUG & this.get('isTriggeredOnHover')) {
+        this._popperElement.setAttribute('data-test-sub-dropdown', '');
+      } else if (DEBUG) {
+        this._popperElement.setAttribute('data-test-dropdown', '');
       }
     };
 
