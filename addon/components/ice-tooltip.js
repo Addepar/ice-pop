@@ -66,6 +66,13 @@ export default class IceTooltip extends Component {
   init() {
     this._popperClass = this.class || '';
     this._popperClass += this.classNames.join(' ');
+
+    for (const binding of this.classNameBindings) {
+      if (binding.value) {
+        this._popperClass += ` ${binding.value()}`;
+      }
+    }
+
     this._popperId = generateGuid();
 
     super.init(...arguments);
