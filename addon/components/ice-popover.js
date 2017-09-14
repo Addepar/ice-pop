@@ -38,11 +38,6 @@ export default class IcePopover extends Component {
   @property placement = 'right-start'
 
   /**
-   * An optional class to pass to the popover itself.
-   */
-  @property popoverClass = null
-
-  /**
    * Selector or Element
    */
   @property target = null

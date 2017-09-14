@@ -5,7 +5,7 @@ A popover that is triggered upon clicking a target element.
 
 You can implement a popover custom class and custom placement with the Ember addon like this:
 ```
-{{#ice-popover popoverClass="custom-class" placement="top"}}
+{{#ice-popover class="custom-class" placement="top"}}
   <div class="ice-popover-body">
     I'm Mr. Meseeks look at me!
   </div>

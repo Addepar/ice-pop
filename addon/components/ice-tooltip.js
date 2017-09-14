@@ -37,11 +37,6 @@ export default class IceTooltip extends Component {
   @property placement = 'auto'
 
   /**
-   * An optional class to pass to the tooltip itself.
-   */
-  @property tooltipClass = null
-
-  /**
    * Selector or Element
    */
   @property target = null

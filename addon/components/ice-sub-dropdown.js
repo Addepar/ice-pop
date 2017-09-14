@@ -3,10 +3,7 @@ import { property } from '@addepar/ice-box/utils/class';
 
 import layout from '../templates/components/ice-sub-dropdown';
 
-
 const {
-  run,
-  generateGuid,
   Component
 } = Ember;
 
@@ -29,7 +26,6 @@ export default class IceSubDropdown extends Component {
   @property layout = layout
 
   @property tagName =''
-
 
   // ----- Public Settings ------
 
