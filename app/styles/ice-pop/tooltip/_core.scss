@@ -4,15 +4,15 @@ Ice Tooltip
 A small tooltip that is triggered on hover over a target element.
 
 
-You can implement a tooltip type class with the Ember addon like this:
+You can implement a tooltip custom class as well as custom direction placement with the Ember addon like this:
 ```
-{{#ice-tooltip class="error"}}
+{{#ice-tooltip placement="bottom" class="custom-class"}}
  I'm Mr. Meseeks look at me!
 {{/ice-tooltip}}
 ```
 
 #### Important
-Note that tooltips are an offical Ember addon in ice-pop,
+Note that tooltips are an official Ember addon in ice-pop,
 so please do not use the below example HTML directly.
 Please use the Ember component instead.
 [See Ice Tooltip Docs >>](/docs/ice-pop/class/addon/components/ice-tooltip.js~IceTooltip.html)

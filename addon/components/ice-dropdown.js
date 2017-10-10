@@ -17,15 +17,47 @@ const {
  * can also take a target selector as an option.
  *
  * ```hbs
- * <button class="button-default">
+ * <div class="target">
+ *   Target text
+ *   <div class="ice-dropdown-caret"></div>
+ *   {{#ice-dropdown}}
+ *     Dropdown with defaults
+ *   {{/ice-dropdown}}
+ * </div>
+ *
+ * <div class="target">
+ *   Target text
+ *   <div class="ice-dropdown-caret"></div>
+ *   {{#ice-dropdown placement="bottom"}}
+ *     Dropdown with custom placement
+ *   {{/ice-dropdown}}
+ * </div>
+ *
+ * <div class="target">
  *   Target text
  *   <div class="ice-dropdown-caret"></div>
  *   {{#ice-dropdown class="custom-class"}}
- *     Menu
- *   {{/ice-dropdown}}
- * </button>
- * ```
+ *     Dropdown with custom class
+ *   {{/ice-tooltip}}
+ * </div>
  *
+ * <div class="target">
+ *   Target text
+ *   <div class="ice-dropdown-caret"></div>
+ *   {{#ice-dropdown closeItems="false"}}
+ *     By default, clicking any dropdown menu link will close the dropdown,
+ *     but you can turn this off via closeItems="false" if you need to handle closing manually
+ *   {{/ice-tooltip}}
+ * </div>
+ *
+ * <div data-dropdown-target>
+ *   Target text
+ *   <div class="ice-dropdown-caret"></div>
+ * </div>
+ * {{#ice-dropdown target="[data-dropdown-target]"}}
+ *   Dropdown with external target, should be a unique id or attribute
+ * {{/ice-dropdown}}
+ * ```
  */
 export default class IceDropdown extends Component {
   @property layout = layout

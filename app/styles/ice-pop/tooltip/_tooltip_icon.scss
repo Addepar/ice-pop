@@ -4,10 +4,10 @@ Ice Tooltip Icon
 A tooltip with a target icon baked in. It is designed to be a font awesome icon
 for now, until Addepar comes up with its own icon system.
 
-
-You can implement the icon tooltip component (along with optional class for either icon or tooltip) with the Ember addon like this:
+You can implement the icon tooltip component (along with optional class for either
+icon or tooltip, and tooltip direction placement) with the Ember addon like this:
 ```
-{{#ice-tooltip-icon tooltipClass="error" tooltipIcon="fa-warning"}}
+{{#ice-tooltip-icon placement="bottom" tooltipClass="error-tooltip" iconClass="fa-warning"}}
  I'm Mr. Meseeks look at me!
 {{/ice-tooltip-icon}}
 ```
