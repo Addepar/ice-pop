@@ -80,6 +80,8 @@ export default class IcePopover extends Component {
   }
 
   didInsertElement() {
+    this.element.className = '';
+
     let target = this.get('target') || this.element.parentNode;
 
     if (typeof target === 'string') {

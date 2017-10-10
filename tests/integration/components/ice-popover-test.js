@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { click } from 'ember-native-dom-helpers';
 
 import waitForAnimations from '../../helpers/wait-for-animations';
-import popoverHelpers from '../../helpers/popover-helpers';
+import popoverHelpers from '../../helpers/components/popover-helpers';
 
 moduleForComponent('ice-popover', 'Integration | Component | ice popover', {
   integration: true

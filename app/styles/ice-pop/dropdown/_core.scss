@@ -5,7 +5,7 @@ A dropdown that is triggered upon clicking a target element.
 
 You can implement a dropdown type class and custom placement with the Ember addon like this:
 ```
-{{#ice-dropdown position="left-start"}}
+{{#ice-dropdown position="left-start" class="custom-class"}}
   Menu
 {{/ice-dropdown}}
 ```
@@ -17,7 +17,7 @@ Please use the Ember component instead.
 [See Ice Dropdown Docs >>](/docs/ice-pop/class/addon/components/ice-dropdown.js~IceDropdown.html)
 
 Markup:
-<div class="ice-dropdown is-visible" x-placement="bottom">
+<div class="ice-dropdown is-visible custom-class" x-placement="bottom">
   <div class="ice-dropdown-content">
     Menu
   </div>

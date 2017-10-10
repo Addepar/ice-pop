@@ -282,7 +282,7 @@
           <li><a>Lorem ipsum</a></li>
           <li><a>I'm Mr. Meseeks</a></li>
           <li><a>Foo bar baz</a></li>
-          <li class="disabled"><a>Lorem ipsum</a></li>
+          <li><a disabled>Lorem ipsum</a></li>
           <li><a>I'm Mr. Meseeks</a></li>
         </ul>
       {{/ice-dropdown}}
@@ -307,6 +307,21 @@
   </div>
   <div class="demo-item">
     <button class="button-default popover-target">
+      Custom Class <div class="ice-dropdown-caret"></div>
+      {{#ice-dropdown class="foobar"}}
+        <ul class="ice-dropdown-menu">
+          <li><a>Foo bar baz</a></li>
+          <li><a>Lorem ipsum</a></li>
+          <li><a>I'm Mr. Meseeks</a></li>
+          <li><a>Foo bar baz</a></li>
+          <li><a>Lorem ipsum</a></li>
+          <li><a>I'm Mr. Meseeks</a></li>
+        </ul>
+      {{/ice-dropdown}}
+    </button>
+  </div>
+  <div class="demo-item">
+    <button class="button-default popover-target">
       Submenu <div class="ice-dropdown-caret"></div>
       {{#ice-dropdown}}
         <ul class="ice-dropdown-menu">
@@ -320,7 +335,7 @@
               <li><a>I'm Mr. Meseeks</a></li>
               <li class="list-divider"></li>
               <li><a>Foo bar baz</a></li>
-              <li class="disabled"><a>Lorem ipsum</a></li>
+              <li><a disabled>Lorem ipsum</a></li>
               <li><a>I'm Mr. Meseeks</a></li>
             </ul>
           {{/ice-sub-dropdown}}

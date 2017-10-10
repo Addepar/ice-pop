@@ -2,7 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 import waitForAnimations from '../../helpers/wait-for-animations';
-import tooltipHelpers from '../../helpers/tooltip-helpers';
+import tooltipHelpers from '../../helpers/components/tooltip-helpers';
 
 moduleForComponent('ice-tooltip-icon', 'Integration | Component | ice tooltip icon', {
   integration: true
