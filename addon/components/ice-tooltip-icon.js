@@ -10,17 +10,18 @@ const { Component } = Ember;
  * which is currently by default a font awesome icon.
  *
  * ```hbs
- * {{#ice-tooltip-icon placement="bottom"}}
- *   // Tooltip with default icon and bottom placement
- *   Some text
+ * {{#ice-tooltip-icon}}
+ *   Icon tooltip with defaults
  * {{/ice-tooltip-icon}}
  *
- * {{#ice-tooltip-icon iconClass="fa-warning"}}
- *   // Tooltip with warning icon
- *   Some text
+ * {{#ice-tooltip-icon placement="bottom"}}
+ *   Icon tooltip with custom placement
+ * {{/ice-tooltip-icon}}
+ *
+ * {{#ice-tooltip-icon iconClass="fa-warning" tooltipClass="error-tooltip"}}
+ *   Icon tooltip with custom icon class and custom tooltip class
  * {{/ice-tooltip-icon}}
  * ```
- *
  */
 export default class IceTooltipIcon extends Component {
   @property layout = layout

@@ -17,12 +17,33 @@ const {
  *
  * ```hbs
  * <div class="target">
- *   {{#ice-tooltip placement="bottom"}}
- *     Some text
+ *   Target text
+ *   {{#ice-tooltip}}
+ *     Tootip with defaults
  *   {{/ice-tooltip}}
  * </div>
- * ```
  *
+ * <div class="target">
+ *   Target text
+ *   {{#ice-tooltip placement="bottom"}}
+ *     Tooltip with custom placement
+ *   {{/ice-tooltip}}
+ * </div>
+ *
+ * <div class="target">
+ *   Target text
+ *   {{#ice-tooltip class="error-tooltip"}}
+ *     Tooltip with custom class
+ *   {{/ice-tooltip}}
+ * </div>
+ *
+ * <div data-tooltip-target>
+ *   Target text
+ * </div>
+ * {{#ice-tooltip target="[data-tooltip-target]"}}
+ *   Tooltip with external target, should be a unique id or attribute
+ * {{/ice-tooltip}}
+ * ```
  */
 export default class IceTooltip extends Component {
   @property layout = layout

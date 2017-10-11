@@ -3,21 +3,30 @@ Ice Dropdown Menu
 
 A specific menu list style that is used inside dropdowns (and selects).
 
-The dropdown menu list itself is not an Ember addon, so you should use the HTML examples below.
+The dropdown menu list itself is not an Ember addon, it is just HTML/CSS.
 However you should only use it inside the ice-dropdown Ember addon like this:
 ```
-{{#ice-dropdown}}
-  <ul class="ice-dropdown-menu">
-    <li><a {{action 'foo'}}>Foo bar baz</a></li>
-    <li><a {{action 'bar'}}>I'm Mr. Meseeks</a></li>
-    <li><a {{action 'baz'}}>Lorem ipsum</a></li>
-    <li><a disabled">I'm disabled</a></li>
-  </ul>
-{{/ice-dropdown}}
+<div class="example-target">
+  Target text <div class="ice-dropdown-caret"></div>
+  {{#ice-dropdown}}
+    <ul class="ice-dropdown-menu">
+      <li><a {{action 'foo'}}>Foo bar baz</a></li>
+      <li class="list-group-header">Group Header Text</li>
+      <li><a {{action 'bar'}}>I'm Mr. Meseeks</a></li>
+      <li><a {{action 'baz'}}>Lorem ipsum</a></li>
+      <li class="list-divider"></li>
+      <li><a disabled>I'm disabled</a></li>
+    </ul>
+  {{/ice-dropdown}}
+</div>
+```
+
+By default, clicking any menu items will make the dropdown close,
+but you can instead customize which items have the closable action like this:
+```
 {{#ice-dropdown closeItems=false}}
   <ul class="ice-dropdown-menu">
     <li><a {{action 'foo'}} data-dropdown-close>Foo bar baz</a></li>
-    <li class="list-group-header">Header Text</li>
     <li><a {{action 'bar'}} data-dropdown-close>I'm Mr. Meseeks</a></li>
     <li><a {{action 'baz'}}>Don't close the dropdown yet</a></li>
   </ul>
@@ -25,26 +34,31 @@ However you should only use it inside the ice-dropdown Ember addon like this:
 ```
 
 Markup:
-  <ul class="ice-dropdown-menu">
-    <li><a data-dropdown-close>Foo bar baz</a></li>
-    <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
-    <li><a data-dropdown-close>Lorem ipsum</a></li>
-    <li><a disabled>I'm disabled</a></li>
-  </ul>
-  <ul class="ice-dropdown-menu">
-    <li><a data-dropdown-close>Foo bar baz</a></li>
-    <li class="list-group-header">Header Text</li>
-    <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
-    <li><a>Don't close the dropdown yet</a></li>
-  </ul>
+  (Note: Do not use this example outputted ice-dropdown HTML directly,
+  use the ember addon as notated in the section above)
+  <div class="dropdown-example">
+    <div class="example-target ice-dropdown-toggle" dropdown-placement="bottom-start">
+      Target text <div class="ice-dropdown-caret"></div>
+      <div class="ice-dropdown is-visible" x-placement="bottom-start">
+        <ul class="ice-dropdown-menu">
+          <li><a data-dropdown-close>Foo bar baz</a></li>
+          <li class="list-group-header">Group Header Text</li>
+          <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
+          <li><a data-dropdown-close>Lorem ipsum</a></li>
+          <li class="list-divider"></li>
+          <li><a disabled>I'm disabled</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 Class Options:
-`list-divider`: A horizontal divider between list items. Place this class on an empty `<li>`
-`list-group-header`: A header to go above a group of items in the list. Place on an `<li>` with the header text.
+* `list-divider`: A horizontal divider between list items. Place this class on an empty `<li>`
+* `list-group-header`: A header to go above a group of items in the list. Place on an `<li>` with the header text.
 
 Attribute Options:
-`disabled`: Marks a list item as disabled. Place class directly on the `<a>` that is to be disabled.
-`data-dropdown-close`: Lets Ember know it needs to close the dropdown after clicking. All `<a>` will do this by default unless you set closeItems=false on the dropdown component. In which case you can add them manually to any element.
+* `disabled`: Marks a list item as disabled. Place class directly on the `<a>` that is to be disabled.
+* `data-dropdown-close`: Lets Ember know it needs to close the dropdown after clicking. All `<a>` will do this by default unless you set closeItems=false on the dropdown component. In which case you can add them manually to any element.
 
 Styleguide Ice Pop - Ice Dropdown - Ice Dropdown Menu
 */

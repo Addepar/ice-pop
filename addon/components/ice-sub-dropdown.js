@@ -8,19 +8,25 @@ const {
 } = Ember;
 
 /**
- * Super simple dropdown component that uses popper.js. By default it targets its
- * parent element for placement and warps itself to the root of the DOM, but it
- * can also take a target selector as an option.
+ * Subdropdown component that is used inside a dropdown menu item.
  *
  * ```hbs
- * <div class="target">
- *   Target text
- *   {{#ice-dropdown}}
- *     Menu
- *   {{/ice-dropdown}}
- * </div>
+ * {{#ice-dropdown}}
+ *   <ul class="ice-dropdown-menu">
+ *     <li>
+ *       <a>Foo bar baz</a>
+ *       <div class="ice-dropdown-caret"></div>
+ *       {{#ice-sub-dropdown}}
+ *         <ul class="ice-dropdown-menu">
+ *           <li><a>Foo bar baz</a></li>
+ *           <li><a>I'm Mr. Meseeks</a></li>
+ *           <li><a>Lorem ipsum</a></li>
+ *         </ul>
+ *       {{/ice-sub-dropdown}}
+ *     </li>
+ *   </ul>
+ * {{/ice-dropdown}}
  * ```
- *
  */
 export default class IceSubDropdown extends Component {
   @property layout = layout

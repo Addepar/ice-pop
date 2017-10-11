@@ -17,13 +17,40 @@ const {
  *
  * ```hbs
  * <div class="target">
- *   Some text
- *   \{{#ice-popover placement="bottom"}}
- *     Some text
+ *   Target text
+ *   {{#ice-popover}}
+ *     Popover with defaults
  *   {{/ice-popover}}
  * </div>
- * ```
  *
+ * <div class="target">
+ *   Target text
+ *   {{#ice-popover placement="bottom"}}
+ *     Popover with custom placement
+ *   {{/ice-popover}}
+ * </div>
+ *
+ * <div class="target">
+ *   Target text
+ *   {{#ice-popover class="custom-class"}}
+ *     Popover with custom class
+ *   {{/ice-popover}}
+ * </div>
+ *
+ * <div class="target">
+ *   Target text
+ *   {{#ice-popover popoverTitle="Title Text"}}
+ *     Popover with optional header/title
+ *   {{/ice-popover}}
+ * </div>
+ *
+ * <div data-popover-target>
+ *   Target text
+ * </div>
+ * {{#ice-popover target="[data-popover-target]"}}
+ *   Popover with external target, should be a unique id or attribute
+ * {{/ice-popover}}
+ * ```
  */
 export default class IcePopover extends Component {
   @property layout = layout
