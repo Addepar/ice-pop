@@ -1,11 +1,9 @@
-import Ember from 'ember';
-import { property } from '@addepar/ice-box/utils/class';
+import Component from '@ember/component';
+
+import { tagName } from 'ember-decorators/component';
+import { argument, type } from 'ember-argument-decorators';
 
 import layout from '../templates/components/ice-sub-dropdown';
-
-const {
-  Component
-} = Ember;
 
 /**
  * Subdropdown component that is used inside a dropdown menu item.
@@ -28,10 +26,9 @@ const {
  * {{/ice-dropdown}}
  * ```
  */
+@tagName('')
 export default class IceSubDropdown extends Component {
-  @property layout = layout
-
-  @property tagName =''
+  layout = layout
 
   // ----- Public Settings ------
 
@@ -40,5 +37,11 @@ export default class IceSubDropdown extends Component {
    * Should only use right-start, left-start, right-end, left-end.
    * Popper will auto move it if needed.
    */
-  @property placement = 'right-start'
+  @argument
+  @type('string')
+  placement = 'right-start'
+
+  @argument
+  @type('boolean')
+  renderInPlace = false;
 }

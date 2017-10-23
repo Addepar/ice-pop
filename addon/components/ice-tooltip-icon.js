@@ -1,9 +1,9 @@
-import Ember from 'ember';
-import { property } from '@addepar/ice-box/utils/class';
+import Component from '@ember/component';
+
+import { className, classNames, tagName } from 'ember-decorators/component';
+import { argument, type } from 'ember-argument-decorators';
 
 import layout from '../templates/components/ice-tooltip-icon';
-
-const { Component } = Ember;
 
 /**
  * A tooltip that has an icon as its target element,
@@ -23,33 +23,33 @@ const { Component } = Ember;
  * {{/ice-tooltip-icon}}
  * ```
  */
+@tagName('i')
+@classNames('fa', 'tooltip-icon')
 export default class IceTooltipIcon extends Component {
-  @property layout = layout
-
-  @property tagName ='i'
-
-  @property classNameBindings = [':fa', 'iconClass', ':tooltip-icon']
-
-  @property attributeBindings = ['testAttr:data-test-tooltip-icon']
-
-  @property testAttr = true
+  layout = layout
 
   // ----- Public Settings ------
 
   /**
    * The specific icon class that you want to use
    */
-  @property iconClass = 'fa-question-circle'
+  @className
+  @type('string')
+  iconClass = 'fa-question-circle';
 
   /**
    * Used to determine the placement of the tooltip;
    * Can choose between auto, top, right, bottom, left;
    * Can also add -start or -end modifier.
    */
-  @property placement = 'auto'
+  @argument
+  @type('string')
+  placement = 'auto';
 
   /**
    * An optional class to pass to the tooltip itself.
    */
-  @property tooltipClass = null
+  @argument
+  @type('string')
+  tooltipClass = '';
 }

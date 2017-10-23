@@ -2,8 +2,10 @@
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults, {
-    // Add options here
+  const app = new EmberAddon(defaults, {
+    'ember-test-selectors': {
+      disableParamTransform: true
+    }
   });
 
   /*
