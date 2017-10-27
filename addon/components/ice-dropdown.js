@@ -1,15 +1,13 @@
-import Ember from 'ember';
-import { property } from '@addepar/ice-box/utils/class';
 import { DEBUG } from '@glimmer/env';
 
+import Component from '@ember/component';
+import { run } from '@ember/runloop';
+import { guidFor } from '@ember/object/internals';
+
+import { argument, type, immutable } from 'ember-argument-decorators';
+import { unionOf } from 'ember-argument-decorators/types';
+
 import layout from '../templates/components/ice-dropdown';
-
-
-const {
-  run,
-  generateGuid,
-  Component
-} = Ember;
 
 /**
  * Super simple dropdown component that uses popper.js. By default it targets its
@@ -60,7 +58,7 @@ const {
  * ```
  */
 export default class IceDropdown extends Component {
-  @property layout = layout
+  layout = layout
 
   // ----- Public Settings ------
 
@@ -69,59 +67,77 @@ export default class IceDropdown extends Component {
    * Can choose between auto, top, right, bottom, left
    * Can also add -start or -end modifier
    */
-  @property placement = 'bottom-start'
+  @argument
+  @type('string')
+  placement = 'bottom-start';
 
   /**
    * Selector or Element
    */
-  @property target = null
+  @immutable
+  @argument
+  @type(unionOf(null, 'string', Element))
+  target = null;
+
+  @argument
+  @type('boolean')
+  renderInPlace = false;
 
   /**
    * Determines whether this dropdown should be triggered by hover on the target
    */
-  @property isTriggeredOnHover = false
+  @argument
+  @type('boolean')
+  isTriggeredOnHover = false;
 
   /**
    * By default a dropdown will add the [data-dropdown-close] attribute to all items
    * in the dropdown list. If you instead need to do it manually for finer control, set to false.
    */
-  @property closeItems = true
+  @argument
+  @type('boolean')
+  closeItems = true;
 
   // ----- Private Variables -----
 
   /**
    * Used to track if the tooltip is open and appended to the DOM
    */
-  @property isOpen = false
+  @type('boolean')
+  isOpen = false;
 
   /**
    * Used to track whether fade in/out animation should trigger
    */
-  @property isShowing = false
+  @type('boolean')
+  isShowing = false;
 
   /**
    * Used to store the popper element for adding/removing event listeners
    */
-  @property _popperElement = null
+  _popperElement = null;
 
   /**
    * Used to target/select the popper element after it's been inserted
    */
-  @property _popperId = ''
+  _popperId = `${guidFor(this)}_popper`;
 
-  init() {
-    super.init(...arguments);
+  /**
+   * Used to as a proxy to pass along the class of this component to the actual popper
+   */
+  _popperClass = '';
 
-    this._popperClass = this.class || '';
+  constructor() {
+    super();
+
+    this._popperClass = this.class;
     this._popperClass += ` ${this.classNames.join(' ')}`;
 
     for (const binding of this.classNameBindings) {
-       if (binding.value) {
-         this._popperClass += ` ${binding.value()}`;
-       }
-     }
-
-    this._popperId = generateGuid();
+      if (binding.value) {
+        this._popperClass += ` ${binding.value()}`;
+      }
+    }
   }
 
   didInsertElement() {
@@ -140,12 +156,12 @@ export default class IceDropdown extends Component {
 
     // Add initial dropdown placement to the target element so that it can apply
     // any special styling based on the dropdown's direction.
-    this._target.setAttribute('dropdown-placement', this.placement);
+    this._target.setAttribute('dropdown-placement', this.get('placement'));
     // Add toggle class to target element, for open/closed or any styling needs.
     this._target.classList.add('ice-dropdown-toggle');
 
     // Click handler is used by default, when isTriggeredOnHover is false
-    this._clickHandler = (event) => {
+    this._clickHandler = () => {
       if (this.get('isOpen') === false) {
         this._insertDropdown();
       }
@@ -226,9 +242,9 @@ export default class IceDropdown extends Component {
       // the dropdown is currently open
       this._target.classList.add('is-active');
 
-      if (this.closeItems) {
+      if (this.get('closeItems')) {
         // This makes the assumption that actions are placed on anchor elements, not on the li
-        let dropdownItems = this._popperElement.querySelectorAll('.ice-dropdown-menu li a');
+        const dropdownItems = this._popperElement.querySelectorAll('.ice-dropdown-menu li a');
         dropdownItems.forEach(function(item) {
           item.setAttribute('data-dropdown-close', '');
         });
@@ -246,7 +262,7 @@ export default class IceDropdown extends Component {
       run(() => this.set('isShowing', false));
     };
 
-    if (this.isTriggeredOnHover) {
+    if (this.get('isTriggeredOnHover')) {
       this._target.addEventListener('mouseenter', this._mouseEnterHandler);
       this._target.addEventListener('mouseleave', this._mouseLeaveHandler);
     } else {

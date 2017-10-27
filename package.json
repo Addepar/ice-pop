@@ -18,10 +18,12 @@
   },
   "dependencies": {
     "@addepar/ice-box": "^0.1.0",
+    "ember-argument-decorators": "~0.6.1",
     "ember-cli-babel": "^6.3.0",
     "ember-cli-htmlbars": "^2.0.1",
-    "ember-decorators": "^1.2.2",
-    "ember-popper": "~0.5.0"
+    "ember-decorators": "^1.3.1",
+    "ember-legacy-class-transform": "~0.1.2",
+    "ember-popper": "~0.6.6"
   },
   "devDependencies": {
     "@addepar/eslint-config": "^1.0.0",
@@ -48,6 +50,7 @@
     "ember-native-dom-helpers": "^0.5.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.14.0",
+    "ember-test-selectors": "pzuraq/ember-test-selectors#24334cd9a0de17a4201c5354f8b4cd9ea774c208",
     "loader.js": "^4.2.3"
   },
   "engines": {

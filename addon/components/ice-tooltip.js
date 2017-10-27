@@ -1,14 +1,13 @@
-import Ember from 'ember';
-import { property } from '@addepar/ice-box/utils/class';
 import { DEBUG } from '@glimmer/env';
 
-import layout from '../templates/components/ice-tooltip';
+import Component from '@ember/component';
+import { run } from '@ember/runloop';
+import { guidFor } from '@ember/object/internals';
 
-const {
-  run,
-  generateGuid,
-  Component
-} = Ember;
+import { argument, type, immutable } from 'ember-argument-decorators';
+import { unionOf } from 'ember-argument-decorators/types';
+
+import layout from '../templates/components/ice-tooltip';
 
 /**
  * Super simple tooltip component that uses popper.js. By default it targets its
@@ -46,7 +45,7 @@ const {
  * ```
  */
 export default class IceTooltip extends Component {
-  @property layout = layout
+  layout = layout
 
   // ----- Public Settings ------
 
@@ -55,37 +54,49 @@ export default class IceTooltip extends Component {
    * Can choose between auto, top, right, bottom, left;
    * Can also add -start or -end modifier
    */
-  @property placement = 'auto'
+  @argument
+  @type('string')
+  placement = 'auto';
 
   /**
    * Selector or Element
    */
-  @property target = null
+  @immutable
+  @argument
+  @type(unionOf(null, 'string', Element))
+  target = null;
 
   // ----- Private Variables -----
 
   /**
    * Used to track if the tooltip is open and appended to the DOM
    */
-  @property isOpen = false
+  @type('boolean')
+  isOpen = false;
 
   /**
    * Used to track whether fade in/out animation should trigger
    */
-  @property isShowing = false
+  @type('boolean')
+  isShowing = false;
 
   /**
    * Used to store the popper element for adding/removing event listeners
    */
-  @property _popperElement = null
+  _popperElement = null
 
   /**
    * Used to target/select the popper element after it's been inserted
    */
-  @property _popperId = ''
+  _popperId = `${guidFor(this)}_popper`;
 
-  init() {
-    super.init(...arguments);
+  /**
+   * Used to as a proxy to pass along the class of this component to the actual popper
+   */
+  _popperClass = '';
+
+  constructor() {
+    super();
 
     this._popperClass = this.class || '';
     this._popperClass += ` ${this.classNames.join(' ')}`;
@@ -95,8 +106,6 @@ export default class IceTooltip extends Component {
         this._popperClass += ` ${binding.value()}`;
       }
     }
-
-    this._popperId = generateGuid();
   }
 
   didInsertElement() {

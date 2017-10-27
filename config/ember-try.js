@@ -48,7 +48,7 @@ module.exports = {
         },
         resolutions: {
           'ember': 'lts-2-4',
-          'ember-cli-shims': null
+          'ember-cli-shims': '1.1.0'
         }
       },
       npm: {
@@ -66,7 +66,7 @@ module.exports = {
         },
         resolutions: {
           'ember': 'lts-2-8',
-          'ember-cli-shims': null
+          'ember-cli-shims': '1.1.0'
         }
       },
       npm: {
