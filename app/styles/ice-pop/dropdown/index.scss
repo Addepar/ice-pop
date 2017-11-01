@@ -1,12 +1,11 @@
 // Dropdown CSS Package
 
-// Common styles/tools shared by multiple components
-@import '../common/functions';
-@import '../common/mixins';
-
 @import 'variables';
 @import 'mixins';
+@import 'functions';
 @import 'core';
 
 @import 'dropdown_menu';
+
+// Dropdown variations
 @import 'sub_dropdown';
