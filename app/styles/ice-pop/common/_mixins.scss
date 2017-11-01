@@ -394,3 +394,64 @@ Styleguide: Ice Pop - Common - Mixins - @update-arrow-color()
     }
   }
 }
+
+/*
+@create-offset-box-shadow()
+
+Creates an offset box-shadow property,
+which makes one side of the box shadow smaller than the others.
+
+### Example Usage:
+
+  ```
+  @include arrow-box("bottom", 3px, 3px, 5px, rgba(175, 175, 175, 0.1));
+  ```
+
+### Parameters:
+
+* $direction = The direction/placement of the popper
+* $x-offset = horizontal placement offset on the x axis
+* $y-offset = vertical placement offset on the y axis
+* $spread = shadow spread
+* $color = shadow color
+
+### Example Output:
+  ```
+  box-shadow: 0 0 3px rgba(175, 175, 175, 0.1),
+              -3px 3px 5px rgba(175, 175, 175, 0.1),
+              3px 3px 5px rgba(175, 175, 175, 0.1);
+  ```
+
+Styleguide: Ice Pop - Common - Mixins - @create-offset-box-shadow()
+*/
+
+@mixin create-offset-box-shadow($direction, $x-offset, $y-offset, $spread, $color) {
+  $left-top:      #{-$x-offset}   #{-$y-offset};
+  $left-bottom:   #{-$x-offset}   $y-offset;
+  $right-top:     $x-offset       #{-$y-offset};
+  $right-bottom:  $x-offset       $y-offset;
+
+  $side-1: '';
+  $side-2: '';
+
+  @if $direction == 'bottom' {
+    $side-1: $left-bottom;
+    $side-2: $right-bottom;
+  }
+  @elseif $direction == 'top' {
+    $side-1: $left-top;
+    $side-2: $right-top;
+  }
+  @elseif $direction == 'left' {
+    $side-1: $left-bottom;
+    $side-2: $left-top;
+  }
+  @elseif $direction == 'right' {
+    $side-1: $right-bottom;
+    $side-2: $right-top;
+  }
+
+  box-shadow: 0 0 $spread $color,
+              $side-1 $spread $color,
+              $side-2 $spread $color;
+}

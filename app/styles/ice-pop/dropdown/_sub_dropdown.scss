@@ -61,27 +61,36 @@ Styleguide Ice Pop - Ice Dropdown - Ice Sub Dropdown
 */
 
 .ice-sub-dropdown {
-  margin-top: $ice-sub-dropdown-offset;
+  margin-top: $ice-sub-dropdown-offset; // offset to make the subdropdown menu items line up
 
-  // Determine placement of box shadow and offset depending on direction
-  // TODO: Make a fancy mixin/function for this
-  &[x-placement^="bottom"] {
-    box-shadow: $ice-sub-dropdown-box-shadow;
-    margin-top: -$ice-dropdown-offset;
+  // The designers want the direction of the subdropdown to always be down or up,
+  // no left or right. -start and -end denote left and right when combined with up or down
+  &[x-placement^='bottom'],
+  &[x-placement$='-start'] {
+    @include create-offset-box-shadow('bottom', $ice-dropdown-box-shadow-x-offset, $ice-dropdown-box-shadow-y-offset, $ice-dropdown-box-shadow-spread, $ice-dropdown-box-shadow-color);
   }
 
-  &[x-placement^="top"] {
-    box-shadow: $ice-sub-dropdown-box-shadow;
-    margin-bottom: -$ice-dropdown-offset;
+  &[x-placement^='top'],
+  &[x-placement$='-end'] {
+    @include create-offset-box-shadow('top', $ice-dropdown-box-shadow-x-offset, $ice-dropdown-box-shadow-y-offset, $ice-dropdown-box-shadow-spread, $ice-dropdown-box-shadow-color);
   }
 
-  &[x-placement^="left"] {
-    box-shadow: $ice-sub-dropdown-box-shadow;
-    margin-right: -$ice-dropdown-offset;
-  }
+  // If we need an offset to match the offset on the main dropdown between its target
+  @if ($ice-dropdown-offset != 0) {
+    &[x-placement^='bottom'] {
+      margin-top: -$ice-dropdown-offset;
+    }
 
-  &[x-placement^="right"] {
-    box-shadow: $ice-sub-dropdown-box-shadow;
-    margin-left: -$ice-dropdown-offset;
+    &[x-placement^='top'] {
+      margin-bottom: -$ice-dropdown-offset;
+    }
+
+    &[x-placement^='left'] {
+      margin-right: -$ice-dropdown-offset;
+    }
+
+    &[x-placement^='right'] {
+      margin-left: -$ice-dropdown-offset;
+    }
   }
 }

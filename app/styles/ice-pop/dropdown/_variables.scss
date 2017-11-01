@@ -7,7 +7,7 @@
 
 $ice-dropdown-background-color:           $background-white !default;
 $ice-dropdown-title-background-color:     $background-extra-light !default;
-$ice-dropdown-offset:                     $spacing-small;
+$ice-dropdown-offset:                     0 !default;
 
 $ice-dropdown-text-align:                 left !default;
 $ice-dropdown-text-color:                 $text-dark !default;
@@ -31,8 +31,12 @@ $ice-dropdown-border-color:               $border-item !default;
 $ice-dropdown-border-width:               1px !default;
 $ice-dropdown-border-style:               solid !default;
 $ice-dropdown-border-radius:              0 !default;
-// Default shadows set for a downward dropdown
-$ice-dropdown-box-shadow:                 0 3px 8px 2px rgba(51,51,51,0.20) !default;
+
+// Dropdown vars, separated out so can customize more easily
+$ice-dropdown-box-shadow-color:           rgba(175, 175, 175, 0.1) !default;
+$ice-dropdown-box-shadow-x-offset:        3px !default;
+$ice-dropdown-box-shadow-y-offset:        3px !default;
+$ice-dropdown-box-shadow-spread:          3px !default;
 
 // Want to have no transition but currently it breaks if we do that, so making very short for now
 $ice-dropdown-fade-transition:            opacity 0.1s ease-in-out !default;
@@ -45,7 +49,7 @@ $ice-dropdown-z-index:                    10 !default;
 
 $ice-dropdown-item-spacing-vertical:      $spacing-default !default;
 $ice-dropdown-item-spacing-horizontal:    $spacing-double !default;
-$ice-dropdown-item-line-height:           1 !default;
+$ice-dropdown-item-line-height:           $spacing-double !default;
 
 $ice-dropdown-item-color:                 $ice-dropdown-text-color !default;
 $ice-dropdown-item-hover-bg-color:        $background-hover !default;
@@ -61,4 +65,3 @@ $ice-dropdown-item-group-header-weight:   $font-bold !default;
 // -----------------
 // Offset is needed to align the submenu items with the main dropdown menu's items
 $ice-sub-dropdown-offset:                 -$ice-dropdown-item-spacing-vertical !default;
-$ice-sub-dropdown-box-shadow:             $ice-dropdown-box-shadow !default;
