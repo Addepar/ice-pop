@@ -1,30 +1,29 @@
-/*
-Ice Dropdown
 
-A dropdown that is triggered upon clicking a target element.
-
-You can implement a dropdown type class and custom placement with the Ember addon like this:
-```
-{{#ice-dropdown position="left-start" class="custom-class"}}
-  Menu
-{{/ice-dropdown}}
-```
-
-#### Important
-Note that dropdowns are an offical Ember addon in ice-pop,
-so please do not use the below example HTML directly.
-Please use the Ember component instead.
-[See Ice Dropdown Docs >>](/docs/ice-pop/class/addon/components/ice-dropdown.js~IceDropdown.html)
-
-Markup:
-<div class="ice-dropdown is-visible [modifier-class]" x-placement="left-start">
-  <div class="ice-dropdown-content">
-    Menu
-  </div>
-</div>
-
-Styleguide Ice Pop - Ice Dropdown
-*/
+// Ice Dropdown
+//
+// A dropdown that is triggered upon clicking a target element.
+//
+// You can implement a dropdown type class and custom placement with the Ember addon like this:
+// ```
+// {{#ice-dropdown position="left-start" class="custom-class"}}
+//   Menu
+// {{/ice-dropdown}}
+// ```
+//
+// #### Important
+// Note that dropdowns are an offical Ember addon in ice-pop,
+// so please do not use the below example HTML directly.
+// Please use the Ember component instead.
+// [See Ice Dropdown Docs >>](/docs/ice-pop/class/addon/components/ice-dropdown.js~IceDropdown.html)
+//
+// Markup:
+// <div class="ice-dropdown is-visible [modifier-class]" x-placement="left-start">
+//   <div class="ice-dropdown-content">
+//     Menu
+//   </div>
+// </div>
+//
+// Styleguide Ice Pop - Ice Dropdown
 
 .ice-dropdown {
   position: absolute;

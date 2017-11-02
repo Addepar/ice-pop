@@ -1,64 +1,63 @@
-/*
-Ice Sub Dropdown
 
-A sub dropdown that is ONLY embedded in a list item inside of a regular dropdown menu.
-It is triggered when hovering over its target list element.
-
-You can implement a sub dropdown within a regular dropdown with the Ember addon like this:
-```
-{{#ice-dropdown}}
-  <ul class="ice-dropdown-menu">
-    <li>
-      <a>Foo bar baz</a>
-      <div class="ice-dropdown-caret"></div>
-      {{#ice-sub-dropdown}}
-        <ul class="ice-dropdown-menu">
-          <li><a>Foo bar baz</a></li>
-          <li><a>I'm Mr. Meseeks</a></li>
-          <li><a>Lorem ipsum</a></li>
-        </ul>
-      {{/ice-sub-dropdown}}
-    </li>
-    <li><a>I'm Mr. Meseeks</a></li>
-    <li><a>Lorem ipsum</a></li>
-  </ul>
-{{/ice-dropdown}}
-```
-
-#### Important
-Note that sub dropdowns are an offical Ember addon in ice-pop,
-so please do not use the below example HTML directly.
-Please use the Ember component instead.
-[See Ice Dropdown Docs >>](/docs/ice-pop/class/addon/components/ice-sub-dropdown.js~IceSubDropdown.html)
-
-Markup:
-  <div class="dropdown-example">
-    <div class="example-target ice-dropdown-toggle" dropdown-placement="bottom">
-      Target text <div class="ice-dropdown-caret"></div>
-      <div class="ice-dropdown is-visible">
-        <ul class="ice-dropdown-menu">
-          <li>
-            <a class="is-active">Foo bar baz</a>
-            <div class="ice-dropdown-caret"></div>
-            <div class="ice-dropdown ice-sub-dropdown is-visible" x-placement="right-start">
-              <div class="ice-dropdown-content">
-                <ul class="ice-dropdown-menu">
-                  <li><a>Foo bar baz</a></li>
-                  <li><a>I'm Mr. Meseeks</a></li>
-                  <li><a>Lorem ipsum</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li><a>I'm Mr. Meseeks</a></li>
-          <li><a>Lorem ipsum</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-Styleguide Ice Pop - Ice Dropdown - Ice Sub Dropdown
-*/
+// Ice Sub Dropdown
+//
+// A sub dropdown that is ONLY embedded in a list item inside of a regular dropdown menu.
+// It is triggered when hovering over its target list element.
+//
+// You can implement a sub dropdown within a regular dropdown with the Ember addon like this:
+// ```
+// {{#ice-dropdown}}
+//   <ul class="ice-dropdown-menu">
+//     <li>
+//       <a>Foo bar baz</a>
+//       <div class="ice-dropdown-caret"></div>
+//       {{#ice-sub-dropdown}}
+//         <ul class="ice-dropdown-menu">
+//           <li><a>Foo bar baz</a></li>
+//           <li><a>I'm Mr. Meseeks</a></li>
+//           <li><a>Lorem ipsum</a></li>
+//         </ul>
+//       {{/ice-sub-dropdown}}
+//     </li>
+//     <li><a>I'm Mr. Meseeks</a></li>
+//     <li><a>Lorem ipsum</a></li>
+//   </ul>
+// {{/ice-dropdown}}
+// ```
+//
+// #### Important
+// Note that sub dropdowns are an offical Ember addon in ice-pop,
+// so please do not use the below example HTML directly.
+// Please use the Ember component instead.
+// [See Ice Dropdown Docs >>](/docs/ice-pop/class/addon/components/ice-sub-dropdown.js~IceSubDropdown.html)
+//
+// Markup:
+//   <div class="dropdown-example">
+//     <div class="example-target ice-dropdown-toggle" dropdown-placement="bottom">
+//       Target text <div class="ice-dropdown-caret"></div>
+//       <div class="ice-dropdown is-visible">
+//         <ul class="ice-dropdown-menu">
+//           <li>
+//             <a class="is-active">Foo bar baz</a>
+//             <div class="ice-dropdown-caret"></div>
+//             <div class="ice-dropdown ice-sub-dropdown is-visible" x-placement="right-start">
+//               <div class="ice-dropdown-content">
+//                 <ul class="ice-dropdown-menu">
+//                   <li><a>Foo bar baz</a></li>
+//                   <li><a>I'm Mr. Meseeks</a></li>
+//                   <li><a>Lorem ipsum</a></li>
+//                 </ul>
+//               </div>
+//             </div>
+//           </li>
+//           <li><a>I'm Mr. Meseeks</a></li>
+//           <li><a>Lorem ipsum</a></li>
+//         </ul>
+//       </div>
+//     </div>
+//   </div>
+//
+// Styleguide Ice Pop - Ice Dropdown - Ice Sub Dropdown
 
 .ice-sub-dropdown {
   margin-top: $ice-sub-dropdown-offset; // offset to make the subdropdown menu items line up
