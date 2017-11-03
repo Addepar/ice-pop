@@ -1,17 +1,16 @@
-{{#if isOpen}}
-  {{#ember-popper
-    id=_popperId
-    target=_target
-    placement=placement
-    class="ice-popover"
-    classNameBindings="isShowing:is-visible popoverTitle:has-title _popperClass"
-  }}
-    <div class="ice-popover-content">
-      {{#if popoverTitle}}
-        <header class="ice-popover-title" data-test-popover-header>{{popoverTitle}}</header>
-      {{/if}}
-      {{yield}}
-    </div>
-    <div class="popper-arrow" x-arrow></div>
-  {{/ember-popper}}
-{{/if}}
+{{#animated-popper
+  isOpen=isOpen
+  placement=placement
+  renderInPlace=renderInPlace
+  popperClass=(concat "ice-popover " (if popoverTitle "has-title ") _popperClass)
+  onOpen="popoverOpened"
+  onClose="popoverClosed"
+}}
+  <div class="ice-popover-content">
+    {{#if popoverTitle}}
+      <header class="ice-popover-title" data-test-popover-header>{{popoverTitle}}</header>
+    {{/if}}
+    {{yield}}
+  </div>
+  <div class="popper-arrow" x-arrow></div>
+{{/animated-popper}}

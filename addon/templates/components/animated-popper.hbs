@@ -1,0 +1,13 @@
+{{unbound _parentFinder}}
+
+{{#if renderInDOM}}
+  {{#ember-popper
+    target=_target
+    placement=placement
+    renderInPlace=renderInPlace
+    registerAPI="registerAPI"
+    class=(concat "ice-animated " (if makeVisible "is-visible " "") popperClass)
+  }}
+    {{yield}}
+  {{/ember-popper}}
+{{/if}}
