@@ -1,202 +1,196 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { click } from 'ember-native-dom-helpers';
 
-import waitForAnimations from '../../helpers/wait-for-animations';
-import popoverHelpers from '../../helpers/components/popover-helpers';
+import { PageObject } from 'ember-classy-page-object';
+import { clickable, hasClass } from 'ember-cli-page-object';
 
-moduleForComponent('ice-popover', 'Integration | Component | ice popover', {
+import IcePopoverPage from '@addepar/ice-pop/test-support/pages/ice-popover';
+
+const PopoverHelper = IcePopoverPage.extend({ scope: '[data-test-popover]' });
+
+moduleForComponent('ice-popover', 'Integration | Component | ice-popover', {
   integration: true
 });
 
-test('popover box renders when parent element is the target', async function(assert) {
-  assert.expect(3);
+test('popover works', async function(assert) {
+  assert.expect(4);
 
   this.render(hbs`
-    <div data-test-popover-target>
+    <div>
       Target
-      {{#ice-popover placement="bottom-start"}}
+      {{#ice-popover data-test-popover=true}}
         template block text
       {{/ice-popover}}
     </div>
   `);
 
-  assert.equal(popoverHelpers.getPopoversCount(), 0,
-    'popover not rendered initially');
+  const popover = PopoverHelper.create();
 
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
+  assert.ok(!popover.isOpen, 'popover not rendered initially');
 
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+  await popover.open();
 
-  assert.equal(popoverHelpers.getPopoversCount(), 1,
-    'only one popover is rendered');
+  assert.ok(popover.isOpen, 'popover is rendered');
+  assert.equal(popover.content.text, 'template block text', 'popover has correct text');
 
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+  await popover.close();
 
-  assert.equal(popoverHelpers.getPopoversCount(), 0,
-    'popover removed after clicking the target again');
-});
-
-test('popover box renders when another element is the target', async function(assert) {
-  assert.expect(3);
-
-  this.render(hbs`
-    <div data-test-popover-target>
-      Target
-    </div>
-
-    {{#ice-popover target="[data-test-popover-target]" placement="bottom-start"}}
-      template block text
-    {{/ice-popover}}
-  `);
-
-  assert.equal(popoverHelpers.getPopoversCount(), 0,
-    'popover not rendered initially');
-
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
-
-  assert.equal(popoverHelpers.getPopoversCount(), 1,
-    'only one popover is rendered');
-
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
-
-  assert.equal(popoverHelpers.getPopoversCount(), 0,
-    'popover removed after clicking the target again');
+  assert.ok(!popover.isOpen, 'popover removed after exiting the parent');
 });
 
 test('popover box closes when element outside of popover is clicked', async function(assert) {
   assert.expect(2);
 
   this.render(hbs`
-    <div data-test-outside-element></div>
-    <div data-test-popover-target>
-      Target
-      {{#ice-popover placement="bottom-start"}}
-        template block text
-      {{/ice-popover}}
+    <div data-test-content>
+      <div data-test-outside-element></div>
+      <div>
+        Target
+        {{#ice-popover data-test-popover=true}}
+          template block text
+        {{/ice-popover}}
+      </div>
     </div>
   `);
 
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
+  const content = new PageObject({
+    scope: '[data-test-content]',
+    clickOutsideElement: clickable('[data-test-outside-element]'),
 
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+    popover: PopoverHelper
+  }).create();
 
-  assert.equal(popoverHelpers.getPopoversCount(), 1,
-    'popover is rendered');
+  await content.popover.open();
 
-  await click('[data-test-outside-element]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+  assert.ok(content.popover.isOpen, 'popover is rendered');
 
-  assert.equal(popoverHelpers.getPopoversCount(), 0,
-    'popover removed after clicking the outside element');
+  await content.clickOutsideElement();
+
+  assert.ok(!content.popover.isOpen, 'popover closed when outside element clicked');
 });
 
 test('clicking inside popover only closes for designated elements', async function(assert) {
-  assert.expect(3);
+  assert.expect(4);
 
   this.render(hbs`
-    <div data-test-popover-target>
+    <div>
       Target
-      {{#ice-popover placement="bottom-start"}}
+      {{#ice-popover data-test-popover=true placement="bottom-start"}}
         template block text
-        <button data-popover-close>Close Me</button>
+        <button disabled data-close>Close Me</button>
+        <button data-test-close data-close>Close Me</button>
       {{/ice-popover}}
     </div>
   `);
 
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+  const popover = PopoverHelper.extend({
+    content: {
+      click: clickable(),
+      clickDisabled: clickable('[disabled]'),
+      clickCloseButton: clickable('[data-test-close]')
+    }
+  }).create();
 
-  assert.equal(popoverHelpers.getPopoversCount(), 1,
-    'popover is rendered');
+  await popover.open();
 
-  await click(popoverHelpers.POPOVER_SELECTOR);
+  assert.ok(popover.isOpen, 'popover is rendered');
 
-  assert.equal(popoverHelpers.getPopoversCount(), 1,
-    'popover does not close after clicking the popover container');
+  await popover.content.click();
 
-  await popoverHelpers.clickPopoverCloseElement();
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+  assert.ok(popover.isOpen, 'popover does not close after clicking the popover container');
 
-  assert.equal(popoverHelpers.getPopoversCount(), 0,
-    'popover removed after clicking the close element');
+  await popover.content.clickDisabled();
+
+  assert.ok(popover.isOpen, 'popover does not close after clicking a disabled element');
+
+  await popover.content.clickCloseButton();
+
+  assert.ok(!popover.isOpen, 'popover removed after clicking the close element');
 });
 
 test('popover box modifier class can be added', async function(assert) {
   assert.expect(1);
 
   this.render(hbs`
-    <div data-test-popover-target>
+    <div>
       Target
-      {{#ice-popover class="foobar" placement="bottom-start"}}
+      {{#ice-popover data-test-popover=true class="foobar"}}
         template block text
       {{/ice-popover}}
     </div>
   `);
 
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+  const popover = PopoverHelper.extend({
+    content: {
+      hasAdditionalClass: hasClass('foobar')
+    }
+  }).create();
 
-  assert.equal(popoverHelpers.getPopover().classList.contains('foobar'), true,
-    'popover box reflects additional class');
+  await popover.open();
+
+  assert.ok(popover.content.hasAdditionalClass, 'popover box reflects additional class');
 });
 
 test('popover box direction can be modified', async function(assert) {
   assert.expect(1);
 
   this.render(hbs`
-    <div data-test-popover-target>
+    <div>
       Target
-      {{#ice-popover placement="bottom-end"}}
+      {{#ice-popover data-test-popover=true placement="bottom-end"}}
         template block text
       {{/ice-popover}}
     </div>
   `);
 
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+  const popover = PopoverHelper.create();
 
-  assert.equal(popoverHelpers.getPopover().getAttribute('x-placement'), 'bottom-end',
-    'popover box reflects correct direction');
-});
+  await popover.open();
 
-test('popover box correctly renders content', async function(assert) {
-  assert.expect(1);
-
-  this.render(hbs`
-    <div data-test-popover-target>
-      Target
-      {{#ice-popover placement="bottom-start"}}
-        template block text
-      {{/ice-popover}}
-    </div>
-  `);
-
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
-
-  assert.equal(popoverHelpers.getPopover().textContent.trim(), 'template block text',
-    'popover renders given content');
+  assert.equal(popover.content.placement, 'bottom-end', 'popover box reflects correct direction');
 });
 
 test('popover header is rendered when title is passed in', async function(assert) {
-  assert.expect(1);
+  assert.expect(2);
 
   this.render(hbs`
-    <div data-test-popover-target>
+    <div>
       Target
-      {{#ice-popover placement="bottom-start" popoverTitle="Foo"}}
+      {{#ice-popover data-test-popover=true placement="bottom-start" popoverTitle="Foo"}}
         template block text
       {{/ice-popover}}
     </div>
   `);
 
-  await popoverHelpers.togglePopover('[data-test-popover-target]');
-  await waitForAnimations(popoverHelpers.POPOVER_SELECTOR);
+  const popover = PopoverHelper.create();
 
-  assert.equal(popoverHelpers.getPopoverHeader().textContent.trim(), 'Foo',
-    'popover header renders given content');
+  await popover.open();
+
+  assert.ok(popover.content.header.isPresent, 'popover header is rendered');
+  assert.equal(popover.content.header.text, 'Foo', 'popover header renders given content');
+});
+
+test('popover trigger element is marked as active when open', async function(assert) {
+  assert.expect(3);
+
+  this.render(hbs`
+    <div>
+      Target
+      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+        template block text
+      {{/ice-popover}}
+    </div>
+  `);
+
+  const popover = PopoverHelper.create();
+
+  assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed');
+
+  await popover.open();
+
+  assert.ok(popover.trigger.isActive, 'popover trigger is marked as active when the popover is open');
+
+  await popover.close();
+
+  assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed again');
 });
