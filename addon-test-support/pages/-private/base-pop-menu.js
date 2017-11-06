@@ -6,9 +6,7 @@ import { find } from 'ember-native-dom-helpers';
 
 import {
   attribute,
-  clickable,
-  hasClass,
-  triggerable
+  hasClass
 } from 'ember-cli-page-object';
 
 /**

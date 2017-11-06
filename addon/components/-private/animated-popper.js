@@ -10,7 +10,7 @@ import { unionOf } from 'ember-argument-decorators/types';
 
 import { scheduler as raf, Token } from 'ember-raf-scheduler';
 
-import layout from '../templates/components/animated-popper';
+import layout from '../../templates/components/animated-popper';
 
 function hasTransition(element) {
   const { transitionDuration } = window.getComputedStyle(element);

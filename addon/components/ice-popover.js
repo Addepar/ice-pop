@@ -1,7 +1,7 @@
 import { argument, type } from 'ember-argument-decorators';
 import { unionOf } from 'ember-argument-decorators/types';
 
-import BasePopoverComponent from './utils/base-popover';
+import BasePopMenuComponent from './-private/base-pop-menu';
 
 import layout from '../templates/components/ice-popover';
 
@@ -49,7 +49,7 @@ import layout from '../templates/components/ice-popover';
  * </div>
  * ```
  */
-export default class IcePopoverComponent extends BasePopoverComponent {
+export default class IcePopoverComponent extends BasePopMenuComponent {
   layout = layout
 
   triggerEvent = 'click'

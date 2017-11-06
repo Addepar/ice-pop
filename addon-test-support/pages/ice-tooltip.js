@@ -1,8 +1,8 @@
 import { triggerable } from 'ember-cli-page-object';
 
-import BasePopoverPage from './utils/base-popover';
+import BasePopMenuPage from './-private/base-pop-menu';
 
-export default BasePopoverPage.extend({
+export default BasePopMenuPage.extend({
   trigger: {
     open: triggerable('mouseenter'),
     close: triggerable('mouseleave')

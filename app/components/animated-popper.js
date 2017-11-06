@@ -1,1 +1,1 @@
-export { default } from '@addepar/ice-pop/components/animated-popper';
+export { default } from '@addepar/ice-pop/components/-private/animated-popper';

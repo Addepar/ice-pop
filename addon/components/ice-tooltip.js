@@ -1,4 +1,4 @@
-import BasePopoverComponent from './utils/base-popover';
+import BasePopMenuComponent from './-private/base-pop-menu';
 
 import layout from '../templates/components/ice-tooltip';
 
@@ -29,7 +29,7 @@ import layout from '../templates/components/ice-tooltip';
  * </div>
  * ```
  */
-export default class IceTooltipComponent extends BasePopoverComponent {
+export default class IceTooltipComponent extends BasePopMenuComponent {
   layout = layout
 
   triggerEvent = 'hover'
