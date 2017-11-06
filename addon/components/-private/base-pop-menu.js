@@ -32,7 +32,7 @@ export default class BasePopMenuComponent extends Component {
   // ----- Arguments ------
 
   /**
-   * Used to determine the placement of the popover
+   * Used to determine the placement of the pop menu
    * Can choose between auto, top, right, bottom, left
    * Can also add -start or -end modifier
    */
@@ -68,7 +68,7 @@ export default class BasePopMenuComponent extends Component {
   // ----- Private Variables -----
 
   /**
-   * Tracks if the tooltip is open
+   * Tracks if the pop menu is open
    */
   @type('boolean')
   isOpen = false;

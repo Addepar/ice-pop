@@ -57,7 +57,7 @@ export default class AnimatedPopperComponent extends Component {
   renderInPlace = false;
 
   /**
-   * The popper elment's class
+   * The popper element's class
    */
   @argument
   @type('string')
@@ -116,6 +116,7 @@ export default class AnimatedPopperComponent extends Component {
   }
 
   didInsertElement() {
+    // find the parent of the enclosing pop menu component
     this._target = this._parentFinder.parentNode.parentNode;
 
     addObserver(this, 'isOpen', this, this.isOpenDidChange);
@@ -159,7 +160,9 @@ export default class AnimatedPopperComponent extends Component {
    * Triggers when the popper has been inserted. Grabs the popper element to add animation event
    * handlers if needed, and propogates the API to the external context.
    *
-   * @param {PopperAPI} api - The API received from the underlying popper
+   * Note: The API itself is defined in ember-popper, which is an external library
+   *
+   * @param {PopperAPI} api - The API received from the underlying ember-popper component
    */
   @action
   registerAPI(api) {
