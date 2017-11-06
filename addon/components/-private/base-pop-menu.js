@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { guidFor } from '@ember/object/internals';
 import { run } from '@ember/runloop';
+import { assert } from '@ember/debug';
 
 import { action } from 'ember-decorators/object';
 
@@ -55,6 +56,15 @@ export default class BasePopMenuComponent extends Component {
   @type('string')
   triggerEvent = null;
 
+  /**
+   * Selector for the root element of the application which will have body listeners
+   * attached to close on click
+   */
+  @immutable
+  @argument
+  @type('string')
+  rootElementSelector = '.ember-application';
+
   // ----- Private Variables -----
 
   /**
@@ -78,6 +88,11 @@ export default class BasePopMenuComponent extends Component {
    */
   _popperClass = '';
 
+  /**
+   * Root element that has attached event listeners for body close action
+   */
+  _rootElement = null;
+
   constructor() {
     super();
 
@@ -91,6 +106,16 @@ export default class BasePopMenuComponent extends Component {
   }
 
   didInsertElement() {
+    const rootElementSelector = this.get('rootElementSelector');
+    const possibleRootElements = self.document.querySelectorAll(rootElementSelector);
+
+    assert(
+      `ember-popper with popperContainer selector "${rootElementSelector}" found ${possibleRootElements.length} possible containers when there should be exactly 1`,
+      possibleRootElements.length === 1
+    );
+
+    this._rootElement = possibleRootElements[0];
+
     this._triggerElement = this.element.parentNode;
     this._triggerElement.setAttribute('data-popover-trigger', guidFor(this));
 
@@ -114,7 +139,7 @@ export default class BasePopMenuComponent extends Component {
 
     this._triggerElement.removeAttribute('data-popover-trigger');
 
-    document.body.removeEventListener('mouseup', this._handleBodyClick);
+    this._rootElement.removeEventListener('mouseup', this._handleBodyClick);
   }
 
   /**
@@ -126,7 +151,7 @@ export default class BasePopMenuComponent extends Component {
     // CSS transition
     run(() => this.set('isOpen', true));
 
-    document.body.addEventListener('mouseup', this._handleBodyClick);
+    this._rootElement.addEventListener('mouseup', this._handleBodyClick);
   }
 
   /**
@@ -135,7 +160,7 @@ export default class BasePopMenuComponent extends Component {
   _removePopover() {
     run(() => this.set('isOpen', false));
 
-    document.body.removeEventListener('mouseup', this._handleBodyClick);
+    this._rootElement.removeEventListener('mouseup', this._handleBodyClick);
   }
 
   /**
