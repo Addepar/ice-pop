@@ -329,49 +329,24 @@
         <ul class="ice-dropdown-menu">
           <li><a>Foo bar baz</a></li>
           <li><a>Lorem ipsum</a></li>
-          <li><a>I'm Mr. Meseeks</a> <div class="ice-dropdown-caret"></div>
-          {{#ice-sub-dropdown}}
-            <ul class="ice-dropdown-menu">
-              <li><a>Foo bar baz</a></li>
-              <li><a>Lorem ipsum</a></li>
-              <li><a>I'm Mr. Meseeks</a></li>
-              <li class="list-divider"></li>
-              <li><a>Foo bar baz</a></li>
-              <li><a disabled>Lorem ipsum</a></li>
-              <li><a>I'm Mr. Meseeks</a></li>
-            </ul>
-          {{/ice-sub-dropdown}}
+          <li>
+            <a>I'm Mr. Meseeks</a>
+            <div class="ice-dropdown-caret"></div>
+            {{#ice-sub-dropdown}}
+              <ul class="ice-dropdown-menu">
+                <li><a>Foo bar baz</a></li>
+                <li><a>Lorem ipsum</a></li>
+                <li><a>I'm Mr. Meseeks</a></li>
+                <li class="list-divider"></li>
+                <li><a>Foo bar baz</a></li>
+                <li><a disabled>Lorem ipsum</a></li>
+                <li><a>I'm Mr. Meseeks</a></li>
+              </ul>
+            {{/ice-sub-dropdown}}
           </li>
           <li><a>Foo bar baz</a></li>
           <li><a>Lorem ipsum</a></li>
           <li><a>I'm Mr. Meseeks</a></li>
-        </ul>
-      {{/ice-dropdown}}
-    </button>
-  </div>
-  <div class="demo-item">
-    <button class="button-text popover-target">
-      Custom links <div class="ice-dropdown-caret"></div>
-      {{#ice-dropdown closeItems=false}}
-        <ul class="ice-dropdown-menu">
-          <li><a data-dropdown-close>Foo bar baz</a></li>
-          <li><a data-dropdown-close>Lorem ipsum</a></li>
-          <li><a>I'm Mr. Meseeks</a> <div class="ice-dropdown-caret"></div>
-          {{#ice-sub-dropdown}}
-            <ul class="ice-dropdown-menu">
-              <li><a data-dropdown-close>Foo bar baz</a></li>
-              <li><a data-dropdown-close>Lorem ipsum</a></li>
-              <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
-              <li class="list-divider"></li>
-              <li><a data-dropdown-close>Foo bar baz</a></li>
-              <li><a data-dropdown-close>Lorem ipsum</a></li>
-              <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
-            </ul>
-          {{/ice-sub-dropdown}}
-          </li>
-          <li><a data-dropdown-close>Foo bar baz</a></li>
-          <li><a data-dropdown-close>Lorem ipsum</a></li>
-          <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
         </ul>
       {{/ice-dropdown}}
     </button>

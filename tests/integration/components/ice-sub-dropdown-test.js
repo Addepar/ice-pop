@@ -1,118 +1,156 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { find, click, triggerEvent } from 'ember-native-dom-helpers';
+import { triggerEvent } from 'ember-native-dom-helpers';
 
-import waitForAnimations from '../../helpers/wait-for-animations';
-import dropdownHelpers from '../../helpers/components/dropdown-helpers';
+import { PageObject } from 'ember-classy-page-object';
+import { clickable } from 'ember-cli-page-object';
 
-moduleForComponent('ice-sub-dropdown', 'Integration | Component | ice sub dropdown', {
+import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
+import IceSubDropdownPage from '@addepar/ice-pop/test-support/pages/ice-sub-dropdown';
+
+moduleForComponent('ice-sub-dropdown', 'Integration | Component | ice-sub-dropdown', {
   integration: true
 });
 
 test('sub dropdown box renders when hovering target list item', async function(assert) {
-  assert.expect(7);
+  assert.expect(10);
 
   this.render(hbs`
-    <div data-test-dropdown-target>
+    <div>
       Target
-      {{#ice-dropdown}}
+      {{#ice-dropdown data-test-dropdown=true}}
         <ul class="ice-dropdown-menu">
-          <li data-test-sub-item><a>Foo bar baz</a>
-          {{#ice-sub-dropdown}}
-            <ul class="ice-dropdown-menu">
-              <li><a>Foo bar baz</a></li>
-            </ul>
-          {{/ice-sub-dropdown}}
+          <li>
+            <a>Foo bar baz</a>
+            {{#ice-sub-dropdown data-test-sub-dropdown=true}}
+              <ul class="ice-dropdown-menu">
+                <li><a>Foo bar baz</a></li>
+              </ul>
+            {{/ice-sub-dropdown}}
           </li>
         </ul>
       {{/ice-dropdown}}
     </div>
   `);
 
-  assert.equal(dropdownHelpers.getDropdownsCount(), 0,
-    'main dropdown not rendered initially');
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 0,
-    'sub dropdown not rendered initially');
+  const dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]'
+      })
+    }
+  }).create();
 
-  await dropdownHelpers.toggleDropdown('[data-test-dropdown-target]');
-  await waitForAnimations(dropdownHelpers.DROPDOWN_SELECTOR);
+  const { subDropdown } = dropdown.content;
 
-  assert.equal(dropdownHelpers.getDropdownsCount(), 1,
-    'main dropdown is rendered');
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 0,
-    'sub dropdown not rendered yet');
+  assert.ok(!dropdown.isOpen, 'main dropdown not rendered initially');
+  assert.ok(!subDropdown.isOpen, 'sub dropdown not rendered initially');
 
-  await dropdownHelpers.openSubDropdown('[data-test-sub-item]');
-  await waitForAnimations(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  await dropdown.open();
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 1,
-    'sub dropdown is rendered');
+  assert.ok(dropdown.isOpen, 'main dropdown is rendered');
+  assert.ok(!subDropdown.isOpen, 'sub dropdown not rendered yet');
 
-  triggerEvent('[data-test-sub-item]', 'mouseleave');
-  await triggerEvent(dropdownHelpers.SUB_DROPDOWN_SELECTOR, 'mouseenter');
-  await waitForAnimations(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  await subDropdown.open();
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 1,
-    'sub dropdown is still rendered after entering the sub dropdown box');
+  assert.ok(subDropdown.isOpen, 'sub dropdown is rendered');
 
-  await triggerEvent(dropdownHelpers.SUB_DROPDOWN_SELECTOR, 'mouseleave');
-  await waitForAnimations(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  // Trigger the event manually so that we can trigger mouseenter on the
+  // tooltip content before it finishes closing
+  triggerEvent(subDropdown.scope, 'mouseleave');
+  await triggerEvent(subDropdown.content.scope, 'mouseenter');
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 0,
-    'sub dropdown is no longer rendered when mouse is no longer hovering the list item');
+  assert.ok(
+    subDropdown.isOpen,
+    'sub dropdown is still rendered after entering the sub dropdown box'
+  );
+
+  await triggerEvent(subDropdown.content.scope, 'mouseleave');
+
+  assert.ok(
+    !subDropdown.isOpen,
+    'sub dropdown is no longer rendered when mouse leaves the content'
+  );
+
+  await subDropdown.open();
+
+  assert.ok(subDropdown.isOpen, 'sub dropdown reopened');
+
+  await dropdown.close();
+
+  assert.ok(!dropdown.isOpen, 'dropdown closed');
+  assert.ok(!subDropdown.isOpen, 'sub dropdown closed with main dropdown');
 });
 
 test('sub dropdown box closes when element outside of sub dropdown is clicked', async function(assert) {
-  assert.expect(2);
+  assert.expect(4);
 
   this.render(hbs`
-    <div data-test-outside-element></div>
-    <div data-test-dropdown-target>
-      Target
-      {{#ice-dropdown}}
-        <ul class="ice-dropdown-menu">
-          <li data-test-sub-item><a>Foo bar baz</a>
-          {{#ice-sub-dropdown}}
-            <ul class="ice-dropdown-menu">
-              <li><a>Foo bar baz</a></li>
-            </ul>
-          {{/ice-sub-dropdown}}
-          </li>
-        </ul>
-      {{/ice-dropdown}}
+    <div data-test-content>
+      <div data-test-outside-element></div>
+      <div>
+        Target
+        {{#ice-dropdown data-test-dropdown=true}}
+          <ul class="ice-dropdown-menu">
+            <li>
+              <a>Foo bar baz</a>
+              {{#ice-sub-dropdown data-test-sub-dropdown=true}}
+                <ul class="ice-dropdown-menu">
+                  <li><a>Foo bar baz</a></li>
+                </ul>
+              {{/ice-sub-dropdown}}
+            </li>
+          </ul>
+        {{/ice-dropdown}}
+      </div>
     </div>
   `);
 
-  await dropdownHelpers.toggleDropdown('[data-test-dropdown-target]');
-  await waitForAnimations(dropdownHelpers.DROPDOWN_SELECTOR);
-  await dropdownHelpers.openSubDropdown('[data-test-sub-item]');
-  await waitForAnimations(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  const content = new PageObject({
+    scope: '[data-test-content]',
+    clickOutsideElement: clickable('[data-test-outside-element]'),
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 1,
-    'sub dropdown is rendered');
+    dropdown: IceDropdownPage.extend({
+      scope: '[data-test-dropdown]',
+      content: {
+        subDropdown: IceSubDropdownPage.extend({
+          scope: '[data-test-sub-dropdown]'
+        })
+      }
+    })
+  }).create();
 
-  await click('[data-test-outside-element]');
-  await waitForAnimations(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  const { dropdown } = content;
+  const { subDropdown } = dropdown.content;
 
-  assert.equal(dropdownHelpers.getDropdownsCount(), 0,
-    'sub dropdown removed after clicking the outside element');
+  await dropdown.open();
+  await subDropdown.open();
+
+  assert.ok(dropdown.isOpen, 'dropdown is rendered');
+  assert.ok(subDropdown.isOpen, 'sub dropdown is rendered');
+
+  await content.clickOutsideElement();
+
+  assert.ok(!dropdown.isOpen, 'dropdown is closed');
+  assert.ok(!subDropdown.isOpen, 'sub dropdown is closed');
 });
 
 test('clicking inside sub dropdown only closes for certain elements', async function(assert) {
-  assert.expect(11);
+  assert.expect(12);
 
   this.render(hbs`
-    <div data-test-dropdown-target>
+    <div>
       Target
-      {{#ice-dropdown}}
+      {{#ice-dropdown data-test-dropdown=true}}
         <ul class="ice-dropdown-menu">
-          <li data-test-sub-item><a>Foo bar baz</a>
-          {{#ice-sub-dropdown}}
+          <li><a>Foo bar baz</a>
+          {{#ice-sub-dropdown data-test-sub-dropdown=true}}
             <ul class="ice-dropdown-menu">
               <li class="list-group-header" data-test-menu-header>Group Header</li>
-              <li><a disabled>Lorem ipsum</a></li>
+              <li><a data-close disabled>Lorem ipsum</a></li>
               <li class="list-divider" data-test-list-divider></li>
-              <li data-dropdown-close>Foo bar baz</li>
+              <li data-test-close-item data-close>Foo bar baz</li>
             </ul>
           {{/ice-sub-dropdown}}
           </li>
@@ -121,111 +159,132 @@ test('clicking inside sub dropdown only closes for certain elements', async func
     </div>
   `);
 
-  await dropdownHelpers.toggleDropdown('[data-test-dropdown-target]');
-  await waitForAnimations(dropdownHelpers.DROPDOWN_SELECTOR);
-  await dropdownHelpers.openSubDropdown('[data-test-sub-item]');
-  await waitForAnimations(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  const dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]',
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 1,
-    'sub dropdown is rendered');
+        content: {
+          click: clickable(),
+          clickMenuHeader: clickable('[data-test-menu-header]'),
+          clickDisabledItem: clickable('[disabled]'),
+          clickDivider: clickable('[data-test-list-divider]'),
+          clickCloseItem: clickable('[data-test-close-item]')
+        }
+      })
+    }
+  }).create();
 
-  await click(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  const { subDropdown } = dropdown.content;
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 1,
-    'Sub dropdown does not close after clicking the sub dropdown container');
-  assert.equal(dropdownHelpers.getDropdownsCount(), 1,
-    'Main dropdown has also not been closed');
+  await dropdown.open();
+  await subDropdown.open();
 
-  await click('[data-test-menu-header]');
+  assert.ok(dropdown.isOpen, 'dropdown is rendered');
+  assert.ok(subDropdown.isOpen, 'dropdown is rendered');
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 1,
-    'Sub dropdown does not close after clicking a menu header');
-  assert.equal(dropdownHelpers.getDropdownsCount(), 1,
-    'Main dropdown has also not been closed');
+  await subDropdown.content.click();
 
-  await click('[disabled]');
+  assert.ok(dropdown.isOpen, 'dropdown does not close after clicking the sub dropdown container');
+  assert.ok(subDropdown.isOpen, 'sub dropdown does not close after clicking the sub dropdown container');
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 1,
-    'Sub dropdown does not close after clicking a disabled item');
-  assert.equal(dropdownHelpers.getDropdownsCount(), 1,
-    'Main dropdown has also not been closed');
+  await subDropdown.content.clickMenuHeader();
 
-  await click('[data-test-list-divider]');
+  assert.ok(dropdown.isOpen, 'dropdown does not close after clicking a menu header');
+  assert.ok(subDropdown.isOpen, 'sub dropdown does not close after clicking a menu header');
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 1,
-    'Sub dropdown does not close after clicking a list divider');
-  assert.equal(dropdownHelpers.getDropdownsCount(), 1,
-    'Main dropdown has also not been closed');
+  await subDropdown.content.clickDisabledItem();
 
-  await dropdownHelpers.clickDropdownCloseElement();
-  await waitForAnimations(dropdownHelpers.DROPDOWN_SELECTOR);
+  assert.ok(dropdown.isOpen, 'dropdown does not close after clicking a disabled item');
+  assert.ok(subDropdown.isOpen, 'sub dropdown does not close after clicking a disabled item');
 
-  assert.equal(dropdownHelpers.getSubDropdownsCount(), 0,
-    'Sub dropdown removed after clicking the close element');
-  assert.equal(dropdownHelpers.getDropdownsCount(), 0,
-    'Main dropdown also removed after clicking the close element');
+  await subDropdown.content.clickDivider();
+
+  assert.ok(dropdown.isOpen, 'dropdown does not close after clicking a list divider');
+  assert.ok(subDropdown.isOpen, 'sub dropdown does not close after clicking a list divider');
+
+  await subDropdown.content.clickCloseItem();
+
+  assert.ok(!dropdown.isOpen, 'dropdown closed after clicking the close element');
+  assert.ok(!subDropdown.isOpen, 'sub dropdown closed after clicking the close element');
 });
 
 test('sub dropdown direction can be modified', async function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   this.render(hbs`
-    <div data-test-dropdown-target>
+    <div>
       Target
-      {{#ice-dropdown}}
+      {{#ice-dropdown data-test-dropdown=true}}
         <ul class="ice-dropdown-menu">
-          <li data-test-sub-item><a>Foo bar baz</a>
-          {{#ice-sub-dropdown placement="right-end"}}
-            <ul class="ice-dropdown-menu">
-              <li><a>Foo bar baz</a></li>
-            </ul>
-          {{/ice-sub-dropdown}}
+          <li>
+            <a>Foo bar baz</a>
+            {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+              <ul class="ice-dropdown-menu">
+                <li><a>Foo bar baz</a></li>
+              </ul>
+            {{/ice-sub-dropdown}}
           </li>
         </ul>
       {{/ice-dropdown}}
     </div>
   `);
 
-  await dropdownHelpers.toggleDropdown('[data-test-dropdown-target]');
-  await waitForAnimations(dropdownHelpers.DROPDOWN_SELECTOR);
-  await dropdownHelpers.openSubDropdown('[data-test-sub-item]');
-  await waitForAnimations(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  const dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]'
+      })
+    }
+  }).create();
 
-  assert.equal(dropdownHelpers.getSubDropdown().getAttribute('x-placement'), 'right-end',
-    'Sub dropdown box reflects correct direction');
-  assert.equal(find('[data-test-sub-item]').getAttribute('dropdown-placement'), 'right-end',
-    'dropdown target reflects correct dropdown placement');
+  const { subDropdown } = dropdown.content;
+
+  await dropdown.open();
+  await subDropdown.open();
+
+  assert.equal(subDropdown.content.placement, 'right-end', 'Sub dropdown box reflects correct direction');
 });
 
 test('sub dropdown button is active when open', async function(assert) {
   assert.expect(2);
 
   this.render(hbs`
-    <div data-test-dropdown-target>
+    <div>
       Target
-      {{#ice-dropdown}}
+      {{#ice-dropdown data-test-dropdown=true}}
         <ul class="ice-dropdown-menu">
-          <li data-test-sub-item><a>Foo bar baz</a>
-          {{#ice-sub-dropdown}}
-            <ul class="ice-dropdown-menu">
-              <li><a>Foo bar baz</a></li>
-            </ul>
-          {{/ice-sub-dropdown}}
+          <li>
+            <a>Foo bar baz</a>
+            {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+              <ul class="ice-dropdown-menu">
+                <li><a>Foo bar baz</a></li>
+              </ul>
+            {{/ice-sub-dropdown}}
           </li>
         </ul>
       {{/ice-dropdown}}
     </div>
   `);
 
-  await dropdownHelpers.toggleDropdown('[data-test-dropdown-target]');
-  await waitForAnimations(dropdownHelpers.DROPDOWN_SELECTOR);
+  const dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]'
+      })
+    }
+  }).create();
 
-  assert.equal(find('[data-test-sub-item]').classList.contains('is-active'), false,
-    'Sub dropdown target list item does not initially reflect active class');
+  const { subDropdown } = dropdown.content;
 
-  await dropdownHelpers.openSubDropdown('[data-test-sub-item]');
-  await waitForAnimations(dropdownHelpers.SUB_DROPDOWN_SELECTOR);
+  await dropdown.open();
 
-  assert.equal(find('[data-test-sub-item]').classList.contains('is-active'), true,
-    'Sub dropdown target list item reflects active class');
+  assert.ok(!subDropdown.trigger.isActive, 'Sub dropdown target list item does not initially reflect active class');
+
+  await subDropdown.open();
+
+  assert.ok(subDropdown.trigger.isActive, 'Sub dropdown target list item reflects active class');
 });

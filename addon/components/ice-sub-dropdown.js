@@ -1,12 +1,10 @@
-import Component from '@ember/component';
-
-import { tagName } from 'ember-decorators/component';
 import { argument, type } from 'ember-argument-decorators';
 
-import layout from '../templates/components/ice-sub-dropdown';
+import IceDropdownComponent from './ice-dropdown';
 
 /**
- * Subdropdown component that is used inside a dropdown menu item.
+ * Subdropdown component that is used inside a dropdown menu item. It targets
+ * its immediate parent element, and will open whenever that element is hovered.
  *
  * ```hbs
  * {{#ice-dropdown}}
@@ -26,22 +24,19 @@ import layout from '../templates/components/ice-sub-dropdown';
  * {{/ice-dropdown}}
  * ```
  */
-@tagName('')
-export default class IceSubDropdown extends Component {
-  layout = layout
+export default class IceSubDropdownComponent extends IceDropdownComponent {
+
+  triggerEvent = 'hover';
 
   // ----- Public Settings ------
 
   /**
-   * Used to determine the placement of the tooltip.
+   * Used to determine the placement of the sub-dropdown.
    * Should only use right-start, left-start, right-end, left-end.
    * Popper will auto move it if needed.
    */
   @argument
   @type('string')
-  placement = 'right-start'
+  placement = 'right-start';
 
-  @argument
-  @type('boolean')
-  renderInPlace = false;
 }
