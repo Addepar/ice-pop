@@ -1,132 +1,131 @@
-/*
-@arrow-box()
 
-Generates a box with an arrow attached on a specified side
-
-### Example Usage:
-
-  ```
-  @include arrow-box(
-  "ice-popover",
-  $popover-placements,
-  $ice-popover-z-index,
-  $ice-popover-background-color,
-  $ice-popover-width,
-  $ice-popover-min-width,
-  $ice-popover-max-width,
-  $ice-popover-box-padding,
-  $ice-popover-border-width,
-  $ice-popover-border-style,
-  $ice-popover-border-color,
-  $ice-popover-border-radius,
-  $ice-popover-box-shadow,
-  $ice-popover-text-color,
-  $ice-popover-text-align,
-  $ice-popover-font-weight,
-  $ice-popover-font-size,
-  $ice-popover-line-height,
-  $ice-popover-font-family,
-  $ice-popover-fade-transition,
-  $ice-popover-arrow-size
-  );
-  ```
-
-### Parameters:
-
-* $name = Class name for your arrow-box
-* $box-placements = Map of placements, each placement having a side (left, right, top, bottom) mapped to a direction (horizontal or vertical)
-* $z-index = z-index for the whole component
-* $background-color = Background color of the box and arrow
-* $max-width = max width for the main box
-* $box-padding = padding for the main box
-* $border-width = border thickness for the box and arrow
-* $border-style = border style for the box and arrow
-* $border-color = border color for the box and arrow
-* $border-radius = border radius for the main box
-* $box-shadow = box shadow for the main box
-* $text-color = content text color for the main box
-* $text-align = content text alignment for the main box
-* $font-weight = content font weight for the main box
-* $font-size = content font size for the main box
-* $line-height = content line height for the main box
-* $font-family = content font family for the main box
-* $fade-transition = fade in/out time for the whole component
-* $arrow-size = arrow size, both width and height
-
-### Example Output:
-  ```
-  .ice-tooltip {
-  position: absolute;
-  z-index: 10;
-  background: #333333;
-  width: auto;
-  min-width: auto;
-  max-width: 200px;
-  height: auto;
-  min-height: auto;
-  max-height: auto;
-  padding: 8px;
-  border: 0 none none;
-  border-radius: 0;
-  box-shadow: none;
-  color: #ffffff;
-  text-align: left;
-  font-weight: normal;
-  font-size: 11px;
-  line-height: 13px;
-  font-family: "Univers-Next", "Helvetica Neue", "Helvetica", Arial, sans-serif;
-  transition: opacity 0.2s ease-in-out;
-  opacity: 0; }
-  .ice-tooltip .popper-arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    margin: 8px;
-    border-width: 8px;
-    border-style: solid;
-    border-color: #333333; }
-  .ice-tooltip.is-visible {
-    opacity: 1; }
-  .ice-tooltip[x-placement^="left"] {
-    margin-right: 8px; }
-    .ice-tooltip[x-placement^="left"] .popper-arrow {
-      border-right-width: 0;
-      border-right-color: transparent;
-      right: -8px; }
-  .ice-tooltip[x-placement^="right"] {
-    margin-left: 8px; }
-    .ice-tooltip[x-placement^="right"] .popper-arrow {
-      border-left-width: 0;
-      border-left-color: transparent;
-      left: -8px; }
-  .ice-tooltip[x-placement^="top"] {
-    margin-bottom: 8px; }
-    .ice-tooltip[x-placement^="top"] .popper-arrow {
-      border-bottom-width: 0;
-      border-bottom-color: transparent;
-      bottom: -8px; }
-  .ice-tooltip[x-placement^="bottom"] {
-    margin-top: 8px; }
-    .ice-tooltip[x-placement^="bottom"] .popper-arrow {
-      border-top-width: 0;
-      border-top-color: transparent;
-      top: -8px; }
-  .ice-tooltip[x-placement^="top"] .popper-arrow, .ice-tooltip[x-placement^="bottom"] .popper-arrow {
-    margin-top: 0;
-    margin-bottom: 0;
-    border-right-color: transparent;
-    border-left-color: transparent;
-    left: calc(50% - 8px); }
-  .ice-tooltip[x-placement^="left"] .popper-arrow, .ice-tooltip[x-placement^="right"] .popper-arrow {
-    margin-left: 0;
-    margin-right: 0;
-    border-top-color: transparent;
-    border-bottom-color: transparent;
-    top: calc(50% - 8px); }
-  ```
-
-Styleguide: Ice Pop - Common - Mixins - @arrow-box()
-*/
+// @arrow-box()
+//
+// Generates a box with an arrow attached on a specified side
+//
+// ### Example Usage:
+//
+//   ```
+//   @include arrow-box(
+//   "ice-popover",
+//   $popover-placements,
+//   $ice-popover-z-index,
+//   $ice-popover-background-color,
+//   $ice-popover-width,
+//   $ice-popover-min-width,
+//   $ice-popover-max-width,
+//   $ice-popover-box-padding,
+//   $ice-popover-border-width,
+//   $ice-popover-border-style,
+//   $ice-popover-border-color,
+//   $ice-popover-border-radius,
+//   $ice-popover-box-shadow,
+//   $ice-popover-text-color,
+//   $ice-popover-text-align,
+//   $ice-popover-font-weight,
+//   $ice-popover-font-size,
+//   $ice-popover-line-height,
+//   $ice-popover-font-family,
+//   $ice-popover-fade-transition,
+//   $ice-popover-arrow-size
+//   );
+//   ```
+//
+// ### Parameters:
+//
+// * $name = Class name for your arrow-box
+// * $box-placements = Map of placements, each placement having a side (left, right, top, bottom) mapped to a direction (horizontal or vertical)
+// * $z-index = z-index for the whole component
+// * $background-color = Background color of the box and arrow
+// * $max-width = max width for the main box
+// * $box-padding = padding for the main box
+// * $border-width = border thickness for the box and arrow
+// * $border-style = border style for the box and arrow
+// * $border-color = border color for the box and arrow
+// * $border-radius = border radius for the main box
+// * $box-shadow = box shadow for the main box
+// * $text-color = content text color for the main box
+// * $text-align = content text alignment for the main box
+// * $font-weight = content font weight for the main box
+// * $font-size = content font size for the main box
+// * $line-height = content line height for the main box
+// * $font-family = content font family for the main box
+// * $fade-transition = fade in/out time for the whole component
+// * $arrow-size = arrow size, both width and height
+//
+// ### Example Output:
+//   ```
+//   .ice-tooltip {
+//   position: absolute;
+//   z-index: 10;
+//   background: #333333;
+//   width: auto;
+//   min-width: auto;
+//   max-width: 200px;
+//   height: auto;
+//   min-height: auto;
+//   max-height: auto;
+//   padding: 8px;
+//   border: 0 none none;
+//   border-radius: 0;
+//   box-shadow: none;
+//   color: #ffffff;
+//   text-align: left;
+//   font-weight: normal;
+//   font-size: 11px;
+//   line-height: 13px;
+//   font-family: "Univers-Next", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+//   transition: opacity 0.2s ease-in-out;
+//   opacity: 0; }
+//   .ice-tooltip .popper-arrow {
+//     position: absolute;
+//     width: 0;
+//     height: 0;
+//     margin: 8px;
+//     border-width: 8px;
+//     border-style: solid;
+//     border-color: #333333; }
+//   .ice-tooltip.is-visible {
+//     opacity: 1; }
+//   .ice-tooltip[x-placement^="left"] {
+//     margin-right: 8px; }
+//     .ice-tooltip[x-placement^="left"] .popper-arrow {
+//       border-right-width: 0;
+//       border-right-color: transparent;
+//       right: -8px; }
+//   .ice-tooltip[x-placement^="right"] {
+//     margin-left: 8px; }
+//     .ice-tooltip[x-placement^="right"] .popper-arrow {
+//       border-left-width: 0;
+//       border-left-color: transparent;
+//       left: -8px; }
+//   .ice-tooltip[x-placement^="top"] {
+//     margin-bottom: 8px; }
+//     .ice-tooltip[x-placement^="top"] .popper-arrow {
+//       border-bottom-width: 0;
+//       border-bottom-color: transparent;
+//       bottom: -8px; }
+//   .ice-tooltip[x-placement^="bottom"] {
+//     margin-top: 8px; }
+//     .ice-tooltip[x-placement^="bottom"] .popper-arrow {
+//       border-top-width: 0;
+//       border-top-color: transparent;
+//       top: -8px; }
+//   .ice-tooltip[x-placement^="top"] .popper-arrow, .ice-tooltip[x-placement^="bottom"] .popper-arrow {
+//     margin-top: 0;
+//     margin-bottom: 0;
+//     border-right-color: transparent;
+//     border-left-color: transparent;
+//     left: calc(50% - 8px); }
+//   .ice-tooltip[x-placement^="left"] .popper-arrow, .ice-tooltip[x-placement^="right"] .popper-arrow {
+//     margin-left: 0;
+//     margin-right: 0;
+//     border-top-color: transparent;
+//     border-bottom-color: transparent;
+//     top: calc(50% - 8px); }
+//   ```
+//
+// Styleguide: Ice Pop - Common - Mixins - @arrow-box()
 
 @mixin arrow-box(
   $name,
@@ -276,43 +275,41 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box()
   }
 }
 
-/*
-arrow-box-color-variation()
-
-Create an arrow-box variation based on color.
-Be careful to not make the selector containing this
-mixin overly specific or it will overwrite the x-placement colors,
-causing the new colors to not apply.
-
-### Example Usage:
-
-  ```
-  @include arrow-box-color-variation(blue, white, gray);
-  ```
-
-### Parameters:
-
-* $background-color = New background color for the box and arrow
-* $text-color = New text color for the box
-* $border-color (optional) = New border color for the box and arrow
-
-### Example Output:
-  ```
-  background-color: blue;
-  color: white;
-  border-color: gray;
-
-  .popper-arrow {
-    border-color: gray;
-
-    &::before {
-      border-color: blue;
-    }
-  }
-  ```
-
-Styleguide: Ice Pop - Common - Mixins - @arrow-box-color-variation()
-*/
+// arrow-box-color-variation()
+//
+// Create an arrow-box variation based on color.
+// Be careful to not make the selector containing this
+// mixin overly specific or it will overwrite the x-placement colors,
+// causing the new colors to not apply.
+//
+// ### Example Usage:
+//
+//   ```
+//   @include arrow-box-color-variation(blue, white, gray);
+//   ```
+//
+// ### Parameters:
+//
+// * $background-color = New background color for the box and arrow
+// * $text-color = New text color for the box
+// * $border-color (optional) = New border color for the box and arrow
+//
+// ### Example Output:
+//   ```
+//   background-color: blue;
+//   color: white;
+//   border-color: gray;
+//
+//   .popper-arrow {
+//     border-color: gray;
+//
+//     &::before {
+//       border-color: blue;
+//     }
+//   }
+//   ```
+//
+// Styleguide: Ice Pop - Common - Mixins - @arrow-box-color-variation()
 
 // Dev note
 // ------------------------------------
@@ -341,38 +338,36 @@ Styleguide: Ice Pop - Common - Mixins - @arrow-box-color-variation()
   }
 }
 
-/*
-update-arrow-color()
-
-Used when a specific arrow needs to be updated from the defaults,
-such as for when the arrow needs to match something in the box, like the header.
-Note that this uses BOX position, not the visible arrow position.
-
-### Example Usage:
-
-  ```
-  @include update-arrow-color('left', blue, gray);
-  ```
-
-### Parameters:
-
-* $box-position = The current position of the box you want to target (NOT the arrow). ('left', 'right', 'top', 'bottom', 'left-start', 'right-start'...etc)
-* $background-color = New background color for the arrow
-* $border-color = New border color for the arrow
-
-### Example Output:
-  ```
-  .popper-arrow {
-    border-left-color: gray;
-
-    &::before {
-      border-left-color: blue;
-    }
-  }
-  ```
-
-Styleguide: Ice Pop - Common - Mixins - @update-arrow-color()
-*/
+// update-arrow-color()
+//
+// Used when a specific arrow needs to be updated from the defaults,
+// such as for when the arrow needs to match something in the box, like the header.
+// Note that this uses BOX position, not the visible arrow position.
+//
+// ### Example Usage:
+//
+//   ```
+//   @include update-arrow-color('left', blue, gray);
+//   ```
+//
+// ### Parameters:
+//
+// * $box-position = The current position of the box you want to target (NOT the arrow). ('left', 'right', 'top', 'bottom', 'left-start', 'right-start'...etc)
+// * $background-color = New background color for the arrow
+// * $border-color = New border color for the arrow
+//
+// ### Example Output:
+//   ```
+//   .popper-arrow {
+//     border-left-color: gray;
+//
+//     &::before {
+//       border-left-color: blue;
+//     }
+//   }
+//   ```
+//
+// Styleguide: Ice Pop - Common - Mixins - @update-arrow-color()
 
 // Dev note
 // ------------------------------------
@@ -395,35 +390,33 @@ Styleguide: Ice Pop - Common - Mixins - @update-arrow-color()
   }
 }
 
-/*
-@create-offset-box-shadow()
-
-Creates an offset box-shadow property,
-which makes one side of the box shadow smaller than the others.
-
-### Example Usage:
-
-  ```
-  @include arrow-box("bottom", 3px, 3px, 5px, rgba(175, 175, 175, 0.1));
-  ```
-
-### Parameters:
-
-* $direction = The direction/placement of the popper
-* $x-offset = horizontal placement offset on the x axis
-* $y-offset = vertical placement offset on the y axis
-* $spread = shadow spread
-* $color = shadow color
-
-### Example Output:
-  ```
-  box-shadow: 0 0 3px rgba(175, 175, 175, 0.1),
-              -3px 3px 5px rgba(175, 175, 175, 0.1),
-              3px 3px 5px rgba(175, 175, 175, 0.1);
-  ```
-
-Styleguide: Ice Pop - Common - Mixins - @create-offset-box-shadow()
-*/
+// @create-offset-box-shadow()
+//
+// Creates an offset box-shadow property,
+// which makes one side of the box shadow smaller than the others.
+//
+// ### Example Usage:
+//
+//   ```
+//   @include arrow-box("bottom", 3px, 3px, 5px, rgba(175, 175, 175, 0.1));
+//   ```
+//
+// ### Parameters:
+//
+// * $direction = The direction/placement of the popper
+// * $x-offset = horizontal placement offset on the x axis
+// * $y-offset = vertical placement offset on the y axis
+// * $spread = shadow spread
+// * $color = shadow color
+//
+// ### Example Output:
+//   ```
+//   box-shadow: 0 0 3px rgba(175, 175, 175, 0.1),
+//               -3px 3px 5px rgba(175, 175, 175, 0.1),
+//               3px 3px 5px rgba(175, 175, 175, 0.1);
+//   ```
+//
+// Styleguide: Ice Pop - Common - Mixins - @create-offset-box-shadow()
 
 @mixin create-offset-box-shadow($direction, $x-offset, $y-offset, $spread, $color) {
   $left-top:      #{-$x-offset}   #{-$y-offset};
