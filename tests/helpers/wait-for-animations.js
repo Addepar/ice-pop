@@ -1,7 +1,5 @@
-import Ember from 'ember';
+import { Promise } from 'rsvp';
 import { find } from 'ember-native-dom-helpers';
-
-const { RSVP: { Promise } } = Ember;
 
 export default function(target) {
   return new Promise((resolve) => {
