@@ -7,7 +7,8 @@
 // However you should only use it inside the ice-dropdown Ember addon like this:
 // ```
 // <div class="example-target">
-//   Target text <div class="ice-dropdown-caret"></div>
+//   Target text
+//   <i class="fa fa-caret-down ice-dropdown-caret"></i>
 //   {{#ice-dropdown}}
 //     <ul class="ice-dropdown-menu">
 //       <li><a {{action 'foo'}}>Foo bar baz</a></li>
@@ -38,7 +39,8 @@
 //   use the ember addon as notated in the section above)
 //   <div class="dropdown-example">
 //     <div class="example-target ice-dropdown-toggle" dropdown-placement="bottom-start">
-//       Target text <div class="ice-dropdown-caret"></div>
+//       Target text
+//       <i class="fa fa-caret-down ice-dropdown-caret"></i>
 //       <div class="ice-dropdown is-visible" x-placement="bottom-start">
 //         <ul class="ice-dropdown-menu">
 //           <li><a data-dropdown-close>Foo bar baz</a></li>
@@ -104,7 +106,7 @@
       opacity: 0.6; // TODO: update to $disabled-opacity; from ice-box
     }
 
-    // TODO: investigate if this will cause any issues
+    // TODO: investigate if this will cause any issues in Iverson
     .ice-dropdown-caret {
       @include anchor-element($top: 50%, $right: $ice-dropdown-item-spacing-horizontal / 2);
       transform: translateY(-50%);
@@ -120,35 +122,5 @@
       font-weight: $ice-dropdown-item-group-header-weight;
       padding: $ice-dropdown-item-spacing-vertical $ice-dropdown-item-spacing-horizontal;
     }
-  }
-}
-
-
-// TODO: The caret here is currently temporary for development.
-// Update this whole section with font awesome (when it makes it to ice-box) BEFORE using in Iverson.
-.ice-dropdown-caret {
-  display: inline-block;
-  margin-left: $spacing-small;
-
-  &::after {
-    content: '\0203A';
-    display: block;
-    color: inherit;
-  }
-
-  .ice-dropdown-toggle[dropdown-placement^="right"] > & {
-    // nothing
-  }
-
-  .ice-dropdown-toggle[dropdown-placement^="left"] > & {
-    transform: rotate(180deg);
-  }
-
-  .ice-dropdown-toggle[dropdown-placement^="bottom"] > & {
-    transform: rotate(90deg);
-  }
-
-  .ice-dropdown-toggle[dropdown-placement^="top"] > & {
-    transform: rotate(-90deg);
   }
 }

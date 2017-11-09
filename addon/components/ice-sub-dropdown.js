@@ -11,7 +11,7 @@ import IceDropdownComponent from './ice-dropdown';
  *   <ul class="ice-dropdown-menu">
  *     <li>
  *       <a>Foo bar baz</a>
- *       <div class="ice-dropdown-caret"></div>
+ *       <i class="fa fa-caret-down ice-dropdown-caret"></i>
  *       {{#ice-sub-dropdown}}
  *         <ul class="ice-dropdown-menu">
  *           <li><a>Foo bar baz</a></li>

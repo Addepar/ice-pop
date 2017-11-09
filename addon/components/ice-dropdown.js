@@ -10,7 +10,7 @@ import layout from '../templates/components/ice-dropdown';
  * ```hbs
  * <div class="target">
  *   Target text
- *   <div class="ice-dropdown-caret"></div>
+ *   <i class="fa fa-caret-down ice-dropdown-caret"></i>
  *   {{#ice-dropdown}}
  *     Dropdown with defaults
  *   {{/ice-dropdown}}
@@ -18,7 +18,7 @@ import layout from '../templates/components/ice-dropdown';
  *
  * <div class="target">
  *   Target text
- *   <div class="ice-dropdown-caret"></div>
+ *   <i class="fa fa-caret-down ice-dropdown-caret"></i>
  *   {{#ice-dropdown placement="bottom"}}
  *     Dropdown with custom placement
  *   {{/ice-dropdown}}
@@ -26,7 +26,7 @@ import layout from '../templates/components/ice-dropdown';
  *
  * <div class="target">
  *   Target text
- *   <div class="ice-dropdown-caret"></div>
+ *   <i class="fa fa-caret-down ice-dropdown-caret"></i>
  *   {{#ice-dropdown class="custom-class"}}
  *     Dropdown with custom class
  *   {{/ice-tooltip}}
@@ -34,7 +34,7 @@ import layout from '../templates/components/ice-dropdown';
  *
  * <div class="target">
  *   Target text
- *   <div class="ice-dropdown-caret"></div>
+ *   <i class="fa fa-caret-down ice-dropdown-caret"></i>
  *   {{#ice-dropdown}}
  *     <a data-close>
  *       Adding data-close to anything within the dropdown will cause
