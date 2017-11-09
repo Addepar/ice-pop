@@ -7,7 +7,8 @@
 // However you should only use it inside the ice-dropdown Ember addon like this:
 // ```
 // <div class="example-target">
-//   Target text <div class="ice-dropdown-caret"></div>
+//   Target text
+//   <i class="fa fa-caret-down ice-dropdown-caret"></i>
 //   {{#ice-dropdown}}
 //     <ul class="ice-dropdown-menu">
 //       <li><a {{action 'foo'}}>Foo bar baz</a></li>
@@ -38,7 +39,8 @@
 //   use the ember addon as notated in the section above)
 //   <div class="dropdown-example">
 //     <div class="example-target ice-dropdown-toggle" dropdown-placement="bottom-start">
-//       Target text <div class="ice-dropdown-caret"></div>
+//       Target text
+//       <i class="fa fa-caret-down ice-dropdown-caret"></i>
 //       <div class="ice-dropdown is-visible" x-placement="bottom-start">
 //         <ul class="ice-dropdown-menu">
 //           <li><a data-dropdown-close>Foo bar baz</a></li>

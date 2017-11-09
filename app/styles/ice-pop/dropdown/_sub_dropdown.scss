@@ -10,7 +10,7 @@
 //   <ul class="ice-dropdown-menu">
 //     <li>
 //       <a>Foo bar baz</a>
-//       <div class="ice-dropdown-caret"></div>
+//       <i class="fa fa-caret-down ice-dropdown-caret"></i>
 //       {{#ice-sub-dropdown}}
 //         <ul class="ice-dropdown-menu">
 //           <li><a>Foo bar baz</a></li>
@@ -34,12 +34,13 @@
 // Markup:
 //   <div class="dropdown-example">
 //     <div class="example-target ice-dropdown-toggle" dropdown-placement="bottom">
-//       Target text <div class="ice-dropdown-caret"></div>
+//       Target text
+//       <i class="fa fa-caret-down ice-dropdown-caret"></i>
 //       <div class="ice-dropdown is-visible">
 //         <ul class="ice-dropdown-menu">
 //           <li>
 //             <a class="is-active">Foo bar baz</a>
-//             <div class="ice-dropdown-caret"></div>
+//             <i class="fa fa-caret-down ice-dropdown-caret"></i>
 //             <div class="ice-dropdown ice-sub-dropdown is-visible" x-placement="right-start">
 //               <div class="ice-dropdown-content">
 //                 <ul class="ice-dropdown-menu">
