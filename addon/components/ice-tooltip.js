@@ -30,7 +30,7 @@ import layout from '../templates/components/ice-tooltip';
  * ```
  */
 export default class IceTooltipComponent extends BasePopMenuComponent {
-  layout = layout
+  layout = layout;
 
-  triggerEvent = 'hover'
+  triggerEvent = 'hover';
 }

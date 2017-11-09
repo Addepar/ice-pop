@@ -50,9 +50,9 @@ import layout from '../templates/components/ice-popover';
  * ```
  */
 export default class IcePopoverComponent extends BasePopMenuComponent {
-  layout = layout
+  layout = layout;
 
-  triggerEvent = 'click'
+  triggerEvent = 'click';
 
   // ----- Arguments ------
 
@@ -63,7 +63,7 @@ export default class IcePopoverComponent extends BasePopMenuComponent {
    */
   @argument
   @type('string')
-  placement = 'right-start'
+  placement = 'right-start';
 
   /**
    * Title for the popover, if provided will include the header
@@ -71,6 +71,6 @@ export default class IcePopoverComponent extends BasePopMenuComponent {
    */
   @argument
   @type(unionOf(null, 'string'))
-  popoverTitle = null
+  popoverTitle = null;
 
 }
