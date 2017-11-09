@@ -207,7 +207,7 @@ export default class BasePopMenuComponent extends Component {
       this._isOpening = true;
       this._insertPopover();
     }
-  }
+  };
 
   /**
    * Closes the popover
@@ -217,7 +217,7 @@ export default class BasePopMenuComponent extends Component {
       this._isOpening = false;
       this._removePopover();
     }
-  }
+  };
 
   /**
    * Handles a click on the body in general when a popover is open. If the clicked element is not
@@ -240,5 +240,5 @@ export default class BasePopMenuComponent extends Component {
 
       this._removePopover();
     }
-  }
+  };
 }

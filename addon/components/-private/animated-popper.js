@@ -201,5 +201,5 @@ export default class AnimatedPopperComponent extends Component {
     if (this.get('makeVisible') === false) {
       this.finalizeClose();
     }
-  }
+  };
 }

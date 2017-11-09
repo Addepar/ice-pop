@@ -26,7 +26,7 @@ import layout from '../templates/components/ice-tooltip-icon';
 @tagName('i')
 @classNames('fa', 'tooltip-icon')
 export default class IceTooltipIcon extends Component {
-  layout = layout
+  layout = layout;
 
   // ----- Public Settings ------
 

@@ -45,9 +45,9 @@ import layout from '../templates/components/ice-dropdown';
  * ```
  */
 export default class IceDropdownComponent extends BasePopMenuComponent {
-  layout = layout
+  layout = layout;
 
-  triggerEvent = 'click'
+  triggerEvent = 'click';
 
   // ----- Public Settings ------
 
