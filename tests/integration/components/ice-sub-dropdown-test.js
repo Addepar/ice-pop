@@ -2,8 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { triggerEvent } from 'ember-native-dom-helpers';
 
-import { PageObject } from 'ember-classy-page-object';
-import { clickable } from 'ember-cli-page-object';
+import PageObject, { clickable } from 'ember-classy-page-object';
 
 import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
 import IceSubDropdownPage from '@addepar/ice-pop/test-support/pages/ice-sub-dropdown';

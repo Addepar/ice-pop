@@ -5,7 +5,7 @@ import { triggerEvent } from 'ember-native-dom-helpers';
 
 import IceTooltipPage from '@addepar/ice-pop/test-support/pages/ice-tooltip';
 
-import { hasClass } from 'ember-cli-page-object';
+import { hasClass } from 'ember-classy-page-object';
 
 const TooltipHelper = IceTooltipPage.extend({ scope: '[data-test-tooltip]' });
 

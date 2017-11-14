@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import { hasClass } from 'ember-cli-page-object';
+import { hasClass } from 'ember-classy-page-object';
 
 import IceTooltipIconPage from '@addepar/ice-pop/test-support/pages/ice-tooltip-icon';
 
