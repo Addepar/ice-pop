@@ -1,13 +1,8 @@
 import Ceibo from 'ceibo';
 
-import { PageObject } from 'ember-classy-page-object';
+import PageObject, { attribute, hasClass } from 'ember-classy-page-object';
 
 import { find } from 'ember-native-dom-helpers';
-
-import {
-  attribute,
-  hasClass
-} from 'ember-cli-page-object';
 
 /**
  * Base test page-object for ice-tooltip, ice-popover, ice-dropdown, and ice-sub-dropdown.

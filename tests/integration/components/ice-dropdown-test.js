@@ -1,8 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import { PageObject } from 'ember-classy-page-object';
-import { clickable, hasClass } from 'ember-cli-page-object';
+import PageObject, { clickable, hasClass } from 'ember-classy-page-object';
 
 import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
 

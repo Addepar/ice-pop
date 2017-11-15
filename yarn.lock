@@ -1400,9 +1400,9 @@ broccoli-debug@^0.6.1, broccoli-debug@^0.6.2, broccoli-debug@^0.6.3:
     symlink-or-copy "^1.1.8"
     tree-sync "^1.2.2"
 
-"broccoli-esdoc@git+https://github.com/pzuraq/broccoli-esdoc.git#93c5d0042fd751cec468fb01687c7f4e1aa447ea":
+"broccoli-esdoc@https://github.com/pzuraq/broccoli-esdoc.git#93c5d0042fd751cec468fb01687c7f4e1aa447ea":
   version "0.0.1"
-  resolved "git+https://github.com/pzuraq/broccoli-esdoc.git#93c5d0042fd751cec468fb01687c7f4e1aa447ea"
+  resolved "https://github.com/pzuraq/broccoli-esdoc.git#93c5d0042fd751cec468fb01687c7f4e1aa447ea"
   dependencies:
     broccoli-caching-writer "^3.0.3"
     esdoc "https://github.com/pzuraq/esdoc.git#bcd3f55bada45f0555f491cc3789c4dc3970d703"
@@ -2407,13 +2407,13 @@ ember-argument-decorators@~0.6.1:
     ember-compatibility-helpers "^0.1.1"
     ember-get-config "^0.2.3"
 
-ember-classy-page-object@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/ember-classy-page-object/-/ember-classy-page-object-0.1.0.tgz#5557de65ef513be54b4b48441ba214759c74d19b"
+ember-classy-page-object@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/ember-classy-page-object/-/ember-classy-page-object-0.2.1.tgz#ee895d211933b2b70adf50f80444c6ad4c69fb50"
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-cli-babel "^6.6.0"
-    ember-cli-page-object pzuraq/ember-cli-page-object#af35424
+    ember-cli-page-object "1.13.0-alpha.1"
 
 ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7:
   version "5.2.4"
@@ -2568,12 +2568,12 @@ ember-cli-normalize-entity-name@^1.0.0:
   dependencies:
     silent-error "^1.0.0"
 
-"ember-cli-page-object@github:pzuraq/ember-cli-page-object#af35424", ember-cli-page-object@pzuraq/ember-cli-page-object#af35424:
-  version "1.12.0"
-  resolved "https://codeload.github.com/pzuraq/ember-cli-page-object/tar.gz/af35424841c3d64c693ec576d866798b4bafe604"
+ember-cli-page-object@1.13.0-alpha.1:
+  version "1.13.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-page-object/-/ember-cli-page-object-1.13.0-alpha.1.tgz#f5b80b9c19001cdedc62c65be84ef06591f38487"
   dependencies:
     ceibo "~2.0.0"
-    ember-cli-babel "^5.1.7"
+    ember-cli-babel "^6.6.0"
     ember-cli-get-component-path-option "^1.0.0"
     ember-cli-is-package-missing "^1.0.0"
     ember-cli-node-assets "^0.2.2"
@@ -3194,9 +3194,9 @@ esdoc-publish-html-plugin@latest:
     marked "0.3.6"
     taffydb "2.7.2"
 
-"esdoc-publish-module-html-plugin@git+https://github.com/pzuraq/esdoc-publish-module-html-plugin.git#fa1c2dbb20521f5dc477a764ab03272fb74f7d37":
+"esdoc-publish-module-html-plugin@https://github.com/pzuraq/esdoc-publish-module-html-plugin.git#fa1c2dbb20521f5dc477a764ab03272fb74f7d37":
   version "0.0.12"
-  resolved "git+https://github.com/pzuraq/esdoc-publish-module-html-plugin.git#fa1c2dbb20521f5dc477a764ab03272fb74f7d37"
+  resolved "https://github.com/pzuraq/esdoc-publish-module-html-plugin.git#fa1c2dbb20521f5dc477a764ab03272fb74f7d37"
   dependencies:
     babel-generator "6.11.4"
     cheerio "0.22.0"

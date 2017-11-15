@@ -1,4 +1,4 @@
-import { clickable } from 'ember-cli-page-object';
+import { clickable } from 'ember-classy-page-object';
 
 import BasePopMenuPage from './-private/base-pop-menu';
 
