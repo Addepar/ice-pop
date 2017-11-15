@@ -89,6 +89,19 @@ export default class BasePopMenuComponent extends Component {
   _popperClass = '';
 
   /**
+   * Modifiers to the popper to set it's default behavior
+   */
+  _popperModifiers = {
+    flip: {
+      boundariesElement: 'viewport'
+    },
+
+    preventOverflow: {
+      boundariesElement: 'window'
+    }
+  };
+
+  /**
    * Root element that has attached event listeners for body close action
    */
   _rootElement = null;

@@ -70,6 +70,13 @@ export default class AnimatedPopperComponent extends Component {
   @type('string')
   placement = 'auto';
 
+  /**
+   * Modifiers passed to the popper element
+   */
+  @argument
+  @type(unionOf(null, 'object'))
+  modifiers = null;
+
   // ----- Private Variables -----
 
   /**
