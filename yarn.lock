@@ -2407,9 +2407,9 @@ ember-argument-decorators@~0.6.1:
     ember-compatibility-helpers "^0.1.1"
     ember-get-config "^0.2.3"
 
-ember-classy-page-object@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/ember-classy-page-object/-/ember-classy-page-object-0.2.1.tgz#ee895d211933b2b70adf50f80444c6ad4c69fb50"
+ember-classy-page-object@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/ember-classy-page-object/-/ember-classy-page-object-0.3.0.tgz#57ae2d8ec1deb57eb330e7c91f7c75d9158f6d53"
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-cli-babel "^6.6.0"
@@ -2948,9 +2948,9 @@ ember-test-helpers@^0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/ember-test-helpers/-/ember-test-helpers-0.6.3.tgz#f864cdf6f4e75f3f8768d6537785b5ab6e82d907"
 
-ember-test-selectors@simplabs/ember-test-selectors#251be25:
-  version "0.3.7"
-  resolved "https://codeload.github.com/simplabs/ember-test-selectors/tar.gz/251be253890f62b57b3b19487426ef58711c616b"
+ember-test-selectors@^0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/ember-test-selectors/-/ember-test-selectors-0.3.8.tgz#1e8ae3e78c64bacc4bbfe87f9973c85805699db2"
   dependencies:
     broccoli-stew "^1.4.0"
     ember-cli-babel "^6.8.2"
