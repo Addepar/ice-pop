@@ -52,7 +52,7 @@ test('dropdown box closes when element outside of dropdown is clicked', async fu
     </div>
   `);
 
-  const content = new PageObject({
+  const content = PageObject.extend({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 

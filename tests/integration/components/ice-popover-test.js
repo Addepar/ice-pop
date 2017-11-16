@@ -52,7 +52,7 @@ test('popover box closes when element outside of popover is clicked', async func
     </div>
   `);
 
-  const content = new PageObject({
+  const content = PageObject.extend({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 

@@ -1,15 +1,14 @@
 import Ceibo from 'ceibo';
 
 import PageObject, { attribute, hasClass } from 'ember-classy-page-object';
-
-import { find } from 'ember-native-dom-helpers';
+import { findElement } from 'ember-classy-page-object/extend';
 
 /**
  * Base test page-object for ice-tooltip, ice-popover, ice-dropdown, and ice-sub-dropdown.
  * Allows testers to open ond close the popover and select its content, as well as check
  * its current state.
  */
-export default new PageObject({
+export default PageObject.extend({
   /**
    * Opens the popover using the method provided by the subclass on the trigger element
    *
@@ -41,7 +40,7 @@ export default new PageObject({
   trigger: {
     resetScope: true,
     get scope() {
-      const parent = find(Ceibo.parent(this).scope);
+      const parent = findElement(Ceibo.parent(this));
 
       // The parent may not be rendered either, so we can only grab the ID if it exists
       const parentId = parent ? parent.getAttribute('id') : 'unrendered';
@@ -61,7 +60,7 @@ export default new PageObject({
   content: {
     resetScope: true,
     get scope() {
-      const parent = find(Ceibo.parent(this).scope);
+      const parent = findElement(Ceibo.parent(this));
 
       // The parent may not be rendered either, so we can only grab the ID if it exists
       const parentId = parent ? parent.getAttribute('id') : 'unrendered';

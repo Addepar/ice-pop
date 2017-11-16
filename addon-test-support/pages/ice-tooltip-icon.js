@@ -1,15 +1,14 @@
 import PageObject from 'ember-classy-page-object';
+import { findElement } from 'ember-classy-page-object/extend';
 
 import TooltipPage from './ice-tooltip';
 
-import { find } from 'ember-native-dom-helpers';
-
-export default new PageObject({
+export default PageObject.extend({
   /**
    * Returns if this tooltip-icon is the specified icon
    */
   isIcon(icon) {
-    return find(this.scope).classList.contains(icon);
+    return findElement(this).classList.contains(icon);
   },
 
   /**
