@@ -156,7 +156,7 @@ export default class AnimatedPopperComponent extends Component {
         // important in tests
         raf.schedule('affect', () => {
           if (this.get('makeVisible') === false) {
-            run(() => this.finalizeClose());
+            this.finalizeClose();
           }
         }, this._token);
       }
@@ -188,15 +188,17 @@ export default class AnimatedPopperComponent extends Component {
    * and notifies the parent context that animations have finished.
    */
   finalizeClose() {
-    this.set('renderInDOM', false);
+    run(() => {
+      this.set('renderInDOM', false);
 
-    if (this._hasTransition) {
-      this._animatedElement.removeEventListener('transitionend', this._transitionEndHandler);
-    }
+      if (this._hasTransition) {
+        this._animatedElement.removeEventListener('transitionend', this._transitionEndHandler);
+      }
 
-    this._animatedElement = null;
+      this._animatedElement = null;
 
-    this.sendAction('onClose');
+      this.sendAction('onClose');
+    });
   }
 
   // ----- Event Handlers -----
