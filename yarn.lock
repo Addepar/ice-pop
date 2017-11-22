@@ -2407,9 +2407,9 @@ ember-argument-decorators@~0.6.1:
     ember-compatibility-helpers "^0.1.1"
     ember-get-config "^0.2.3"
 
-ember-classy-page-object@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/ember-classy-page-object/-/ember-classy-page-object-0.3.0.tgz#57ae2d8ec1deb57eb330e7c91f7c75d9158f6d53"
+ember-classy-page-object@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/ember-classy-page-object/-/ember-classy-page-object-0.4.0.tgz#1acc34a8567ee41bf40ed27473058e4557109130"
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-cli-babel "^6.6.0"
