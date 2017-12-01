@@ -1,5 +1,5 @@
-import { argument, type } from 'ember-argument-decorators';
-import { unionOf } from 'ember-argument-decorators/types';
+import { argument } from '@ember-decorators/argument';
+import { type, unionOf } from '@ember-decorators/argument/type';
 
 import BasePopMenuComponent from './-private/base-pop-menu';
 

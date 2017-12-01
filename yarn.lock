@@ -79,6 +79,17 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@ember-decorators/argument@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@ember-decorators/argument/-/argument-0.8.2.tgz#f6dcd92c5c507356c3fc118e159e9ae64f4af79b"
+  dependencies:
+    babel-plugin-filter-imports "^1.1.1"
+    broccoli-funnel "^2.0.1"
+    ember-cli-babel "^6.3.0"
+    ember-cli-version-checker "^2.0.0"
+    ember-compatibility-helpers "^0.1.1"
+    ember-get-config "^0.2.3"
+
 "@ember-decorators/argument@~0.7.1":
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/@ember-decorators/argument/-/argument-0.7.2.tgz#3960eca2b26fcef158076df7ee81ebe1d259cf72"
@@ -691,6 +702,13 @@ babel-plugin-eval@^1.0.1:
 babel-plugin-filter-imports@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-filter-imports/-/babel-plugin-filter-imports-1.1.0.tgz#e5ea78f58f7fed4a22e59e136b52994c5fda7bad"
+  dependencies:
+    babel-types "^6.26.0"
+    lodash "^4.17.4"
+
+babel-plugin-filter-imports@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-filter-imports/-/babel-plugin-filter-imports-1.1.1.tgz#0f418fb517a7c64b54461b947940081e51b3fd9d"
   dependencies:
     babel-types "^6.26.0"
     lodash "^4.17.4"
@@ -2395,17 +2413,6 @@ ember-ajax@^3.0.0:
   resolved "https://registry.yarnpkg.com/ember-ajax/-/ember-ajax-3.0.0.tgz#8f21e9da0c1d433cf879aa855fce464d517e9ab5"
   dependencies:
     ember-cli-babel "^6.0.0"
-
-ember-argument-decorators@~0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/ember-argument-decorators/-/ember-argument-decorators-0.6.1.tgz#c6170f999c63de0a6a31bd85b6587d850b4f404b"
-  dependencies:
-    babel-plugin-filter-imports "^1.1.0"
-    broccoli-funnel "^2.0.1"
-    ember-cli-babel "^6.3.0"
-    ember-cli-version-checker "^2.0.0"
-    ember-compatibility-helpers "^0.1.1"
-    ember-get-config "^0.2.3"
 
 ember-classy-page-object@^0.4.0:
   version "0.4.0"
