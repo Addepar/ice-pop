@@ -1,4 +1,5 @@
-import { argument, type } from 'ember-argument-decorators';
+import { argument } from '@ember-decorators/argument';
+import { type } from '@ember-decorators/argument/type';
 
 import BasePopMenuComponent from './-private/base-pop-menu';
 import layout from '../templates/components/ice-dropdown';

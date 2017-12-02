@@ -5,8 +5,9 @@ import { addObserver, removeObserver } from '@ember/object/observers';
 import { action } from 'ember-decorators/object';
 import { tagName } from 'ember-decorators/component';
 
-import { argument, type } from 'ember-argument-decorators';
-import { unionOf } from 'ember-argument-decorators/types';
+import { argument } from '@ember-decorators/argument';
+import { type, optional } from '@ember-decorators/argument/type';
+import { Action } from '@ember-decorators/argument/types';
 
 import { scheduler as raf, Token } from 'ember-raf-scheduler';
 
@@ -39,14 +40,14 @@ export default class AnimatedPopperComponent extends Component {
    * Action sent when the popper has been added to the DOM, before animations
    */
   @argument
-  @type(unionOf(null, 'action'))
+  @type(optional(Action))
   onOpen = null;
 
   /**
    * Action sent when the popper has been removed from the DOM, after animations
    */
   @argument
-  @type(unionOf(null, 'action'))
+  @type(optional(Action))
   onClose = null;
 
   /**
@@ -74,7 +75,7 @@ export default class AnimatedPopperComponent extends Component {
    * Modifiers passed to the popper element
    */
   @argument
-  @type(unionOf(null, 'object'))
+  @type(optional('object'))
   modifiers = null;
 
   // ----- Private Variables -----

@@ -1,4 +1,5 @@
-import { argument, type } from 'ember-argument-decorators';
+import { argument } from '@ember-decorators/argument';
+import { type } from '@ember-decorators/argument/type';
 
 import IceDropdownComponent from './ice-dropdown';
 

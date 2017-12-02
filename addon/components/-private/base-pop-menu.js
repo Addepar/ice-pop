@@ -5,7 +5,9 @@ import { assert } from '@ember/debug';
 
 import { action } from 'ember-decorators/object';
 
-import { argument, type, immutable } from 'ember-argument-decorators';
+import { argument } from '@ember-decorators/argument';
+import { type } from '@ember-decorators/argument/type';
+import { immutable } from '@ember-decorators/argument/validation';
 
 import { scheduler as raf } from 'ember-raf-scheduler';
 

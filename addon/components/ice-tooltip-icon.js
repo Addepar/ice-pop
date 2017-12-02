@@ -1,7 +1,8 @@
 import Component from '@ember/component';
 
 import { className, classNames, tagName } from 'ember-decorators/component';
-import { argument, type } from 'ember-argument-decorators';
+import { argument } from '@ember-decorators/argument';
+import { type } from '@ember-decorators/argument/type';
 
 import layout from '../templates/components/ice-tooltip-icon';
 
