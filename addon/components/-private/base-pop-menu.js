@@ -6,7 +6,8 @@ import { assert } from '@ember/debug';
 import { action } from 'ember-decorators/object';
 
 import { argument } from '@ember-decorators/argument';
-import { type } from '@ember-decorators/argument/type';
+import { type, optional } from '@ember-decorators/argument/type';
+import { Action } from '@ember-decorators/argument/types';
 import { immutable } from '@ember-decorators/argument/validation';
 
 import { scheduler as raf } from 'ember-raf-scheduler';
@@ -41,6 +42,14 @@ export default class BasePopMenuComponent extends Component {
   @argument
   @type('string')
   placement = 'auto';
+
+  /**
+   * Sends the public API to the enclosing context so it can manipulate the state
+   * of the menu
+   */
+  @argument
+  @type(optional(Action))
+  registerAPI = null;
 
   /**
    * Determines whether or not the popover should render in place
@@ -84,6 +93,11 @@ export default class BasePopMenuComponent extends Component {
    * Stores the popper element for adding/removing event listeners and data attributes
    */
   _popperElement = null;
+
+  /**
+   * Defines the popper id so that it can be selected for a11y
+   */
+  _popperId = `ice-pop-menu-content-${guidFor(this)}`;
 
   /**
    * Used as proxy to pass along the class of this component to the actual popper
@@ -140,6 +154,8 @@ export default class BasePopMenuComponent extends Component {
       this._triggerElement.addEventListener('mouseenter', this._openPopoverHandler);
       this._triggerElement.addEventListener('mouseleave', this._closePopoverHandler);
     }
+
+    this.sendAction('registerAPI', this._getPublicAPI());
   }
 
   willDestroyElement() {
@@ -178,6 +194,42 @@ export default class BasePopMenuComponent extends Component {
     this._rootElement.removeEventListener('mouseup', this._handleBodyClick);
   }
 
+  _getPublicAPI() {
+    let publicAPI = this.get('publicAPI');
+
+    if (publicAPI === null) {
+      // bootstrap the public API with fields that are guaranteed to be static,
+      // such as imperative actions
+      const open = this._openPopoverHandler;
+      const close = this._closePopoverHandler;
+
+      publicAPI = {
+        uniqueId: guidFor(this),
+
+        actions: {
+          open,
+          close,
+          toggle: () => {
+            if (this.get('isOpen')) {
+              close();
+            } else {
+              open();
+            }
+          },
+          reposition: () => {
+            if (this.get('isOpen')) {
+              this._popperAPI.update();
+            }
+          }
+        }
+      };
+    }
+
+    publicAPI.isOpen = this.get('isOpen');
+
+    return this.set('publicAPI', publicAPI);
+  }
+
   /**
    * Triggers when the popover has entered the DOM and the API has been established,
    * allowing us to add data attributes and event handlers and mark the trigger as active
@@ -185,10 +237,13 @@ export default class BasePopMenuComponent extends Component {
    * @param {PopperAPI} api - The API received from the underlying popper
    */
   @action
-  popoverOpened({ popperElement }) {
-    this._popperElement = popperElement;
+  popoverOpened(popperAPI) {
+    this._popperAPI = popperAPI;
+    this._popperElement = popperAPI.popperElement;
     this._popperElement.setAttribute('data-popover-content', guidFor(this));
     this._triggerElement.classList.add('is-active');
+
+    this.sendAction('registerAPI', this._getPublicAPI());
 
     if (this.get('triggerEvent') === 'hover') {
       this._popperElement.addEventListener('mouseenter', this._openPopoverHandler);
@@ -207,9 +262,12 @@ export default class BasePopMenuComponent extends Component {
       this._popperElement.removeEventListener('mouseleave', this._closePopoverHandler);
     }
 
+    this.sendAction('registerAPI', this._getPublicAPI());
+
     this._triggerElement.classList.remove('is-active');
     this._popperElement.removeAttribute('data-popover-content');
     this._popperElement = null;
+    this._popperAPI = null;
   }
 
   // ----- Event Handlers -----
