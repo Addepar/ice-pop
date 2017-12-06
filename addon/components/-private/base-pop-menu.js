@@ -133,6 +133,8 @@ export default class BasePopMenuComponent extends Component {
 
     this._triggerElement = this.element.parentNode;
     this._triggerElement.setAttribute('data-popover-trigger', guidFor(this));
+    this._triggerElement.setAttribute('aria-haspopup', 'true');
+    this._triggerElement.setAttribute('aria-expanded', 'false');
 
     if (this.get('triggerEvent') === 'click') {
       this._triggerElement.addEventListener('mousedown', this._openPopoverHandler);
@@ -189,6 +191,7 @@ export default class BasePopMenuComponent extends Component {
     this._popperElement = popperElement;
     this._popperElement.setAttribute('data-popover-content', guidFor(this));
     this._triggerElement.classList.add('is-active');
+    this._triggerElement.setAttribute('aria-expanded', 'true');
 
     if (this.get('triggerEvent') === 'hover') {
       this._popperElement.addEventListener('mouseenter', this._openPopoverHandler);
@@ -208,6 +211,7 @@ export default class BasePopMenuComponent extends Component {
     }
 
     this._triggerElement.classList.remove('is-active');
+    this._triggerElement.setAttribute('aria-expanded', 'false');
     this._popperElement.removeAttribute('data-popover-content');
     this._popperElement = null;
   }
