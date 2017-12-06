@@ -142,6 +142,7 @@ export default class BasePopMenuComponent extends Component {
       this._triggerElement.addEventListener('mouseenter', this._openPopoverHandler);
       this._triggerElement.addEventListener('mouseleave', this._closePopoverHandler);
     }
+    this._triggerElement.addEventListener('keydown', this._popperKeyHandler);
   }
 
   willDestroyElement() {
@@ -153,6 +154,7 @@ export default class BasePopMenuComponent extends Component {
       this._triggerElement.removeEventListener('mouseenter', this._openPopoverHandler);
       this._triggerElement.removeEventListener('mouseleave', this._closePopoverHandler);
     }
+    this._triggerElement.removeEventListener('keydown', this._popperKeyHandler);
 
     this._triggerElement.removeAttribute('data-popover-trigger');
 
@@ -192,6 +194,7 @@ export default class BasePopMenuComponent extends Component {
     this._popperElement.setAttribute('data-popover-content', guidFor(this));
     this._triggerElement.classList.add('is-active');
     this._triggerElement.setAttribute('aria-expanded', 'true');
+    this._popperElement.addEventListener('keydown', this._popperKeyHandler);
 
     if (this.get('triggerEvent') === 'hover') {
       this._popperElement.addEventListener('mouseenter', this._openPopoverHandler);
@@ -210,6 +213,7 @@ export default class BasePopMenuComponent extends Component {
       this._popperElement.removeEventListener('mouseleave', this._closePopoverHandler);
     }
 
+    this._popperElement.removeEventListener('keydown', this._popperKeyHandler);
     this._triggerElement.classList.remove('is-active');
     this._triggerElement.setAttribute('aria-expanded', 'false');
     this._popperElement.removeAttribute('data-popover-content');
@@ -255,9 +259,83 @@ export default class BasePopMenuComponent extends Component {
 
     } else if (closest(target, '[data-close]:not([disabled])')) {
       // We still want to allow purposeful closing of the popover from within,
-      // so this closes the popover if the click target has [data-popover-close] attribute
+      // so this closes the popover if the click target has [data-close] attribute
 
       this._removePopover();
+    }
+  };
+
+  /**
+   * Determines if a keypress should open/close the popper, or focus popper items
+   */
+  _popperKeyHandler = (event) => {
+    const keyCode = event.code;
+
+    // When focus is on a trigger, Enter or Space should open it's popper
+    if (
+      (keyCode == 'Enter' || keyCode == 'Space')
+      && event.target.hasAttribute('data-popover-trigger')
+      ) {
+      this._openPopoverHandler();
+    }
+
+    // When focus is on a data-close element, Enter should close the popper
+    // (todo: make sure it executes the action too)
+    // Escape provides a way to close the popper early from any point.
+    // Also assumes a trigger (such as a submenu trigger) will not have data-close
+    if (
+      (keyCode == 'Enter' && event.target.hasAttribute('data-close'))
+      || keyCode == 'Escape'
+      ) {
+      // The focus should probably go to whatever
+      // area the action triggers. But there is no way for this generic component
+      // to know that, so the best guess is back to the trigger
+      // (otherwise it goes out of the page bc its at the bottom of the body).
+      this._triggerElement.focus();
+      this._closePopoverHandler();
+    }
+
+    // Move focus inside the popper if it is open and you hit Tab
+    if (keyCode == 'Tab' && this.get('isOpen')) {
+      this._focusNextTabbableItem();
+    }
+  };
+
+  /**
+   * Determines where to focus when tabbing to/in an opened popper
+   */
+  _focusNextTabbableItem = () => {
+    const currentActiveElement = document.activeElement;
+    // Reasonable guess for our use cases, we may need to update this list
+    const tabbableSelectors = 'a[href], input, button, select, textarea, [tabindex]:not([disabled])';
+    // We want to query the tabbable elements each time because it is possible to
+    // have dynamic content in a popper, and we dont want to get stuck in a loop
+    // or exit too early
+    const tabbableElements = this._popperElement.querySelectorAll(tabbableSelectors);
+
+    // If focus isn't in the popper yet and we are still focused on the trigger,
+    // enter into the popper container by focusing on the first tabbable element,
+    // which is the popper container itself.
+    // Primary browser tab action will then tab to the next naturally tabbable
+    // item within the popper.
+    // Also need to check if there are even any elements to tab through
+    // (outside of just the popper container itself, hence length > 1),
+    // otherwise there is no point in entering.
+    if (
+      (currentActiveElement == this._triggerElement)
+      && (tabbableElements.length > 1)
+      ) {
+      tabbableElements[0].focus(); // the popper container itself
+    }
+    // If focus is on the last tabbable item, we need to close the popper and
+    // focus back to the trigger.
+    // Primary browser tab action will then tab to the next tabbable item in the dom.
+    else if (
+      (currentActiveElement == tabbableElements[tabbableElements.length - 1])
+      || (tabbableElements.length <= 1)
+      ){
+      this._triggerElement.focus();
+      this._closePopoverHandler();
     }
   };
 }

@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
-import { className, classNames, tagName } from 'ember-decorators/component';
+import { attribute, className, classNames, tagName } from 'ember-decorators/component';
 import { argument } from '@ember-decorators/argument';
 import { type } from '@ember-decorators/argument/type';
 
@@ -28,6 +28,9 @@ import layout from '../templates/components/ice-tooltip-icon';
 @classNames('fa', 'tooltip-icon')
 export default class IceTooltipIcon extends Component {
   layout = layout;
+
+  // Make the tooltip icon tabbable
+  @attribute tabindex = '0';
 
   // ----- Public Settings ------
 
