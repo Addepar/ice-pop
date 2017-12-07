@@ -5,9 +5,12 @@
 //
 // You can implement a tooltip custom class as well as custom direction placement with the Ember addon like this:
 // ```
-// {{#ice-tooltip placement="bottom" class="custom-class"}}
-//  I'm Mr. Meseeks look at me!
-// {{/ice-tooltip}}
+// <div class="example-target">
+//   Target Text
+//   {{#ice-tooltip placement="bottom" class="custom-class"}}
+//    I'm Mr. Meseeks look at me!
+//   {{/ice-tooltip}}
+// </div>
 // ```
 //
 // #### Important
@@ -17,8 +20,11 @@
 // [See Ice Tooltip Docs >>](/docs/ice-pop/class/addon/components/ice-tooltip.js~IceTooltip.html)
 //
 // Markup:
-// <div class="ice-tooltip is-visible {{modifier_class}}" x-placement="top">
-//   <div class="ice-tooltip-content">
+// <div class="example-target popover-target is-active" aria-haspopup="true" aria-expanded="true">
+//   Target Text
+// </div>
+// <div class="ice-tooltip is-visible {{modifier_class}}" x-placement="bottom">
+//   <div class="ice-tooltip-content" tabindex="0">
 //     I'm Mr. Meseeks look at me!
 //   </div>
 //   <div class="popper-arrow" x-arrow></div>

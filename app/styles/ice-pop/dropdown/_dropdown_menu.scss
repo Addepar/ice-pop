@@ -6,30 +6,45 @@
 // The dropdown menu list itself is not an Ember addon, it is just HTML/CSS.
 // However you should only use it inside the ice-dropdown Ember addon like this:
 // ```
-// <div class="example-target">
-//   Target text
-//   <i class="fa fa-caret-down ice-dropdown-caret"></i>
-//   {{#ice-dropdown}}
-//     <ul class="ice-dropdown-menu">
-//       <li><a {{action 'foo'}}>Foo bar baz</a></li>
-//       <li class="list-group-header">Group Header Text</li>
-//       <li><a {{action 'bar'}}>I'm Mr. Meseeks</a></li>
-//       <li><a {{action 'baz'}}>Lorem ipsum</a></li>
-//       <li class="list-divider"></li>
-//       <li><a disabled>I'm disabled</a></li>
-//     </ul>
-//   {{/ice-dropdown}}
+// <div class="dropdown-example">
+//   <div class="example-target">
+//     Target text
+//     <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
+//     {{#ice-dropdown}}
+//       <ul class="ice-dropdown-menu" role="menu">
+//         <li role="none"><button {{action 'foo'}} role="menuitem">Foo bar baz</button></li>
+//         <li class="list-group-header" role="heading">Group Header Text</li>
+//         <li role="none"><button {{action 'bar'}} role="menuitem">I'm Mr. Meseeks</button></li>
+//         <li role="none"><button {{action 'baz'}} role="menuitem">Lorem ipsum</button></li>
+//         <li class="list-divider" role="separator"></li>
+//         <li role="none"><button role="menuitem" disabled>I'm disabled</button></li>
+//       </ul>
+//     {{/ice-dropdown}}
+//   </div>
 // </div>
 // ```
 //
-// By default, clicking any menu items will make the dropdown close,
+// By default, clicking any menu items will not make the dropdown close,
 // but you can instead customize which items have the closable action like this:
 // ```
-// {{#ice-dropdown closeItems=false}}
-//   <ul class="ice-dropdown-menu">
-//     <li><a {{action 'foo'}} data-dropdown-close>Foo bar baz</a></li>
-//     <li><a {{action 'bar'}} data-dropdown-close>I'm Mr. Meseeks</a></li>
-//     <li><a {{action 'baz'}}>Don't close the dropdown yet</a></li>
+// {{#ice-dropdown}}
+//   <ul class="ice-dropdown-menu" role="menu">
+//     <li role="none"><button {{action 'foo'}} role="menuitem" data-close>Foo bar baz</button></li>
+//     <li role="none"><button {{action 'bar'}} role="menuitem" data-close>I'm Mr. Meseeks</button></li>
+//     <li role="none"><button {{action 'baz'}} role="menuitem">Don't close the dropdown here</button></li>
+//   </ul>
+// {{/ice-dropdown}}
+// ```
+//
+// Use buttons in the dropdown menu for actions.
+// Anchor tags should be used for actual links that navigate to a view, or to an external url.
+// ```
+// {{#ice-dropdown}}
+//   <ul class="ice-dropdown-menu" role="menu">
+//     <li role="none"><a href="#foo" role="menuitem">Foo</a></li>
+//     <li role="none"><a href="#bar" role="menuitem">Bar</a></li>
+//     <li role="none"><a href="#baz" role="menuitem">Baz</a></li>
+//     <li role="none"><a href="#nowhere" role="menuitem" tabindex="-1" disabled>Disabled</a></li>
 //   </ul>
 // {{/ice-dropdown}}
 // ```
@@ -38,17 +53,19 @@
 //   (Note: Do not use this example outputted ice-dropdown HTML directly,
 //   use the ember addon as notated in the section above)
 //   <div class="dropdown-example">
-//     <div class="example-target ice-dropdown-toggle" dropdown-placement="bottom-start">
+//     <div class="example-target popover-target is-active" aria-haspopup="true" aria-expanded="true">
 //       Target text
-//       <i class="fa fa-caret-down ice-dropdown-caret"></i>
-//       <div class="ice-dropdown is-visible" x-placement="bottom-start">
-//         <ul class="ice-dropdown-menu">
-//           <li><a data-dropdown-close>Foo bar baz</a></li>
-//           <li class="list-group-header">Group Header Text</li>
-//           <li><a data-dropdown-close>I'm Mr. Meseeks</a></li>
-//           <li><a data-dropdown-close>Lorem ipsum</a></li>
-//           <li class="list-divider"></li>
-//           <li><a disabled>I'm disabled</a></li>
+//       <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
+//     </div>
+//     <div class="ice-dropdown is-visible" x-placement="bottom-start">
+//       <div class="ice-dropdown-content" tabindex="0">
+//         <ul class="ice-dropdown-menu" role="menu">
+//           <li role="none"><button {{action 'foo'}} role="menuitem">Foo bar baz</button></li>
+//           <li class="list-group-header" role="heading">Group Header Text</li>
+//           <li role="none"><button {{action 'bar'}} role="menuitem">I'm Mr. Meseeks</button></li>
+//           <li role="none"><button {{action 'baz'}} role="menuitem">Lorem ipsum</button></li>
+//           <li class="list-divider" role="separator"></li>
+//           <li role="none"><button role="menuitem" disabled>I'm disabled</button></li>
 //         </ul>
 //       </div>
 //     </div>
@@ -60,7 +77,7 @@
 //
 // Attribute Options:
 // * `disabled`: Marks a list item as disabled. Place class directly on the `<a>` that is to be disabled.
-// * `data-dropdown-close`: Lets Ember know it needs to close the dropdown after clicking. All `<a>` will do this by default unless you set closeItems=false on the dropdown component. In which case you can add them manually to any element.
+// * `data-close`: Lets Ember know it needs to close the dropdown after clicking.
 //
 // Styleguide Ice Pop - Ice Dropdown - Ice Dropdown Menu
 

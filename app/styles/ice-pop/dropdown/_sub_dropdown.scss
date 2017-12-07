@@ -6,23 +6,31 @@
 //
 // You can implement a sub dropdown within a regular dropdown with the Ember addon like this:
 // ```
-// {{#ice-dropdown}}
-//   <ul class="ice-dropdown-menu">
-//     <li>
-//       <a>Foo bar baz</a>
-//       <i class="fa fa-caret-down ice-dropdown-caret"></i>
-//       {{#ice-sub-dropdown}}
-//         <ul class="ice-dropdown-menu">
-//           <li><a>Foo bar baz</a></li>
-//           <li><a>I'm Mr. Meseeks</a></li>
-//           <li><a>Lorem ipsum</a></li>
-//         </ul>
-//       {{/ice-sub-dropdown}}
-//     </li>
-//     <li><a>I'm Mr. Meseeks</a></li>
-//     <li><a>Lorem ipsum</a></li>
-//   </ul>
-// {{/ice-dropdown}}
+// <div class="dropdown-example">
+//   <div class="example-target">
+//     Target text
+//     <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
+//     {{#ice-dropdown}}
+//       <ul class="ice-dropdown-menu" role="menu">
+//         <li role="none">
+//           <button role="menuitem">
+//             Foo bar baz
+//             <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
+//             {{#ice-sub-dropdown}}
+//               <ul class="ice-dropdown-menu" role="menu">
+//                 <li role="none"><button role="menuitem">Foo bar baz</button></li>
+//                 <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
+//                 <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//               </ul>
+//             {{/ice-sub-dropdown}}
+//           </button>
+//         </li>
+//         <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
+//         <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//       </ul>
+//     {{/ice-dropdown}}
+//   </div>
+// </div>
 // ```
 //
 // #### Important
@@ -33,27 +41,31 @@
 //
 // Markup:
 //   <div class="dropdown-example">
-//     <div class="example-target ice-dropdown-toggle" dropdown-placement="bottom">
+//     <div class="example-target popover-target is-active" aria-haspopup="true" aria-expanded="true">
 //       Target text
-//       <i class="fa fa-caret-down ice-dropdown-caret"></i>
-//       <div class="ice-dropdown is-visible">
-//         <ul class="ice-dropdown-menu">
-//           <li>
-//             <a class="is-active">Foo bar baz</a>
-//             <i class="fa fa-caret-down ice-dropdown-caret"></i>
-//             <div class="ice-dropdown ice-sub-dropdown is-visible" x-placement="right-start">
-//               <div class="ice-dropdown-content">
-//                 <ul class="ice-dropdown-menu">
-//                   <li><a>Foo bar baz</a></li>
-//                   <li><a>I'm Mr. Meseeks</a></li>
-//                   <li><a>Lorem ipsum</a></li>
-//                 </ul>
-//               </div>
-//             </div>
-//           </li>
-//           <li><a>I'm Mr. Meseeks</a></li>
-//           <li><a>Lorem ipsum</a></li>
-//         </ul>
+//       <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
+//       <div class="ice-dropdown is-visible" x-placement="bottom-start">
+//         <div class="ice-dropdown-content" tabindex="0">
+//           <ul class="ice-dropdown-menu" role="menu">
+//             <li role="none">
+//               <button class="is-active" role="menuitem">
+//                Foo bar baz
+//                 <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
+//                 <div class="ice-dropdown ice-sub-dropdown is-visible" x-placement="right-start">
+//                   <div class="ice-dropdown-content" tabindex="0">
+//                     <ul class="ice-dropdown-menu" role="menu">
+//                       <li role="none"><button role="menuitem">Foo bar baz</button></li>
+//                       <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
+//                       <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//                     </ul>
+//                   </div>
+//                 </div>
+//               </button>
+//             </li>
+//             <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
+//             <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//           </ul>
+//         </div>
 //       </div>
 //     </div>
 //   </div>
