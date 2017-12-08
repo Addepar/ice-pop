@@ -76,10 +76,22 @@
     color: $ice-dropdown-item-color;
     line-height: $ice-dropdown-item-line-height;
 
-    // Items with actions should have anchor tags
+    // Use button tag for actions
+    button {
+      @include reset-button();
+      border-radius: 0;
+      line-height: inherit;
+      text-align: left;
+      width: 100%;
+    }
+
+    // Use anchor tag for actual links
     a {
       display: block;
-      height: 100%;
+    }
+
+    button,
+    a {
       padding: $ice-dropdown-item-spacing-vertical $ice-dropdown-item-spacing-horizontal;
       color: inherit;
       text-decoration: none;
@@ -96,14 +108,17 @@
       }
     }
 
-    &.is-active a {
+    // Active state may need to be on the li
+    &.is-active a,
+    &.is-active button {
       background-color: $ice-dropdown-item-active-bg-color;
     }
 
     &[disabled],
-    a[disabled] {
+    a[disabled],
+    button[disabled] {
       @include disabled-input();
-      opacity: 0.6; // TODO: update to $disabled-opacity; from ice-box
+      opacity: $button-disabled-color-inc;
     }
 
     // TODO: investigate if this will cause any issues in Iverson
