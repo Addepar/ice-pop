@@ -25,6 +25,9 @@
 //
 // Styleguide Ice Pop - Ice Dropdown
 
+// Common ice-pop styles
+@import '../common/core';
+
 .ice-dropdown {
   position: absolute;
   z-index: $ice-dropdown-z-index;

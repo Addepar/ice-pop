@@ -7,8 +7,9 @@
   onOpen="popoverOpened"
   onClose="popoverClosed"
 }}
-  <div class="ice-tooltip-content" tabindex="0">
+  <div class="ice-popper-content ice-tooltip-content" tabindex="0">
     {{yield}}
+    <span class="hidden-focus-tracker" tabindex="0"></span>
   </div>
   <div class="popper-arrow" x-arrow></div>
 {{/animated-popper}}

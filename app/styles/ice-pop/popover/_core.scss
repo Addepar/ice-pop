@@ -36,6 +36,9 @@
 //
 // Styleguide Ice Pop - Ice Popover
 
+// Common ice-pop styles
+@import '../common/core';
+
 $popover-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'vertical', 'bottom': 'vertical');
 
 @include arrow-box(

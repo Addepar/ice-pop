@@ -7,11 +7,12 @@
   onOpen="popoverOpened"
   onClose="popoverClosed"
 }}
-  <div class="ice-popover-content" tabindex="0">
+  <div class="ice-popper-content ice-popover-content" tabindex="0">
     {{#if popoverTitle}}
       <header class="ice-popover-title" data-test-popover-header>{{popoverTitle}}</header>
     {{/if}}
     {{yield}}
+    <span class="hidden-focus-tracker" tabindex="0"></span>
   </div>
   <div class="popper-arrow" x-arrow></div>
 {{/animated-popper}}

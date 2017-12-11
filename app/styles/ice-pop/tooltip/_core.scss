@@ -34,6 +34,9 @@
 //
 // Styleguide Ice Pop - Ice Tooltip
 
+// Common ice-pop styles
+@import '../common/core';
+
 $tooltip-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'vertical', 'bottom': 'vertical');
 
 @include arrow-box(

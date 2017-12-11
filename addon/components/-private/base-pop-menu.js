@@ -142,7 +142,7 @@ export default class BasePopMenuComponent extends Component {
       this._triggerElement.addEventListener('mouseenter', this._openPopoverHandler);
       this._triggerElement.addEventListener('mouseleave', this._closePopoverHandler);
     }
-    this._triggerElement.addEventListener('keydown', this._popperKeyHandler);
+    this._triggerElement.addEventListener('keydown', this._triggerKeyHandler);
   }
 
   willDestroyElement() {
@@ -154,7 +154,7 @@ export default class BasePopMenuComponent extends Component {
       this._triggerElement.removeEventListener('mouseenter', this._openPopoverHandler);
       this._triggerElement.removeEventListener('mouseleave', this._closePopoverHandler);
     }
-    this._triggerElement.removeEventListener('keydown', this._popperKeyHandler);
+    this._triggerElement.removeEventListener('keydown', this._triggerKeyHandler);
 
     this._triggerElement.removeAttribute('data-popover-trigger');
 
@@ -195,6 +195,9 @@ export default class BasePopMenuComponent extends Component {
     this._triggerElement.classList.add('is-active');
     this._triggerElement.setAttribute('aria-expanded', 'true');
     this._popperElement.addEventListener('keydown', this._popperKeyHandler);
+    // The hidden tab tracker is the last tabbable element, and as soon as its focused
+    // we need to close the popper and focus back to the trigger
+    this._popperElement.querySelector('.hidden-focus-tracker').addEventListener('focus', this._closePopoverAndFocusTrigger);
 
     if (this.get('triggerEvent') === 'hover') {
       this._popperElement.addEventListener('mouseenter', this._openPopoverHandler);
@@ -214,6 +217,7 @@ export default class BasePopMenuComponent extends Component {
     }
 
     this._popperElement.removeEventListener('keydown', this._popperKeyHandler);
+    this._popperElement.querySelector('.hidden-focus-tracker').removeEventListener('focus', this._closePopoverAndFocusTrigger);
     this._triggerElement.classList.remove('is-active');
     this._triggerElement.setAttribute('aria-expanded', 'false');
     this._popperElement.removeAttribute('data-popover-content');
@@ -243,6 +247,14 @@ export default class BasePopMenuComponent extends Component {
   };
 
   /**
+   * Closes the popover and focuses back on the trigger
+   */
+  _closePopoverAndFocusTrigger = () => {
+    this._triggerElement.focus();
+    this._closePopoverHandler();
+  };
+
+  /**
    * Handles a click on the body in general when a popover is open. If the clicked element is not
    * a child of the popover, or is marked with `data-close`, closes the popover.
    */
@@ -266,76 +278,51 @@ export default class BasePopMenuComponent extends Component {
   };
 
   /**
-   * Determines if a keypress should open/close the popper, or focus popper items
+   * When focus is on the trigger, determine specific key actions
    */
-  _popperKeyHandler = (event) => {
+  _triggerKeyHandler = (event) => {
     const keyCode = event.code;
 
-    // When focus is on a trigger, Enter or Space should open it's popper
+    // Pressing Enter or Space opens the popper
     if (
       (keyCode == 'Enter' || keyCode == 'Space')
-      && event.target.hasAttribute('data-popover-trigger')
+      && !this.get('isOpen')
       ) {
       this._openPopoverHandler();
     }
 
-    // When focus is on a data-close element, Enter should close the popper
-    // (todo: make sure it executes the action too)
-    // Escape provides a way to close the popper early from any point.
-    // Also assumes a trigger (such as a submenu trigger) will not have data-close
-    if (
-      (keyCode == 'Enter' && event.target.hasAttribute('data-close'))
-      || keyCode == 'Escape'
+    // Close on esc if we never entered the popper
+    // (Enter is the same as re-clicking the button)
+    else if (
+      (keyCode == 'Escape' || keyCode == 'Enter')
+      && this.get('isOpen')
       ) {
-      // The focus should probably go to whatever
-      // area the action triggers. But there is no way for this generic component
-      // to know that, so the best guess is back to the trigger
-      // (otherwise it goes out of the page bc its at the bottom of the body).
-      this._triggerElement.focus();
-      this._closePopoverHandler();
+      this._closePopoverAndFocusTrigger();
     }
 
-    // Move focus inside the popper if it is open and you hit Tab
+    // If the popper is already open and you hit Tab,
+    // enter into the popper by focusing on the popper container itself.
+    // Primary browser tab action will then tab to the next naturally tabbable
+    // item within the popper.
     if (keyCode == 'Tab' && this.get('isOpen')) {
-      this._focusNextTabbableItem();
+      this._popperElement.querySelector('.ice-popper-content').focus();
     }
   };
 
   /**
-   * Determines where to focus when tabbing to/in an opened popper
+   * When focus is inside the popper, determine specific key actions
    */
-  _focusNextTabbableItem = () => {
-    const currentActiveElement = document.activeElement;
-    // Reasonable guess for our use cases, we may need to update this list
-    const tabbableSelectors = 'a[href], input, button, select, textarea, [tabindex]:not([disabled])';
-    // We want to query the tabbable elements each time because it is possible to
-    // have dynamic content in a popper, and we dont want to get stuck in a loop
-    // or exit too early
-    const tabbableElements = this._popperElement.querySelectorAll(tabbableSelectors);
+  _popperKeyHandler = (event) => {
+    const keyCode = event.code;
 
-    // If focus isn't in the popper yet and we are still focused on the trigger,
-    // enter into the popper container by focusing on the first tabbable element,
-    // which is the popper container itself.
-    // Primary browser tab action will then tab to the next naturally tabbable
-    // item within the popper.
-    // Also need to check if there are even any elements to tab through
-    // (outside of just the popper container itself, hence length > 1),
-    // otherwise there is no point in entering.
+    // When focus is on a data-close element, pressing Enter should close the popper.
+    // Also assumes a trigger (such as a submenu trigger) will not have data-close.
+    // Escape also provides a way to close the popper early from any point.
     if (
-      (currentActiveElement == this._triggerElement)
-      && (tabbableElements.length > 1)
+      (keyCode == 'Enter' && event.target.hasAttribute('data-close'))
+      || keyCode == 'Escape'
       ) {
-      tabbableElements[0].focus(); // the popper container itself
-    }
-    // If focus is on the last tabbable item, we need to close the popper and
-    // focus back to the trigger.
-    // Primary browser tab action will then tab to the next tabbable item in the dom.
-    else if (
-      (currentActiveElement == tabbableElements[tabbableElements.length - 1])
-      || (tabbableElements.length <= 1)
-      ){
-      this._triggerElement.focus();
-      this._closePopoverHandler();
+      this._closePopoverAndFocusTrigger();
     }
   };
 }
