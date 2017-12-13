@@ -281,30 +281,20 @@ export default class BasePopMenuComponent extends Component {
    * When focus is on the trigger, determine specific key actions
    */
   _triggerKeyHandler = (event) => {
-    const keyCode = event.code;
+    const keyCode = event.key;
 
     // Pressing Enter or Space opens the popper
-    if (
-      (keyCode == 'Enter' || keyCode == 'Space')
-      && !this.get('isOpen')
-      ) {
+    if ((keyCode == 'Enter' || keyCode == ' ') && !this.get('isOpen')) {
       this._openPopoverHandler();
-    }
-
-    // Close on esc if we never entered the popper
-    // (Enter is the same as re-clicking the button)
-    else if (
-      (keyCode == 'Escape' || keyCode == 'Enter')
-      && this.get('isOpen')
-      ) {
+    } else if ((keyCode == 'Escape' || keyCode == 'Enter') && this.get('isOpen')) {
+      // Close on esc if we never entered the popper
+      // (Enter is the same as re-clicking the button)
       this._closePopoverAndFocusTrigger();
-    }
-
-    // If the popper is already open and you hit Tab,
-    // enter into the popper by focusing on the popper container itself.
-    // Primary browser tab action will then tab to the next naturally tabbable
-    // item within the popper.
-    if (keyCode == 'Tab' && this.get('isOpen')) {
+    } else if (keyCode == 'Tab' && this.get('isOpen')) {
+      // If the popper is already open and you hit Tab,
+      // enter into the popper by focusing on the popper container itself.
+      // Primary browser tab action will then tab to the next naturally tabbable
+      // item within the popper.
       this._popperElement.querySelector('.ice-popper-content').focus();
     }
   };
@@ -313,15 +303,12 @@ export default class BasePopMenuComponent extends Component {
    * When focus is inside the popper, determine specific key actions
    */
   _popperKeyHandler = (event) => {
-    const keyCode = event.code;
+    const keyCode = event.key;
 
     // When focus is on a data-close element, pressing Enter should close the popper.
     // Also assumes a trigger (such as a submenu trigger) will not have data-close.
     // Escape also provides a way to close the popper early from any point.
-    if (
-      (keyCode == 'Enter' && event.target.hasAttribute('data-close'))
-      || keyCode == 'Escape'
-      ) {
+    if ((keyCode == 'Enter' && event.target.hasAttribute('data-close')) || keyCode == 'Escape') {
       this._closePopoverAndFocusTrigger();
     }
   };

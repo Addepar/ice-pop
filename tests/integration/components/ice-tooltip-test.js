@@ -5,7 +5,7 @@ import { triggerEvent } from 'ember-native-dom-helpers';
 
 import IceTooltipPage from '@addepar/ice-pop/test-support/pages/ice-tooltip';
 
-import { hasClass } from 'ember-classy-page-object';
+import { hasClass, triggerable } from 'ember-classy-page-object';
 
 const TooltipHelper = IceTooltipPage.extend({ scope: '[data-test-tooltip]' });
 
@@ -162,4 +162,70 @@ test('tooltip trigger element has correct aria roles', async function(assert) {
   await tooltip.close();
 
   assert.equal(tooltip.trigger.isAriaExpanded, 'false', 'tooltip trigger role aria-expanded is false when the tooltip is closed again');
+});
+
+test('tooltip is keyboard accessible', async function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-tooltip data-test-tooltip=true placement="bottom-end"}}
+        template block text
+      {{/ice-tooltip}}
+    </button>
+  `);
+
+  const tooltip = TooltipHelper.extend({
+    trigger: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+    },
+    content: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } })
+    }
+  }).create();
+
+  assert.ok(!tooltip.isOpen, 'tooltip not rendered initially');
+
+  await tooltip.trigger.enter();
+
+  assert.ok(tooltip.isOpen, 'tooltip renders after pressing enter on the target');
+
+  await tooltip.trigger.escape();
+
+  assert.ok(!tooltip.isOpen, 'tooltip removed after pressing escape on the target');
+
+  await tooltip.trigger.space();
+
+  assert.ok(tooltip.isOpen, 'tooltip renders after pressing space on the target');
+});
+
+test('Focusing on hidden focus tracker closes tooltip', async function(assert) {
+  assert.expect(2);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-tooltip data-test-tooltip=true placement="bottom-end"}}
+        template block text
+      {{/ice-tooltip}}
+    </button>
+  `);
+
+  const tooltip = TooltipHelper.extend({
+    content: {
+      focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
+    }
+  }).create();
+
+  await tooltip.open();
+
+  assert.ok(tooltip.isOpen, 'tooltip is rendered');
+
+  await tooltip.content.focusHiddenTracker();
+
+  assert.ok(!tooltip.isOpen, 'tooltip removed after focusing on hidden focus tracker');
 });

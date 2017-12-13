@@ -2,7 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { triggerEvent } from 'ember-native-dom-helpers';
 
-import PageObject, { clickable } from 'ember-classy-page-object';
+import PageObject, { clickable, triggerable } from 'ember-classy-page-object';
 
 import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
 import IceSubDropdownPage from '@addepar/ice-pop/test-support/pages/ice-sub-dropdown';
@@ -297,12 +297,13 @@ test('sub dropdown button has correct aria roles', async function(assert) {
       {{#ice-dropdown data-test-dropdown=true}}
         <ul class="ice-dropdown-menu">
           <li>
-            <a>Foo bar baz</a>
-            {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
-              <ul class="ice-dropdown-menu">
-                <li><a>Foo bar baz</a></li>
-              </ul>
-            {{/ice-sub-dropdown}}
+            <a>Foo bar baz
+              {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+                <ul class="ice-dropdown-menu">
+                  <li><a>Foo bar baz</a></li>
+                </ul>
+              {{/ice-sub-dropdown}}
+            </a>
           </li>
         </ul>
       {{/ice-dropdown}}
@@ -332,4 +333,125 @@ test('sub dropdown button has correct aria roles', async function(assert) {
   await subDropdown.close();
 
   assert.equal(subDropdown.trigger.isAriaExpanded, 'false', 'subdropdown trigger role aria-expanded is false when the subdropdown is closed again');
+});
+
+test('sub dropdown is keyboard accessible', async function(assert) {
+  assert.expect(9);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-dropdown data-test-dropdown=true}}
+        <ul class="ice-dropdown-menu">
+          <li>
+            <a>Foo bar baz
+              {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+                <ul class="ice-dropdown-menu">
+                  <li><button data-test-menu-item data-close>Item</button></li>
+                </ul>
+              {{/ice-sub-dropdown}}
+            </a>
+          </li>
+        </ul>
+      {{/ice-dropdown}}
+    </button>
+  `);
+
+  const dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]',
+        trigger: {
+          enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+          tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
+          escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+          space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+        },
+        content: {
+          enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+          escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+          enterOnMenuItem: triggerable('keydown', '[data-test-menu-item]', { eventProperties: { key: 'Enter' } })
+        }
+      })
+    }
+  }).create();
+
+  const { subDropdown } = dropdown.content;
+
+  assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
+
+  await dropdown.open();
+  await subDropdown.trigger.enter();
+
+  assert.ok(subDropdown.isOpen, 'subdropdown renders after pressing enter on the target');
+
+  await subDropdown.trigger.enter();
+
+  assert.ok(!subDropdown.isOpen, 'subdropdown removed after hitting enter on the target again');
+  assert.ok(dropdown.isOpen, 'main dropdown is still open');
+
+  await subDropdown.trigger.space();
+
+  assert.ok(subDropdown.isOpen, 'subdropdown renders after pressing space on the target');
+
+  // tab moves focus to subdropdown container
+  await subDropdown.trigger.tab();
+  await subDropdown.content.escape();
+
+  assert.ok(!subDropdown.isOpen, 'subdropdown removed after pressing escape on the subdropdown container');
+  assert.ok(dropdown.isOpen, 'main dropdown is still open');
+
+  await subDropdown.trigger.enter();
+  await subDropdown.content.enterOnMenuItem();
+
+  assert.ok(!subDropdown.isOpen, 'subdropdown removed after pressing enter on a data-close item');
+  assert.ok(dropdown.isOpen, 'main dropdown is still open');
+});
+
+test('Focusing on hidden focus tracker closes subdropdown', async function(assert) {
+  assert.expect(3);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-dropdown data-test-dropdown=true}}
+        <ul class="ice-dropdown-menu">
+          <li>
+            <a>Foo bar baz
+              {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+                <ul class="ice-dropdown-menu">
+                  <li><button data-test-menu-item data-close>Item</button></li>
+                </ul>
+              {{/ice-sub-dropdown}}
+            </a>
+          </li>
+        </ul>
+      {{/ice-dropdown}}
+    </button>
+  `);
+
+  const dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]',
+        content: {
+          focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
+        }
+      })
+    }
+  }).create();
+
+  const { subDropdown } = dropdown.content;
+
+  await dropdown.open();
+  await subDropdown.open();
+
+  assert.ok(dropdown.isOpen, 'subdropdown is rendered');
+
+  await subDropdown.content.focusHiddenTracker();
+
+  assert.ok(!subDropdown.isOpen, 'subdropdown removed after focusing on hidden focus tracker');
+  assert.ok(dropdown.isOpen, 'main dropdown is still open');
 });

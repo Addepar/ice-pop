@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import PageObject, { clickable, hasClass } from 'ember-classy-page-object';
+import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
 import IcePopoverPage from '@addepar/ice-pop/test-support/pages/ice-popover';
 
@@ -218,4 +218,83 @@ test('popover trigger element has correct aria roles', async function(assert) {
   await popover.close();
 
   assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false when the popover is closed again');
+});
+
+test('popover is keyboard accessible', async function(assert) {
+  assert.expect(6);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+        <button data-close>Close</button>
+      {{/ice-popover}}
+    </button>
+  `);
+
+  const popover = PopoverHelper.extend({
+    trigger: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+    },
+    content: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      enterOnCloseItem: triggerable('keydown', '[data-close]', { eventProperties: { key: 'Enter' } })
+    }
+  }).create();
+
+  assert.ok(!popover.isOpen, 'popover not rendered initially');
+
+  await popover.trigger.enter();
+
+  assert.ok(popover.isOpen, 'popover renders after pressing enter on the target');
+
+  await popover.trigger.escape();
+
+  assert.ok(!popover.isOpen, 'popover removed after pressing escape on the target');
+
+  await popover.trigger.space();
+
+  assert.ok(popover.isOpen, 'popover renders after pressing space on the target');
+
+  // tab moves focus to dropdown container
+  await popover.trigger.tab();
+  await popover.content.escape();
+
+  assert.ok(!popover.isOpen, 'popover removed after pressing escape on the popover container');
+
+  await popover.trigger.enter();
+  await popover.content.enterOnCloseItem();
+
+  assert.ok(!popover.isOpen, 'popover removed after pressing enter on a data-close item');
+});
+
+test('Focusing on hidden focus tracker closes popover', async function(assert) {
+  assert.expect(2);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-popover data-test-popover=true placement="right-start"}}
+        template block text
+      {{/ice-popover}}
+    </button>
+  `);
+
+  const popover = PopoverHelper.extend({
+    content: {
+      focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
+    }
+  }).create();
+
+  await popover.open();
+
+  assert.ok(popover.isOpen, 'popover is rendered');
+
+  await popover.content.focusHiddenTracker();
+
+  assert.ok(!popover.isOpen, 'popover removed after focusing on hidden focus tracker');
 });
