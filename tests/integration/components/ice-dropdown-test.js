@@ -5,7 +5,7 @@ import PageObject, { clickable, hasClass } from 'ember-classy-page-object';
 
 import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
 
-const DropdownHelper = IceDropdownPage.extend({ scope: '[data-test-dropdown]' });
+const DropdownHelper = IceDropdownPage.extend({scope: '[data-test-dropdown]'});
 
 moduleForComponent('ice-dropdown', 'Integration | Component | ice-dropdown', {
   integration: true
@@ -185,4 +185,30 @@ test('dropdown trigger element is marked as active when open', async function(as
   await dropdown.close();
 
   assert.ok(!dropdown.trigger.isActive, 'dropdown trigger is not marked as active when the dropdown is closed again');
+});
+
+test('dropdown trigger element has correct aria roles', async function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    <div>
+      Target
+      {{#ice-dropdown data-test-dropdown=true placement="bottom-end"}}
+        template block text
+      {{/ice-dropdown}}
+    </div>
+  `);
+
+  const dropdown = DropdownHelper.create();
+
+  assert.ok(dropdown.trigger.hasAriaPopup, 'dropdown trigger has aria-haspopup role');
+  assert.equal(dropdown.trigger.isAriaExpanded, 'false', 'dropdown trigger role aria-expanded is false');
+
+  await dropdown.open();
+
+  assert.equal(dropdown.trigger.isAriaExpanded, 'true', 'dropdown trigger role aria-expanded is true when the dropdown is open');
+
+  await dropdown.close();
+
+  assert.equal(dropdown.trigger.isAriaExpanded, 'false', 'dropdown trigger role aria-expanded is false when the dropdown is closed again');
 });

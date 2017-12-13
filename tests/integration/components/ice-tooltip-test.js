@@ -137,3 +137,29 @@ test('tooltip trigger element is marked as active when open', async function(ass
 
   assert.ok(!tooltip.trigger.isActive, 'tooltip trigger is not marked as active when the tooltip is closed again');
 });
+
+test('tooltip trigger element has correct aria roles', async function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    <div>
+      Target
+      {{#ice-tooltip data-test-tooltip=true placement="bottom-end"}}
+        template block text
+      {{/ice-tooltip}}
+    </div>
+  `);
+
+  const tooltip = TooltipHelper.create();
+
+  assert.ok(tooltip.trigger.hasAriaPopup, 'tooltip trigger has aria-haspopup role');
+  assert.equal(tooltip.trigger.isAriaExpanded, 'false', 'tooltip trigger role aria-expanded is false');
+
+  await tooltip.open();
+
+  assert.equal(tooltip.trigger.isAriaExpanded, 'true', 'tooltip trigger role aria-expanded is true when the tooltip is open');
+
+  await tooltip.close();
+
+  assert.equal(tooltip.trigger.isAriaExpanded, 'false', 'tooltip trigger role aria-expanded is false when the tooltip is closed again');
+});

@@ -193,3 +193,29 @@ test('popover trigger element is marked as active when open', async function(ass
 
   assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed again');
 });
+
+test('popover trigger element has correct aria roles', async function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    <div>
+      Target
+      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+        template block text
+      {{/ice-popover}}
+    </div>
+  `);
+
+  const popover = PopoverHelper.create();
+
+  assert.ok(popover.trigger.hasAriaPopup, 'popover trigger has aria-haspopup role');
+  assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false');
+
+  await popover.open();
+
+  assert.equal(popover.trigger.isAriaExpanded, 'true', 'popover trigger role aria-expanded is true when the popover is open');
+
+  await popover.close();
+
+  assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false when the popover is closed again');
+});

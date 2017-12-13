@@ -287,3 +287,49 @@ test('sub dropdown button is active when open', async function(assert) {
 
   assert.ok(subDropdown.trigger.isActive, 'Sub dropdown target list item reflects active class');
 });
+
+test('sub dropdown button has correct aria roles', async function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    <div>
+      Target
+      {{#ice-dropdown data-test-dropdown=true}}
+        <ul class="ice-dropdown-menu">
+          <li>
+            <a>Foo bar baz</a>
+            {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+              <ul class="ice-dropdown-menu">
+                <li><a>Foo bar baz</a></li>
+              </ul>
+            {{/ice-sub-dropdown}}
+          </li>
+        </ul>
+      {{/ice-dropdown}}
+    </div>
+  `);
+
+  const dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]'
+      })
+    }
+  }).create();
+
+  const { subDropdown } = dropdown.content;
+
+  await dropdown.open();
+
+  assert.ok(subDropdown.trigger.hasAriaPopup, 'subdropdown trigger has aria-haspopup role');
+  assert.equal(subDropdown.trigger.isAriaExpanded, 'false', 'subdropdown trigger role aria-expanded is false');
+
+  await subDropdown.open();
+
+  assert.equal(subDropdown.trigger.isAriaExpanded, 'true', 'subdropdown trigger role aria-expanded is true when the subdropdown is open');
+
+  await subDropdown.close();
+
+  assert.equal(subDropdown.trigger.isAriaExpanded, 'false', 'subdropdown trigger role aria-expanded is false when the subdropdown is closed again');
+});
