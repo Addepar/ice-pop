@@ -32,7 +32,7 @@ test('sub dropdown box renders when hovering target list item', async function(a
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -41,7 +41,7 @@ test('sub dropdown box renders when hovering target list item', async function(a
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   assert.ok(!dropdown.isOpen, 'main dropdown not rendered initially');
   assert.ok(!subDropdown.isOpen, 'sub dropdown not rendered initially');
@@ -106,7 +106,7 @@ test('sub dropdown box closes when element outside of sub dropdown is clicked', 
     </div>
   `);
 
-  const content = PageObject.extend({
+  let content = PageObject.extend({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
@@ -120,8 +120,8 @@ test('sub dropdown box closes when element outside of sub dropdown is clicked', 
     })
   }).create();
 
-  const { dropdown } = content;
-  const { subDropdown } = dropdown.content;
+  let { dropdown } = content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
   await subDropdown.open();
@@ -158,7 +158,7 @@ test('clicking inside sub dropdown only closes for certain elements', async func
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -175,7 +175,7 @@ test('clicking inside sub dropdown only closes for certain elements', async func
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
   await subDropdown.open();
@@ -230,7 +230,7 @@ test('sub dropdown direction can be modified', async function(assert) {
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -239,7 +239,7 @@ test('sub dropdown direction can be modified', async function(assert) {
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
   await subDropdown.open();
@@ -268,7 +268,7 @@ test('sub dropdown button is active when open', async function(assert) {
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -277,7 +277,7 @@ test('sub dropdown button is active when open', async function(assert) {
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
 
@@ -310,7 +310,7 @@ test('sub dropdown button has correct aria roles', async function(assert) {
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -319,7 +319,7 @@ test('sub dropdown button has correct aria roles', async function(assert) {
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
 
@@ -357,7 +357,7 @@ test('sub dropdown is keyboard accessible', async function(assert) {
     </button>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -377,7 +377,7 @@ test('sub dropdown is keyboard accessible', async function(assert) {
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
 
@@ -431,7 +431,7 @@ test('Focusing on hidden focus tracker closes subdropdown', async function(asser
     </button>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -443,7 +443,7 @@ test('Focusing on hidden focus tracker closes subdropdown', async function(asser
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
   await subDropdown.open();

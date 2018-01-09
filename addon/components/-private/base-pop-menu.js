@@ -113,7 +113,7 @@ export default class BasePopMenuComponent extends Component {
 
     this._popperClass = `ice-base-pop-menu ${this.class || ''} ${this.classNames.join(' ')}`;
 
-    for (const binding of this.classNameBindings) {
+    for (let binding of this.classNameBindings) {
       if (binding.value) {
         this._popperClass += ` ${binding.value()}`;
       }
@@ -121,8 +121,8 @@ export default class BasePopMenuComponent extends Component {
   }
 
   didInsertElement() {
-    const rootElementSelector = this.get('rootElementSelector');
-    const possibleRootElements = self.document.querySelectorAll(rootElementSelector);
+    let rootElementSelector = this.get('rootElementSelector');
+    let possibleRootElements = self.document.querySelectorAll(rootElementSelector);
 
     assert(
       `ember-popper with popperContainer selector "${rootElementSelector}" found ${possibleRootElements.length} possible containers when there should be exactly 1`,
@@ -281,16 +281,16 @@ export default class BasePopMenuComponent extends Component {
    * When focus is on the trigger, determine specific key actions
    */
   _triggerKeyHandler = (event) => {
-    const keyCode = event.key;
+    let keyCode = event.key;
 
     // Pressing Enter or Space opens the popper
-    if ((keyCode == 'Enter' || keyCode == ' ') && !this.get('isOpen')) {
+    if ((keyCode === 'Enter' || keyCode === ' ') && !this.get('isOpen')) {
       this._openPopoverHandler();
-    } else if ((keyCode == 'Escape' || keyCode == 'Enter') && this.get('isOpen')) {
+    } else if ((keyCode === 'Escape' || keyCode === 'Enter') && this.get('isOpen')) {
       // Close on esc if we never entered the popper
       // (Enter is the same as re-clicking the button)
       this._closePopoverAndFocusTrigger();
-    } else if (keyCode == 'Tab' && this.get('isOpen')) {
+    } else if (keyCode === 'Tab' && this.get('isOpen')) {
       // If the popper is already open and you hit Tab,
       // enter into the popper by focusing on the popper container itself.
       // Primary browser tab action will then tab to the next naturally tabbable
@@ -303,12 +303,12 @@ export default class BasePopMenuComponent extends Component {
    * When focus is inside the popper, determine specific key actions
    */
   _popperKeyHandler = (event) => {
-    const keyCode = event.key;
+    let keyCode = event.key;
 
     // When focus is on a data-close element, pressing Enter should close the popper.
     // Also assumes a trigger (such as a submenu trigger) will not have data-close.
     // Escape also provides a way to close the popper early from any point.
-    if ((keyCode == 'Enter' && event.target.hasAttribute('data-close')) || keyCode == 'Escape') {
+    if ((keyCode === 'Enter' && event.target.hasAttribute('data-close')) || keyCode === 'Escape') {
       this._closePopoverAndFocusTrigger();
     }
   };

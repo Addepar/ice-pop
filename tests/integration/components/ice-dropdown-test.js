@@ -5,7 +5,7 @@ import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-
 
 import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
 
-const DropdownHelper = IceDropdownPage.extend({scope: '[data-test-dropdown]'});
+const DropdownHelper = IceDropdownPage.extend({ scope: '[data-test-dropdown]' });
 
 moduleForComponent('ice-dropdown', 'Integration | Component | ice-dropdown', {
   integration: true
@@ -23,7 +23,7 @@ test('dropdown works', async function(assert) {
     </div>
   `);
 
-  const dropdown = DropdownHelper.create();
+  let dropdown = DropdownHelper.create();
 
   assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
 
@@ -52,7 +52,7 @@ test('dropdown box closes when element outside of dropdown is clicked', async fu
     </div>
   `);
 
-  const content = PageObject.extend({
+  let content = PageObject.extend({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
@@ -85,7 +85,7 @@ test('clicking inside dropdown only closes for certain elements', async function
     </div>
   `);
 
-  const dropdown = DropdownHelper.extend({
+  let dropdown = DropdownHelper.extend({
     content: {
       click: clickable(),
       clickMenuHeader: clickable('[data-test-menu-header]'),
@@ -132,7 +132,7 @@ test('dropdown box modifier class can be added', async function(assert) {
     </div>
   `);
 
-  const dropdown = DropdownHelper.extend({
+  let dropdown = DropdownHelper.extend({
     content: {
       hasAdditionalClass: hasClass('foobar')
     }
@@ -155,7 +155,7 @@ test('dropdown box direction can be modified', async function(assert) {
     </div>
   `);
 
-  const dropdown = DropdownHelper.create();
+  let dropdown = DropdownHelper.create();
 
   await dropdown.open();
 
@@ -174,7 +174,7 @@ test('dropdown trigger element is marked as active when open', async function(as
     </div>
   `);
 
-  const dropdown = DropdownHelper.create();
+  let dropdown = DropdownHelper.create();
 
   assert.ok(!dropdown.trigger.isActive, 'dropdown trigger is not marked as active when the dropdown is closed');
 
@@ -199,7 +199,7 @@ test('dropdown trigger element has correct aria roles', async function(assert) {
     </div>
   `);
 
-  const dropdown = DropdownHelper.create();
+  let dropdown = DropdownHelper.create();
 
   assert.ok(dropdown.trigger.hasAriaPopup, 'dropdown trigger has aria-haspopup role');
   assert.equal(dropdown.trigger.isAriaExpanded, 'false', 'dropdown trigger role aria-expanded is false');
@@ -227,7 +227,7 @@ test('dropdown is keyboard accessible', async function(assert) {
     </button>
   `);
 
-  const dropdown = DropdownHelper.extend({
+  let dropdown = DropdownHelper.extend({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
@@ -281,7 +281,7 @@ test('Focusing on hidden focus tracker closes dropdown', async function(assert) 
     </button>
   `);
 
-  const dropdown = DropdownHelper.extend({
+  let dropdown = DropdownHelper.extend({
     content: {
       focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
     }

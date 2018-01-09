@@ -23,7 +23,7 @@ test('popover works', async function(assert) {
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   assert.ok(!popover.isOpen, 'popover not rendered initially');
 
@@ -52,7 +52,7 @@ test('popover box closes when element outside of popover is clicked', async func
     </div>
   `);
 
-  const content = PageObject.extend({
+  let content = PageObject.extend({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
@@ -82,7 +82,7 @@ test('clicking inside popover only closes for designated elements', async functi
     </div>
   `);
 
-  const popover = PopoverHelper.extend({
+  let popover = PopoverHelper.extend({
     content: {
       click: clickable(),
       clickDisabled: clickable('[disabled]'),
@@ -119,7 +119,7 @@ test('popover box modifier class can be added', async function(assert) {
     </div>
   `);
 
-  const popover = PopoverHelper.extend({
+  let popover = PopoverHelper.extend({
     content: {
       hasAdditionalClass: hasClass('foobar')
     }
@@ -142,7 +142,7 @@ test('popover box direction can be modified', async function(assert) {
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   await popover.open();
 
@@ -161,7 +161,7 @@ test('popover header is rendered when title is passed in', async function(assert
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   await popover.open();
 
@@ -181,7 +181,7 @@ test('popover trigger element is marked as active when open', async function(ass
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed');
 
@@ -206,7 +206,7 @@ test('popover trigger element has correct aria roles', async function(assert) {
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   assert.ok(popover.trigger.hasAriaPopup, 'popover trigger has aria-haspopup role');
   assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false');
@@ -232,7 +232,7 @@ test('popover is keyboard accessible', async function(assert) {
     </button>
   `);
 
-  const popover = PopoverHelper.extend({
+  let popover = PopoverHelper.extend({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
@@ -284,7 +284,7 @@ test('Focusing on hidden focus tracker closes popover', async function(assert) {
     </button>
   `);
 
-  const popover = PopoverHelper.extend({
+  let popover = PopoverHelper.extend({
     content: {
       focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
     }

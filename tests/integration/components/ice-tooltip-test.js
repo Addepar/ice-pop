@@ -25,7 +25,7 @@ test('tooltip works', async function(assert) {
     </div>
   `);
 
-  const tooltip = TooltipHelper.create();
+  let tooltip = TooltipHelper.create();
 
   assert.ok(!tooltip.isOpen, 'tooltip not rendered initially');
 
@@ -51,7 +51,7 @@ test('tooltip remains rendered when tooltip box itself is hovered', async functi
     </div>
   `);
 
-  const tooltip = TooltipHelper.create();
+  let tooltip = TooltipHelper.create();
 
   assert.ok(!tooltip.isOpen, 'tooltip not rendered initially');
 
@@ -83,7 +83,7 @@ test('tooltip box modifier class can be added', async function(assert) {
     </div>
   `);
 
-  const tooltip = TooltipHelper.extend({
+  let tooltip = TooltipHelper.extend({
     content: {
       isErrored: hasClass('error-tooltip')
     }
@@ -106,7 +106,7 @@ test('tooltip box direction can be modified', async function(assert) {
     </div>
   `);
 
-  const tooltip = TooltipHelper.create();
+  let tooltip = TooltipHelper.create();
 
   await tooltip.open();
 
@@ -125,7 +125,7 @@ test('tooltip trigger element is marked as active when open', async function(ass
     </div>
   `);
 
-  const tooltip = TooltipHelper.create();
+  let tooltip = TooltipHelper.create();
 
   assert.ok(!tooltip.trigger.isActive, 'tooltip trigger is not marked as active when the tooltip is closed');
 
@@ -150,7 +150,7 @@ test('tooltip trigger element has correct aria roles', async function(assert) {
     </div>
   `);
 
-  const tooltip = TooltipHelper.create();
+  let tooltip = TooltipHelper.create();
 
   assert.ok(tooltip.trigger.hasAriaPopup, 'tooltip trigger has aria-haspopup role');
   assert.equal(tooltip.trigger.isAriaExpanded, 'false', 'tooltip trigger role aria-expanded is false');
@@ -176,7 +176,7 @@ test('tooltip is keyboard accessible', async function(assert) {
     </button>
   `);
 
-  const tooltip = TooltipHelper.extend({
+  let tooltip = TooltipHelper.extend({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
@@ -215,7 +215,7 @@ test('Focusing on hidden focus tracker closes tooltip', async function(assert) {
     </button>
   `);
 
-  const tooltip = TooltipHelper.extend({
+  let tooltip = TooltipHelper.extend({
     content: {
       focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
     }
