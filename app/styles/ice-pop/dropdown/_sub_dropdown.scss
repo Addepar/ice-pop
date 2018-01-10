@@ -11,22 +11,22 @@
 //     Target text
 //     <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
 //     {{#ice-dropdown}}
-//       <ul class="ice-dropdown-menu" role="menu">
-//         <li role="none">
-//           <button role="menuitem">
+//       <ul class="ice-dropdown-menu">
+//         <li>
+//           <button>
 //             Foo bar baz
 //             <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
 //             {{#ice-sub-dropdown}}
-//               <ul class="ice-dropdown-menu" role="menu">
-//                 <li role="none"><button role="menuitem">Foo bar baz</button></li>
-//                 <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
-//                 <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//               <ul class="ice-dropdown-menu">
+//                 <li><button>Foo bar baz</button></li>
+//                 <li><button>I'm Mr. Meseeks</button></li>
+//                 <li><button>Lorem ipsum</button></li>
 //               </ul>
 //             {{/ice-sub-dropdown}}
 //           </button>
 //         </li>
-//         <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
-//         <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//         <li><button>I'm Mr. Meseeks</button></li>
+//         <li><button>Lorem ipsum</button></li>
 //       </ul>
 //     {{/ice-dropdown}}
 //   </div>
@@ -46,24 +46,24 @@
 //       <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
 //       <div class="ice-dropdown is-visible" x-placement="bottom-start">
 //         <div class="ice-dropdown-content" tabindex="0">
-//           <ul class="ice-dropdown-menu" role="menu">
-//             <li role="none">
-//               <button class="is-active" role="menuitem">
+//           <ul class="ice-dropdown-menu">
+//             <li>
+//               <button class="is-active">
 //                Foo bar baz
 //                 <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
 //                 <div class="ice-dropdown ice-sub-dropdown is-visible" x-placement="right-start">
 //                   <div class="ice-dropdown-content" tabindex="0">
-//                     <ul class="ice-dropdown-menu" role="menu">
-//                       <li role="none"><button role="menuitem">Foo bar baz</button></li>
-//                       <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
-//                       <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//                     <ul class="ice-dropdown-menu">
+//                       <li><button>Foo bar baz</button></li>
+//                       <li><button>I'm Mr. Meseeks</button></li>
+//                       <li><button>Lorem ipsum</button></li>
 //                     </ul>
 //                   </div>
 //                 </div>
 //               </button>
 //             </li>
-//             <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
-//             <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//             <li><button>I'm Mr. Meseeks</button></li>
+//             <li><button>Lorem ipsum</button></li>
 //           </ul>
 //         </div>
 //       </div>

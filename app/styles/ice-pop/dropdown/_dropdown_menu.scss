@@ -11,13 +11,13 @@
 //     Target text
 //     <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
 //     {{#ice-dropdown}}
-//       <ul class="ice-dropdown-menu" role="menu">
-//         <li role="none"><button role="menuitem">Foo bar baz</button></li>
+//       <ul class="ice-dropdown-menu">
+//         <li><button>Foo bar baz</button></li>
 //         <li class="list-group-header" role="heading">Group Header Text</li>
-//         <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
-//         <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//         <li><button>I'm Mr. Meseeks</button></li>
+//         <li><button>Lorem ipsum</button></li>
 //         <li class="list-divider" role="separator"></li>
-//         <li role="none"><button role="menuitem" disabled>I'm disabled</button></li>
+//         <li><button disabled>I'm disabled</button></li>
 //       </ul>
 //     {{/ice-dropdown}}
 //   </div>
@@ -28,10 +28,10 @@
 // but you can instead customize which items have the closable action like this:
 // ```
 // {{#ice-dropdown}}
-//   <ul class="ice-dropdown-menu" role="menu">
-//     <li role="none"><button role="menuitem" data-close>Foo bar baz</button></li>
-//     <li role="none"><button role="menuitem" data-close>I'm Mr. Meseeks</button></li>
-//     <li role="none"><button role="menuitem">Don't close the dropdown here</button></li>
+//   <ul class="ice-dropdown-menu">
+//     <li><button data-close>Foo bar baz</button></li>
+//     <li><button data-close>I'm Mr. Meseeks</button></li>
+//     <li><button>Don't close the dropdown here</button></li>
 //   </ul>
 // {{/ice-dropdown}}
 // ```
@@ -40,11 +40,11 @@
 // Anchor tags should be used for actual links that navigate to a view, or to an external url.
 // ```
 // {{#ice-dropdown}}
-//   <ul class="ice-dropdown-menu" role="menu">
-//     <li role="none"><a href="#foo" role="menuitem">Foo</a></li>
-//     <li role="none"><a href="#bar" role="menuitem">Bar</a></li>
-//     <li role="none"><a href="#baz" role="menuitem">Baz</a></li>
-//     <li role="none"><a href="#nowhere" role="menuitem" tabindex="-1" disabled>Disabled</a></li>
+//   <ul class="ice-dropdown-menu">
+//     <li><a href="#foo">Foo</a></li>
+//     <li><a href="#bar">Bar</a></li>
+//     <li><a href="#baz">Baz</a></li>
+//     <li><a href="#nowhere" tabindex="-1" disabled>Disabled</a></li>
 //   </ul>
 // {{/ice-dropdown}}
 // ```
@@ -59,13 +59,13 @@
 //     </div>
 //     <div class="ice-dropdown is-visible" x-placement="bottom-start">
 //       <div class="ice-dropdown-content" tabindex="0">
-//         <ul class="ice-dropdown-menu" role="menu">
-//           <li role="none"><button role="menuitem">Foo bar baz</button></li>
+//         <ul class="ice-dropdown-menu">
+//           <li><button>Foo bar baz</button></li>
 //           <li class="list-group-header" role="heading">Group Header Text</li>
-//           <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
-//           <li role="none"><button role="menuitem">Lorem ipsum</button></li>
+//           <li><button>I'm Mr. Meseeks</button></li>
+//           <li><button>Lorem ipsum</button></li>
 //           <li class="list-divider" role="separator"></li>
-//           <li role="none"><button role="menuitem" disabled>I'm disabled</button></li>
+//           <li><button disabled>I'm disabled</button></li>
 //         </ul>
 //       </div>
 //     </div>

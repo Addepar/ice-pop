@@ -11,13 +11,13 @@ import IceDropdownComponent from './ice-dropdown';
  * {{#ice-dropdown}}
  *   <ul class="ice-dropdown-menu">
  *     <li>
- *       <a>Foo bar baz</a>
- *       <i class="fa fa-caret-down ice-dropdown-caret"></i>
+ *       <button>Foo bar baz</button>
+ *       <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
  *       {{#ice-sub-dropdown}}
  *         <ul class="ice-dropdown-menu">
- *           <li><a>Foo bar baz</a></li>
- *           <li><a>I'm Mr. Meseeks</a></li>
- *           <li><a>Lorem ipsum</a></li>
+ *           <li><button>Foo bar baz</button></li>
+ *           <li><button>I'm Mr. Meseeks</button></li>
+ *           <li><button>Lorem ipsum</button></li>
  *         </ul>
  *       {{/ice-sub-dropdown}}
  *     </li>
