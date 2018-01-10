@@ -12,10 +12,10 @@
 //     <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
 //     {{#ice-dropdown}}
 //       <ul class="ice-dropdown-menu" role="menu">
-//         <li role="none"><button {{action 'foo'}} role="menuitem">Foo bar baz</button></li>
+//         <li role="none"><button role="menuitem">Foo bar baz</button></li>
 //         <li class="list-group-header" role="heading">Group Header Text</li>
-//         <li role="none"><button {{action 'bar'}} role="menuitem">I'm Mr. Meseeks</button></li>
-//         <li role="none"><button {{action 'baz'}} role="menuitem">Lorem ipsum</button></li>
+//         <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
+//         <li role="none"><button role="menuitem">Lorem ipsum</button></li>
 //         <li class="list-divider" role="separator"></li>
 //         <li role="none"><button role="menuitem" disabled>I'm disabled</button></li>
 //       </ul>
@@ -29,9 +29,9 @@
 // ```
 // {{#ice-dropdown}}
 //   <ul class="ice-dropdown-menu" role="menu">
-//     <li role="none"><button {{action 'foo'}} role="menuitem" data-close>Foo bar baz</button></li>
-//     <li role="none"><button {{action 'bar'}} role="menuitem" data-close>I'm Mr. Meseeks</button></li>
-//     <li role="none"><button {{action 'baz'}} role="menuitem">Don't close the dropdown here</button></li>
+//     <li role="none"><button role="menuitem" data-close>Foo bar baz</button></li>
+//     <li role="none"><button role="menuitem" data-close>I'm Mr. Meseeks</button></li>
+//     <li role="none"><button role="menuitem">Don't close the dropdown here</button></li>
 //   </ul>
 // {{/ice-dropdown}}
 // ```
@@ -60,10 +60,10 @@
 //     <div class="ice-dropdown is-visible" x-placement="bottom-start">
 //       <div class="ice-dropdown-content" tabindex="0">
 //         <ul class="ice-dropdown-menu" role="menu">
-//           <li role="none"><button {{action 'foo'}} role="menuitem">Foo bar baz</button></li>
+//           <li role="none"><button role="menuitem">Foo bar baz</button></li>
 //           <li class="list-group-header" role="heading">Group Header Text</li>
-//           <li role="none"><button {{action 'bar'}} role="menuitem">I'm Mr. Meseeks</button></li>
-//           <li role="none"><button {{action 'baz'}} role="menuitem">Lorem ipsum</button></li>
+//           <li role="none"><button role="menuitem">I'm Mr. Meseeks</button></li>
+//           <li role="none"><button role="menuitem">Lorem ipsum</button></li>
 //           <li class="list-divider" role="separator"></li>
 //           <li role="none"><button role="menuitem" disabled>I'm disabled</button></li>
 //         </ul>
