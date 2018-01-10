@@ -1,8 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import { hasClass } from 'ember-classy-page-object';
-
 import IceTooltipIconPage from '@addepar/ice-pop/test-support/pages/ice-tooltip-icon';
 
 const IconHelper = IceTooltipIconPage.extend({ scope: '[data-test-tooltip-icon]' });
@@ -71,17 +69,11 @@ test('tooltip box modifier class can be added', async function(assert) {
     {{/ice-tooltip-icon}}
   `);
 
-  let icon = IconHelper.extend({
-    tooltip: {
-      content: {
-        isErrored: hasClass('error-tooltip')
-      }
-    }
-  }).create();
+  let icon = IconHelper.create();
 
   await icon.tooltip.open();
 
-  assert.ok(icon.tooltip.content.isErrored, 'tooltip box reflects additional class');
+  assert.ok(icon.tooltip.content.hasClass('error-tooltip'), 'tooltip box reflects additional class');
 });
 
 test('tooltip box direction can be modified', async function(assert) {
