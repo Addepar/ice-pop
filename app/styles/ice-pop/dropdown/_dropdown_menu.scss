@@ -114,8 +114,7 @@
       text-decoration: none;
       cursor: pointer;
 
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: $ice-dropdown-item-hover-bg-color;
       }
 

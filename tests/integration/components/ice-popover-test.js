@@ -271,30 +271,3 @@ test('popover is keyboard accessible', async function(assert) {
 
   assert.ok(!popover.isOpen, 'popover removed after pressing enter on a data-close item');
 });
-
-test('Focusing on hidden focus tracker closes popover', async function(assert) {
-  assert.expect(2);
-
-  this.render(hbs`
-    <button>
-      Target
-      {{#ice-popover data-test-popover=true placement="right-start"}}
-        template block text
-      {{/ice-popover}}
-    </button>
-  `);
-
-  let popover = PopoverHelper.extend({
-    content: {
-      focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
-    }
-  }).create();
-
-  await popover.open();
-
-  assert.ok(popover.isOpen, 'popover is rendered');
-
-  await popover.content.focusHiddenTracker();
-
-  assert.ok(!popover.isOpen, 'popover removed after focusing on hidden focus tracker');
-});

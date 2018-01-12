@@ -235,7 +235,6 @@ test('dropdown is keyboard accessible', async function(assert) {
       space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
     },
     content: {
-      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
       enterOnMenuItem: triggerable('keydown', '[data-test-menu-item]', { eventProperties: { key: 'Enter' } })
     }
@@ -255,8 +254,6 @@ test('dropdown is keyboard accessible', async function(assert) {
 
   assert.ok(dropdown.isOpen, 'dropdown renders after pressing space on the target');
 
-  // tab moves focus to dropdown container
-  await dropdown.trigger.tab();
   await dropdown.content.escape();
 
   assert.ok(!dropdown.isOpen, 'dropdown removed after pressing escape on the dropdown container');
@@ -265,33 +262,4 @@ test('dropdown is keyboard accessible', async function(assert) {
   await dropdown.content.enterOnMenuItem();
 
   assert.ok(!dropdown.isOpen, 'dropdown removed after pressing enter on a data-close item');
-});
-
-test('Focusing on hidden focus tracker closes dropdown', async function(assert) {
-  assert.expect(2);
-
-  this.render(hbs`
-    <button>
-      Target
-      {{#ice-dropdown data-test-dropdown=true placement="right-start"}}
-        <ul class="ice-dropdown-menu">
-          <li><button data-test-menu-item data-close>Item</button></li>
-        </ul>
-      {{/ice-dropdown}}
-    </button>
-  `);
-
-  let dropdown = DropdownHelper.extend({
-    content: {
-      focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
-    }
-  }).create();
-
-  await dropdown.open();
-
-  assert.ok(dropdown.isOpen, 'dropdown is rendered');
-
-  await dropdown.content.focusHiddenTracker();
-
-  assert.ok(!dropdown.isOpen, 'dropdown removed after focusing on hidden focus tracker');
 });

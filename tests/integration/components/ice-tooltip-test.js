@@ -165,7 +165,7 @@ test('tooltip trigger element has correct aria roles', async function(assert) {
 });
 
 test('tooltip is keyboard accessible', async function(assert) {
-  assert.expect(4);
+  assert.expect(3);
 
   this.render(hbs`
     <button>
@@ -178,54 +178,18 @@ test('tooltip is keyboard accessible', async function(assert) {
 
   let tooltip = TooltipHelper.extend({
     trigger: {
-      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
-      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
-      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
-    },
-    content: {
-      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
-      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } })
+      focus: triggerable('focus'),
+      blur: triggerable('blur')
     }
   }).create();
 
   assert.ok(!tooltip.isOpen, 'tooltip not rendered initially');
 
-  await tooltip.trigger.enter();
+  await tooltip.trigger.focus();
 
-  assert.ok(tooltip.isOpen, 'tooltip renders after pressing enter on the target');
+  assert.ok(tooltip.isOpen, 'tooltip renders after focusing on the target');
 
-  await tooltip.trigger.escape();
+  await tooltip.trigger.blur();
 
-  assert.ok(!tooltip.isOpen, 'tooltip removed after pressing escape on the target');
-
-  await tooltip.trigger.space();
-
-  assert.ok(tooltip.isOpen, 'tooltip renders after pressing space on the target');
-});
-
-test('Focusing on hidden focus tracker closes tooltip', async function(assert) {
-  assert.expect(2);
-
-  this.render(hbs`
-    <button>
-      Target
-      {{#ice-tooltip data-test-tooltip=true placement="bottom-end"}}
-        template block text
-      {{/ice-tooltip}}
-    </button>
-  `);
-
-  let tooltip = TooltipHelper.extend({
-    content: {
-      focusHiddenTracker: triggerable('focus', '[data-test-focus-tracker]')
-    }
-  }).create();
-
-  await tooltip.open();
-
-  assert.ok(tooltip.isOpen, 'tooltip is rendered');
-
-  await tooltip.content.focusHiddenTracker();
-
-  assert.ok(!tooltip.isOpen, 'tooltip removed after focusing on hidden focus tracker');
+  assert.ok(!tooltip.isOpen, 'tooltip removed after unfocusing of the target');
 });
