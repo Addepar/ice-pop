@@ -81,17 +81,17 @@ $popover-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'verti
 .ice-popover.has-title {
   // When the arrow position is at the top (tooltip placement being bottom),
   // its always touching the title header
-  &[x-placement^="bottom"] {
+  &[x-placement^='bottom'] {
     @include update-arrow-color('bottom', $ice-popover-title-background-color, $ice-popover-border-color);
   }
 
   // When the arrow placement is at the top right
-  &[x-placement="left-start"] {
+  &[x-placement='left-start'] {
     @include update-arrow-color('left', $ice-popover-title-background-color, $ice-popover-border-color);
   }
 
   // When the arrow placement is at top left
-  &[x-placement="right-start"] {
+  &[x-placement='right-start'] {
     @include update-arrow-color('right', $ice-popover-title-background-color, $ice-popover-border-color);
   }
 }
