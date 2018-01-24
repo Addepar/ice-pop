@@ -14,7 +14,7 @@ import { scheduler as raf, Token } from 'ember-raf-scheduler';
 import layout from '../../templates/components/animated-popper';
 
 function hasTransition(element) {
-  const { transitionDuration } = window.getComputedStyle(element);
+  let { transitionDuration } = window.getComputedStyle(element);
 
   return parseFloat(transitionDuration) > 0;
 }

@@ -2,7 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { triggerEvent } from 'ember-native-dom-helpers';
 
-import PageObject, { clickable } from 'ember-classy-page-object';
+import PageObject, { clickable, triggerable } from 'ember-classy-page-object';
 
 import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
 import IceSubDropdownPage from '@addepar/ice-pop/test-support/pages/ice-sub-dropdown';
@@ -32,7 +32,7 @@ test('sub dropdown box renders when hovering target list item', async function(a
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -41,7 +41,7 @@ test('sub dropdown box renders when hovering target list item', async function(a
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   assert.ok(!dropdown.isOpen, 'main dropdown not rendered initially');
   assert.ok(!subDropdown.isOpen, 'sub dropdown not rendered initially');
@@ -106,7 +106,7 @@ test('sub dropdown box closes when element outside of sub dropdown is clicked', 
     </div>
   `);
 
-  const content = PageObject.extend({
+  let content = PageObject.extend({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
@@ -120,8 +120,8 @@ test('sub dropdown box closes when element outside of sub dropdown is clicked', 
     })
   }).create();
 
-  const { dropdown } = content;
-  const { subDropdown } = dropdown.content;
+  let { dropdown } = content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
   await subDropdown.open();
@@ -158,7 +158,7 @@ test('clicking inside sub dropdown only closes for certain elements', async func
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -175,7 +175,7 @@ test('clicking inside sub dropdown only closes for certain elements', async func
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
   await subDropdown.open();
@@ -230,7 +230,7 @@ test('sub dropdown direction can be modified', async function(assert) {
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -239,7 +239,7 @@ test('sub dropdown direction can be modified', async function(assert) {
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
   await subDropdown.open();
@@ -268,7 +268,7 @@ test('sub dropdown button is active when open', async function(assert) {
     </div>
   `);
 
-  const dropdown = IceDropdownPage.extend({
+  let dropdown = IceDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: IceSubDropdownPage.extend({
@@ -277,7 +277,7 @@ test('sub dropdown button is active when open', async function(assert) {
     }
   }).create();
 
-  const { subDropdown } = dropdown.content;
+  let { subDropdown } = dropdown.content;
 
   await dropdown.open();
 
@@ -286,4 +286,112 @@ test('sub dropdown button is active when open', async function(assert) {
   await subDropdown.open();
 
   assert.ok(subDropdown.trigger.isActive, 'Sub dropdown target list item reflects active class');
+});
+
+test('sub dropdown button has correct aria roles', async function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    <div>
+      Target
+      {{#ice-dropdown data-test-dropdown=true}}
+        <ul class="ice-dropdown-menu">
+          <li>
+            <a>Foo bar baz
+              {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+                <ul class="ice-dropdown-menu">
+                  <li><a>Foo bar baz</a></li>
+                </ul>
+              {{/ice-sub-dropdown}}
+            </a>
+          </li>
+        </ul>
+      {{/ice-dropdown}}
+    </div>
+  `);
+
+  let dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]'
+      })
+    }
+  }).create();
+
+  let { subDropdown } = dropdown.content;
+
+  await dropdown.open();
+
+  assert.ok(subDropdown.trigger.hasAriaPopup, 'subdropdown trigger has aria-haspopup role');
+  assert.equal(subDropdown.trigger.isAriaExpanded, 'false', 'subdropdown trigger role aria-expanded is false');
+
+  await subDropdown.open();
+
+  assert.equal(subDropdown.trigger.isAriaExpanded, 'true', 'subdropdown trigger role aria-expanded is true when the subdropdown is open');
+
+  await subDropdown.close();
+
+  assert.equal(subDropdown.trigger.isAriaExpanded, 'false', 'subdropdown trigger role aria-expanded is false when the subdropdown is closed again');
+});
+
+test('sub dropdown is keyboard accessible', async function(assert) {
+  assert.expect(5);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-dropdown data-test-dropdown=true}}
+        <ul class="ice-dropdown-menu">
+          <li>
+            <a>Foo bar baz
+              {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+                <ul class="ice-dropdown-menu">
+                  <li><button data-test-menu-item data-close>Item</button></li>
+                </ul>
+              {{/ice-sub-dropdown}}
+            </a>
+          </li>
+        </ul>
+      {{/ice-dropdown}}
+    </button>
+  `);
+
+  let dropdown = IceDropdownPage.extend({
+    scope: '[data-test-dropdown]',
+    content: {
+      subDropdown: IceSubDropdownPage.extend({
+        scope: '[data-test-sub-dropdown]',
+        trigger: {
+          focus: triggerable('focus'),
+          blur: triggerable('blur')
+        },
+        content: {
+          escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+          enterOnMenuItem: triggerable('keydown', '[data-test-menu-item]', { eventProperties: { key: 'Enter' } })
+        }
+      })
+    }
+  }).create();
+
+  let { subDropdown } = dropdown.content;
+
+  assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
+
+  await dropdown.open();
+  await subDropdown.trigger.focus();
+
+  assert.ok(subDropdown.isOpen, 'subdropdown renders after focusing on the target');
+
+  await subDropdown.content.escape();
+
+  assert.ok(!subDropdown.isOpen, 'subdropdown removed after pressing escape on the subdropdown container');
+  assert.ok(dropdown.isOpen, 'main dropdown is still open');
+
+  await subDropdown.trigger.focus();
+  await subDropdown.content.enterOnMenuItem();
+
+  assert.ok(!subDropdown.isOpen, 'subdropdown removed after pressing enter on a data-close item');
+  // TODO: this assertion needs to be added back in when this bug is fixed
+  // assert.ok(!dropdown.isOpen, 'main dropdown also closes');
 });

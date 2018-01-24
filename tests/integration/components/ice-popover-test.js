@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import PageObject, { clickable, hasClass } from 'ember-classy-page-object';
+import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
 import IcePopoverPage from '@addepar/ice-pop/test-support/pages/ice-popover';
 
@@ -23,7 +23,7 @@ test('popover works', async function(assert) {
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   assert.ok(!popover.isOpen, 'popover not rendered initially');
 
@@ -52,7 +52,7 @@ test('popover box closes when element outside of popover is clicked', async func
     </div>
   `);
 
-  const content = PageObject.extend({
+  let content = PageObject.extend({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
@@ -82,7 +82,7 @@ test('clicking inside popover only closes for designated elements', async functi
     </div>
   `);
 
-  const popover = PopoverHelper.extend({
+  let popover = PopoverHelper.extend({
     content: {
       click: clickable(),
       clickDisabled: clickable('[disabled]'),
@@ -119,7 +119,7 @@ test('popover box modifier class can be added', async function(assert) {
     </div>
   `);
 
-  const popover = PopoverHelper.extend({
+  let popover = PopoverHelper.extend({
     content: {
       hasAdditionalClass: hasClass('foobar')
     }
@@ -142,7 +142,7 @@ test('popover box direction can be modified', async function(assert) {
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   await popover.open();
 
@@ -161,7 +161,7 @@ test('popover header is rendered when title is passed in', async function(assert
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   await popover.open();
 
@@ -181,7 +181,7 @@ test('popover trigger element is marked as active when open', async function(ass
     </div>
   `);
 
-  const popover = PopoverHelper.create();
+  let popover = PopoverHelper.create();
 
   assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed');
 
@@ -192,4 +192,82 @@ test('popover trigger element is marked as active when open', async function(ass
   await popover.close();
 
   assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed again');
+});
+
+test('popover trigger element has correct aria roles', async function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    <div>
+      Target
+      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+        template block text
+      {{/ice-popover}}
+    </div>
+  `);
+
+  let popover = PopoverHelper.create();
+
+  assert.ok(popover.trigger.hasAriaPopup, 'popover trigger has aria-haspopup role');
+  assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false');
+
+  await popover.open();
+
+  assert.equal(popover.trigger.isAriaExpanded, 'true', 'popover trigger role aria-expanded is true when the popover is open');
+
+  await popover.close();
+
+  assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false when the popover is closed again');
+});
+
+test('popover is keyboard accessible', async function(assert) {
+  assert.expect(6);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+        <button data-close>Close</button>
+      {{/ice-popover}}
+    </button>
+  `);
+
+  let popover = PopoverHelper.extend({
+    trigger: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+    },
+    content: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      enterOnCloseItem: triggerable('keydown', '[data-close]', { eventProperties: { key: 'Enter' } })
+    }
+  }).create();
+
+  assert.ok(!popover.isOpen, 'popover not rendered initially');
+
+  await popover.trigger.enter();
+
+  assert.ok(popover.isOpen, 'popover renders after pressing enter on the target');
+
+  await popover.trigger.escape();
+
+  assert.ok(!popover.isOpen, 'popover removed after pressing escape on the target');
+
+  await popover.trigger.space();
+
+  assert.ok(popover.isOpen, 'popover renders after pressing space on the target');
+
+  // tab moves focus to dropdown container
+  await popover.trigger.tab();
+  await popover.content.escape();
+
+  assert.ok(!popover.isOpen, 'popover removed after pressing escape on the popover container');
+
+  await popover.trigger.enter();
+  await popover.content.enterOnCloseItem();
+
+  assert.ok(!popover.isOpen, 'popover removed after pressing enter on a data-close item');
 });

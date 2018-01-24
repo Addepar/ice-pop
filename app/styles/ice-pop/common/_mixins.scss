@@ -212,14 +212,14 @@
       @if $box-placement == 'top' { $arrow-placement: 'bottom'; }
       @if $box-placement == 'bottom' { $arrow-placement: 'top'; }
 
-      &[x-placement^="#{$box-placement}"] {
+      &[x-placement^='#{$box-placement}'] {
         margin-#{$arrow-placement}: $arrow-size;
 
         .popper-arrow {
+          @extend %#{$name}-#{$direction}-presets;
           border-#{$arrow-placement}-width: 0;
           border-#{$arrow-placement}-color: transparent;
           #{$arrow-placement}: -$arrow-size;
-          @extend %#{$name}-#{$direction}-presets;
 
           @if $has-border {
             &::before {
@@ -445,6 +445,6 @@
   }
 
   box-shadow: 0 0 $spread $color,
-              $side-1 $spread $color,
-              $side-2 $spread $color;
+  $side-1 $spread $color,
+  $side-2 $spread $color;
 }

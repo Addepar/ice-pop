@@ -294,12 +294,39 @@
       {{#ice-popover}}
         <div class="ice-popover-body">
           <p>This is a popover!</p>
-          <button data-popover-close>Close Me</button>
-          <button data-popover-close>Close Me Too</button>
+          <button data-close>Close Me</button>
+          <button data-close disabled>Do Nothing</button>
+          <button data-close>Close Me Too</button>
         </div>
       {{/ice-popover}}
     </button>
   </div>
+  <div class="demo-item">
+    <button class="button-default popover-target">
+      Form
+      {{#ice-popover class="foobar"}}
+        <div class="ice-popover-body">
+          <p>Form with lots of elements</p>
+          <input type="text" /><br />
+          <input type="checkbox" /><br />
+          <input type="radio" /><br />
+          <input type="time" /><br />
+          <input type="range" /><br />
+          <textarea>Foo bar baz</textarea><br />
+          <a href="#">A link</a><br />
+          <select name="select">
+            <option value="value1">Value 1</option>
+            <option value="value2" selected>Value 2</option>
+            <option value="value3">Value 3</option>
+          </select><br />
+          <button data-close>Submit Me</button>
+          <button data-close disabled>Do Nothing</button>
+          <button data-close>Close Me Too</button>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
+
 </div>
 
 <div class="info-text">Misc</div>
@@ -314,4 +341,15 @@
       {{/ice-popover}}
     </button>
   </div>
+  <div class="demo-item">
+    <button class="button-default popover-target">
+      Custom class
+      {{#ice-popover}}
+        <div class="ice-popover-body">
+          <p>A popover with just text in it, no focusable items.</p>
+        </div>
+      {{/ice-popover}}
+    </button>
+  </div>
 </div>
+

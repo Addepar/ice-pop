@@ -51,7 +51,11 @@ export default PageObject.extend({
     /**
      * Returns whether or not the trigger has been marked as active
      */
-    isActive: hasClass('is-active')
+    isActive: hasClass('is-active'),
+
+    hasAriaPopup: attribute('aria-haspopup'),
+
+    isAriaExpanded: attribute('aria-expanded')
   },
 
   /**

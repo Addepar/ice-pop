@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import PageObject, { clickable, hasClass } from 'ember-classy-page-object';
+import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
 import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
 
@@ -23,7 +23,7 @@ test('dropdown works', async function(assert) {
     </div>
   `);
 
-  const dropdown = DropdownHelper.create();
+  let dropdown = DropdownHelper.create();
 
   assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
 
@@ -52,7 +52,7 @@ test('dropdown box closes when element outside of dropdown is clicked', async fu
     </div>
   `);
 
-  const content = PageObject.extend({
+  let content = PageObject.extend({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
@@ -85,7 +85,7 @@ test('clicking inside dropdown only closes for certain elements', async function
     </div>
   `);
 
-  const dropdown = DropdownHelper.extend({
+  let dropdown = DropdownHelper.extend({
     content: {
       click: clickable(),
       clickMenuHeader: clickable('[data-test-menu-header]'),
@@ -132,7 +132,7 @@ test('dropdown box modifier class can be added', async function(assert) {
     </div>
   `);
 
-  const dropdown = DropdownHelper.extend({
+  let dropdown = DropdownHelper.extend({
     content: {
       hasAdditionalClass: hasClass('foobar')
     }
@@ -155,7 +155,7 @@ test('dropdown box direction can be modified', async function(assert) {
     </div>
   `);
 
-  const dropdown = DropdownHelper.create();
+  let dropdown = DropdownHelper.create();
 
   await dropdown.open();
 
@@ -174,7 +174,7 @@ test('dropdown trigger element is marked as active when open', async function(as
     </div>
   `);
 
-  const dropdown = DropdownHelper.create();
+  let dropdown = DropdownHelper.create();
 
   assert.ok(!dropdown.trigger.isActive, 'dropdown trigger is not marked as active when the dropdown is closed');
 
@@ -185,4 +185,81 @@ test('dropdown trigger element is marked as active when open', async function(as
   await dropdown.close();
 
   assert.ok(!dropdown.trigger.isActive, 'dropdown trigger is not marked as active when the dropdown is closed again');
+});
+
+test('dropdown trigger element has correct aria roles', async function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    <div>
+      Target
+      {{#ice-dropdown data-test-dropdown=true placement="bottom-end"}}
+        template block text
+      {{/ice-dropdown}}
+    </div>
+  `);
+
+  let dropdown = DropdownHelper.create();
+
+  assert.ok(dropdown.trigger.hasAriaPopup, 'dropdown trigger has aria-haspopup role');
+  assert.equal(dropdown.trigger.isAriaExpanded, 'false', 'dropdown trigger role aria-expanded is false');
+
+  await dropdown.open();
+
+  assert.equal(dropdown.trigger.isAriaExpanded, 'true', 'dropdown trigger role aria-expanded is true when the dropdown is open');
+
+  await dropdown.close();
+
+  assert.equal(dropdown.trigger.isAriaExpanded, 'false', 'dropdown trigger role aria-expanded is false when the dropdown is closed again');
+});
+
+test('dropdown is keyboard accessible', async function(assert) {
+  assert.expect(6);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-dropdown data-test-dropdown=true placement="right-start"}}
+        <ul class="ice-dropdown-menu">
+          <li><button data-test-menu-item data-close>Item</button></li>
+        </ul>
+      {{/ice-dropdown}}
+    </button>
+  `);
+
+  let dropdown = DropdownHelper.extend({
+    trigger: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+    },
+    content: {
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      enterOnMenuItem: triggerable('keydown', '[data-test-menu-item]', { eventProperties: { key: 'Enter' } })
+    }
+  }).create();
+
+  assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
+
+  await dropdown.trigger.enter();
+
+  assert.ok(dropdown.isOpen, 'dropdown renders after pressing enter on the target');
+
+  await dropdown.trigger.escape();
+
+  assert.ok(!dropdown.isOpen, 'dropdown removed after pressing escape on the target');
+
+  await dropdown.trigger.space();
+
+  assert.ok(dropdown.isOpen, 'dropdown renders after pressing space on the target');
+
+  await dropdown.content.escape();
+
+  assert.ok(!dropdown.isOpen, 'dropdown removed after pressing escape on the dropdown container');
+
+  await dropdown.trigger.enter();
+  await dropdown.content.enterOnMenuItem();
+
+  assert.ok(!dropdown.isOpen, 'dropdown removed after pressing enter on a data-close item');
 });

@@ -11,19 +11,22 @@
 // ```
 //
 // #### Important
-// Note that dropdowns are an offical Ember addon in ice-pop,
+// Note that dropdowns are an official Ember addon in ice-pop,
 // so please do not use the below example HTML directly.
 // Please use the Ember component instead.
 // [See Ice Dropdown Docs >>](/docs/ice-pop/class/addon/components/ice-dropdown.js~IceDropdown.html)
 //
 // Markup:
 // <div class="ice-dropdown is-visible [modifier-class]" x-placement="left-start">
-//   <div class="ice-dropdown-content">
+//   <div class="ice-dropdown-content" tabindex="0">
 //     Menu
 //   </div>
 // </div>
 //
 // Styleguide Ice Pop - Ice Dropdown
+
+// Common ice-pop styles
+@import '../common/core';
 
 .ice-dropdown {
   position: absolute;
