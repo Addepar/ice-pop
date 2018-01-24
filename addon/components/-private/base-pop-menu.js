@@ -189,6 +189,38 @@ export default class BasePopMenuComponent extends Component {
   }
 
   /**
+   * Closes the popover and focuses back on the trigger
+   */
+  _closePopoverAndFocusTrigger() {
+    this._triggerElement.focus();
+    this._closePopoverHandler();
+  };
+
+  /**
+   * Maintains a determinable list of elements that are focusable.
+   * Makes a query for elements that match that list
+   * TODO: Make this a global helper?
+   * @return {Array} list of focusable elements
+   */
+  _getFocusableElementsInPopper() {
+    let focusableSelectors = 'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
+    let focusableElements = this._popperElement.querySelectorAll(focusableSelectors);
+    return focusableElements;
+  };
+
+  /**
+   * Gets the list of focusable elements in the popper, focuses on the first one.
+   * Makes sure there is actually something to focus on.
+   * TODO: Make this a global helper?
+   */
+  _focusOnFirstFocusableElement() {
+    let focusableElements = this._getFocusableElementsInPopper();
+    if (focusableElements.length > 0) {
+      focusableElements[0].focus();
+    }
+  };
+
+  /**
    * Triggers when the popover has entered the DOM and the API has been established,
    * allowing us to add data attributes and event handlers and mark the trigger as active
    *
@@ -215,6 +247,7 @@ export default class BasePopMenuComponent extends Component {
       this._focusOnFirstFocusableElement();
     }, this._token);
   }
+
 
   /**
    * Triggers when the popover has been fully removed from the DOM (e.g. after animations)
@@ -273,13 +306,6 @@ export default class BasePopMenuComponent extends Component {
     }
   };
 
-  /**
-   * Closes the popover and focuses back on the trigger
-   */
-  _closePopoverAndFocusTrigger = () => {
-    this._triggerElement.focus();
-    this._closePopoverHandler();
-  };
 
   /**
    * Handles a click on the body in general when a popover is open. If the clicked element is not
@@ -357,30 +383,6 @@ export default class BasePopMenuComponent extends Component {
       // The browser will execute the focus on the trigger first, then the shift+tab event
       // will execute, thus naturally landing on the previous tabbable item in the DOM before the trigger.
       this._closePopoverAndFocusTrigger();
-    }
-  };
-
-  /**
-   * Maintains a determinable list of elements that are focusable.
-   * Makes a query for elements that match that list
-   * TODO: Make this a global helper?
-   * @return {Array} list of focusable elements
-   */
-  _getFocusableElementsInPopper = () => {
-    let focusableSelectors = 'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
-    let focusableElements = this._popperElement.querySelectorAll(focusableSelectors);
-    return focusableElements;
-  };
-
-  /**
-   * Gets the list of focusable elements in the popper, focuses on the first one.
-   * Makes sure there is actually something to focus on.
-   * TODO: Make this a global helper?
-   */
-  _focusOnFirstFocusableElement = () => {
-    let focusableElements = this._getFocusableElementsInPopper();
-    if (focusableElements.length > 0) {
-      focusableElements[0].focus();
     }
   };
 }
