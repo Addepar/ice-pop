@@ -194,7 +194,7 @@ export default class BasePopMenuComponent extends Component {
   _closePopoverAndFocusTrigger() {
     this._triggerElement.focus();
     this._closePopoverHandler();
-  };
+  }
 
   /**
    * Maintains a determinable list of elements that are focusable.
@@ -206,7 +206,7 @@ export default class BasePopMenuComponent extends Component {
     let focusableSelectors = 'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
     let focusableElements = this._popperElement.querySelectorAll(focusableSelectors);
     return focusableElements;
-  };
+  }
 
   /**
    * Gets the list of focusable elements in the popper, focuses on the first one.
@@ -218,7 +218,7 @@ export default class BasePopMenuComponent extends Component {
     if (focusableElements.length > 0) {
       focusableElements[0].focus();
     }
-  };
+  }
 
   /**
    * Triggers when the popover has entered the DOM and the API has been established,
