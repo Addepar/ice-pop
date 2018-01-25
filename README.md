@@ -1,6 +1,6 @@
 # ice-pop
 
-This README outlines the details of collaborating on this Ember addon.
+Ember Addons for popping things up. This includes popovers, dropdowns, and tooltips.
 
 ## Installation
 
