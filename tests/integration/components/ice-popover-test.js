@@ -271,3 +271,47 @@ test('popover is keyboard accessible', async function(assert) {
 
   assert.ok(!popover.isOpen, 'popover removed after pressing enter on a data-close item');
 });
+
+test('First item autofocuses when opened by keyboard only', async function(assert) {
+  assert.expect(6);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+        <button data-test-button data-close>Close</button>
+        <button>Foo</button>
+      {{/ice-popover}}
+    </button>
+  `);
+
+  let popover = PopoverHelper.extend({
+    trigger: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+    },
+    content: {
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      buttonWithFocus: {
+        scope: '[data-test-button]:focus'
+      }
+    }
+  }).create();
+
+  await popover.trigger.enter();
+
+  assert.ok(popover.isOpen, 'popover rendered on enter');
+  assert.ok(popover.content.buttonWithFocus.isPresent, 'first button has focus');
+
+  await popover.content.escape();
+  await popover.trigger.space();
+
+  assert.ok(popover.isOpen, 'popover rendered on space');
+  assert.ok(popover.content.buttonWithFocus.isPresent, 'first button has focus');
+
+  await popover.content.escape();
+  await popover.open();
+
+  assert.ok(popover.isOpen, 'popover rendered on click');
+  assert.ok(!popover.content.buttonWithFocus.isPresent, 'first button does not have focus');
+});
