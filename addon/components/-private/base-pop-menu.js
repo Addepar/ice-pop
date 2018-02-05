@@ -240,12 +240,6 @@ export default class BasePopMenuComponent extends Component {
       this._popperElement.addEventListener('focus', this._openPopoverHandler);
       this._popperElement.addEventListener('blur', this._closePopoverBlurHandler);
     }
-
-    // Wait until popper layout has finished computing, otherwise the mischief will happen
-    raf.schedule('layout', () => {
-      // Automatically focus on first focusable item in the popper
-      this._focusOnFirstFocusableElement();
-    }, this._token);
   }
 
 
@@ -341,6 +335,11 @@ export default class BasePopMenuComponent extends Component {
     // Pressing Enter or Space opens the popper
     if ((keyCode === 'Enter' || keyCode === ' ') && !this.get('isOpen')) {
       this._openPopoverHandler();
+      // Wait until popper layout has finished computing, otherwise mischief will happen
+      raf.schedule('layout', () => {
+        // Automatically focus on first focusable item in the popper
+        this._focusOnFirstFocusableElement();
+      }, this._token);
     } else if ((keyCode === 'Escape' || keyCode === 'Enter') && this.get('isOpen')) {
       // Close on esc if we never entered the popper
       // (Enter is the same as re-clicking the button)

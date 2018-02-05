@@ -263,3 +263,49 @@ test('dropdown is keyboard accessible', async function(assert) {
 
   assert.ok(!dropdown.isOpen, 'dropdown removed after pressing enter on a data-close item');
 });
+
+test('First item autofocuses when opened by keyboard only', async function(assert) {
+  assert.expect(6);
+
+  this.render(hbs`
+    <button>
+      Target
+      {{#ice-dropdown data-test-dropdown=true placement="right-start"}}
+        <ul class="ice-dropdown-menu">
+          <li><button data-test-menu-item>First Item</button></li>
+          <li><button>Another Item</button></li>
+        </ul>
+      {{/ice-dropdown}}
+    </button>
+  `);
+
+  let dropdown = DropdownHelper.extend({
+    trigger: {
+      enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+    },
+    content: {
+      escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
+      menuItemWithFocus: {
+        scope: '[data-test-menu-item]:focus'
+      }
+    }
+  }).create();
+
+  await dropdown.trigger.enter();
+
+  assert.ok(dropdown.isOpen, 'dropdown rendered on enter');
+  assert.ok(dropdown.content.menuItemWithFocus.isPresent, 'first menu item has focus');
+
+  await dropdown.content.escape();
+  await dropdown.trigger.space();
+
+  assert.ok(dropdown.isOpen, 'dropdown rendered on space');
+  assert.ok(dropdown.content.menuItemWithFocus.isPresent, 'first menu item has focus');
+
+  await dropdown.content.escape();
+  await dropdown.open();
+
+  assert.ok(dropdown.isOpen, 'dropdown rendered on click');
+  assert.ok(!dropdown.content.menuItemWithFocus.isPresent, 'first menu item does not have focus');
+});
