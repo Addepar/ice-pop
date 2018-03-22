@@ -2,6 +2,8 @@
 
 Ember Addons for popping things up. This includes popovers, dropdowns, and tooltips.
 
+Documentation for the components are here: https://component-library.addedev.com/docs/css-docs/section-ice-pop.html
+
 ## Installation
 
 * `git clone <repository-url>` this repository
