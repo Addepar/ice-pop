@@ -67,6 +67,14 @@ export default class BasePopMenuComponent extends Component {
   @type('string')
   rootElementSelector = '.ember-application';
 
+  /**
+   * User-provided modifiers to the popper.
+   * Documentation for popper modifiers can be found at https://popper.js.org/popper-documentation.html#modifiers
+   */
+  @argument
+  @type('object')
+  popperModifiers = {};
+
   // ----- Private Variables -----
 
   /**
@@ -93,7 +101,7 @@ export default class BasePopMenuComponent extends Component {
   /**
    * Modifiers to the popper to set it's default behavior
    */
-  _popperModifiers = {
+  _defaultPopperModifiers = {
     flip: {
       boundariesElement: 'viewport'
     },
@@ -102,6 +110,12 @@ export default class BasePopMenuComponent extends Component {
       boundariesElement: 'window'
     }
   };
+
+  /**
+   * Combined set of default modifiers and user-provided modifiers. Overwrites default
+   * modifiers with user-provided ones if there is overlap.
+   */
+  _popperModifiers = null;
 
   /**
    * Root element that has attached event listeners for body close action
@@ -175,6 +189,8 @@ export default class BasePopMenuComponent extends Component {
     // `isOpen` to true, and only _then_ setting `isShowing` to true, triggering the
     // CSS transition
     run(() => this.set('isOpen', true));
+    let combinedModifiers = Object.assign({}, this._defaultPopperModifiers, this.get('popperModifiers'));
+    this.set('_popperModifiers', combinedModifiers);
 
     this._rootElement.addEventListener('mouseup', this._handleBodyClick);
   }
