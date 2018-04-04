@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 import { run } from '@ember/runloop';
 import { assert } from '@ember/debug';
@@ -115,7 +116,9 @@ export default class BasePopMenuComponent extends Component {
    * Combined set of default modifiers and user-provided modifiers. Overwrites default
    * modifiers with user-provided ones if there is overlap.
    */
-  _popperModifiers = null;
+  _popperModifiers = computed('popperModifiers', function() {
+    return Object.assign({}, this._defaultPopperModifiers, this.get('popperModifiers'));
+  });
 
   /**
    * Root element that has attached event listeners for body close action
@@ -189,8 +192,6 @@ export default class BasePopMenuComponent extends Component {
     // `isOpen` to true, and only _then_ setting `isShowing` to true, triggering the
     // CSS transition
     run(() => this.set('isOpen', true));
-    let combinedModifiers = Object.assign({}, this._defaultPopperModifiers, this.get('popperModifiers'));
-    this.set('_popperModifiers', combinedModifiers);
 
     this._rootElement.addEventListener('mouseup', this._handleBodyClick);
   }

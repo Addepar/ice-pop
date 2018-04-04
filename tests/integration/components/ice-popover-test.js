@@ -315,3 +315,36 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   assert.ok(popover.isOpen, 'popover rendered on click');
   assert.ok(!popover.content.buttonWithFocus.isPresent, 'first button does not have focus');
 });
+
+moduleForComponent('ice-popover', 'Unit | Component | ice-popover', {
+  unit: true
+});
+
+test('popper modifiers are customizable', function(assert) {
+  assert.expect(2);
+
+  let popover = this.subject();
+  assert.deepEqual(
+    popover.get('_popperModifiers'),
+    {
+      flip: { boundariesElement: 'viewport' },
+      preventOverflow: { boundariesElement: 'window' }
+    },
+    'Default modifiers are correct'
+  );
+
+  popover.set('popperModifiers', {
+    flip: { boundariesElement: 'overrideValue' },
+    newProperty: 'newValue'
+  });
+
+  assert.deepEqual(
+    popover.get('_popperModifiers'),
+    {
+      flip: { boundariesElement: 'overrideValue' },
+      preventOverflow: { boundariesElement: 'window' },
+      newProperty: 'newValue'
+    },
+    'Merging of modifiers is correct'
+  );
+});
