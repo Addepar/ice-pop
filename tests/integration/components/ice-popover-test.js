@@ -1,8 +1,9 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { moduleForComponent, module, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
+import IcePopover from '@addepar/ice-pop/components/ice-popover';
 import IcePopoverPage from '@addepar/ice-pop/test-support/pages/ice-popover';
 
 const PopoverHelper = IcePopoverPage.extend({ scope: '[data-test-popover]' });
@@ -316,14 +317,15 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   assert.ok(!popover.content.buttonWithFocus.isPresent, 'first button does not have focus');
 });
 
-moduleForComponent('ice-popover', 'Unit | Component | ice-popover', {
-  unit: true
-});
+module('Unit | Component | ice-popover');
 
 test('popper modifiers are customizable', function(assert) {
   assert.expect(2);
 
-  let popover = this.subject({});
+  let popover = IcePopover.create({
+    renderer: true
+  });
+
   assert.deepEqual(
     popover.get('_popperModifiers'),
     {
