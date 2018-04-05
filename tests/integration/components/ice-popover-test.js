@@ -317,15 +317,14 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   assert.ok(!popover.content.buttonWithFocus.isPresent, 'first button does not have focus');
 });
 
-module('Unit | Component | ice-popover');
+moduleForComponent('ice-popover', 'Unit | Component | ice-popover', {
+  unit: true
+});
 
 test('popper modifiers are customizable', function(assert) {
   assert.expect(2);
 
-  let popover = IcePopover.create({
-    renderer: true
-  });
-
+  let popover = this.subject({});
   assert.deepEqual(
     popover.get('_popperModifiers'),
     {
