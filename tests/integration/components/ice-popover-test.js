@@ -323,7 +323,7 @@ moduleForComponent('ice-popover', 'Unit | Component | ice-popover', {
 test('popper modifiers are customizable', function(assert) {
   assert.expect(2);
 
-  let popover = this.subject();
+  let popover = this.subject({});
   assert.deepEqual(
     popover.get('_popperModifiers'),
     {
