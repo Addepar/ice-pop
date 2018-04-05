@@ -4,9 +4,10 @@ import { run } from '@ember/runloop';
 import { assert } from '@ember/debug';
 
 import { action } from 'ember-decorators/object';
+import { computed } from 'ember-decorators/object';
 
 import { argument } from '@ember-decorators/argument';
-import { type } from '@ember-decorators/argument/type';
+import { type, unionOf } from '@ember-decorators/argument/type';
 import { immutable } from '@ember-decorators/argument/validation';
 
 import { scheduler as raf } from 'ember-raf-scheduler';
@@ -24,6 +25,19 @@ function closest(node, selector) {
 
   return null;
 }
+
+/**
+ * Modifiers to the popper to set it's default behavior
+ */
+const DEFAULT_POPPER_MODIFIERS = {
+  flip: {
+    boundariesElement: 'viewport'
+  },
+
+  preventOverflow: {
+    boundariesElement: 'window'
+  }
+};
 
 /**
  * Base class which ice-popover, ice-tooltip, and ice-dropdown all inherit from.
@@ -67,6 +81,14 @@ export default class BasePopMenuComponent extends Component {
   @type('string')
   rootElementSelector = '.ember-application';
 
+  /**
+   * User-provided modifiers to the popper.
+   * Documentation for popper modifiers can be found at https://popper.js.org/popper-documentation.html#modifiers
+   */
+  @argument
+  @type(unionOf(null, 'object'))
+  popperModifiers = null;
+
   // ----- Private Variables -----
 
   /**
@@ -91,22 +113,18 @@ export default class BasePopMenuComponent extends Component {
   _popperClass = '';
 
   /**
-   * Modifiers to the popper to set it's default behavior
-   */
-  _popperModifiers = {
-    flip: {
-      boundariesElement: 'viewport'
-    },
-
-    preventOverflow: {
-      boundariesElement: 'window'
-    }
-  };
-
-  /**
    * Root element that has attached event listeners for body close action
    */
   _rootElement = null;
+
+  /**
+   * Combined set of default modifiers and user-provided modifiers. Overwrites default
+   * modifiers with user-provided ones if there is overlap.
+   */
+  @computed('popperModifiers')
+  get _popperModifiers() {
+    return Object.assign({}, DEFAULT_POPPER_MODIFIERS, this.get('popperModifiers'));
+  }
 
   constructor() {
     super();
