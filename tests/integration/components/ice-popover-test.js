@@ -1,9 +1,8 @@
-import { moduleForComponent, module, test } from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
-import IcePopover from '@addepar/ice-pop/components/ice-popover';
 import IcePopoverPage from '@addepar/ice-pop/test-support/pages/ice-popover';
 
 const PopoverHelper = IcePopoverPage.extend({ scope: '[data-test-popover]' });
