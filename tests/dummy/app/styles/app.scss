@@ -1,5 +1,5 @@
-@import 'ice-box/index';
-@import '../styles/ice-pop/index';
+@import 'adde-box/index';
+@import '../styles/adde-pop/index';
 
 $demo-container-width: 400px;
 
@@ -57,7 +57,7 @@ $demo-container-width: 400px;
 }
 
 // tooltip-icon is temporarily defined here for the sake of testing,
-// until font awesome gets included by ice box
+// until font awesome gets included by addepar-style-toolbox
 .fa-question-circle::before {
   content: '?';
   width: 14px;
@@ -73,8 +73,8 @@ $demo-container-width: 400px;
 
 
 // TODO: The caret here is currently temporary for development.
-// Update this with font awesome when it is finally included in ice-box.
-.ice-dropdown-caret {
+// Update this with font awesome when it is finally included in adde-box.
+.adde-dropdown-caret {
   display: inline-block;
   margin-left: $spacing-small;
 

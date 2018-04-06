@@ -1,0 +1,40 @@
+
+// Adde Tooltip Icon
+//
+// A tooltip with a target icon baked in. It is designed to be a font awesome icon
+// for now, until Addepar comes up with its own icon system.
+//
+// You can implement the icon tooltip component (along with optional class for either
+// icon or tooltip, and tooltip direction placement) with the Ember addon like this:
+// ```
+// {{#adde-tooltip-icon placement="bottom" tooltipClass="error-tooltip" iconClass="fa-warning"}}
+//  I'm Mr. Meseeks look at me!
+// {{/adde-tooltip-icon}}
+// ```
+//
+// #### Important
+// Note that tooltips are an offical Ember addon in adde-pop,
+// so please do not use the below example HTML directly.
+// Please use the Ember component instead.
+// [See Adde Tooltip Docs >>](/docs/adde-pop/class/addon/components/adde-tooltip-icon.js~AddeTooltipIcon.html)
+//
+// Markup:
+// <i class="fa {{modifier_class}} tooltip-icon" tabindex="0">
+//   <!--tooltip code inserted by addon will go here -->
+// </i>
+//
+// .fa-question-circle - The default font awesome icon class. This will be used if you do not pass in your own via `iconClass`.
+// .fa-warning - Example of an alternative font awesome icon class you could pass in via `iconClass`. You can pass in any font awesome icon class.
+//
+// Styleguide Adde Pop - Adde Tooltip - Tooltip Icon
+
+.tooltip-icon {
+  width: $tooltip-icon-height;
+  height: $tooltip-icon-height;
+  font-size: $tooltip-icon-height;
+  color: $tooltip-icon-color;
+
+  &:hover {
+    color: $tooltip-icon-color-hover;
+  }
+}

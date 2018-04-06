@@ -1,0 +1,217 @@
+
+// Adde Popover
+//
+// A popover that is triggered upon clicking a target element.
+//
+// You can implement a popover custom class and custom placement with the Ember addon like this:
+// ```
+// <div class="example-target">
+//   Target Text
+//   {{#adde-popover class="custom-class" placement="bottom"}}
+//     <div class="adde-popover-body">
+//       I'm Mr. Meseeks look at me!
+//     </div>
+//   {{/adde-popover}}
+// </div>
+// ```
+//
+// #### Important
+// Note that popovers are an offical Ember addon in adde-pop,
+// so please do not use the below example HTML directly.
+// Please use the Ember component instead.
+// [See Adde Popover Docs >>](/docs/adde-pop/class/addon/components/adde-popover.js~AddePopover.html)
+//
+// Markup:
+// <div class="example-target popover-target is-active" aria-haspopup="true" aria-expanded="true">
+//   Target Text
+// </div>
+// <div class="adde-popover is-visible custom-class" x-placement="bottom">
+//   <div class="adde-popover-content" tabindex="0">
+//     <div class="adde-popover-body">
+//       I'm Mr. Meseeks look at me!
+//     </div>
+//   </div>
+//   <div class="popper-arrow" x-arrow></div>
+// </div>
+//
+// Styleguide Adde Pop - Adde Popover
+
+// Common adde-pop styles
+@import '../common/core';
+
+$popover-placements: ('left': 'horizontal', 'right': 'horizontal', 'top': 'vertical', 'bottom': 'vertical');
+
+@include arrow-box(
+  'adde-popover',
+  $popover-placements,
+  $adde-popover-z-index,
+  $adde-popover-background-color,
+  $adde-popover-width,
+  $adde-popover-min-width,
+  $adde-popover-max-width,
+  $adde-popover-height,
+  $adde-popover-min-height,
+  $adde-popover-max-height-vh,
+  $adde-popover-box-padding,
+  $adde-popover-border-width,
+  $adde-popover-border-style,
+  $adde-popover-border-color,
+  $adde-popover-border-radius,
+  $adde-popover-box-shadow,
+  $adde-popover-text-color,
+  $adde-popover-text-align,
+  $adde-popover-font-weight,
+  $adde-popover-font-size,
+  $adde-popover-line-height,
+  $adde-popover-font-family,
+  $adde-popover-fade-transition,
+  $adde-popover-arrow-size
+  );
+
+// Popovers can have an optional header determined by whether a title is passed in.
+// This means tricky consequences for the arrow color, which needs to match if
+// it is visually touching the title header.
+// ----------------------------------------
+// Currently the below method is to guess what the arrow color should be based
+// on its predicted placement in relation to the header, but this can be incorrect
+// if the popover needs to adjust the arrow placement due to limited room on the screen.
+// A better solution would be to change the color with JS depending on the
+// y-placement of the arrow and whether it is in range of the header.
+
+.adde-popover.has-title {
+  // When the arrow position is at the top (tooltip placement being bottom),
+  // its always touching the title header
+  &[x-placement^='bottom'] {
+    @include update-arrow-color('bottom', $adde-popover-title-background-color, $adde-popover-border-color);
+  }
+
+  // When the arrow placement is at the top right
+  &[x-placement='left-start'] {
+    @include update-arrow-color('left', $adde-popover-title-background-color, $adde-popover-border-color);
+  }
+
+  // When the arrow placement is at top left
+  &[x-placement='right-start'] {
+    @include update-arrow-color('right', $adde-popover-title-background-color, $adde-popover-border-color);
+  }
+}
+
+// Content level elements
+
+.adde-popover-content {
+  // Setting up flex to control the height of the body so it can scroll
+  display: flex;
+  flex-direction: column;
+
+  // We need to check whether a vh height was set (which is by default,
+  // but the user may overwrite to '0' or 'none').
+  // If set, we need to add the optional max pixel height css media query (explained below).
+  @if non-zero-value($adde-popover-max-height-vh) {
+    // If the popover has been given a vh max height AND a px max height, we want to
+    // cap the max-height out once the rendered vh height gets longer than the px amount given.
+    // Until there is a better way to cap percentage/viewport based values like this, we are using a media query.
+    //
+    // Checking if px value was given, otherwise we don't need to do anything
+    @if non-zero-value($adde-popover-max-height-px) {
+      // Figure out the ratio of the given vh height to the current screen height
+      $viewport-ratio: $adde-popover-max-height-vh / 100vh;
+      $viewport-adjusted-height: $adde-popover-max-height-px / $viewport-ratio;
+      @media screen and (min-height: $viewport-adjusted-height) {
+        max-height: $adde-popover-max-height-px;
+      }
+    }
+  } @else {
+    // If vh var was not set, we need to set the given pixel height onto the content div, since it
+    // will not have been set in the mixin (we give the mixin the vh var by default)
+    max-height: $adde-popover-max-height-px;
+  }
+}
+
+// Adde Popover with title
+//
+// You can add a popover title with the Ember addon like this:
+// ```
+// <div class="example-target">
+//   Target Text
+//   {{#adde-popover popoverTitle="Popover Title"}}
+//     <div class="adde-popover-body">
+//       I'm Mr. Meseeks look at me!
+//     </div>
+//   {{/adde-popover}}
+// </div>
+// ```
+//
+// Markup:
+// <div class="example-target popover-target is-active" aria-haspopup="true" aria-expanded="true">
+//   Target Text
+// </div>
+// <div class="adde-popover is-visible has-title" x-placement="bottom">
+//   <div class="adde-popover-content" tabindex="0">
+//     <header class="adde-popover-title">Popover Title</header>
+//     <div class="adde-popover-body">
+//       I'm Mr. Meseeks look at me!
+//     </div>
+//   </div>
+//   <div class="popper-arrow" x-arrow></div>
+// </div>
+//
+// Styleguide Adde Pop - Adde Popover - Popover with title
+
+.adde-popover-title {
+  background-color: $adde-popover-title-background-color;
+  padding: $adde-popover-header-padding;
+  font-size: $adde-popover-title-font-size;
+  font-weight: $adde-popover-title-font-weight;
+  line-height: $adde-popover-title-line-height;
+  flex: none;
+}
+
+// Body should generally always be used and is demonstrated in the base component,
+// so not adding css doc entry for now
+.adde-popover-body {
+  padding: $adde-popover-content-padding;
+  flex: 1;
+  overflow: auto;
+  max-width: 100%;
+}
+
+// Adde Popover with footer
+//
+// To add a popover footer with the Ember addon, you just manually put it in the HTML like this:
+// ```
+// <div class="example-target">
+//   Target Text
+//   {{#adde-popover}}
+//     <div class="adde-popover-body">
+//       I'm Mr. Meseeks look at me!
+//     </div>
+//     <div class="adde-popover-footer">
+//       <button>Click me</button>
+//     </div>
+//   {{/adde-popover}}
+// </div>
+// ```
+//
+// Markup:
+// <div class="example-target popover-target is-active" aria-haspopup="true" aria-expanded="true">
+//   Target Text
+// </div>
+// <div class="adde-popover is-visible" x-placement="bottom">
+//   <div class="adde-popover-content" tabindex="0">
+//     <div class="adde-popover-body">
+//       I'm Mr. Meseeks look at me!
+//     </div>
+//     <div class="adde-popover-footer">
+//       <button>Click me</button>
+//     </div>
+//   </div>
+//   <div class="popper-arrow" x-arrow></div>
+// </div>
+//
+// Styleguide Adde Pop - Adde Popover - Popover with footer
+
+.adde-popover-footer {
+  padding: $adde-popover-footer-padding;
+  border-top: $adde-popover-footer-border;
+  flex: none;
+}

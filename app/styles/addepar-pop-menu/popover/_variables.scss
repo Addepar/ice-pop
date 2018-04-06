@@ -1,0 +1,44 @@
+// Variables needed from adde-box
+@import '../../adde-box/variables/colors';
+@import '../../adde-box/variables/typography';
+@import '../../adde-box/variables/spacing';
+
+// Core popover variables
+
+$adde-popover-background-color:              $background-white !default;
+$adde-popover-title-background-color:        $background-extra-light !default;
+
+$adde-popover-text-align:                    left !default;
+$adde-popover-text-color:                    $text-dark !default;
+$adde-popover-font-weight:                   normal !default;
+$adde-popover-font-size:                     $font-size-base !default;
+$adde-popover-line-height:                   auto !default;
+$adde-popover-font-family:                   $font-family-sans-serif !default;
+$adde-popover-title-font-size:               $font-size-medium !default;
+$adde-popover-title-font-weight:             $font-medium !default;
+$adde-popover-title-line-height:             1 !default;
+
+$adde-popover-width:                         auto !default;
+$adde-popover-min-width:                     200px !default;
+$adde-popover-max-width:                     none !default;
+$adde-popover-height:                        auto !default;
+$adde-popover-min-height:                    auto !default;
+$adde-popover-max-height-vh:                 80vh !default;
+$adde-popover-max-height-px:                 600px !default; // (not passed to the arrow box mixin)
+
+$adde-popover-box-padding:                   0 !default;
+$adde-popover-content-padding:               $spacing-double !default;
+$adde-popover-header-padding:                $adde-popover-content-padding !default;
+$adde-popover-footer-padding:                $adde-popover-content-padding !default;
+$adde-popover-arrow-size:                    $spacing-default !default;
+
+$adde-popover-border-color:                  $border-item !default;
+$adde-popover-border-width:                  1px !default;
+$adde-popover-border-style:                  solid !default;
+$adde-popover-border-radius:                 0 !default;
+$adde-popover-footer-border:                 $adde-popover-border-width $adde-popover-border-style $adde-popover-border-color;
+$adde-popover-box-shadow:                    0 0 5px rgba(0, 0, 0, 0.1) !default;
+
+$adde-popover-fade-transition:               opacity 0.2s ease-in-out !default;
+
+$adde-popover-z-index:                       10 !default;

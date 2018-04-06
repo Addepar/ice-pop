@@ -1,0 +1,108 @@
+
+// Adde Sub Dropdown
+//
+// A sub dropdown that is ONLY embedded in a list item inside of a regular dropdown menu.
+// It is triggered when hovering over its target list element.
+//
+// You can implement a sub dropdown within a regular dropdown with the Ember addon like this:
+// ```
+// <div class="dropdown-example">
+//   <div class="example-target">
+//     Target text
+//     <i class="fa fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
+//     {{#adde-dropdown}}
+//       <ul class="adde-dropdown-menu">
+//         <li>
+//           <button>
+//             Foo bar baz
+//             <i class="fa fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
+//             {{#adde-sub-dropdown}}
+//               <ul class="adde-dropdown-menu">
+//                 <li><button>Foo bar baz</button></li>
+//                 <li><button>I'm Mr. Meseeks</button></li>
+//                 <li><button>Lorem ipsum</button></li>
+//               </ul>
+//             {{/adde-sub-dropdown}}
+//           </button>
+//         </li>
+//         <li><button>I'm Mr. Meseeks</button></li>
+//         <li><button>Lorem ipsum</button></li>
+//       </ul>
+//     {{/adde-dropdown}}
+//   </div>
+// </div>
+// ```
+//
+// #### Important
+// Note that sub dropdowns are an offical Ember addon in adde-pop,
+// so please do not use the below example HTML directly.
+// Please use the Ember component instead.
+// [See Adde Dropdown Docs >>](/docs/adde-pop/class/addon/components/adde-sub-dropdown.js~AddeSubDropdown.html)
+//
+// Markup:
+//   <div class="dropdown-example">
+//     <div class="example-target popover-target is-active" aria-haspopup="true" aria-expanded="true">
+//       Target text
+//       <i class="fa fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
+//       <div class="adde-dropdown is-visible" x-placement="bottom-start">
+//         <div class="adde-dropdown-content" tabindex="0">
+//           <ul class="adde-dropdown-menu">
+//             <li>
+//               <button class="is-active">
+//                Foo bar baz
+//                 <i class="fa fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
+//                 <div class="adde-dropdown adde-sub-dropdown is-visible" x-placement="right-start">
+//                   <div class="adde-dropdown-content" tabindex="0">
+//                     <ul class="adde-dropdown-menu">
+//                       <li><button>Foo bar baz</button></li>
+//                       <li><button>I'm Mr. Meseeks</button></li>
+//                       <li><button>Lorem ipsum</button></li>
+//                     </ul>
+//                   </div>
+//                 </div>
+//               </button>
+//             </li>
+//             <li><button>I'm Mr. Meseeks</button></li>
+//             <li><button>Lorem ipsum</button></li>
+//           </ul>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+//
+// Styleguide Adde Pop - Adde Dropdown - Adde Sub Dropdown
+
+.adde-sub-dropdown {
+  margin-top: $adde-sub-dropdown-offset; // offset to make the subdropdown menu items line up
+
+  // The designers want the direction of the subdropdown to always be down or up,
+  // no left or right. -start and -end denote left and right when combined with up or down
+  &[x-placement^='bottom'],
+  &[x-placement$='-start'] {
+    @include create-offset-box-shadow('bottom', $adde-dropdown-box-shadow-x-offset, $adde-dropdown-box-shadow-y-offset, $adde-dropdown-box-shadow-spread, $adde-dropdown-box-shadow-color);
+  }
+
+  &[x-placement^='top'],
+  &[x-placement$='-end'] {
+    @include create-offset-box-shadow('top', $adde-dropdown-box-shadow-x-offset, $adde-dropdown-box-shadow-y-offset, $adde-dropdown-box-shadow-spread, $adde-dropdown-box-shadow-color);
+  }
+
+  // If we need an offset to match the offset on the main dropdown between its target
+  @if ($adde-dropdown-offset != 0) {
+    &[x-placement^='bottom'] {
+      margin-top: -$adde-dropdown-offset;
+    }
+
+    &[x-placement^='top'] {
+      margin-bottom: -$adde-dropdown-offset;
+    }
+
+    &[x-placement^='left'] {
+      margin-right: -$adde-dropdown-offset;
+    }
+
+    &[x-placement^='right'] {
+      margin-left: -$adde-dropdown-offset;
+    }
+  }
+}

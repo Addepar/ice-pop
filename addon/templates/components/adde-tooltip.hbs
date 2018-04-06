@@ -1,0 +1,14 @@
+{{#animated-popper
+  isOpen=isOpen
+  placement=placement
+  modifiers=_popperModifiers
+  renderInPlace=renderInPlace
+  popperClass=(concat "adde-tooltip " _popperClass)
+  onOpen="popoverOpened"
+  onClose="popoverClosed"
+}}
+  <div class="adde-popper-content adde-tooltip-content">
+    {{yield}}
+  </div>
+  <div class="popper-arrow" x-arrow></div>
+{{/animated-popper}}

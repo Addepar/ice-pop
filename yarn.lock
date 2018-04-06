@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@addepar/ember-toolbox@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@addepar/ember-toolbox/-/ember-toolbox-0.2.0.tgz#0690d508ff8497d02c09bbe94cf4de9c3b33f9ef"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    ember-cli-version-checker "^2.1.0"
+    ember-hash-helper-polyfill "^0.2.0"
+
 "@addepar/eslint-config@^3.0.1":
   version "3.0.1"
   resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/eslint-config/-/eslint-config-3.0.1.tgz#1f44ceb7649a21963b084de1c901046a217c69a2"
@@ -16,19 +24,17 @@
     eslint-plugin-import "^2.3.0"
     eslint-plugin-prefer-let "^1.0.1"
 
-"@addepar/ice-box@^0.1.3":
-  version "0.1.5"
-  resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/ice-box/-/ice-box-0.1.5.tgz#5477dba89aee17bfa79597ec06e8813b821dc31e"
-  dependencies:
-    ember-cli-babel "^6.6.0"
-    ember-cli-version-checker "^2.1.0"
-    ember-hash-helper-polyfill "^0.2.0"
-    node-sass "^4.6.0"
-    node-sass-import-once "^1.2.0"
-
 "@addepar/sass-lint-config@^2.0.0":
   version "2.0.0"
   resolved "https://addepar.jfrog.io/addepar/api/npm/npm/@addepar/sass-lint-config/-/sass-lint-config-2.0.0.tgz#fb0e93c1f1e93a5c5b17a0612966557cea51bc67"
+
+"@addepar/style-toolbox@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@addepar/style-toolbox/-/style-toolbox-0.1.0.tgz#d5b0f4a8ca3c5de2884fd90fd1f1dd770b5e62a7"
+  dependencies:
+    ember-cli-babel "^6.6.0"
+    node-sass "^4.6.0"
+    node-sass-import-once "^1.2.0"
 
 "@babel/code-frame@7.0.0-beta.36":
   version "7.0.0-beta.36"

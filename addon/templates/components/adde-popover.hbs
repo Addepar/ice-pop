@@ -1,0 +1,17 @@
+{{#animated-popper
+  isOpen=isOpen
+  placement=placement
+  modifiers=_popperModifiers
+  renderInPlace=renderInPlace
+  popperClass=(concat "adde-popover " (if popoverTitle "has-title ") _popperClass)
+  onOpen="popoverOpened"
+  onClose="popoverClosed"
+}}
+  <div class="adde-popper-content adde-popover-content">
+    {{#if popoverTitle}}
+      <header class="adde-popover-title" data-test-popover-header>{{popoverTitle}}</header>
+    {{/if}}
+    {{yield}}
+  </div>
+  <div class="popper-arrow" x-arrow></div>
+{{/animated-popper}}

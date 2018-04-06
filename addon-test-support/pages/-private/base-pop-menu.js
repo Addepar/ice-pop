@@ -4,7 +4,7 @@ import PageObject, { attribute, hasClass } from 'ember-classy-page-object';
 import { findElement } from 'ember-classy-page-object/extend';
 
 /**
- * Base test page-object for ice-tooltip, ice-popover, ice-dropdown, and ice-sub-dropdown.
+ * Base test page-object for adde-tooltip, adde-popover, adde-dropdown, and adde-sub-dropdown.
  * Allows testers to open ond close the popover and select its content, as well as check
  * its current state.
  */

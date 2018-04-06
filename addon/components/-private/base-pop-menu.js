@@ -40,7 +40,7 @@ const DEFAULT_POPPER_MODIFIERS = {
 };
 
 /**
- * Base class which ice-popover, ice-tooltip, and ice-dropdown all inherit from.
+ * Base class which adde-popover, adde-tooltip, and adde-dropdown all inherit from.
  * Adds the event listeners and data attributes that are common to all of the popover-like
  * components, and wraps all of their functionality.
  */
@@ -129,7 +129,7 @@ export default class BasePopMenuComponent extends Component {
   constructor() {
     super();
 
-    this._popperClass = `ice-base-pop-menu ${this.class || ''} ${this.classNames.join(' ')}`;
+    this._popperClass = `adde-base-pop-menu ${this.class || ''} ${this.classNames.join(' ')}`;
 
     for (let binding of this.classNameBindings) {
       if (binding.value) {
@@ -326,7 +326,7 @@ export default class BasePopMenuComponent extends Component {
   _handleBodyClick = ({ target }) => {
     if (this._isOpening) {
       this._isOpening = false;
-    } else if (closest(target, '.ice-base-pop-menu') === null) {
+    } else if (closest(target, '.adde-base-pop-menu') === null) {
       // We do not want _removePopover to trigger when clicking inside of the popover.
       // Here we check whether the body click event was also a popover container click event.
       // We are comparing the click events because tracking the click element itself can

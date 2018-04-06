@@ -1,0 +1,157 @@
+
+// Adde Dropdown Menu
+//
+// A specific menu list style that is used inside dropdowns (and selects).
+//
+// The dropdown menu list itself is not an Ember addon, it is just HTML/CSS.
+// However you should only use it inside the adde-dropdown Ember addon like this:
+// ```
+// <div class="dropdown-example">
+//   <div class="example-target">
+//     Target text
+//     <i class="fa fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
+//     {{#adde-dropdown}}
+//       <ul class="adde-dropdown-menu">
+//         <li><button>Foo bar baz</button></li>
+//         <li class="list-group-header" role="heading">Group Header Text</li>
+//         <li><button>I'm Mr. Meseeks</button></li>
+//         <li><button>Lorem ipsum</button></li>
+//         <li class="list-divider" role="separator"></li>
+//         <li><button disabled>I'm disabled</button></li>
+//       </ul>
+//     {{/adde-dropdown}}
+//   </div>
+// </div>
+// ```
+//
+// By default, clicking any menu items will not make the dropdown close,
+// but you can instead customize which items have the closable action like this:
+// ```
+// {{#adde-dropdown}}
+//   <ul class="adde-dropdown-menu">
+//     <li><button data-close>Foo bar baz</button></li>
+//     <li><button data-close>I'm Mr. Meseeks</button></li>
+//     <li><button>Don't close the dropdown here</button></li>
+//   </ul>
+// {{/adde-dropdown}}
+// ```
+//
+// Use buttons in the dropdown menu for actions.
+// Anchor tags should be used for actual links that navigate to a view, or to an external url.
+// ```
+// {{#adde-dropdown}}
+//   <ul class="adde-dropdown-menu">
+//     <li><a href="#foo">Foo</a></li>
+//     <li><a href="#bar">Bar</a></li>
+//     <li><a href="#baz">Baz</a></li>
+//     <li><a href="#nowhere" tabindex="-1" disabled>Disabled</a></li>
+//   </ul>
+// {{/adde-dropdown}}
+// ```
+//
+// Markup:
+//   (Note: Do not use this example outputted adde-dropdown HTML directly,
+//   use the ember addon as notated in the section above)
+//   <div class="dropdown-example">
+//     <div class="example-target popover-target is-active" aria-haspopup="true" aria-expanded="true">
+//       Target text
+//       <i class="fa fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
+//     </div>
+//     <div class="adde-dropdown is-visible" x-placement="bottom-start">
+//       <div class="adde-dropdown-content" tabindex="0">
+//         <ul class="adde-dropdown-menu">
+//           <li><button>Foo bar baz</button></li>
+//           <li class="list-group-header" role="heading">Group Header Text</li>
+//           <li><button>I'm Mr. Meseeks</button></li>
+//           <li><button>Lorem ipsum</button></li>
+//           <li class="list-divider" role="separator"></li>
+//           <li><button disabled>I'm disabled</button></li>
+//         </ul>
+//       </div>
+//     </div>
+//   </div>
+//
+// Class Options:
+// * `list-divider`: A horizontal divider between list items. Place this class on an empty `<li>`
+// * `list-group-header`: A header to go above a group of items in the list. Place on an `<li>` with the header text.
+//
+// Attribute Options:
+// * `disabled`: Marks a list item as disabled. Place class directly on the `<a>` that is to be disabled.
+// * `data-close`: Lets Ember know it needs to close the dropdown after clicking.
+//
+// Styleguide Adde Pop - Adde Dropdown - Adde Dropdown Menu
+
+// Main class for the dropdown menu ul
+.adde-dropdown-menu {
+  @include reset-list();
+  padding-top: $adde-dropdown-item-spacing-vertical;
+  padding-bottom: $adde-dropdown-item-spacing-vertical;
+
+  > li {
+    position: relative; // needed for absolutely positioned caret
+    display: block;
+    color: $adde-dropdown-item-color;
+    line-height: $adde-dropdown-item-line-height;
+
+    // Use button tag for actions
+    button {
+      @include reset-button();
+      border-radius: 0;
+      line-height: inherit;
+      text-align: left;
+      width: 100%;
+    }
+
+    // Use anchor tag for actual links
+    a {
+      display: block;
+    }
+
+    button,
+    a {
+      padding: $adde-dropdown-item-spacing-vertical $adde-dropdown-item-spacing-horizontal;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $adde-dropdown-item-hover-bg-color;
+      }
+
+      &.is-selected,
+      &.is-active {
+        background-color: $adde-dropdown-item-active-bg-color;
+      }
+    }
+
+    // Active state may need to be on the li
+    &.is-active a,
+    &.is-active button {
+      background-color: $adde-dropdown-item-active-bg-color;
+    }
+
+    &[disabled],
+    a[disabled],
+    button[disabled] {
+      @include disabled-input();
+      opacity: $button-disabled-color-inc;
+    }
+
+    // TODO: investigate if this will cause any issues in Iverson
+    .adde-dropdown-caret {
+      @include anchor-element($top: 50%, $right: $adde-dropdown-item-spacing-horizontal / 2);
+      transform: translateY(-50%);
+    }
+
+    &.list-divider {
+      border-top: $adde-dropdown-item-border-style;
+      margin: $adde-dropdown-item-spacing-vertical 0;
+    }
+
+    &.list-group-header {
+      background-color: $adde-dropdown-item-group-header-bg;
+      font-weight: $adde-dropdown-item-group-header-weight;
+      padding: $adde-dropdown-item-spacing-vertical $adde-dropdown-item-spacing-horizontal;
+    }
+  }
+}
