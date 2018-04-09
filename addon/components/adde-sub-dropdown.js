@@ -1,31 +1,31 @@
 import { argument } from '@ember-decorators/argument';
 import { type } from '@ember-decorators/argument/type';
 
-import IceDropdownComponent from './ice-dropdown';
+import AddeDropdownComponent from './adde-dropdown';
 
 /**
  * Subdropdown component that is used inside a dropdown menu item. It targets
  * its immediate parent element, and will open whenever that element is hovered.
  *
  * ```hbs
- * {{#ice-dropdown}}
- *   <ul class="ice-dropdown-menu">
+ * {{#adde-dropdown}}
+ *   <ul class="adde-dropdown-menu">
  *     <li>
  *       <button>Foo bar baz</button>
- *       <i class="fa fa-caret-down ice-dropdown-caret" aria-hidden="true"></i>
- *       {{#ice-sub-dropdown}}
- *         <ul class="ice-dropdown-menu">
+ *       <i class="fa fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
+ *       {{#adde-sub-dropdown}}
+ *         <ul class="adde-dropdown-menu">
  *           <li><button>Foo bar baz</button></li>
  *           <li><button>I'm Mr. Meseeks</button></li>
  *           <li><button>Lorem ipsum</button></li>
  *         </ul>
- *       {{/ice-sub-dropdown}}
+ *       {{/adde-sub-dropdown}}
  *     </li>
  *   </ul>
- * {{/ice-dropdown}}
+ * {{/adde-dropdown}}
  * ```
  */
-export default class IceSubDropdownComponent extends IceDropdownComponent {
+export default class AddeSubDropdownComponent extends AddeDropdownComponent {
 
   triggerEvent = 'hover';
 

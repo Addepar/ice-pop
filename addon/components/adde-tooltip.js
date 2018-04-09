@@ -1,6 +1,6 @@
 import BasePopMenuComponent from './-private/base-pop-menu';
 
-import layout from '../templates/components/ice-tooltip';
+import layout from '../templates/components/adde-tooltip';
 
 /**
  * Super simple tooltip component that uses popper.js. It targets its immediate
@@ -9,27 +9,27 @@ import layout from '../templates/components/ice-tooltip';
  * ```hbs
  * <div class="target">
  *   Target text
- *   {{#ice-tooltip}}
+ *   {{#adde-tooltip}}
  *     Tootip with defaults
- *   {{/ice-tooltip}}
+ *   {{/adde-tooltip}}
  * </div>
  *
  * <div class="target">
  *   Target text
- *   {{#ice-tooltip placement="bottom"}}
+ *   {{#adde-tooltip placement="bottom"}}
  *     Tooltip with custom placement
- *   {{/ice-tooltip}}
+ *   {{/adde-tooltip}}
  * </div>
  *
  * <div class="target">
  *   Target text
- *   {{#ice-tooltip class="error-tooltip"}}
+ *   {{#adde-tooltip class="error-tooltip"}}
  *     Tooltip with custom class
- *   {{/ice-tooltip}}
+ *   {{/adde-tooltip}}
  * </div>
  * ```
  */
-export default class IceTooltipComponent extends BasePopMenuComponent {
+export default class AddeTooltipComponent extends BasePopMenuComponent {
   layout = layout;
 
   triggerEvent = 'hover';

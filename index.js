@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: '@addepar/ice-pop'
+  name: '@addepar/pop-menu'
 };

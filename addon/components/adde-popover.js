@@ -3,7 +3,7 @@ import { type, unionOf } from '@ember-decorators/argument/type';
 
 import BasePopMenuComponent from './-private/base-pop-menu';
 
-import layout from '../templates/components/ice-popover';
+import layout from '../templates/components/adde-popover';
 
 /**
  * Super simple popover component that uses popper.js. It targets its immediate parent
@@ -12,44 +12,44 @@ import layout from '../templates/components/ice-popover';
  * ```hbs
  * <div class="target">
  *   Target text
- *   {{#ice-popover}}
+ *   {{#adde-popover}}
  *     Popover with defaults
- *   {{/ice-popover}}
+ *   {{/adde-popover}}
  * </div>
  *
  * <div class="target">
  *   Target text
- *   {{#ice-popover placement="bottom"}}
+ *   {{#adde-popover placement="bottom"}}
  *     Popover with custom placement
- *   {{/ice-popover}}
+ *   {{/adde-popover}}
  * </div>
  *
  * <div class="target">
  *   Target text
- *   {{#ice-popover class="custom-class"}}
+ *   {{#adde-popover class="custom-class"}}
  *     Popover with custom class
- *   {{/ice-popover}}
+ *   {{/adde-popover}}
  * </div>
  *
  * <div class="target">
  *   Target text
- *   {{#ice-popover popoverTitle="Title Text"}}
+ *   {{#adde-popover popoverTitle="Title Text"}}
  *     Popover with optional header/title
- *   {{/ice-popover}}
+ *   {{/adde-popover}}
  * </div>
  *
 * <div class="target">
  *   Target text
- *   {{#ice-popover}}
+ *   {{#adde-popover}}
  *     <a data-close>
  *       Adding data-close to anything within the popover will cause
  *       it to close when the item is clicked
  *     </a>
- *   {{/ice-popover}}
+ *   {{/adde-popover}}
  * </div>
  * ```
  */
-export default class IcePopoverComponent extends BasePopMenuComponent {
+export default class AddePopoverComponent extends BasePopMenuComponent {
   layout = layout;
 
   triggerEvent = 'click';

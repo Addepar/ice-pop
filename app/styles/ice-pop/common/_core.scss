@@ -1,7 +1,0 @@
-// Hidden focus tracker on all poppers
-// Ensure that it never messes up layout
-// Cannot do visibility:hidden or display:none or focus won't trigger
-.hidden-focus-tracker {
-  height: 0;
-  width: 0;
-}

@@ -2,7 +2,7 @@ import { argument } from '@ember-decorators/argument';
 import { type } from '@ember-decorators/argument/type';
 
 import BasePopMenuComponent from './-private/base-pop-menu';
-import layout from '../templates/components/ice-dropdown';
+import layout from '../templates/components/adde-dropdown';
 
 /**
  * Super simple dropdown component that uses popper.js. It targets its immediate parent
@@ -11,41 +11,41 @@ import layout from '../templates/components/ice-dropdown';
  * ```hbs
  * <div class="target">
  *   Target text
- *   <i class="fa fa-caret-down ice-dropdown-caret"></i>
- *   {{#ice-dropdown}}
+ *   <i class="fa fa-caret-down adde-dropdown-caret"></i>
+ *   {{#adde-dropdown}}
  *     Dropdown with defaults
- *   {{/ice-dropdown}}
+ *   {{/adde-dropdown}}
  * </div>
  *
  * <div class="target">
  *   Target text
- *   <i class="fa fa-caret-down ice-dropdown-caret"></i>
- *   {{#ice-dropdown placement="bottom"}}
+ *   <i class="fa fa-caret-down adde-dropdown-caret"></i>
+ *   {{#adde-dropdown placement="bottom"}}
  *     Dropdown with custom placement
- *   {{/ice-dropdown}}
+ *   {{/adde-dropdown}}
  * </div>
  *
  * <div class="target">
  *   Target text
- *   <i class="fa fa-caret-down ice-dropdown-caret"></i>
- *   {{#ice-dropdown class="custom-class"}}
+ *   <i class="fa fa-caret-down adde-dropdown-caret"></i>
+ *   {{#adde-dropdown class="custom-class"}}
  *     Dropdown with custom class
- *   {{/ice-tooltip}}
+ *   {{/adde-tooltip}}
  * </div>
  *
  * <div class="target">
  *   Target text
- *   <i class="fa fa-caret-down ice-dropdown-caret"></i>
- *   {{#ice-dropdown}}
+ *   <i class="fa fa-caret-down adde-dropdown-caret"></i>
+ *   {{#adde-dropdown}}
  *     <a data-close>
  *       Adding data-close to anything within the dropdown will cause
  *       it to close when the item is clicked
  *     </a>
- *   {{/ice-tooltip}}
+ *   {{/adde-tooltip}}
  * </div>
  * ```
  */
-export default class IceDropdownComponent extends BasePopMenuComponent {
+export default class AddeDropdownComponent extends BasePopMenuComponent {
   layout = layout;
 
   triggerEvent = 'click';

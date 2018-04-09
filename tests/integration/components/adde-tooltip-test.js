@@ -3,13 +3,13 @@ import hbs from 'htmlbars-inline-precompile';
 
 import { triggerEvent } from 'ember-native-dom-helpers';
 
-import IceTooltipPage from '@addepar/ice-pop/test-support/pages/ice-tooltip';
+import AddeTooltipPage from '@addepar/pop-menu/test-support/pages/adde-tooltip';
 
 import { hasClass, triggerable } from 'ember-classy-page-object';
 
-const TooltipHelper = IceTooltipPage.extend({ scope: '[data-test-tooltip]' });
+const TooltipHelper = AddeTooltipPage.extend({ scope: '[data-test-tooltip]' });
 
-moduleForComponent('ice-tooltip', 'Integration | Component | ice-tooltip', {
+moduleForComponent('adde-tooltip', 'Integration | Component | adde-tooltip', {
   integration: true
 });
 
@@ -19,9 +19,9 @@ test('tooltip works', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-tooltip data-test-tooltip=true}}
+      {{#adde-tooltip data-test-tooltip=true}}
         template block text
-      {{/ice-tooltip}}
+      {{/adde-tooltip}}
     </div>
   `);
 
@@ -45,9 +45,9 @@ test('tooltip remains rendered when tooltip box itself is hovered', async functi
   this.render(hbs`
     <div>
       Target
-      {{#ice-tooltip data-test-tooltip=true}}
+      {{#adde-tooltip data-test-tooltip=true}}
         template block text
-      {{/ice-tooltip}}
+      {{/adde-tooltip}}
     </div>
   `);
 
@@ -77,9 +77,9 @@ test('tooltip box modifier class can be added', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-tooltip data-test-tooltip=true class="error-tooltip"}}
+      {{#adde-tooltip data-test-tooltip=true class="error-tooltip"}}
         template block text
-      {{/ice-tooltip}}
+      {{/adde-tooltip}}
     </div>
   `);
 
@@ -100,9 +100,9 @@ test('tooltip box direction can be modified', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-tooltip data-test-tooltip=true placement="bottom-end"}}
+      {{#adde-tooltip data-test-tooltip=true placement="bottom-end"}}
         template block text
-      {{/ice-tooltip}}
+      {{/adde-tooltip}}
     </div>
   `);
 
@@ -119,9 +119,9 @@ test('tooltip trigger element is marked as active when open', async function(ass
   this.render(hbs`
     <div>
       Target
-      {{#ice-tooltip data-test-tooltip=true placement="bottom-end"}}
+      {{#adde-tooltip data-test-tooltip=true placement="bottom-end"}}
         template block text
-      {{/ice-tooltip}}
+      {{/adde-tooltip}}
     </div>
   `);
 
@@ -144,9 +144,9 @@ test('tooltip trigger element has correct aria roles', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-tooltip data-test-tooltip=true placement="bottom-end"}}
+      {{#adde-tooltip data-test-tooltip=true placement="bottom-end"}}
         template block text
-      {{/ice-tooltip}}
+      {{/adde-tooltip}}
     </div>
   `);
 
@@ -170,9 +170,9 @@ test('tooltip is keyboard accessible', async function(assert) {
   this.render(hbs`
     <button>
       Target
-      {{#ice-tooltip data-test-tooltip=true placement="bottom-end"}}
+      {{#adde-tooltip data-test-tooltip=true placement="bottom-end"}}
         template block text
-      {{/ice-tooltip}}
+      {{/adde-tooltip}}
     </button>
   `);
 

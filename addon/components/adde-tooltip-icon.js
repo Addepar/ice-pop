@@ -4,29 +4,29 @@ import { attribute, className, classNames, tagName } from 'ember-decorators/comp
 import { argument } from '@ember-decorators/argument';
 import { type } from '@ember-decorators/argument/type';
 
-import layout from '../templates/components/ice-tooltip-icon';
+import layout from '../templates/components/adde-tooltip-icon';
 
 /**
  * A tooltip that has an icon as its target element,
  * which is currently by default a font awesome icon.
  *
  * ```hbs
- * {{#ice-tooltip-icon}}
+ * {{#adde-tooltip-icon}}
  *   Icon tooltip with defaults
- * {{/ice-tooltip-icon}}
+ * {{/adde-tooltip-icon}}
  *
- * {{#ice-tooltip-icon placement="bottom"}}
+ * {{#adde-tooltip-icon placement="bottom"}}
  *   Icon tooltip with custom placement
- * {{/ice-tooltip-icon}}
+ * {{/adde-tooltip-icon}}
  *
- * {{#ice-tooltip-icon iconClass="fa-warning" tooltipClass="error-tooltip"}}
+ * {{#adde-tooltip-icon iconClass="fa-warning" tooltipClass="error-tooltip"}}
  *   Icon tooltip with custom icon class and custom tooltip class
- * {{/ice-tooltip-icon}}
+ * {{/adde-tooltip-icon}}
  * ```
  */
 @tagName('i')
 @classNames('fa', 'tooltip-icon')
-export default class IceTooltipIcon extends Component {
+export default class AddeTooltipIcon extends Component {
   layout = layout;
 
   // Make the tooltip icon tabbable

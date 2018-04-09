@@ -20,7 +20,7 @@ function hasTransition(element) {
 }
 
 /**
- * Private component used by ice-pop internally. This component handles the logic
+ * Private component used by adde-pop internally. This component handles the logic
  * surrounding animation, including determining if animations should happen at all.
  */
 @tagName('')

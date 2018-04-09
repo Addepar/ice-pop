@@ -3,11 +3,11 @@ import hbs from 'htmlbars-inline-precompile';
 
 import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
-import IcePopoverPage from '@addepar/ice-pop/test-support/pages/ice-popover';
+import AddePopoverPage from '@addepar/pop-menu/test-support/pages/adde-popover';
 
-const PopoverHelper = IcePopoverPage.extend({ scope: '[data-test-popover]' });
+const PopoverHelper = AddePopoverPage.extend({ scope: '[data-test-popover]' });
 
-moduleForComponent('ice-popover', 'Integration | Component | ice-popover', {
+moduleForComponent('adde-popover', 'Integration | Component | adde-popover', {
   integration: true
 });
 
@@ -17,9 +17,9 @@ test('popover works', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-popover data-test-popover=true}}
+      {{#adde-popover data-test-popover=true}}
         template block text
-      {{/ice-popover}}
+      {{/adde-popover}}
     </div>
   `);
 
@@ -45,9 +45,9 @@ test('popover box closes when element outside of popover is clicked', async func
       <div data-test-outside-element></div>
       <div>
         Target
-        {{#ice-popover data-test-popover=true}}
+        {{#adde-popover data-test-popover=true}}
           template block text
-        {{/ice-popover}}
+        {{/adde-popover}}
       </div>
     </div>
   `);
@@ -74,11 +74,11 @@ test('clicking inside popover only closes for designated elements', async functi
   this.render(hbs`
     <div>
       Target
-      {{#ice-popover data-test-popover=true placement="bottom-start"}}
+      {{#adde-popover data-test-popover=true placement="bottom-start"}}
         template block text
         <button disabled data-close>Close Me</button>
         <button data-test-close data-close>Close Me</button>
-      {{/ice-popover}}
+      {{/adde-popover}}
     </div>
   `);
 
@@ -113,9 +113,9 @@ test('popover box modifier class can be added', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-popover data-test-popover=true class="foobar"}}
+      {{#adde-popover data-test-popover=true class="foobar"}}
         template block text
-      {{/ice-popover}}
+      {{/adde-popover}}
     </div>
   `);
 
@@ -136,9 +136,9 @@ test('popover box direction can be modified', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+      {{#adde-popover data-test-popover=true placement="bottom-end"}}
         template block text
-      {{/ice-popover}}
+      {{/adde-popover}}
     </div>
   `);
 
@@ -155,9 +155,9 @@ test('popover header is rendered when title is passed in', async function(assert
   this.render(hbs`
     <div>
       Target
-      {{#ice-popover data-test-popover=true placement="bottom-start" popoverTitle="Foo"}}
+      {{#adde-popover data-test-popover=true placement="bottom-start" popoverTitle="Foo"}}
         template block text
-      {{/ice-popover}}
+      {{/adde-popover}}
     </div>
   `);
 
@@ -175,9 +175,9 @@ test('popover trigger element is marked as active when open', async function(ass
   this.render(hbs`
     <div>
       Target
-      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+      {{#adde-popover data-test-popover=true placement="bottom-end"}}
         template block text
-      {{/ice-popover}}
+      {{/adde-popover}}
     </div>
   `);
 
@@ -200,9 +200,9 @@ test('popover trigger element has correct aria roles', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+      {{#adde-popover data-test-popover=true placement="bottom-end"}}
         template block text
-      {{/ice-popover}}
+      {{/adde-popover}}
     </div>
   `);
 
@@ -226,9 +226,9 @@ test('popover is keyboard accessible', async function(assert) {
   this.render(hbs`
     <button>
       Target
-      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+      {{#adde-popover data-test-popover=true placement="bottom-end"}}
         <button data-close>Close</button>
-      {{/ice-popover}}
+      {{/adde-popover}}
     </button>
   `);
 
@@ -278,10 +278,10 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   this.render(hbs`
     <button>
       Target
-      {{#ice-popover data-test-popover=true placement="bottom-end"}}
+      {{#adde-popover data-test-popover=true placement="bottom-end"}}
         <button data-test-button data-close>Close</button>
         <button>Foo</button>
-      {{/ice-popover}}
+      {{/adde-popover}}
     </button>
   `);
 
@@ -316,7 +316,7 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   assert.ok(!popover.content.buttonWithFocus.isPresent, 'first button does not have focus');
 });
 
-moduleForComponent('ice-popover', 'Unit | Component | ice-popover', {
+moduleForComponent('adde-popover', 'Unit | Component | adde-popover', {
   unit: true
 });
 

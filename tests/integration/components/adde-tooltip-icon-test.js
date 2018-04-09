@@ -1,11 +1,11 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import IceTooltipIconPage from '@addepar/ice-pop/test-support/pages/ice-tooltip-icon';
+import AddeTooltipIconPage from '@addepar/pop-menu/test-support/pages/adde-tooltip-icon';
 
-const IconHelper = IceTooltipIconPage.extend({ scope: '[data-test-tooltip-icon]' });
+const IconHelper = AddeTooltipIconPage.extend({ scope: '[data-test-tooltip-icon]' });
 
-moduleForComponent('ice-tooltip-icon', 'Integration | Component | ice-tooltip-icon', {
+moduleForComponent('adde-tooltip-icon', 'Integration | Component | adde-tooltip-icon', {
   integration: true
 });
 
@@ -13,9 +13,9 @@ test('target icon renders', async function(assert) {
   assert.expect(2);
 
   this.render(hbs`
-    {{#ice-tooltip-icon data-test-tooltip-icon=true}}
+    {{#adde-tooltip-icon data-test-tooltip-icon=true}}
       template block text
-    {{/ice-tooltip-icon}}
+    {{/adde-tooltip-icon}}
   `);
 
   let icon = IconHelper.create();
@@ -28,9 +28,9 @@ test('tooltip works as expected', async function(assert) {
   assert.expect(3);
 
   this.render(hbs`
-    {{#ice-tooltip-icon data-test-tooltip-icon=true}}
+    {{#adde-tooltip-icon data-test-tooltip-icon=true}}
       template block text
-    {{/ice-tooltip-icon}}
+    {{/adde-tooltip-icon}}
   `);
 
   let icon = IconHelper.create();
@@ -49,9 +49,9 @@ test('tooltip icon class can be modified', async function(assert) {
   assert.expect(2);
 
   this.render(hbs`
-    {{#ice-tooltip-icon data-test-tooltip-icon=true iconClass="fa-exclamation"}}
+    {{#adde-tooltip-icon data-test-tooltip-icon=true iconClass="fa-exclamation"}}
       template block text
-    {{/ice-tooltip-icon}}
+    {{/adde-tooltip-icon}}
   `);
 
   let icon = IconHelper.create();
@@ -64,9 +64,9 @@ test('tooltip box modifier class can be added', async function(assert) {
   assert.expect(1);
 
   this.render(hbs`
-    {{#ice-tooltip-icon data-test-tooltip-icon=true tooltipClass="error-tooltip"}}
+    {{#adde-tooltip-icon data-test-tooltip-icon=true tooltipClass="error-tooltip"}}
       template block text
-    {{/ice-tooltip-icon}}
+    {{/adde-tooltip-icon}}
   `);
 
   let icon = IconHelper.create();
@@ -80,9 +80,9 @@ test('tooltip box direction can be modified', async function(assert) {
   assert.expect(1);
 
   this.render(hbs`
-    {{#ice-tooltip-icon data-test-tooltip-icon=true placement="bottom-end"}}
+    {{#adde-tooltip-icon data-test-tooltip-icon=true placement="bottom-end"}}
       template block text
-    {{/ice-tooltip-icon}}
+    {{/adde-tooltip-icon}}
   `);
 
   let icon = IconHelper.create();

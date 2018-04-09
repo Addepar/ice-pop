@@ -3,11 +3,11 @@ import hbs from 'htmlbars-inline-precompile';
 
 import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
-import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
+import AddeDropdownPage from '@addepar/pop-menu/test-support/pages/adde-dropdown';
 
-const DropdownHelper = IceDropdownPage.extend({ scope: '[data-test-dropdown]' });
+const DropdownHelper = AddeDropdownPage.extend({ scope: '[data-test-dropdown]' });
 
-moduleForComponent('ice-dropdown', 'Integration | Component | ice-dropdown', {
+moduleForComponent('adde-dropdown', 'Integration | Component | adde-dropdown', {
   integration: true
 });
 
@@ -17,9 +17,9 @@ test('dropdown works', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true}}
+      {{#adde-dropdown data-test-dropdown=true}}
         template block text
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
@@ -45,9 +45,9 @@ test('dropdown box closes when element outside of dropdown is clicked', async fu
       <div data-test-outside-element></div>
       <div>
         Target
-        {{#ice-dropdown data-test-dropdown=true}}
+        {{#adde-dropdown data-test-dropdown=true}}
           template block text
-        {{/ice-dropdown}}
+        {{/adde-dropdown}}
       </div>
     </div>
   `);
@@ -74,14 +74,14 @@ test('clicking inside dropdown only closes for certain elements', async function
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true}}
+        <ul class="adde-dropdown-menu">
           <li class="list-group-header" data-test-menu-header>Group Header</li>
           <li><a data-close disabled>Lorem ipsum</a></li>
           <li class="list-divider" data-test-list-divider></li>
           <li data-test-close-item data-close>Foo bar baz</li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
@@ -126,9 +126,9 @@ test('dropdown box modifier class can be added', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true class="foobar"}}
+      {{#adde-dropdown data-test-dropdown=true class="foobar"}}
         template block text
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
@@ -149,9 +149,9 @@ test('dropdown box direction can be modified', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true placement="bottom-end"}}
+      {{#adde-dropdown data-test-dropdown=true placement="bottom-end"}}
         template block text
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
@@ -168,9 +168,9 @@ test('dropdown trigger element is marked as active when open', async function(as
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true placement="bottom-end"}}
+      {{#adde-dropdown data-test-dropdown=true placement="bottom-end"}}
         template block text
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
@@ -193,9 +193,9 @@ test('dropdown trigger element has correct aria roles', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true placement="bottom-end"}}
+      {{#adde-dropdown data-test-dropdown=true placement="bottom-end"}}
         template block text
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
@@ -219,11 +219,11 @@ test('dropdown is keyboard accessible', async function(assert) {
   this.render(hbs`
     <button>
       Target
-      {{#ice-dropdown data-test-dropdown=true placement="right-start"}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true placement="right-start"}}
+        <ul class="adde-dropdown-menu">
           <li><button data-test-menu-item data-close>Item</button></li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </button>
   `);
 
@@ -270,12 +270,12 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   this.render(hbs`
     <button>
       Target
-      {{#ice-dropdown data-test-dropdown=true placement="right-start"}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true placement="right-start"}}
+        <ul class="adde-dropdown-menu">
           <li><button data-test-menu-item>First Item</button></li>
           <li><button>Another Item</button></li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </button>
   `);
 

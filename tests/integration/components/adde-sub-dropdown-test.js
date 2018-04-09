@@ -4,10 +4,10 @@ import { triggerEvent } from 'ember-native-dom-helpers';
 
 import PageObject, { clickable, triggerable } from 'ember-classy-page-object';
 
-import IceDropdownPage from '@addepar/ice-pop/test-support/pages/ice-dropdown';
-import IceSubDropdownPage from '@addepar/ice-pop/test-support/pages/ice-sub-dropdown';
+import AddeDropdownPage from '@addepar/pop-menu/test-support/pages/adde-dropdown';
+import AddeSubDropdownPage from '@addepar/pop-menu/test-support/pages/adde-sub-dropdown';
 
-moduleForComponent('ice-sub-dropdown', 'Integration | Component | ice-sub-dropdown', {
+moduleForComponent('adde-sub-dropdown', 'Integration | Component | adde-sub-dropdown', {
   integration: true
 });
 
@@ -17,25 +17,25 @@ test('sub dropdown box renders when hovering target list item', async function(a
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true}}
+        <ul class="adde-dropdown-menu">
           <li>
             <a>Foo bar baz</a>
-            {{#ice-sub-dropdown data-test-sub-dropdown=true}}
-              <ul class="ice-dropdown-menu">
+            {{#adde-sub-dropdown data-test-sub-dropdown=true}}
+              <ul class="adde-dropdown-menu">
                 <li><a>Foo bar baz</a></li>
               </ul>
-            {{/ice-sub-dropdown}}
+            {{/adde-sub-dropdown}}
           </li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
-  let dropdown = IceDropdownPage.extend({
+  let dropdown = AddeDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: IceSubDropdownPage.extend({
+      subDropdown: AddeSubDropdownPage.extend({
         scope: '[data-test-sub-dropdown]'
       })
     }
@@ -90,18 +90,18 @@ test('sub dropdown box closes when element outside of sub dropdown is clicked', 
       <div data-test-outside-element></div>
       <div>
         Target
-        {{#ice-dropdown data-test-dropdown=true}}
-          <ul class="ice-dropdown-menu">
+        {{#adde-dropdown data-test-dropdown=true}}
+          <ul class="adde-dropdown-menu">
             <li>
               <a>Foo bar baz</a>
-              {{#ice-sub-dropdown data-test-sub-dropdown=true}}
-                <ul class="ice-dropdown-menu">
+              {{#adde-sub-dropdown data-test-sub-dropdown=true}}
+                <ul class="adde-dropdown-menu">
                   <li><a>Foo bar baz</a></li>
                 </ul>
-              {{/ice-sub-dropdown}}
+              {{/adde-sub-dropdown}}
             </li>
           </ul>
-        {{/ice-dropdown}}
+        {{/adde-dropdown}}
       </div>
     </div>
   `);
@@ -110,10 +110,10 @@ test('sub dropdown box closes when element outside of sub dropdown is clicked', 
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
-    dropdown: IceDropdownPage.extend({
+    dropdown: AddeDropdownPage.extend({
       scope: '[data-test-dropdown]',
       content: {
-        subDropdown: IceSubDropdownPage.extend({
+        subDropdown: AddeSubDropdownPage.extend({
           scope: '[data-test-sub-dropdown]'
         })
       }
@@ -141,27 +141,27 @@ test('clicking inside sub dropdown only closes for certain elements', async func
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true}}
+        <ul class="adde-dropdown-menu">
           <li><a>Foo bar baz</a>
-          {{#ice-sub-dropdown data-test-sub-dropdown=true}}
-            <ul class="ice-dropdown-menu">
+          {{#adde-sub-dropdown data-test-sub-dropdown=true}}
+            <ul class="adde-dropdown-menu">
               <li class="list-group-header" data-test-menu-header>Group Header</li>
               <li><a data-close disabled>Lorem ipsum</a></li>
               <li class="list-divider" data-test-list-divider></li>
               <li data-test-close-item data-close>Foo bar baz</li>
             </ul>
-          {{/ice-sub-dropdown}}
+          {{/adde-sub-dropdown}}
           </li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
-  let dropdown = IceDropdownPage.extend({
+  let dropdown = AddeDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: IceSubDropdownPage.extend({
+      subDropdown: AddeSubDropdownPage.extend({
         scope: '[data-test-sub-dropdown]',
 
         content: {
@@ -215,25 +215,25 @@ test('sub dropdown direction can be modified', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true}}
+        <ul class="adde-dropdown-menu">
           <li>
             <a>Foo bar baz</a>
-            {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
-              <ul class="ice-dropdown-menu">
+            {{#adde-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+              <ul class="adde-dropdown-menu">
                 <li><a>Foo bar baz</a></li>
               </ul>
-            {{/ice-sub-dropdown}}
+            {{/adde-sub-dropdown}}
           </li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
-  let dropdown = IceDropdownPage.extend({
+  let dropdown = AddeDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: IceSubDropdownPage.extend({
+      subDropdown: AddeSubDropdownPage.extend({
         scope: '[data-test-sub-dropdown]'
       })
     }
@@ -253,25 +253,25 @@ test('sub dropdown button is active when open', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true}}
+        <ul class="adde-dropdown-menu">
           <li>
             <a>Foo bar baz</a>
-            {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
-              <ul class="ice-dropdown-menu">
+            {{#adde-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+              <ul class="adde-dropdown-menu">
                 <li><a>Foo bar baz</a></li>
               </ul>
-            {{/ice-sub-dropdown}}
+            {{/adde-sub-dropdown}}
           </li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
-  let dropdown = IceDropdownPage.extend({
+  let dropdown = AddeDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: IceSubDropdownPage.extend({
+      subDropdown: AddeSubDropdownPage.extend({
         scope: '[data-test-sub-dropdown]'
       })
     }
@@ -294,26 +294,26 @@ test('sub dropdown button has correct aria roles', async function(assert) {
   this.render(hbs`
     <div>
       Target
-      {{#ice-dropdown data-test-dropdown=true}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true}}
+        <ul class="adde-dropdown-menu">
           <li>
             <a>Foo bar baz
-              {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
-                <ul class="ice-dropdown-menu">
+              {{#adde-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+                <ul class="adde-dropdown-menu">
                   <li><a>Foo bar baz</a></li>
                 </ul>
-              {{/ice-sub-dropdown}}
+              {{/adde-sub-dropdown}}
             </a>
           </li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </div>
   `);
 
-  let dropdown = IceDropdownPage.extend({
+  let dropdown = AddeDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: IceSubDropdownPage.extend({
+      subDropdown: AddeSubDropdownPage.extend({
         scope: '[data-test-sub-dropdown]'
       })
     }
@@ -341,26 +341,26 @@ test('sub dropdown is keyboard accessible', async function(assert) {
   this.render(hbs`
     <button>
       Target
-      {{#ice-dropdown data-test-dropdown=true}}
-        <ul class="ice-dropdown-menu">
+      {{#adde-dropdown data-test-dropdown=true}}
+        <ul class="adde-dropdown-menu">
           <li>
             <a>Foo bar baz
-              {{#ice-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
-                <ul class="ice-dropdown-menu">
+              {{#adde-sub-dropdown data-test-sub-dropdown=true placement="right-end"}}
+                <ul class="adde-dropdown-menu">
                   <li><button data-test-menu-item data-close>Item</button></li>
                 </ul>
-              {{/ice-sub-dropdown}}
+              {{/adde-sub-dropdown}}
             </a>
           </li>
         </ul>
-      {{/ice-dropdown}}
+      {{/adde-dropdown}}
     </button>
   `);
 
-  let dropdown = IceDropdownPage.extend({
+  let dropdown = AddeDropdownPage.extend({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: IceSubDropdownPage.extend({
+      subDropdown: AddeSubDropdownPage.extend({
         scope: '[data-test-sub-dropdown]',
         trigger: {
           focus: triggerable('focus'),

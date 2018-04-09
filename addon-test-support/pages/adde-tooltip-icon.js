@@ -2,7 +2,7 @@ import PageObject from 'ember-classy-page-object';
 import { findElement } from 'ember-classy-page-object/extend';
 import { hasClass } from 'ember-classy-page-object';
 
-import TooltipPage from './ice-tooltip';
+import TooltipPage from './adde-tooltip';
 
 export default PageObject.extend({
   /**
