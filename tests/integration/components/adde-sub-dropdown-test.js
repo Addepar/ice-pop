@@ -4,8 +4,8 @@ import { triggerEvent } from 'ember-native-dom-helpers';
 
 import PageObject, { clickable, triggerable } from 'ember-classy-page-object';
 
-import AddeDropdownPage from '@addepar/adde-pop/test-support/pages/adde-dropdown';
-import AddeSubDropdownPage from '@addepar/adde-pop/test-support/pages/adde-sub-dropdown';
+import AddeDropdownPage from '@addepar/pop-menu/test-support/pages/adde-dropdown';
+import AddeSubDropdownPage from '@addepar/pop-menu/test-support/pages/adde-sub-dropdown';
 
 moduleForComponent('adde-sub-dropdown', 'Integration | Component | adde-sub-dropdown', {
   integration: true

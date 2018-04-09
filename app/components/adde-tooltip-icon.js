@@ -1,1 +1,1 @@
-export { default } from '@addepar/adde-pop/components/adde-tooltip-icon';
+export { default } from '@addepar/pop-menu/components/adde-tooltip-icon';

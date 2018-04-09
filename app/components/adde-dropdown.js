@@ -1,1 +1,1 @@
-export { default } from '@addepar/adde-pop/components/adde-dropdown';
+export { default } from '@addepar/pop-menu/components/adde-dropdown';

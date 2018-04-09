@@ -1,5 +1,4 @@
-@import 'adde-box/index';
-@import '../styles/adde-pop/index';
+@import '@addepar/style-toolbox';
 
 $demo-container-width: 400px;
 
@@ -57,7 +56,7 @@ $demo-container-width: 400px;
 }
 
 // tooltip-icon is temporarily defined here for the sake of testing,
-// until font awesome gets included by addepar-style-toolbox
+// until font awesome gets included by @addepar/style-toolbox
 .fa-question-circle::before {
   content: '?';
   width: 14px;
@@ -73,7 +72,7 @@ $demo-container-width: 400px;
 
 
 // TODO: The caret here is currently temporary for development.
-// Update this with font awesome when it is finally included in adde-box.
+// Update this with font awesome when it is finally included in @addepar/style-toolbox.
 .adde-dropdown-caret {
   display: inline-block;
   margin-left: $spacing-small;

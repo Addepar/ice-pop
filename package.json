@@ -30,7 +30,7 @@
   "devDependencies": {
     "@addepar/eslint-config": "^3.0.1",
     "@addepar/sass-lint-config": "^2.0.0",
-    "@addepar/style-toolbox": "^0.1.0",
+    "@addepar/style-toolbox": "^0.4.0",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-cli": "~2.16.2",

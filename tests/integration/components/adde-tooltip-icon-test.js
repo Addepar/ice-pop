@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import AddeTooltipIconPage from '@addepar/adde-pop/test-support/pages/adde-tooltip-icon';
+import AddeTooltipIconPage from '@addepar/pop-menu/test-support/pages/adde-tooltip-icon';
 
 const IconHelper = AddeTooltipIconPage.extend({ scope: '[data-test-tooltip-icon]' });
 

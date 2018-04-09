@@ -1,1 +1,1 @@
-export { default } from '@addepar/adde-pop/components/adde-popover';
+export { default } from '@addepar/pop-menu/components/adde-popover';

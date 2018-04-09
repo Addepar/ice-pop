@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 
 import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
-import AddeDropdownPage from '@addepar/adde-pop/test-support/pages/adde-dropdown';
+import AddeDropdownPage from '@addepar/pop-menu/test-support/pages/adde-dropdown';
 
 const DropdownHelper = AddeDropdownPage.extend({ scope: '[data-test-dropdown]' });
 

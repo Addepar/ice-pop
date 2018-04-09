@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 
 import { triggerEvent } from 'ember-native-dom-helpers';
 
-import AddeTooltipPage from '@addepar/adde-pop/test-support/pages/adde-tooltip';
+import AddeTooltipPage from '@addepar/pop-menu/test-support/pages/adde-tooltip';
 
 import { hasClass, triggerable } from 'ember-classy-page-object';
 

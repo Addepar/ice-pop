@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 
 import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
 
-import AddePopoverPage from '@addepar/adde-pop/test-support/pages/adde-popover';
+import AddePopoverPage from '@addepar/pop-menu/test-support/pages/adde-popover';
 
 const PopoverHelper = AddePopoverPage.extend({ scope: '[data-test-popover]' });
 
