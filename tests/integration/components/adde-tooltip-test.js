@@ -139,7 +139,7 @@ test('tooltip trigger element is marked as active when open', async function(ass
 });
 
 test('tooltip trigger element has correct aria roles', async function(assert) {
-  assert.expect(4);
+  assert.expect(5);
 
   this.render(hbs`
     <div>
@@ -158,6 +158,7 @@ test('tooltip trigger element has correct aria roles', async function(assert) {
   await tooltip.open();
 
   assert.equal(tooltip.trigger.isAriaExpanded, 'true', 'tooltip trigger role aria-expanded is true when the tooltip is open');
+  assert.ok(tooltip.trigger.hasAriaDescribedBy, 'tooltip trigger has aria-describedby role');
 
   await tooltip.close();
 

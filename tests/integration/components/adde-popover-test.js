@@ -195,7 +195,7 @@ test('popover trigger element is marked as active when open', async function(ass
 });
 
 test('popover trigger element has correct aria roles', async function(assert) {
-  assert.expect(4);
+  assert.expect(5);
 
   this.render(hbs`
     <div>
@@ -214,6 +214,7 @@ test('popover trigger element has correct aria roles', async function(assert) {
   await popover.open();
 
   assert.equal(popover.trigger.isAriaExpanded, 'true', 'popover trigger role aria-expanded is true when the popover is open');
+  assert.ok(popover.trigger.hasAriaDescribedBy, 'popover trigger has aria-describedby role');
 
   await popover.close();
 
@@ -260,8 +261,6 @@ test('popover is keyboard accessible', async function(assert) {
 
   assert.ok(popover.isOpen, 'popover renders after pressing space on the target');
 
-  // tab moves focus to dropdown container
-  await popover.trigger.tab();
   await popover.content.escape();
 
   assert.ok(!popover.isOpen, 'popover removed after pressing escape on the popover container');
