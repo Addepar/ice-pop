@@ -289,7 +289,7 @@ test('sub dropdown button is active when open', async function(assert) {
 });
 
 test('sub dropdown button has correct aria roles', async function(assert) {
-  assert.expect(4);
+  assert.expect(5);
 
   this.render(hbs`
     <div>
@@ -329,6 +329,7 @@ test('sub dropdown button has correct aria roles', async function(assert) {
   await subDropdown.open();
 
   assert.equal(subDropdown.trigger.isAriaExpanded, 'true', 'subdropdown trigger role aria-expanded is true when the subdropdown is open');
+  assert.ok(subDropdown.trigger.hasAriaDescribedBy, 'subdropdown trigger has aria-describedby role');
 
   await subDropdown.close();
 

@@ -1,6 +1,9 @@
 @import '@addepar/style-toolbox';
 
 $demo-container-width: 400px;
+// appease sass lint with variables, even though this is a dummy css file :P
+$white: #ffffff;
+$grey: #808080;
 
 .demo-header,
 .title {
@@ -12,14 +15,14 @@ $demo-container-width: 400px;
   width: 400px;
   overflow: scroll;
   margin: auto;
-  border: 2px solid grey;
+  border: 2px solid $grey;
 }
 
 .item-container {
   height: 1000px;
   width: 800px;
 
-  background-color: white;
+  background-color: $white;
 
   display: flex;
   flex-direction: column;
@@ -40,7 +43,7 @@ $demo-container-width: 400px;
 }
 
 .demo-item {
-  flex: 1 0 $demo-container-width/3;
+  flex: 1 0 $demo-container-width / 3;
   margin-bottom: 20px;
 }
 
@@ -52,7 +55,7 @@ $demo-container-width: 400px;
   height: 20px;
   border-radius: 50%;
   display: inline-block;
-  background-color: grey;
+  background-color: $grey;
 }
 
 // tooltip-icon is temporarily defined here for the sake of testing,
@@ -81,10 +84,6 @@ $demo-container-width: 400px;
     content: '\0203A';
     display: block;
     color: inherit;
-  }
-
-  &.right {
-    // nothing
   }
 
   &.left {

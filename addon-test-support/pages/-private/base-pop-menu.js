@@ -55,7 +55,9 @@ export default PageObject.extend({
 
     hasAriaPopup: attribute('aria-haspopup'),
 
-    isAriaExpanded: attribute('aria-expanded')
+    isAriaExpanded: attribute('aria-expanded'),
+
+    hasAriaDescribedBy: attribute('aria-describedby')
   },
 
   /**

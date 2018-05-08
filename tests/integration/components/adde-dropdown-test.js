@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-object';
+import PageObject, { clickable, hasClass, is, triggerable } from 'ember-classy-page-object';
 
 import AddeDropdownPage from '@addepar/pop-menu/test-support/pages/adde-dropdown';
 
@@ -188,7 +188,7 @@ test('dropdown trigger element is marked as active when open', async function(as
 });
 
 test('dropdown trigger element has correct aria roles', async function(assert) {
-  assert.expect(4);
+  assert.expect(5);
 
   this.render(hbs`
     <div>
@@ -207,6 +207,7 @@ test('dropdown trigger element has correct aria roles', async function(assert) {
   await dropdown.open();
 
   assert.equal(dropdown.trigger.isAriaExpanded, 'true', 'dropdown trigger role aria-expanded is true when the dropdown is open');
+  assert.ok(dropdown.trigger.hasAriaDescribedBy, 'dropdown trigger has aria-describedby role');
 
   await dropdown.close();
 
@@ -214,14 +215,15 @@ test('dropdown trigger element has correct aria roles', async function(assert) {
 });
 
 test('dropdown is keyboard accessible', async function(assert) {
-  assert.expect(6);
+  assert.expect(12);
 
   this.render(hbs`
     <button>
       Target
       {{#adde-dropdown data-test-dropdown=true placement="right-start"}}
         <ul class="adde-dropdown-menu">
-          <li><button data-test-menu-item data-close>Item</button></li>
+          <li><button data-test-menu-item1 data-close>Item</button></li>
+          <li><button data-test-menu-item2 data-close>Item</button></li>
         </ul>
       {{/adde-dropdown}}
     </button>
@@ -232,11 +234,17 @@ test('dropdown is keyboard accessible', async function(assert) {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
-      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } }),
+      arrowdown: triggerable('keydown', null, { eventProperties: { key: 'ArrowDown' } }),
+      arrowup: triggerable('keydown', null, { eventProperties: { key: 'ArrowUp' } })
     },
     content: {
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
-      enterOnMenuItem: triggerable('keydown', '[data-test-menu-item]', { eventProperties: { key: 'Enter' } })
+      arrowdown: triggerable('keydown', null, { eventProperties: { key: 'ArrowDown' } }),
+      arrowup: triggerable('keydown', null, { eventProperties: { key: 'ArrowUp' } }),
+      enterOnMenuItem: triggerable('keydown', '[data-test-menu-item1]', { eventProperties: { key: 'Enter' } }),
+      firstItemHasFocus: is(':focus', '[data-test-menu-item1]'),
+      lastItemHasFocus: is(':focus', '[data-test-menu-item2]')
     }
   }).create();
 
@@ -258,7 +266,25 @@ test('dropdown is keyboard accessible', async function(assert) {
 
   assert.ok(!dropdown.isOpen, 'dropdown removed after pressing escape on the dropdown container');
 
-  await dropdown.trigger.enter();
+  await dropdown.trigger.arrowdown();
+
+  assert.ok(dropdown.isOpen, 'dropdown renders after pressing down arrow on the target');
+  assert.ok(dropdown.content.firstItemHasFocus, 'first item has focus');
+
+  await dropdown.content.arrowdown();
+
+  assert.ok(dropdown.content.lastItemHasFocus, 'next item has focus on arrow down');
+
+  await dropdown.content.escape();
+  await dropdown.trigger.arrowup();
+
+  assert.ok(dropdown.isOpen, 'dropdown renders after pressing up arrow on the target');
+  assert.ok(dropdown.content.lastItemHasFocus, 'last item has focus');
+
+  await dropdown.content.arrowup();
+
+  assert.ok(dropdown.content.firstItemHasFocus, 'previous item has focus on arrow up');
+
   await dropdown.content.enterOnMenuItem();
 
   assert.ok(!dropdown.isOpen, 'dropdown removed after pressing enter on a data-close item');
