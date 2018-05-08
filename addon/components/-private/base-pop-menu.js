@@ -236,53 +236,56 @@ export default class BasePopMenuComponent extends Component {
   }
 
   /**
-   * Gets the list of focusable elements in the popper, focuses on the specified one.
-   * Also checks for active focusable elements.
-   * TODO: Make this a global helper?
-   * @param {string} position - 'first', 'last', 'previous', 'next'
-   * @param {boolean} active - whether it should try to find an active item first
+   * Focuses on the next or previous focusable element in the poppper.
+   * @param {string} position - 'prev', 'next'
    */
-  _focusOnFocusableElement(position = 'first', active = true) {
+  _focusOnFocusableElement(position = 'next') {
     let focusableElements = this._getFocusableElementsInPopper();
-    // Get starting index from what is already focused in the popper
+
+    // Get starting index from what is already focused in the popper.
     let targetIndex = Array.from(focusableElements).indexOf(document.activeElement);
+
+    if (position === 'next') {
+      targetIndex++;
+      if (targetIndex >= focusableElements.length) {
+        targetIndex = 0;
+      }
+    } else if (position === 'prev') {
+      targetIndex--;
+      if (targetIndex < 0) {
+        targetIndex = focusableElements.length - 1;
+      }
+    }
+
+    focusableElements[targetIndex].focus();
+  }
+
+  /**
+   * When entering popper for the first time, decide which element to land on.
+   * Land on active element if exists, otherwise land on provided position.
+   * @param  {string} position - first, last
+   */
+  _focusOnPopperEnter(position = 'first') {
+    let focusableElements = this._getFocusableElementsInPopper();
 
     // Don't bother doing anything if there are no focusable elements
     if (focusableElements.length > 0) {
 
-      // Determine focus target index
-      if (position === 'first') {
-        targetIndex = 0;
-      } else if (position === 'last') {
-        targetIndex = focusableElements.length - 1;
-      } else if (position === 'next') {
-        targetIndex++;
-        if (targetIndex >= focusableElements.length) {
-          targetIndex = 0;
-        }
-      } else if (position === 'prev') {
-        targetIndex--;
-        if (targetIndex < 0) {
-          targetIndex = focusableElements.length - 1;
+      let firstActiveElement = Array.from(focusableElements).find((element) => {
+        // TODO: this is too fragile, come up with something better,
+        // because there could be other active indicators that come along.
+        return /(selected|active)/.test(element.className) || element.checked;
+      });
+
+      if (firstActiveElement) {
+        firstActiveElement.focus();
+      } else {
+        if (position === 'first') {
+          focusableElements[0].focus();
+        } else if (position === 'last') {
+          focusableElements[focusableElements.length - 1].focus();
         }
       }
-
-      let focusElement = focusableElements[targetIndex];
-
-      // If "active" is true, we want to focus on the first active element,
-      // if there is one, instead of just the first regular element.
-      if (active) {
-        // get the first active element match if it exists
-        Array.from(focusableElements).some(function(element) {
-          // TODO: this is too fragile, come up with something better,
-          // because there could be other active indicators that come along.
-          if (/(selected|active)/.test(element.className) || element.checked) {
-            return focusElement = element;
-          }
-        });
-      }
-
-      focusElement.focus();
     }
   }
 
@@ -416,10 +419,10 @@ export default class BasePopMenuComponent extends Component {
       raf.schedule('layout', () => {
         if (keyCode === 'ArrowUp') {
           // Focus on last popper item for arrow up, which is moving backwards
-          this._focusOnFocusableElement('last');
+          this._focusOnPopperEnter('last');
         } else {
           // Otherwise focus on first focusable item in the popper
-          this._focusOnFocusableElement();
+          this._focusOnPopperEnter();
         }
       }, this._token);
     } else if ((keyCode === 'Escape' || keyCode === 'Enter') && this.get('isOpen')) {
@@ -477,11 +480,11 @@ export default class BasePopMenuComponent extends Component {
       // will execute, thus naturally landing on the previous tabbable item in the DOM before the trigger.
       this._closePopoverAndFocusTrigger();
     } else if (keyCode === 'ArrowDown' && this.get('arrowNavigation')) {
-      // focus on next item, regardless of active elements, if arrow nav is enabled
-      this._focusOnFocusableElement('next', false);
+      // focus on next item, if arrow nav is enabled
+      this._focusOnFocusableElement('next');
     } else if (keyCode === 'ArrowUp' && this.get('arrowNavigation')) {
-      // focus on previous item, regardless of active elements, if arrow nav is enabled
-      this._focusOnFocusableElement('prev', false);
+      // focus on previous item, if arrow nav is enabled
+      this._focusOnFocusableElement('prev');
     }
   };
 }

@@ -50,15 +50,17 @@ export default class AddeDropdownComponent extends BasePopMenuComponent {
 
   triggerEvent = 'click';
 
+  // ----- Public Settings ------
+
   /**
    * Since dropdowns primarily contain adde-dropdown-menu lists,
    * they likely always need arrow navigation mode.
    * If your dropdown doesn't use this list and instead uses other semantic elements
    * that automatically use arrow navigation, you can turn this off.
    */
+  @argument
+  @type('boolean')
   arrowNavigation = true;
-
-  // ----- Public Settings ------
 
   /**
    * Used to determine the placement of the dropdown
