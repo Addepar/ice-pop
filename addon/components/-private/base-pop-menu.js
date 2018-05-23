@@ -136,7 +136,7 @@ export default class BasePopMenuComponent extends Component {
   }
 
   constructor() {
-    super();
+    super(...arguments);
 
     this._popperClass = `adde-base-pop-menu ${this.class || ''} ${this.classNames.join(' ')}`;
 
