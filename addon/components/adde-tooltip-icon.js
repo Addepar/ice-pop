@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
-import { attribute, className, classNames, tagName } from 'ember-decorators/component';
+import { attribute, className, classNames, tagName } from '@ember-decorators/component';
 import { argument } from '@ember-decorators/argument';
 import { type } from '@ember-decorators/argument/type';
 
@@ -37,8 +37,9 @@ export default class AddeTooltipIcon extends Component {
   /**
    * The specific icon class that you want to use
    */
-  @className
+  @argument
   @type('string')
+  @className
   iconClass = 'fa-question-circle';
 
   /**
