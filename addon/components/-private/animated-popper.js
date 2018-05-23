@@ -2,8 +2,8 @@ import Component from '@ember/component';
 import { run } from '@ember/runloop';
 import { addObserver, removeObserver } from '@ember/object/observers';
 
-import { action } from 'ember-decorators/object';
-import { tagName } from 'ember-decorators/component';
+import { action } from '@ember-decorators/object';
+import { tagName } from '@ember-decorators/component';
 
 import { argument } from '@ember-decorators/argument';
 import { type, optional } from '@ember-decorators/argument/type';

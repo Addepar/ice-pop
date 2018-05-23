@@ -3,8 +3,8 @@ import { guidFor } from '@ember/object/internals';
 import { run } from '@ember/runloop';
 import { assert } from '@ember/debug';
 
-import { action } from 'ember-decorators/object';
-import { computed } from 'ember-decorators/object';
+import { action } from '@ember-decorators/object';
+import { computed } from '@ember-decorators/object';
 
 import { argument } from '@ember-decorators/argument';
 import { type, unionOf } from '@ember-decorators/argument/type';
