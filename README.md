@@ -1,13 +1,15 @@
-# ice-pop
+# addepar-pop-menu
 
 Ember Addons for popping things up. This includes popovers, dropdowns, and tooltips.
 
-Documentation for the components are here: https://component-library.addedev.com/docs/css-docs/section-ice-pop.html
-
 ## Installation
 
+```
+ember install @addepar/pop-menu
+```
+
 * `git clone <repository-url>` this repository
-* `cd ice-pop`
+* `cd addepar-pop-menu`
 * `npm install`
 
 ## Running
