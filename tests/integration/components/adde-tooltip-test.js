@@ -7,7 +7,7 @@ import AddeTooltipPage from '@addepar/pop-menu/test-support/pages/adde-tooltip';
 
 import { hasClass, triggerable } from 'ember-classy-page-object';
 
-const TooltipHelper = AddeTooltipPage.extend({ scope: '[data-test-tooltip]' });
+const TooltipHelper = AddeTooltipPage.extend('[data-test-tooltip]');
 
 moduleForComponent('adde-tooltip', 'Integration | Component | adde-tooltip', {
   integration: true
@@ -25,7 +25,7 @@ test('tooltip works', async function(assert) {
     </div>
   `);
 
-  let tooltip = TooltipHelper.create();
+  let tooltip = new TooltipHelper();
 
   assert.ok(!tooltip.isOpen, 'tooltip not rendered initially');
 
@@ -51,7 +51,7 @@ test('tooltip remains rendered when tooltip box itself is hovered', async functi
     </div>
   `);
 
-  let tooltip = TooltipHelper.create();
+  let tooltip = new TooltipHelper();
 
   assert.ok(!tooltip.isOpen, 'tooltip not rendered initially');
 
@@ -83,11 +83,11 @@ test('tooltip box modifier class can be added', async function(assert) {
     </div>
   `);
 
-  let tooltip = TooltipHelper.extend({
+  let tooltip = new TooltipHelper({
     content: {
       isErrored: hasClass('error-tooltip')
     }
-  }).create();
+  });
 
   await tooltip.open();
 
@@ -106,7 +106,7 @@ test('tooltip box direction can be modified', async function(assert) {
     </div>
   `);
 
-  let tooltip = TooltipHelper.create();
+  let tooltip = new TooltipHelper();
 
   await tooltip.open();
 
@@ -125,7 +125,7 @@ test('tooltip trigger element is marked as active when open', async function(ass
     </div>
   `);
 
-  let tooltip = TooltipHelper.create();
+  let tooltip = new TooltipHelper();
 
   assert.ok(!tooltip.trigger.isActive, 'tooltip trigger is not marked as active when the tooltip is closed');
 
@@ -150,7 +150,7 @@ test('tooltip trigger element has correct aria roles', async function(assert) {
     </div>
   `);
 
-  let tooltip = TooltipHelper.create();
+  let tooltip = new TooltipHelper();
 
   assert.ok(tooltip.trigger.hasAriaPopup, 'tooltip trigger has aria-haspopup role');
   assert.equal(tooltip.trigger.isAriaExpanded, 'false', 'tooltip trigger role aria-expanded is false');
@@ -177,12 +177,12 @@ test('tooltip is keyboard accessible', async function(assert) {
     </button>
   `);
 
-  let tooltip = TooltipHelper.extend({
+  let tooltip = new TooltipHelper({
     trigger: {
       focus: triggerable('focus'),
       blur: triggerable('blur')
     }
-  }).create();
+  });
 
   assert.ok(!tooltip.isOpen, 'tooltip not rendered initially');
 

@@ -32,14 +32,12 @@ test('sub dropdown box renders when hovering target list item', async function(a
     </div>
   `);
 
-  let dropdown = AddeDropdownPage.extend({
+  let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: AddeSubDropdownPage.extend({
-        scope: '[data-test-sub-dropdown]'
-      })
+      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
     }
-  }).create();
+  });
 
   let { subDropdown } = dropdown.content;
 
@@ -106,19 +104,17 @@ test('sub dropdown box closes when element outside of sub dropdown is clicked', 
     </div>
   `);
 
-  let content = PageObject.extend({
+  let content = new PageObject({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
     dropdown: AddeDropdownPage.extend({
       scope: '[data-test-dropdown]',
       content: {
-        subDropdown: AddeSubDropdownPage.extend({
-          scope: '[data-test-sub-dropdown]'
-        })
+        subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
       }
     })
-  }).create();
+  });
 
   let { dropdown } = content;
   let { subDropdown } = dropdown.content;
@@ -158,7 +154,7 @@ test('clicking inside sub dropdown only closes for certain elements', async func
     </div>
   `);
 
-  let dropdown = AddeDropdownPage.extend({
+  let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: AddeSubDropdownPage.extend({
@@ -173,7 +169,7 @@ test('clicking inside sub dropdown only closes for certain elements', async func
         }
       })
     }
-  }).create();
+  });
 
   let { subDropdown } = dropdown.content;
 
@@ -230,14 +226,12 @@ test('sub dropdown direction can be modified', async function(assert) {
     </div>
   `);
 
-  let dropdown = AddeDropdownPage.extend({
+  let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: AddeSubDropdownPage.extend({
-        scope: '[data-test-sub-dropdown]'
-      })
+      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
     }
-  }).create();
+  });
 
   let { subDropdown } = dropdown.content;
 
@@ -268,14 +262,12 @@ test('sub dropdown button is active when open', async function(assert) {
     </div>
   `);
 
-  let dropdown = AddeDropdownPage.extend({
+  let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: AddeSubDropdownPage.extend({
-        scope: '[data-test-sub-dropdown]'
-      })
+      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
     }
-  }).create();
+  });
 
   let { subDropdown } = dropdown.content;
 
@@ -310,14 +302,12 @@ test('sub dropdown button has correct aria roles', async function(assert) {
     </div>
   `);
 
-  let dropdown = AddeDropdownPage.extend({
+  let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: AddeSubDropdownPage.extend({
-        scope: '[data-test-sub-dropdown]'
-      })
+      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
     }
-  }).create();
+  });
 
   let { subDropdown } = dropdown.content;
 
@@ -358,7 +348,7 @@ test('sub dropdown is keyboard accessible', async function(assert) {
     </button>
   `);
 
-  let dropdown = AddeDropdownPage.extend({
+  let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
       subDropdown: AddeSubDropdownPage.extend({
@@ -373,7 +363,7 @@ test('sub dropdown is keyboard accessible', async function(assert) {
         }
       })
     }
-  }).create();
+  });
 
   let { subDropdown } = dropdown.content;
 

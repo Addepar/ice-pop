@@ -40,10 +40,10 @@ export default PageObject.extend({
   trigger: {
     resetScope: true,
     get scope() {
-      const parent = findElement(Ceibo.parent(this));
+      let parent = findElement(Ceibo.parent(this));
 
       // The parent may not be rendered either, so we can only grab the ID if it exists
-      const parentId = parent ? parent.getAttribute('id') : 'unrendered';
+      let parentId = parent ? parent.getAttribute('id') : 'unrendered';
 
       return `[data-popover-trigger="${parentId}"]`;
     },
@@ -66,10 +66,10 @@ export default PageObject.extend({
   content: {
     resetScope: true,
     get scope() {
-      const parent = findElement(Ceibo.parent(this));
+      let parent = findElement(Ceibo.parent(this));
 
       // The parent may not be rendered either, so we can only grab the ID if it exists
-      const parentId = parent ? parent.getAttribute('id') : 'unrendered';
+      let parentId = parent ? parent.getAttribute('id') : 'unrendered';
 
       return `[data-popover-content="${parentId}"]`;
     },

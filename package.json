@@ -20,7 +20,7 @@
     "@addepar/ember-toolbox": "^0.2.0",
     "@ember-decorators/argument": "^0.8.10",
     "@ember-decorators/babel-transforms": "^2.0.1",
-    "ember-classy-page-object": "^0.4.0",
+    "ember-classy-page-object": "^0.5.0",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-decorators": "^2.1.0",

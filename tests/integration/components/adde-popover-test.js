@@ -5,7 +5,7 @@ import PageObject, { clickable, hasClass, triggerable } from 'ember-classy-page-
 
 import AddePopoverPage from '@addepar/pop-menu/test-support/pages/adde-popover';
 
-const PopoverHelper = AddePopoverPage.extend({ scope: '[data-test-popover]' });
+const PopoverHelper = AddePopoverPage.extend('[data-test-popover]');
 
 moduleForComponent('adde-popover', 'Integration | Component | adde-popover', {
   integration: true
@@ -23,7 +23,7 @@ test('popover works', async function(assert) {
     </div>
   `);
 
-  let popover = PopoverHelper.create();
+  let popover = new PopoverHelper();
 
   assert.ok(!popover.isOpen, 'popover not rendered initially');
 
@@ -52,12 +52,12 @@ test('popover box closes when element outside of popover is clicked', async func
     </div>
   `);
 
-  let content = PageObject.extend({
+  let content = new PageObject({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
     popover: PopoverHelper
-  }).create();
+  });
 
   await content.popover.open();
 
@@ -82,13 +82,13 @@ test('clicking inside popover only closes for designated elements', async functi
     </div>
   `);
 
-  let popover = PopoverHelper.extend({
+  let popover = new PopoverHelper({
     content: {
       click: clickable(),
       clickDisabled: clickable('[disabled]'),
       clickCloseButton: clickable('[data-test-close]')
     }
-  }).create();
+  });
 
   await popover.open();
 
@@ -119,11 +119,11 @@ test('popover box modifier class can be added', async function(assert) {
     </div>
   `);
 
-  let popover = PopoverHelper.extend({
+  let popover = new PopoverHelper({
     content: {
       hasAdditionalClass: hasClass('foobar')
     }
-  }).create();
+  });
 
   await popover.open();
 
@@ -142,7 +142,7 @@ test('popover box direction can be modified', async function(assert) {
     </div>
   `);
 
-  let popover = PopoverHelper.create();
+  let popover = new PopoverHelper();
 
   await popover.open();
 
@@ -161,7 +161,7 @@ test('popover header is rendered when title is passed in', async function(assert
     </div>
   `);
 
-  let popover = PopoverHelper.create();
+  let popover = new PopoverHelper();
 
   await popover.open();
 
@@ -181,7 +181,7 @@ test('popover trigger element is marked as active when open', async function(ass
     </div>
   `);
 
-  let popover = PopoverHelper.create();
+  let popover = new PopoverHelper();
 
   assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed');
 
@@ -206,7 +206,7 @@ test('popover trigger element has correct aria roles', async function(assert) {
     </div>
   `);
 
-  let popover = PopoverHelper.create();
+  let popover = new PopoverHelper();
 
   assert.ok(popover.trigger.hasAriaPopup, 'popover trigger has aria-haspopup role');
   assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false');
@@ -233,7 +233,7 @@ test('popover is keyboard accessible', async function(assert) {
     </button>
   `);
 
-  let popover = PopoverHelper.extend({
+  let popover = new PopoverHelper({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
@@ -245,7 +245,7 @@ test('popover is keyboard accessible', async function(assert) {
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
       enterOnCloseItem: triggerable('keydown', '[data-close]', { eventProperties: { key: 'Enter' } })
     }
-  }).create();
+  });
 
   assert.ok(!popover.isOpen, 'popover not rendered initially');
 
@@ -284,7 +284,7 @@ test('First item autofocuses when opened by keyboard only', async function(asser
     </button>
   `);
 
-  let popover = PopoverHelper.extend({
+  let popover = new PopoverHelper({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
@@ -295,7 +295,7 @@ test('First item autofocuses when opened by keyboard only', async function(asser
         scope: '[data-test-button]:focus'
       }
     }
-  }).create();
+  });
 
   await popover.trigger.enter();
 
