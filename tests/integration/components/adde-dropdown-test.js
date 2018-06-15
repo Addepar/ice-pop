@@ -5,7 +5,7 @@ import PageObject, { clickable, hasClass, is, triggerable } from 'ember-classy-p
 
 import AddeDropdownPage from '@addepar/pop-menu/test-support/pages/adde-dropdown';
 
-const DropdownHelper = AddeDropdownPage.extend({ scope: '[data-test-dropdown]' });
+const DropdownHelper = AddeDropdownPage.extend('[data-test-dropdown]');
 
 moduleForComponent('adde-dropdown', 'Integration | Component | adde-dropdown', {
   integration: true
@@ -23,7 +23,7 @@ test('dropdown works', async function(assert) {
     </div>
   `);
 
-  let dropdown = DropdownHelper.create();
+  let dropdown = new DropdownHelper();
 
   assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
 
@@ -52,12 +52,12 @@ test('dropdown box closes when element outside of dropdown is clicked', async fu
     </div>
   `);
 
-  let content = PageObject.extend({
+  let content = new PageObject({
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
     dropdown: DropdownHelper
-  }).create();
+  });
 
   await content.dropdown.open();
 
@@ -85,7 +85,7 @@ test('clicking inside dropdown only closes for certain elements', async function
     </div>
   `);
 
-  let dropdown = DropdownHelper.extend({
+  let dropdown = new DropdownHelper({
     content: {
       click: clickable(),
       clickMenuHeader: clickable('[data-test-menu-header]'),
@@ -93,7 +93,7 @@ test('clicking inside dropdown only closes for certain elements', async function
       clickDivider: clickable('[data-test-list-divider]'),
       clickCloseItem: clickable('[data-test-close-item]')
     }
-  }).create();
+  });
 
   await dropdown.open();
 
@@ -132,11 +132,11 @@ test('dropdown box modifier class can be added', async function(assert) {
     </div>
   `);
 
-  let dropdown = DropdownHelper.extend({
+  let dropdown = new DropdownHelper({
     content: {
       hasAdditionalClass: hasClass('foobar')
     }
-  }).create();
+  });
 
   await dropdown.open();
 
@@ -155,7 +155,7 @@ test('dropdown box direction can be modified', async function(assert) {
     </div>
   `);
 
-  let dropdown = DropdownHelper.create();
+  let dropdown = new DropdownHelper();
 
   await dropdown.open();
 
@@ -174,7 +174,7 @@ test('dropdown trigger element is marked as active when open', async function(as
     </div>
   `);
 
-  let dropdown = DropdownHelper.create();
+  let dropdown = new DropdownHelper();
 
   assert.ok(!dropdown.trigger.isActive, 'dropdown trigger is not marked as active when the dropdown is closed');
 
@@ -199,7 +199,7 @@ test('dropdown trigger element has correct aria roles', async function(assert) {
     </div>
   `);
 
-  let dropdown = DropdownHelper.create();
+  let dropdown = new DropdownHelper();
 
   assert.ok(dropdown.trigger.hasAriaPopup, 'dropdown trigger has aria-haspopup role');
   assert.equal(dropdown.trigger.isAriaExpanded, 'false', 'dropdown trigger role aria-expanded is false');
@@ -229,7 +229,7 @@ test('dropdown is keyboard accessible', async function(assert) {
     </button>
   `);
 
-  let dropdown = DropdownHelper.extend({
+  let dropdown = new DropdownHelper({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
@@ -246,7 +246,7 @@ test('dropdown is keyboard accessible', async function(assert) {
       firstItemHasFocus: is(':focus', '[data-test-menu-item1]'),
       lastItemHasFocus: is(':focus', '[data-test-menu-item2]')
     }
-  }).create();
+  });
 
   assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
 
@@ -305,7 +305,7 @@ test('First item autofocuses when opened by keyboard only', async function(asser
     </button>
   `);
 
-  let dropdown = DropdownHelper.extend({
+  let dropdown = new DropdownHelper({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
@@ -316,7 +316,7 @@ test('First item autofocuses when opened by keyboard only', async function(asser
         scope: '[data-test-menu-item]:focus'
       }
     }
-  }).create();
+  });
 
   await dropdown.trigger.enter();
 

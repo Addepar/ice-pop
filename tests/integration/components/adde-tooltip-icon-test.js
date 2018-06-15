@@ -3,7 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 
 import AddeTooltipIconPage from '@addepar/pop-menu/test-support/pages/adde-tooltip-icon';
 
-const IconHelper = AddeTooltipIconPage.extend({ scope: '[data-test-tooltip-icon]' });
+const IconHelper = AddeTooltipIconPage.extend('[data-test-tooltip-icon]');
 
 moduleForComponent('adde-tooltip-icon', 'Integration | Component | adde-tooltip-icon', {
   integration: true
@@ -18,7 +18,7 @@ test('target icon renders', async function(assert) {
     {{/adde-tooltip-icon}}
   `);
 
-  let icon = IconHelper.create();
+  let icon = new IconHelper();
 
   assert.ok(icon.isPresent, 'a tooltip icon target is rendered');
   assert.ok(icon.isIcon('fa-question-circle'), 'tooltip has correct default class');
@@ -33,7 +33,7 @@ test('tooltip works as expected', async function(assert) {
     {{/adde-tooltip-icon}}
   `);
 
-  let icon = IconHelper.create();
+  let icon = new IconHelper();
 
   await icon.tooltip.open();
 
@@ -54,7 +54,7 @@ test('tooltip icon class can be modified', async function(assert) {
     {{/adde-tooltip-icon}}
   `);
 
-  let icon = IconHelper.create();
+  let icon = new IconHelper();
 
   assert.ok(icon.isIcon('fa-exclamation'), 'tooltip icon has new class');
   assert.ok(!icon.isIcon('fa-question-circle'), 'tooltip icon no longer has default class');
@@ -69,7 +69,7 @@ test('tooltip box modifier class can be added', async function(assert) {
     {{/adde-tooltip-icon}}
   `);
 
-  let icon = IconHelper.create();
+  let icon = new IconHelper();
 
   await icon.tooltip.open();
 
@@ -85,7 +85,7 @@ test('tooltip box direction can be modified', async function(assert) {
     {{/adde-tooltip-icon}}
   `);
 
-  let icon = IconHelper.create();
+  let icon = new IconHelper();
 
   await icon.tooltip.open();
 
