@@ -1,4 +1,4 @@
-import PageObject from 'ember-classy-page-object';
+import PageObject, { attribute } from 'ember-classy-page-object';
 import { findElement } from 'ember-classy-page-object/extend';
 import { hasClass } from 'ember-classy-page-object';
 
@@ -11,6 +11,8 @@ export default PageObject.extend({
   isIcon(icon) {
     return findElement(this).classList.contains(icon);
   },
+
+  tabindex: attribute('tabindex'),
 
   /**
    * Scope tooltip associated with this tooltip-icon
