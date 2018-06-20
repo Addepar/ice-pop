@@ -60,6 +60,20 @@ test('tooltip icon class can be modified', async function(assert) {
   assert.ok(!icon.isIcon('fa-question-circle'), 'tooltip icon no longer has default class');
 });
 
+test('tooltip tabindex can be modified', async function(assert) {
+  assert.expect(1);
+
+  this.render(hbs`
+    {{#adde-tooltip-icon data-test-tooltip-icon=true tabindex=10}}
+      template block text
+    {{/adde-tooltip-icon}}
+  `);
+
+  let icon = new IconHelper();
+
+  assert.equal(icon.tabindex, '10', 'tooltip icon has the proper tabindex');
+});
+
 test('tooltip box modifier class can be added', async function(assert) {
   assert.expect(1);
 
