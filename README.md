@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Addepar/addepar-pop-menu.svg?branch=master)](https://travis-ci.org/Addepar/addepar-pop-menu)
+
 # addepar-pop-menu
 
 Ember Addons for popping things up. This includes popovers, dropdowns, and tooltips.
