@@ -190,6 +190,10 @@ export default class AnimatedPopperComponent extends Component {
    */
   finalizeClose() {
     run(() => {
+      if (this.get('isDestroyed')) {
+        return;
+      }
+
       this.set('renderInDOM', false);
 
       if (this._hasTransition) {
