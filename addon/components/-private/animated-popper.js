@@ -189,6 +189,9 @@ export default class AnimatedPopperComponent extends Component {
    * and notifies the parent context that animations have finished.
    */
   finalizeClose() {
+    if (this.isDestroyed) {
+      return;
+    }
     run(() => {
       this.set('renderInDOM', false);
 
