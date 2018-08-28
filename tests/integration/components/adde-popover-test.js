@@ -315,34 +315,6 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   assert.ok(!popover.content.buttonWithFocus.isPresent, 'first button does not have focus');
 });
 
-test('popover box can teardown successfully during animation', async function(assert) {
-  assert.expect(2);
-
-  this.set('isShowing', true);
-  this.render(hbs`
-    {{#if isShowing}}
-      <div>
-        Target
-        {{#adde-popover data-test-popover=true}}
-          template block text
-        {{/adde-popover}}
-      </div>
-    {{/if}}
-  `);
-
-  let popover = new PopoverHelper();
-
-  await popover.open();
-
-  assert.ok(popover.isOpen, 'popover is rendered');
-
-  popover.close();
-
-  this.set('isShowing', false);
-
-  assert.ok(true, 'popover teardown can occur during close animation');
-});
-
 moduleForComponent('adde-popover', 'Unit | Component | adde-popover', {
   unit: true
 });
