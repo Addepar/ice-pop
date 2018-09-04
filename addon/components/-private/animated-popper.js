@@ -13,6 +13,8 @@ import { scheduler as raf, Token } from 'ember-raf-scheduler';
 
 import layout from '../../templates/components/animated-popper';
 
+const DEBUG_KEY = '1.13'; // used for debug console logging
+
 function hasTransition(element) {
   let { transitionDuration } = window.getComputedStyle(element);
 
@@ -119,6 +121,7 @@ export default class AnimatedPopperComponent extends Component {
 
   constructor() {
     super(...arguments);
+    console.log(`[${DEBUG_KEY} ${Ember.guidFor(this)}] animated-popper constructor`);
 
     this.isOpenDidChange();
   }
@@ -131,6 +134,7 @@ export default class AnimatedPopperComponent extends Component {
   }
 
   willDestroy() {
+    console.log(`[${DEBUG_KEY} ${Ember.guidFor(this)}] animated-popper willDestroy`);
     raf.forget(this._token);
 
     removeObserver(this, 'isOpen', this, this.isOpenDidChange);
@@ -142,12 +146,22 @@ export default class AnimatedPopperComponent extends Component {
    * states, which is why this must be an observer in 1.11 (it is not tied directly to the DOM)
    */
   isOpenDidChange() {
+    console.log(`[${DEBUG_KEY} ${Ember.guidFor(this)}] isOpenDidChange -> ${this.get('isOpen')}`);
+    window._lastIsOpen = this.get('isOpen');
     if (this.get('isOpen') === true) {
       this.set('renderInDOM', true);
 
-      raf.schedule('sync', () => {
-        this.set('makeVisible', true);
-      }, this._token);
+      console.log(`[${DEBUG_KEY} ${Ember.guidFor(this)}] isOpenDidChange raf.schedule sync scheduling`);
+      raf.schedule(
+        'sync',
+        () => {
+          console.log(
+            `[${DEBUG_KEY} ${Ember.guidFor(this)}] isOpenDidChange raf.schedule setting makeVisible -> true`
+          );
+          this.set('makeVisible', true);
+        },
+        this._token
+      );
     } else {
       this.set('makeVisible', false);
 
@@ -155,11 +169,15 @@ export default class AnimatedPopperComponent extends Component {
         // Use RAF to ensure that if the isOpen has change multiple times, removal
         // will happen _after_ state has completely settled. This is particularly
         // important in tests
-        raf.schedule('affect', () => {
-          if (this.get('makeVisible') === false) {
-            this.finalizeClose();
-          }
-        }, this._token);
+        raf.schedule(
+          'affect',
+          () => {
+            if (this.get('makeVisible') === false) {
+              this.finalizeClose();
+            }
+          },
+          this._token
+        );
       }
     }
   }
