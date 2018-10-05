@@ -10,7 +10,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "github:Addepar/addepar-pop-menu",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
