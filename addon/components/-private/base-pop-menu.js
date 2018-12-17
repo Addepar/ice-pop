@@ -359,6 +359,13 @@ export default class BasePopMenuComponent extends Component {
    * Handler for closing the popper on target blur
    */
   _closePopoverBlurHandler = () => {
+    // Per https://github.com/Addepar/addepar-pop-menu/issues/56:
+    // Because of how browsers handle our animations, it is possible that `willDestroyElement` does not get called,
+    // leaving this event handler still present after the element has been set to null.]
+    // We need to bail on this handler in that case.
+    if (this._popperElement === null) {
+      return;
+    }
     // Check if the popper has focusable elements. If it does, this means when the
     // popper finishes rendering, it will move the focus to the first focusable item,
     // and as a side effect trigger the blur event, but in this case we don't want
