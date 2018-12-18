@@ -361,7 +361,7 @@ export default class BasePopMenuComponent extends Component {
   _closePopoverBlurHandler = () => {
     // Per https://github.com/Addepar/addepar-pop-menu/issues/56:
     // Because of how browsers handle our animations, it is possible that `willDestroyElement` does not get called,
-    // leaving this event handler still present after the element has been set to null.]
+    // leaving this event handler still present after the element has been set to null.
     // We need to bail on this handler in that case.
     if (this._popperElement === null) {
       return;
