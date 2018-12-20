@@ -3,14 +3,13 @@ module.exports = {
   useYarn: true,
   scenarios: [
     {
-      name: 'ember-1.11',
+      name: 'ember-1.12',
       bower: {
         dependencies: {
-          'ember': '~1.11.0',
+          'ember': '1.12.2',
           'ember-cli-shims': 'ember-cli/ember-cli-shims#0.0.5'
         },
         resolutions: {
-          'ember': '~1.11.0',
           'ember-cli-shims': '0.0.5'
         }
       },
@@ -77,54 +76,6 @@ module.exports = {
       npm: {
         devDependencies: {
           'ember-source': '~2.12.0'
-        }
-      }
-    },
-    {
-      name: 'ember-release',
-      bower: {
-        dependencies: {
-          'ember': 'components/ember#release'
-        },
-        resolutions: {
-          'ember': 'release'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null
-        }
-      }
-    },
-    {
-      name: 'ember-beta',
-      bower: {
-        dependencies: {
-          'ember': 'components/ember#beta'
-        },
-        resolutions: {
-          'ember': 'beta'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null
-        }
-      }
-    },
-    {
-      name: 'ember-canary',
-      bower: {
-        dependencies: {
-          'ember': 'components/ember#canary'
-        },
-        resolutions: {
-          'ember': 'canary'
-        }
-      },
-      npm: {
-        devDependencies: {
-          'ember-source': null
         }
       }
     },
