@@ -12,7 +12,7 @@ import AddeDropdownComponent from './adde-dropdown';
  *   <ul class="adde-dropdown-menu">
  *     <li>
  *       <button>Foo bar baz</button>
- *       <i class="fa fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
+ *       <i class="fas fa-caret-down adde-dropdown-caret" aria-hidden="true"></i>
  *       {{#adde-sub-dropdown}}
  *         <ul class="adde-dropdown-menu">
  *           <li><button>Foo bar baz</button></li>
