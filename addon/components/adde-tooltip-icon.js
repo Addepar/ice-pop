@@ -25,7 +25,7 @@ import layout from '../templates/components/adde-tooltip-icon';
  * ```
  */
 @tagName('i')
-@classNames('fa', 'tooltip-icon')
+@classNames('fas', 'tooltip-icon')
 export default class AddeTooltipIcon extends Component {
   layout = layout;
 

@@ -11,7 +11,7 @@ import layout from '../templates/components/adde-dropdown';
  * ```hbs
  * <div class="target">
  *   Target text
- *   <i class="fa fa-caret-down adde-dropdown-caret"></i>
+ *   <i class="fas fa-caret-down adde-dropdown-caret"></i>
  *   {{#adde-dropdown}}
  *     Dropdown with defaults
  *   {{/adde-dropdown}}
@@ -19,7 +19,7 @@ import layout from '../templates/components/adde-dropdown';
  *
  * <div class="target">
  *   Target text
- *   <i class="fa fa-caret-down adde-dropdown-caret"></i>
+ *   <i class="fas fa-caret-down adde-dropdown-caret"></i>
  *   {{#adde-dropdown placement="bottom"}}
  *     Dropdown with custom placement
  *   {{/adde-dropdown}}
@@ -27,7 +27,7 @@ import layout from '../templates/components/adde-dropdown';
  *
  * <div class="target">
  *   Target text
- *   <i class="fa fa-caret-down adde-dropdown-caret"></i>
+ *   <i class="fas fa-caret-down adde-dropdown-caret"></i>
  *   {{#adde-dropdown class="custom-class"}}
  *     Dropdown with custom class
  *   {{/adde-tooltip}}
@@ -35,7 +35,7 @@ import layout from '../templates/components/adde-dropdown';
  *
  * <div class="target">
  *   Target text
- *   <i class="fa fa-caret-down adde-dropdown-caret"></i>
+ *   <i class="fas fa-caret-down adde-dropdown-caret"></i>
  *   {{#adde-dropdown}}
  *     <a data-close>
  *       Adding data-close to anything within the dropdown will cause
