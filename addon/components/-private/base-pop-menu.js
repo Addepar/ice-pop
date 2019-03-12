@@ -200,6 +200,7 @@ export default class BasePopMenuComponent extends Component {
     this._triggerElement.removeAttribute('data-popover-trigger');
 
     this._rootElement.removeEventListener('mouseup', this._handleBodyClick);
+    this._rootElement.removeEventListener('contextmenu', this._handleBodyClick);
   }
 
   /**
@@ -212,6 +213,7 @@ export default class BasePopMenuComponent extends Component {
     run(() => this.set('isOpen', true));
 
     this._rootElement.addEventListener('mouseup', this._handleBodyClick);
+    this._rootElement.addEventListener('contextmenu', this._handleBodyClick);
   }
 
   /**
@@ -221,6 +223,7 @@ export default class BasePopMenuComponent extends Component {
     run(() => this.set('isOpen', false));
 
     this._rootElement.removeEventListener('mouseup', this._handleBodyClick);
+    this._rootElement.removeEventListener('contextmenu', this._handleBodyClick);
   }
 
   /**
