@@ -64,7 +64,7 @@ export default class BasePopMenuComponent extends Component {
   renderInPlace = false;
 
   /**
-   * The event that triggers the popover, can be `click` or `hover`,
+   * The event that triggers the popover, can be `click`, `hover` or `contextmenu`,
    * should be provided by the subclass
    */
   @immutable
@@ -168,6 +168,10 @@ export default class BasePopMenuComponent extends Component {
       this._triggerElement.addEventListener('mousedown', this._openPopoverHandler);
       // When in click trigger mode, we also want to enable open/close with key events
       this._triggerElement.addEventListener('keydown', this._triggerKeyHandler);
+    } else if (this.get('triggerEvent') === 'contextmenu') {
+      this._triggerElement.addEventListener('contextmenu', this._openPopoverHandler);
+      // When in contextmenu trigger mode, we also want to enable open/close with key events
+      this._triggerElement.addEventListener('keydown', this._triggerKeyHandler);
     } else {
       this._triggerElement.addEventListener('mouseenter', this._openPopoverHandler);
       this._triggerElement.addEventListener('mouseleave', this._closePopoverHandler);
@@ -182,6 +186,9 @@ export default class BasePopMenuComponent extends Component {
 
     if (this.get('triggerEvent') === 'click') {
       this._triggerElement.removeEventListener('mousedown', this._openPopoverHandler);
+      this._triggerElement.removeEventListener('keydown', this._triggerKeyHandler);
+    } else if (this.get('triggerEvent') === 'contextmenu') {
+      this._triggerElement.removeEventListener('contextmenu', this._openPopoverHandler);
       this._triggerElement.removeEventListener('keydown', this._triggerKeyHandler);
     } else {
       this._triggerElement.removeEventListener('mouseenter', this._openPopoverHandler);
