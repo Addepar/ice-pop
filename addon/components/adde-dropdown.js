@@ -48,7 +48,8 @@ import layout from '../templates/components/adde-dropdown';
 export default class AddeDropdownComponent extends BasePopMenuComponent {
   layout = layout;
 
-  // triggerEvent = 'click';
+  @argument
+  triggerEvent = 'click';
 
   // ----- Public Settings ------
 
