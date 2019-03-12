@@ -67,7 +67,7 @@ export default class BasePopMenuComponent extends Component {
    * The event that triggers the popover, can be `click`, `hover` or `contextmenu`,
    * should be provided by the subclass
    */
-  @immutable
+  // @immutable
   @argument
   @type('string')
   triggerEvent = null;
