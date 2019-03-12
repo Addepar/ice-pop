@@ -69,7 +69,7 @@ export default class BasePopMenuComponent extends Component {
    */
   // @immutable
   @argument
-  @type('string')
+  // @type('string')
   triggerEvent = null;
 
   /**
