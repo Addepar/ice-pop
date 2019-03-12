@@ -26,6 +26,20 @@ function closest(node, selector) {
   return null;
 }
 
+function isAncestor(node, parentNode) {
+  let currentNode = node;
+
+  while (currentNode !== document.body && currentNode !== null) {
+    if (currentNode === parentNode) {
+      return currentNode;
+    }
+
+    currentNode = currentNode.parentNode;
+  }
+
+  return null;
+}
+
 /**
  * Modifiers to the popper to set it's default behavior
  */
@@ -394,18 +408,27 @@ export default class BasePopMenuComponent extends Component {
   _handleBodyClick = ({ target }) => {
     if (this._isOpening) {
       this._isOpening = false;
-    } else if (closest(target, '.adde-base-pop-menu') === null) {
-      // We do not want _removePopover to trigger when clicking inside of the popover.
-      // Here we check whether the body click event was also a popover container click event.
-      // We are comparing the click events because tracking the click element itself can
-      // be buggy if the content within the popover ever changes while its still open.
+    } else if (this.get('triggerEvent') === 'contextmenu') {
+      if (!isAncestor(target, this._triggerElement)) {
+      // close the popover if contextmenu triggered on another element
 
       this._removePopover();
-    } else if (closest(target, '[data-close]:not([disabled])')) {
-      // We still want to allow purposeful closing of the popover from within,
-      // so this closes the popover if the click target has [data-close] attribute
 
-      this._removePopover();
+      }
+    } else {
+      if (closest(target, '.adde-base-pop-menu') === null) {
+        // We do not want _removePopover to trigger when clicking inside of the popover.
+        // Here we check whether the body click event was also a popover container click event.
+        // We are comparing the click events because tracking the click element itself can
+        // be buggy if the content within the popover ever changes while its still open.
+
+        this._removePopover();
+      } else if (closest(target, '[data-close]:not([disabled])')) {
+        // We still want to allow purposeful closing of the popover from within,
+        // so this closes the popover if the click target has [data-close] attribute
+
+        this._removePopover();
+      }
     }
   };
 
