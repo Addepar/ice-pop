@@ -70,5 +70,4 @@ export default class AddeDropdownComponent extends BasePopMenuComponent {
   @argument
   @type('string')
   placement = 'bottom-start';
-
 }

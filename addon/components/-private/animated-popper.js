@@ -83,14 +83,12 @@ export default class AnimatedPopperComponent extends Component {
   /**
    * Whether or not the popper should be rendered in the DOM
    */
-  @type('boolean')
-  renderInDOM = false;
+  @type('boolean') renderInDOM = false;
 
   /**
    * Wether or not the popper should have the `is-visible` class, which will trigger animations
    */
-  @type('boolean')
-  makeVisible = false;
+  @type('boolean') makeVisible = false;
 
   /**
    * RAF scheduler token, used to cancel all active jobs
@@ -145,9 +143,13 @@ export default class AnimatedPopperComponent extends Component {
     if (this.get('isOpen') === true) {
       this.set('renderInDOM', true);
 
-      raf.schedule('sync', () => {
-        this.set('makeVisible', true);
-      }, this._token);
+      raf.schedule(
+        'sync',
+        () => {
+          this.set('makeVisible', true);
+        },
+        this._token
+      );
     } else {
       this.set('makeVisible', false);
 
@@ -155,11 +157,15 @@ export default class AnimatedPopperComponent extends Component {
         // Use RAF to ensure that if the isOpen has change multiple times, removal
         // will happen _after_ state has completely settled. This is particularly
         // important in tests
-        raf.schedule('affect', () => {
-          if (this.get('makeVisible') === false) {
-            this.finalizeClose();
-          }
-        }, this._token);
+        raf.schedule(
+          'affect',
+          () => {
+            if (this.get('makeVisible') === false) {
+              this.finalizeClose();
+            }
+          },
+          this._token
+        );
       }
     }
   }

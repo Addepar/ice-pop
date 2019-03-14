@@ -8,7 +8,7 @@ import AddeDropdownPage from '@addepar/pop-menu/test-support/pages/adde-dropdown
 const DropdownHelper = AddeDropdownPage.extend('[data-test-dropdown]');
 
 moduleForComponent('adde-dropdown', 'Integration | Component | adde-dropdown', {
-  integration: true
+  integration: true,
 });
 
 test('dropdown works', async function(assert) {
@@ -56,7 +56,7 @@ test('dropdown box closes when element outside of dropdown is clicked', async fu
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
-    dropdown: DropdownHelper
+    dropdown: DropdownHelper,
   });
 
   await content.dropdown.open();
@@ -91,8 +91,8 @@ test('clicking inside dropdown only closes for certain elements', async function
       clickMenuHeader: clickable('[data-test-menu-header]'),
       clickDisabledItem: clickable('[disabled]'),
       clickDivider: clickable('[data-test-list-divider]'),
-      clickCloseItem: clickable('[data-test-close-item]')
-    }
+      clickCloseItem: clickable('[data-test-close-item]'),
+    },
   });
 
   await dropdown.open();
@@ -134,8 +134,8 @@ test('dropdown box modifier class can be added', async function(assert) {
 
   let dropdown = new DropdownHelper({
     content: {
-      hasAdditionalClass: hasClass('foobar')
-    }
+      hasAdditionalClass: hasClass('foobar'),
+    },
   });
 
   await dropdown.open();
@@ -176,15 +176,24 @@ test('dropdown trigger element is marked as active when open', async function(as
 
   let dropdown = new DropdownHelper();
 
-  assert.ok(!dropdown.trigger.isActive, 'dropdown trigger is not marked as active when the dropdown is closed');
+  assert.ok(
+    !dropdown.trigger.isActive,
+    'dropdown trigger is not marked as active when the dropdown is closed'
+  );
 
   await dropdown.open();
 
-  assert.ok(dropdown.trigger.isActive, 'dropdown trigger is marked as active when the dropdown is open');
+  assert.ok(
+    dropdown.trigger.isActive,
+    'dropdown trigger is marked as active when the dropdown is open'
+  );
 
   await dropdown.close();
 
-  assert.ok(!dropdown.trigger.isActive, 'dropdown trigger is not marked as active when the dropdown is closed again');
+  assert.ok(
+    !dropdown.trigger.isActive,
+    'dropdown trigger is not marked as active when the dropdown is closed again'
+  );
 });
 
 test('dropdown trigger element has correct aria roles', async function(assert) {
@@ -202,16 +211,28 @@ test('dropdown trigger element has correct aria roles', async function(assert) {
   let dropdown = new DropdownHelper();
 
   assert.ok(dropdown.trigger.hasAriaPopup, 'dropdown trigger has aria-haspopup role');
-  assert.equal(dropdown.trigger.isAriaExpanded, 'false', 'dropdown trigger role aria-expanded is false');
+  assert.equal(
+    dropdown.trigger.isAriaExpanded,
+    'false',
+    'dropdown trigger role aria-expanded is false'
+  );
 
   await dropdown.open();
 
-  assert.equal(dropdown.trigger.isAriaExpanded, 'true', 'dropdown trigger role aria-expanded is true when the dropdown is open');
+  assert.equal(
+    dropdown.trigger.isAriaExpanded,
+    'true',
+    'dropdown trigger role aria-expanded is true when the dropdown is open'
+  );
   assert.ok(dropdown.trigger.hasAriaDescribedBy, 'dropdown trigger has aria-describedby role');
 
   await dropdown.close();
 
-  assert.equal(dropdown.trigger.isAriaExpanded, 'false', 'dropdown trigger role aria-expanded is false when the dropdown is closed again');
+  assert.equal(
+    dropdown.trigger.isAriaExpanded,
+    'false',
+    'dropdown trigger role aria-expanded is false when the dropdown is closed again'
+  );
 });
 
 test('dropdown is keyboard accessible', async function(assert) {
@@ -236,16 +257,18 @@ test('dropdown is keyboard accessible', async function(assert) {
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
       space: triggerable('keydown', null, { eventProperties: { key: ' ' } }),
       arrowdown: triggerable('keydown', null, { eventProperties: { key: 'ArrowDown' } }),
-      arrowup: triggerable('keydown', null, { eventProperties: { key: 'ArrowUp' } })
+      arrowup: triggerable('keydown', null, { eventProperties: { key: 'ArrowUp' } }),
     },
     content: {
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
       arrowdown: triggerable('keydown', null, { eventProperties: { key: 'ArrowDown' } }),
       arrowup: triggerable('keydown', null, { eventProperties: { key: 'ArrowUp' } }),
-      enterOnMenuItem: triggerable('keydown', '[data-test-menu-item1]', { eventProperties: { key: 'Enter' } }),
+      enterOnMenuItem: triggerable('keydown', '[data-test-menu-item1]', {
+        eventProperties: { key: 'Enter' },
+      }),
       firstItemHasFocus: is(':focus', '[data-test-menu-item1]'),
-      lastItemHasFocus: is(':focus', '[data-test-menu-item2]')
-    }
+      lastItemHasFocus: is(':focus', '[data-test-menu-item2]'),
+    },
   });
 
   assert.ok(!dropdown.isOpen, 'dropdown not rendered initially');
@@ -308,14 +331,14 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   let dropdown = new DropdownHelper({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
-      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } }),
     },
     content: {
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
       menuItemWithFocus: {
-        scope: '[data-test-menu-item]:focus'
-      }
-    }
+        scope: '[data-test-menu-item]:focus',
+      },
+    },
   });
 
   await dropdown.trigger.enter();

@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: '@addepar/pop-menu'
+  name: '@addepar/pop-menu',
 };

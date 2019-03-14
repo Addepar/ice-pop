@@ -5,6 +5,6 @@ import BasePopMenuPage from './-private/base-pop-menu';
 export default BasePopMenuPage.extend({
   trigger: {
     open: clickable(),
-    close: clickable()
-  }
+    close: clickable(),
+  },
 });

@@ -31,7 +31,8 @@ export default class AddeTooltipIcon extends Component {
 
   // Make the tooltip icon tabbable
   @argument
-  @attribute tabindex = '0';
+  @attribute
+  tabindex = '0';
 
   // ----- Public Settings ------
 

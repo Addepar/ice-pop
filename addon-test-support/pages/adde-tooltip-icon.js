@@ -22,7 +22,7 @@ export default PageObject.extend({
     content: {
       hasClass(className) {
         return hasClass(className);
-      }
-    }
-  })
+      },
+    },
+  }),
 });
