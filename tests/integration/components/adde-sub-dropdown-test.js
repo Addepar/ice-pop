@@ -8,7 +8,7 @@ import AddeDropdownPage from '@addepar/pop-menu/test-support/pages/adde-dropdown
 import AddeSubDropdownPage from '@addepar/pop-menu/test-support/pages/adde-sub-dropdown';
 
 moduleForComponent('adde-sub-dropdown', 'Integration | Component | adde-sub-dropdown', {
-  integration: true
+  integration: true,
 });
 
 test('sub dropdown box renders when hovering target list item', async function(assert) {
@@ -35,8 +35,8 @@ test('sub dropdown box renders when hovering target list item', async function(a
   let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
-    }
+      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]'),
+    },
   });
 
   let { subDropdown } = dropdown.content;
@@ -111,9 +111,9 @@ test('sub dropdown box closes when element outside of sub dropdown is clicked', 
     dropdown: AddeDropdownPage.extend({
       scope: '[data-test-dropdown]',
       content: {
-        subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
-      }
-    })
+        subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]'),
+      },
+    }),
   });
 
   let { dropdown } = content;
@@ -165,10 +165,10 @@ test('clicking inside sub dropdown only closes for certain elements', async func
           clickMenuHeader: clickable('[data-test-menu-header]'),
           clickDisabledItem: clickable('[disabled]'),
           clickDivider: clickable('[data-test-list-divider]'),
-          clickCloseItem: clickable('[data-test-close-item]')
-        }
-      })
-    }
+          clickCloseItem: clickable('[data-test-close-item]'),
+        },
+      }),
+    },
   });
 
   let { subDropdown } = dropdown.content;
@@ -182,7 +182,10 @@ test('clicking inside sub dropdown only closes for certain elements', async func
   await subDropdown.content.click();
 
   assert.ok(dropdown.isOpen, 'dropdown does not close after clicking the sub dropdown container');
-  assert.ok(subDropdown.isOpen, 'sub dropdown does not close after clicking the sub dropdown container');
+  assert.ok(
+    subDropdown.isOpen,
+    'sub dropdown does not close after clicking the sub dropdown container'
+  );
 
   await subDropdown.content.clickMenuHeader();
 
@@ -229,8 +232,8 @@ test('sub dropdown direction can be modified', async function(assert) {
   let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
-    }
+      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]'),
+    },
   });
 
   let { subDropdown } = dropdown.content;
@@ -238,7 +241,11 @@ test('sub dropdown direction can be modified', async function(assert) {
   await dropdown.open();
   await subDropdown.open();
 
-  assert.equal(subDropdown.content.placement, 'right-end', 'Sub dropdown box reflects correct direction');
+  assert.equal(
+    subDropdown.content.placement,
+    'right-end',
+    'Sub dropdown box reflects correct direction'
+  );
 });
 
 test('sub dropdown button is active when open', async function(assert) {
@@ -265,15 +272,18 @@ test('sub dropdown button is active when open', async function(assert) {
   let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
-    }
+      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]'),
+    },
   });
 
   let { subDropdown } = dropdown.content;
 
   await dropdown.open();
 
-  assert.ok(!subDropdown.trigger.isActive, 'Sub dropdown target list item does not initially reflect active class');
+  assert.ok(
+    !subDropdown.trigger.isActive,
+    'Sub dropdown target list item does not initially reflect active class'
+  );
 
   await subDropdown.open();
 
@@ -305,8 +315,8 @@ test('sub dropdown button has correct aria roles', async function(assert) {
   let dropdown = new AddeDropdownPage({
     scope: '[data-test-dropdown]',
     content: {
-      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]')
-    }
+      subDropdown: AddeSubDropdownPage.extend('[data-test-sub-dropdown]'),
+    },
   });
 
   let { subDropdown } = dropdown.content;
@@ -314,16 +324,31 @@ test('sub dropdown button has correct aria roles', async function(assert) {
   await dropdown.open();
 
   assert.ok(subDropdown.trigger.hasAriaPopup, 'subdropdown trigger has aria-haspopup role');
-  assert.equal(subDropdown.trigger.isAriaExpanded, 'false', 'subdropdown trigger role aria-expanded is false');
+  assert.equal(
+    subDropdown.trigger.isAriaExpanded,
+    'false',
+    'subdropdown trigger role aria-expanded is false'
+  );
 
   await subDropdown.open();
 
-  assert.equal(subDropdown.trigger.isAriaExpanded, 'true', 'subdropdown trigger role aria-expanded is true when the subdropdown is open');
-  assert.ok(subDropdown.trigger.hasAriaDescribedBy, 'subdropdown trigger has aria-describedby role');
+  assert.equal(
+    subDropdown.trigger.isAriaExpanded,
+    'true',
+    'subdropdown trigger role aria-expanded is true when the subdropdown is open'
+  );
+  assert.ok(
+    subDropdown.trigger.hasAriaDescribedBy,
+    'subdropdown trigger has aria-describedby role'
+  );
 
   await subDropdown.close();
 
-  assert.equal(subDropdown.trigger.isAriaExpanded, 'false', 'subdropdown trigger role aria-expanded is false when the subdropdown is closed again');
+  assert.equal(
+    subDropdown.trigger.isAriaExpanded,
+    'false',
+    'subdropdown trigger role aria-expanded is false when the subdropdown is closed again'
+  );
 });
 
 test('sub dropdown is keyboard accessible', async function(assert) {
@@ -355,14 +380,16 @@ test('sub dropdown is keyboard accessible', async function(assert) {
         scope: '[data-test-sub-dropdown]',
         trigger: {
           focus: triggerable('focus'),
-          blur: triggerable('blur')
+          blur: triggerable('blur'),
         },
         content: {
           escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
-          enterOnMenuItem: triggerable('keydown', '[data-test-menu-item]', { eventProperties: { key: 'Enter' } })
-        }
-      })
-    }
+          enterOnMenuItem: triggerable('keydown', '[data-test-menu-item]', {
+            eventProperties: { key: 'Enter' },
+          }),
+        },
+      }),
+    },
   });
 
   let { subDropdown } = dropdown.content;
@@ -376,7 +403,10 @@ test('sub dropdown is keyboard accessible', async function(assert) {
 
   await subDropdown.content.escape();
 
-  assert.ok(!subDropdown.isOpen, 'subdropdown removed after pressing escape on the subdropdown container');
+  assert.ok(
+    !subDropdown.isOpen,
+    'subdropdown removed after pressing escape on the subdropdown container'
+  );
   assert.ok(dropdown.isOpen, 'main dropdown is still open');
 
   await subDropdown.trigger.focus();

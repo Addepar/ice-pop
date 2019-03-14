@@ -6,7 +6,7 @@ import AddeTooltipIconPage from '@addepar/pop-menu/test-support/pages/adde-toolt
 const IconHelper = AddeTooltipIconPage.extend('[data-test-tooltip-icon]');
 
 moduleForComponent('adde-tooltip-icon', 'Integration | Component | adde-tooltip-icon', {
-  integration: true
+  integration: true,
 });
 
 test('target icon renders', async function(assert) {
@@ -87,7 +87,10 @@ test('tooltip box modifier class can be added', async function(assert) {
 
   await icon.tooltip.open();
 
-  assert.ok(icon.tooltip.content.hasClass('error-tooltip'), 'tooltip box reflects additional class');
+  assert.ok(
+    icon.tooltip.content.hasClass('error-tooltip'),
+    'tooltip box reflects additional class'
+  );
 });
 
 test('tooltip box direction can be modified', async function(assert) {
@@ -103,5 +106,9 @@ test('tooltip box direction can be modified', async function(assert) {
 
   await icon.tooltip.open();
 
-  assert.equal(icon.tooltip.content.placement, 'bottom-end', 'tooltip box reflects correct direction');
+  assert.equal(
+    icon.tooltip.content.placement,
+    'bottom-end',
+    'tooltip box reflects correct direction'
+  );
 });

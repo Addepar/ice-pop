@@ -31,12 +31,12 @@ function closest(node, selector) {
  */
 const DEFAULT_POPPER_MODIFIERS = {
   flip: {
-    boundariesElement: 'viewport'
+    boundariesElement: 'viewport',
   },
 
   preventOverflow: {
-    boundariesElement: 'window'
-  }
+    boundariesElement: 'window',
+  },
 };
 
 /**
@@ -103,8 +103,7 @@ export default class BasePopMenuComponent extends Component {
   /**
    * Tracks if the pop menu is open
    */
-  @type('boolean')
-  isOpen = false;
+  @type('boolean') isOpen = false;
 
   /**
    * Stores the trigger element for adding/removing event listeners and data attributes
@@ -152,7 +151,9 @@ export default class BasePopMenuComponent extends Component {
     let possibleRootElements = self.document.querySelectorAll(rootElementSelector);
 
     assert(
-      `ember-popper with popperContainer selector "${rootElementSelector}" found ${possibleRootElements.length} possible containers when there should be exactly 1`,
+      `ember-popper with popperContainer selector "${rootElementSelector}" found ${
+        possibleRootElements.length
+      } possible containers when there should be exactly 1`,
       possibleRootElements.length === 1
     );
 
@@ -230,7 +231,8 @@ export default class BasePopMenuComponent extends Component {
    * @return {Array} list of focusable elements
    */
   _getFocusableElementsInPopper() {
-    let focusableSelectors = 'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
+    let focusableSelectors =
+      'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([disabled]):not([tabindex="-1"])';
     let focusableElements = this._popperElement.querySelectorAll(focusableSelectors);
     return focusableElements;
   }
@@ -270,8 +272,7 @@ export default class BasePopMenuComponent extends Component {
 
     // Don't bother doing anything if there are no focusable elements
     if (focusableElements.length > 0) {
-
-      let firstActiveElement = Array.from(focusableElements).find((element) => {
+      let firstActiveElement = Array.from(focusableElements).find(element => {
         // TODO: this is too fragile, come up with something better,
         // because there could be other active indicators that come along.
         return /(selected|active)/.test(element.className) || element.checked;
@@ -311,7 +312,6 @@ export default class BasePopMenuComponent extends Component {
       this._popperElement.addEventListener('blur', this._closePopoverBlurHandler);
     }
   }
-
 
   /**
    * Triggers when the popover has been fully removed from the DOM (e.g. after animations)
@@ -377,7 +377,6 @@ export default class BasePopMenuComponent extends Component {
     }
   };
 
-
   /**
    * Handles a click on the body in general when a popover is open. If the clicked element is not
    * a child of the popover, or is marked with `data-close`, closes the popover.
@@ -392,7 +391,6 @@ export default class BasePopMenuComponent extends Component {
       // be buggy if the content within the popover ever changes while its still open.
 
       this._removePopover();
-
     } else if (closest(target, '[data-close]:not([disabled])')) {
       // We still want to allow purposeful closing of the popover from within,
       // so this closes the popover if the click target has [data-close] attribute
@@ -408,7 +406,7 @@ export default class BasePopMenuComponent extends Component {
    * Generally following accessibility suggestions for popper targets here:
    * https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton
    */
-  _triggerKeyHandler = (event) => {
+  _triggerKeyHandler = event => {
     let keyCode = event.key;
 
     if (keyCode === 'ArrowDown' || keyCode === 'ArrowUp') {
@@ -418,20 +416,27 @@ export default class BasePopMenuComponent extends Component {
 
     // Pressing Enter, Space, down arrow, or up arrow opens the popper and focuses on an item
     if (
-      (keyCode === 'Enter' || keyCode === ' ' || keyCode === 'ArrowDown' || keyCode === 'ArrowUp')
-        && !this.get('isOpen')
+      (keyCode === 'Enter' ||
+        keyCode === ' ' ||
+        keyCode === 'ArrowDown' ||
+        keyCode === 'ArrowUp') &&
+      !this.get('isOpen')
     ) {
       this._openPopoverHandler();
       // Wait until popper layout has finished computing, otherwise mischief will happen.
-      raf.schedule('layout', () => {
-        if (keyCode === 'ArrowUp') {
-          // Focus on last popper item for arrow up, which is moving backwards
-          this._focusOnPopperEnter('last');
-        } else {
-          // Otherwise focus on first focusable item in the popper
-          this._focusOnPopperEnter();
-        }
-      }, this._token);
+      raf.schedule(
+        'layout',
+        () => {
+          if (keyCode === 'ArrowUp') {
+            // Focus on last popper item for arrow up, which is moving backwards
+            this._focusOnPopperEnter('last');
+          } else {
+            // Otherwise focus on first focusable item in the popper
+            this._focusOnPopperEnter();
+          }
+        },
+        this._token
+      );
     } else if ((keyCode === 'Escape' || keyCode === 'Enter') && this.get('isOpen')) {
       // Close on esc if we never entered the popper
       // (Enter is the same as re-clicking the button)
@@ -450,7 +455,7 @@ export default class BasePopMenuComponent extends Component {
    * Since the popper element is rendered at the bottom of the DOM far away from
    * its trigger, we have to manually tell focus to where to go.
    */
-  _popperKeyHandler = (event) => {
+  _popperKeyHandler = event => {
     let keyCode = event.key;
     let focusableElements = this._getFocusableElementsInPopper();
     let activeItem = document.activeElement;
@@ -461,9 +466,9 @@ export default class BasePopMenuComponent extends Component {
     }
 
     if (keyCode === 'Escape') {
-    // Escape provides a way to close the popper while the user is focused anywhere
-    // inside the popper. We assume upon closing in this way, the user wants to
-    // be focused where they were before (which would be the trigger).
+      // Escape provides a way to close the popper while the user is focused anywhere
+      // inside the popper. We assume upon closing in this way, the user wants to
+      // be focused where they were before (which would be the trigger).
       this._closePopoverAndFocusTrigger();
     } else if (keyCode === 'Enter' && event.target.hasAttribute('data-close')) {
       // When focus is on a data-close element, pressing Enter should close the popper.
@@ -471,7 +476,11 @@ export default class BasePopMenuComponent extends Component {
       // here because the app instead should determine where it goes depending on the action.
       // TODO Ember 1.13: this needs to close both subdropdown and parent dropdown
       this._closePopoverHandler();
-    } else if (keyCode === 'Tab' && !event.shiftKey && activeItem === focusableElements[focusableElements.length - 1]) {
+    } else if (
+      keyCode === 'Tab' &&
+      !event.shiftKey &&
+      activeItem === focusableElements[focusableElements.length - 1]
+    ) {
       // Since the user has hit the Tab key on the last item in the popper, their
       // intent is to continue on in the DOM. So we manually focus back to where
       // they were before opening the popper (which would be the trigger).

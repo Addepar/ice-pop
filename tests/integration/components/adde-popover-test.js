@@ -8,7 +8,7 @@ import AddePopoverPage from '@addepar/pop-menu/test-support/pages/adde-popover';
 const PopoverHelper = AddePopoverPage.extend('[data-test-popover]');
 
 moduleForComponent('adde-popover', 'Integration | Component | adde-popover', {
-  integration: true
+  integration: true,
 });
 
 test('popover works', async function(assert) {
@@ -56,7 +56,7 @@ test('popover box closes when element outside of popover is clicked', async func
     scope: '[data-test-content]',
     clickOutsideElement: clickable('[data-test-outside-element]'),
 
-    popover: PopoverHelper
+    popover: PopoverHelper,
   });
 
   await content.popover.open();
@@ -86,8 +86,8 @@ test('clicking inside popover only closes for designated elements', async functi
     content: {
       click: clickable(),
       clickDisabled: clickable('[disabled]'),
-      clickCloseButton: clickable('[data-test-close]')
-    }
+      clickCloseButton: clickable('[data-test-close]'),
+    },
   });
 
   await popover.open();
@@ -121,8 +121,8 @@ test('popover box modifier class can be added', async function(assert) {
 
   let popover = new PopoverHelper({
     content: {
-      hasAdditionalClass: hasClass('foobar')
-    }
+      hasAdditionalClass: hasClass('foobar'),
+    },
   });
 
   await popover.open();
@@ -183,15 +183,24 @@ test('popover trigger element is marked as active when open', async function(ass
 
   let popover = new PopoverHelper();
 
-  assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed');
+  assert.ok(
+    !popover.trigger.isActive,
+    'popover trigger is not marked as active when the popover is closed'
+  );
 
   await popover.open();
 
-  assert.ok(popover.trigger.isActive, 'popover trigger is marked as active when the popover is open');
+  assert.ok(
+    popover.trigger.isActive,
+    'popover trigger is marked as active when the popover is open'
+  );
 
   await popover.close();
 
-  assert.ok(!popover.trigger.isActive, 'popover trigger is not marked as active when the popover is closed again');
+  assert.ok(
+    !popover.trigger.isActive,
+    'popover trigger is not marked as active when the popover is closed again'
+  );
 });
 
 test('popover trigger element has correct aria roles', async function(assert) {
@@ -209,16 +218,28 @@ test('popover trigger element has correct aria roles', async function(assert) {
   let popover = new PopoverHelper();
 
   assert.ok(popover.trigger.hasAriaPopup, 'popover trigger has aria-haspopup role');
-  assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false');
+  assert.equal(
+    popover.trigger.isAriaExpanded,
+    'false',
+    'popover trigger role aria-expanded is false'
+  );
 
   await popover.open();
 
-  assert.equal(popover.trigger.isAriaExpanded, 'true', 'popover trigger role aria-expanded is true when the popover is open');
+  assert.equal(
+    popover.trigger.isAriaExpanded,
+    'true',
+    'popover trigger role aria-expanded is true when the popover is open'
+  );
   assert.ok(popover.trigger.hasAriaDescribedBy, 'popover trigger has aria-describedby role');
 
   await popover.close();
 
-  assert.equal(popover.trigger.isAriaExpanded, 'false', 'popover trigger role aria-expanded is false when the popover is closed again');
+  assert.equal(
+    popover.trigger.isAriaExpanded,
+    'false',
+    'popover trigger role aria-expanded is false when the popover is closed again'
+  );
 });
 
 test('popover is keyboard accessible', async function(assert) {
@@ -238,13 +259,15 @@ test('popover is keyboard accessible', async function(assert) {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       tab: triggerable('keydown', null, { eventProperties: { key: 'Tab', bubbles: true } }),
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
-      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } }),
     },
     content: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
-      enterOnCloseItem: triggerable('keydown', '[data-close]', { eventProperties: { key: 'Enter' } })
-    }
+      enterOnCloseItem: triggerable('keydown', '[data-close]', {
+        eventProperties: { key: 'Enter' },
+      }),
+    },
   });
 
   assert.ok(!popover.isOpen, 'popover not rendered initially');
@@ -287,14 +310,14 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   let popover = new PopoverHelper({
     trigger: {
       enter: triggerable('keydown', null, { eventProperties: { key: 'Enter' } }),
-      space: triggerable('keydown', null, { eventProperties: { key: ' ' } })
+      space: triggerable('keydown', null, { eventProperties: { key: ' ' } }),
     },
     content: {
       escape: triggerable('keydown', null, { eventProperties: { key: 'Escape' } }),
       buttonWithFocus: {
-        scope: '[data-test-button]:focus'
-      }
-    }
+        scope: '[data-test-button]:focus',
+      },
+    },
   });
 
   await popover.trigger.enter();
@@ -316,7 +339,7 @@ test('First item autofocuses when opened by keyboard only', async function(asser
 });
 
 moduleForComponent('adde-popover', 'Unit | Component | adde-popover', {
-  unit: true
+  unit: true,
 });
 
 test('popper modifiers are customizable', function(assert) {
@@ -327,14 +350,14 @@ test('popper modifiers are customizable', function(assert) {
     popover.get('_popperModifiers'),
     {
       flip: { boundariesElement: 'viewport' },
-      preventOverflow: { boundariesElement: 'window' }
+      preventOverflow: { boundariesElement: 'window' },
     },
     'Default modifiers are correct'
   );
 
   popover.set('popperModifiers', {
     flip: { boundariesElement: 'overrideValue' },
-    newProperty: 'newValue'
+    newProperty: 'newValue',
   });
 
   assert.deepEqual(
@@ -342,7 +365,7 @@ test('popper modifiers are customizable', function(assert) {
     {
       flip: { boundariesElement: 'overrideValue' },
       preventOverflow: { boundariesElement: 'window' },
-      newProperty: 'newValue'
+      newProperty: 'newValue',
     },
     'Merging of modifiers is correct'
   );

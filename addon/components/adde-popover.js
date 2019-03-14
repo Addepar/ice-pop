@@ -38,7 +38,7 @@ import layout from '../templates/components/adde-popover';
  *   {{/adde-popover}}
  * </div>
  *
-* <div class="target">
+ * <div class="target">
  *   Target text
  *   {{#adde-popover}}
  *     <a data-close>
@@ -72,5 +72,4 @@ export default class AddePopoverComponent extends BasePopMenuComponent {
   @argument
   @type(unionOf(null, 'string'))
   popoverTitle = null;
-
 }

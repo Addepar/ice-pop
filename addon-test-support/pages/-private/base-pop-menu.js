@@ -57,7 +57,7 @@ export default PageObject.extend({
 
     isAriaExpanded: attribute('aria-expanded'),
 
-    hasAriaDescribedBy: attribute('aria-describedby')
+    hasAriaDescribedBy: attribute('aria-describedby'),
   },
 
   /**
@@ -77,7 +77,6 @@ export default PageObject.extend({
     /**
      * Returns the placement of the popover's content based on its attribute
      */
-    placement: attribute('x-placement')
-  }
+    placement: attribute('x-placement'),
+  },
 });
-

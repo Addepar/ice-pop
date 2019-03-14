@@ -26,7 +26,6 @@ import AddeDropdownComponent from './adde-dropdown';
  * ```
  */
 export default class AddeSubDropdownComponent extends AddeDropdownComponent {
-
   triggerEvent = 'hover';
 
   // ----- Public Settings ------
@@ -39,5 +38,4 @@ export default class AddeSubDropdownComponent extends AddeDropdownComponent {
   @argument
   @type('string')
   placement = 'right-start';
-
 }
