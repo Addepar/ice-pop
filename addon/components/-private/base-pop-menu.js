@@ -410,10 +410,9 @@ export default class BasePopMenuComponent extends Component {
       this._isOpening = false;
     } else if (this.get('triggerEvent') === 'contextmenu') {
       if (!isAncestor(target, this._triggerElement)) {
-      // close the popover if contextmenu triggered on another element
+        // close the popover if contextmenu triggered on another element
 
-      this._removePopover();
-
+        this._removePopover();
       }
     } else {
       if (closest(target, '.adde-base-pop-menu') === null) {
