@@ -2,7 +2,6 @@ import Component from '@ember/component';
 import { run } from '@ember/runloop';
 import { addObserver, removeObserver } from '@ember/object/observers';
 
-import { action } from '@ember-decorators/object';
 import { tagName } from '@ember-decorators/component';
 
 import { argument } from '@ember-decorators/argument';
@@ -178,8 +177,7 @@ export default class AnimatedPopperComponent extends Component {
    *
    * @param {PopperAPI} api - The API received from the underlying ember-popper component
    */
-  @action
-  registerAPI(api) {
+  registerAPI = api => {
     this._animatedElement = api.popperElement;
     this._hasTransition = hasTransition(this._animatedElement);
 
@@ -188,7 +186,7 @@ export default class AnimatedPopperComponent extends Component {
     }
 
     this.sendAction('onOpen', api);
-  }
+  };
 
   /**
    * Triggers on finalizing the close, after all animations (if any) have settled. Tears down handlers
