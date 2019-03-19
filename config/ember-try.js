@@ -3,14 +3,14 @@ module.exports = {
   useYarn: true,
   scenarios: [
     {
-      name: 'ember-1.11',
+      name: 'ember-1.12',
       bower: {
         dependencies: {
-          ember: '~1.11.0',
+          ember: '~1.12.0',
           'ember-cli-shims': 'ember-cli/ember-cli-shims#0.0.5',
         },
         resolutions: {
-          ember: '~1.11.0',
+          ember: '~1.12.0',
           'ember-cli-shims': '0.0.5',
         },
       },
