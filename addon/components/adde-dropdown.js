@@ -1,5 +1,5 @@
 import { argument } from '@ember-decorators/argument';
-import { type } from '@ember-decorators/argument/type';
+import { optional, type } from '@ember-decorators/argument/type';
 
 import BasePopMenuComponent from './-private/base-pop-menu';
 import layout from '../templates/components/adde-dropdown';
@@ -70,4 +70,11 @@ export default class AddeDropdownComponent extends BasePopMenuComponent {
   @argument
   @type('string')
   placement = 'bottom-start';
+
+  /**
+   * The target element that the dropdown will position itself based on
+   */
+  @argument
+  @type(optional('object'))
+  positionTarget = null;
 }

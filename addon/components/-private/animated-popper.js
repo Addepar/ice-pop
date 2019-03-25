@@ -65,6 +65,13 @@ export default class AnimatedPopperComponent extends Component {
   popperClass = '';
 
   /**
+   * The target element that the popper will position itself based on
+   */
+  @argument
+  @type(optional('object'))
+  popperTarget = null;
+
+  /**
    * The placement for the popper element
    */
   @argument
@@ -101,11 +108,6 @@ export default class AnimatedPopperComponent extends Component {
   _parentFinder = document.createTextNode('');
 
   /**
-   * The target element that the popper will position itself based on
-   */
-  _target = null;
-
-  /**
    * The popper element, stored in order to add and remove event handlers for transitions
    */
   _animatedElement = null;
@@ -119,12 +121,17 @@ export default class AnimatedPopperComponent extends Component {
     super(...arguments);
 
     this.isOpenDidChange();
+
+    run.schedule('afterRender', () => {
+      // find the parent of the enclosing pop menu component
+      this.set(
+        'popperTarget',
+        this.get('popperTarget') || this._parentFinder.parentNode.parentNode
+      );
+    });
   }
 
   didInsertElement() {
-    // find the parent of the enclosing pop menu component
-    this._target = this._parentFinder.parentNode.parentNode;
-
     addObserver(this, 'isOpen', this, this.isOpenDidChange);
   }
 
