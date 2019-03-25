@@ -3,11 +3,11 @@ import { guidFor } from '@ember/object/internals';
 import { run } from '@ember/runloop';
 import { assert } from '@ember/debug';
 
-import { action } from '@ember-decorators/object';
-import { computed } from '@ember-decorators/object';
+import { action, computed } from '@ember-decorators/object';
 
 import { argument } from '@ember-decorators/argument';
-import { type, unionOf } from '@ember-decorators/argument/type';
+import { optional, type, unionOf } from '@ember-decorators/argument/type';
+import { Action } from '@ember-decorators/argument/types';
 import { immutable } from '@ember-decorators/argument/validation';
 
 import { scheduler as raf } from 'ember-raf-scheduler';
@@ -98,6 +98,21 @@ export default class BasePopMenuComponent extends Component {
   @type('boolean')
   arrowNavigation = false;
 
+  /**
+   * Function called wwhen the component is inserted in the DOM.
+   * It passes the popover as argument
+   */
+  @argument
+  @type(optional(Action))
+  didInsertCallback = null;
+
+  /**
+   * Opens the popover programatically
+   */
+  open() {
+    return this._openPopoverHandler();
+  }
+
   // ----- Private Variables -----
 
   /**
@@ -175,6 +190,8 @@ export default class BasePopMenuComponent extends Component {
       this._triggerElement.addEventListener('focus', this._openPopoverHandler);
       this._triggerElement.addEventListener('blur', this._closePopoverBlurHandler);
     }
+
+    this.sendAction('didInsertCallback', this);
   }
 
   willDestroyElement() {

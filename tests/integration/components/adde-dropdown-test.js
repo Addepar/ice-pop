@@ -398,3 +398,30 @@ test('The dropdown can be positioned to another element than its parent', async 
     "dropdown positioned relatively to its target's left side"
   );
 });
+
+test('The dropdown can be opened programmatically', async function(assert) {
+  assert.expect(1);
+
+  this.on('didInsert', component => {
+    this.component = component;
+  });
+  this.render(hbs`
+    <button style="width: 200px; height: 20px;">
+      Target
+      {{#adde-dropdown
+        data-test-dropdown=true
+        placement="bottom-start"
+        didInsertCallback='didInsert'
+      }}
+        <ul class="adde-dropdown-menu">
+          <li><button data-test-menu-item1 data-close>Item 1</button></li>
+          <li><button data-test-menu-item2 data-close>Item 2</button></li>
+        </ul>
+      {{/adde-dropdown}}
+    </button>
+  `);
+
+  let dropdown = new DropdownHelper();
+  await this.component.open();
+  assert.ok(dropdown.isOpen, 'dropdown opens when calling `open`');
+});
