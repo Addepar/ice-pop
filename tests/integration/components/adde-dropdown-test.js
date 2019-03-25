@@ -358,3 +358,43 @@ test('First item autofocuses when opened by keyboard only', async function(asser
   assert.ok(dropdown.isOpen, 'dropdown rendered on click');
   assert.ok(!dropdown.content.menuItemWithFocus.isPresent, 'first menu item does not have focus');
 });
+
+test('The dropdown can be positioned to another element than its parent', async function(assert) {
+  assert.expect(2);
+
+  this.render(hbs`
+    <button style="width:250px; height:30px;" data-test-target>New parent</button>
+    <button style="width: 200px; height: 20px;" data-test-button>
+      Target
+      {{#adde-dropdown
+        data-test-dropdown=true
+        placement="bottom-start"
+        positionTarget=popperTarget
+      }}
+        <ul class="adde-dropdown-menu">
+          <li><button data-test-menu-item1 data-close>Item 1</button></li>
+          <li><button data-test-menu-item2 data-close>Item 2</button></li>
+        </ul>
+      {{/adde-dropdown}}
+    </button>
+  `);
+
+  let dropdown = new DropdownHelper();
+
+  let newTarget = this.$('[data-test-target]')[0];
+  this.set('popperTarget', newTarget);
+  await dropdown.open();
+  let targetRects = newTarget.getClientRects();
+  let dropdownElt = document.querySelector('.adde-dropdown');
+  let dropdownRects = dropdownElt.getClientRects();
+  assert.equal(
+    targetRects[0].bottom,
+    dropdownRects[0].top,
+    "dropdown positioned relatively to its target's bottom side"
+  );
+  assert.equal(
+    targetRects[0].left,
+    dropdownRects[0].left,
+    "dropdown positioned relatively to its target's left side"
+  );
+});
