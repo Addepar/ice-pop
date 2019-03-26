@@ -399,6 +399,40 @@ test('The dropdown can be positioned to another element than its parent', async 
   );
 });
 
+test('The dropdown sends didInsertCallback and willDestroyCallback actions', async function(assert) {
+  assert.expect(2);
+
+  this.on('didInsert', component => {
+    assert.ok(component, 'didInsert action is sent');
+  });
+  this.on('willDestroy', component => {
+    assert.ok(component, 'willDestroy action is sent');
+  });
+
+  this.set('isVisible', true);
+
+  this.render(hbs`
+    {{#if isVisible}}
+    <button style="width: 200px; height: 20px;">
+      Target
+      {{#adde-dropdown
+        data-test-dropdown=true
+        placement="bottom-start"
+        didInsertCallback='didInsert'
+        willDestroyCallback='willDestroy'
+      }}
+        <ul class="adde-dropdown-menu">
+          <li><button data-test-menu-item1 data-close>Item 1</button></li>
+          <li><button data-test-menu-item2 data-close>Item 2</button></li>
+        </ul>
+      {{/adde-dropdown}}
+    </button>
+    {{/if}}
+  `);
+
+  this.set('isVisible', false);
+});
+
 test('The dropdown can be opened programmatically', async function(assert) {
   assert.expect(1);
 
