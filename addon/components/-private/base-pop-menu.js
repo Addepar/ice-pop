@@ -107,6 +107,14 @@ export default class BasePopMenuComponent extends Component {
   didInsertCallback = null;
 
   /**
+   * Function called wwhen the component is about to be removed from the DOM.
+   * It passes the popover as argument
+   */
+  @argument
+  @type(optional(Action))
+  willDestroyCallback = null;
+
+  /**
    * Opens the popover programatically
    */
   open() {
@@ -210,6 +218,8 @@ export default class BasePopMenuComponent extends Component {
     this._triggerElement.removeAttribute('data-popover-trigger');
 
     this._rootElement.removeEventListener('mouseup', this._handleBodyClick);
+
+    this.sendAction('willDestroyCallback', this);
   }
 
   /**
