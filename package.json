@@ -75,5 +75,8 @@
   },
   "publishConfig": {
     "@addepar:registry": "https://registry.npmjs.org/"
+  },
+  "resolutions": {
+    "ember-cli-page-object": "1.15.1"
   }
 }
