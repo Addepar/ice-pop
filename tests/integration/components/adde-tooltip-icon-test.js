@@ -112,3 +112,32 @@ test('tooltip box direction can be modified', async function(assert) {
     'tooltip box reflects correct direction'
   );
 });
+
+test('tooltip can set iconWeight', async function(assert) {
+  assert.expect(2);
+
+  this.render(hbs`
+    {{#adde-tooltip-icon data-test-tooltip-icon=true iconWeight="far"}}
+      template block text
+    {{/adde-tooltip-icon}}
+  `);
+
+  let icon = new IconHelper();
+
+  assert.ok(icon.isIcon('far'), 'tooltip icon has new class');
+  assert.ok(!icon.isIcon('fas'), 'tooltip icon no longer has default class');
+});
+
+test('tooltip can set iconWeight defaults to fas', async function(assert) {
+  assert.expect(1);
+
+  this.render(hbs`
+    {{#adde-tooltip-icon data-test-tooltip-icon=true}}
+      template block text
+    {{/adde-tooltip-icon}}
+  `);
+
+  let icon = new IconHelper();
+
+  assert.ok(icon.isIcon('fas'), 'tooltip icon has new class');
+});

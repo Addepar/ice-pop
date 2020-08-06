@@ -25,7 +25,7 @@ import layout from '../templates/components/adde-tooltip-icon';
  * ```
  */
 @tagName('i')
-@classNames('fas', 'tooltip-icon')
+@classNames('tooltip-icon')
 export default class AddeTooltipIcon extends Component {
   layout = layout;
 
@@ -59,4 +59,20 @@ export default class AddeTooltipIcon extends Component {
   @argument
   @type('string')
   tooltipClass = '';
+
+  /**
+   * An optional weight defaults to strong with a class of "fas"
+   *
+   * Valid options include:
+   * fa
+   * fas
+   * far
+   * fal
+   * fad
+   * fab
+   */
+  @argument
+  @type('string')
+  @className
+  iconWeightClass = 'fas';
 }
