@@ -11,7 +11,7 @@
     {{#if popoverTitle}}
       <header class="adde-popover-title" data-test-popover-header>{{popoverTitle}}</header>
     {{/if}}
-    {{yield}}
+    {{yield _closePopoverHandler}}
   </div>
   <div class="popper-arrow" x-arrow></div>
 {{/animated-popper}}
