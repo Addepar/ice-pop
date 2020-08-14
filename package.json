@@ -2,7 +2,9 @@
   "name": "@addepar/pop-menu",
   "version": "0.4.0",
   "description": "The default blueprint for ember-cli addons.",
-  "keywords": ["ember-addon"],
+  "keywords": [
+    "ember-addon"
+  ],
   "author": "",
   "directories": {
     "doc": "doc",
@@ -22,7 +24,7 @@
   "dependencies": {
     "@ember-decorators/argument": "^0.8.10",
     "@ember-decorators/babel-transforms": "^2.0.1",
-    "ember-classy-page-object": "^0.5.0",
+    "ember-classy-page-object": "^0.6.1",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-decorators": "^2.1.0",
@@ -66,7 +68,7 @@
     "loader.js": "^4.2.3"
   },
   "engines": {
-    "node": "6.* || >= 7.*"
+    "node": "8.* || >= 10.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
