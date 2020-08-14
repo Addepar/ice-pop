@@ -174,9 +174,8 @@ export default class BasePopMenuComponent extends Component {
     let possibleRootElements = self.document.querySelectorAll(rootElementSelector);
 
     assert(
-      `ember-popper with popperContainer selector "${rootElementSelector}" found ${
-        possibleRootElements.length
-      } possible containers when there should be exactly 1`,
+      `ember-popper with popperContainer selector "${rootElementSelector}" found` +
+        ` ${possibleRootElements.length} possible containers when there should be exactly 1`,
       possibleRootElements.length === 1
     );
 
@@ -214,6 +213,8 @@ export default class BasePopMenuComponent extends Component {
       this._triggerElement.removeEventListener('focus', this._openPopoverHandler);
       this._triggerElement.removeEventListener('blur', this._closePopoverBlurHandler);
     }
+
+    this._removePopperEventListeners();
 
     this._triggerElement.removeAttribute('data-popover-trigger');
 
@@ -346,18 +347,27 @@ export default class BasePopMenuComponent extends Component {
    */
   @action
   popoverClosed() {
-    if (this.get('triggerEvent') === 'hover') {
-      this._popperElement.removeEventListener('mouseenter', this._openPopoverHandler);
-      this._popperElement.removeEventListener('mouseleave', this._closePopoverHandler);
-      this._popperElement.removeEventListener('focus', this._openPopoverHandler);
-      this._popperElement.removeEventListener('blur', this._closePopoverBlurHandler);
-    }
-
-    this._popperElement.removeEventListener('keydown', this._popperKeyHandler);
+    this._removePopperEventListeners();
     this._triggerElement.classList.remove('is-active');
     this._triggerElement.setAttribute('aria-expanded', 'false');
     this._popperElement.removeAttribute('data-popover-content');
     this._popperElement = null;
+  }
+
+  /**
+   * Remove all event listeners added in `popoverOpened`
+   */
+  _removePopperEventListeners() {
+    if (this._popperElement) {
+      if (this.get('triggerEvent') === 'hover') {
+        this._popperElement.removeEventListener('mouseenter', this._openPopoverHandler);
+        this._popperElement.removeEventListener('mouseleave', this._closePopoverHandler);
+        this._popperElement.removeEventListener('focus', this._openPopoverHandler);
+        this._popperElement.removeEventListener('blur', this._closePopoverBlurHandler);
+      }
+
+      this._popperElement.removeEventListener('keydown', this._popperKeyHandler);
+    }
   }
 
   // ----- Event Handlers -----

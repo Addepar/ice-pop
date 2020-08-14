@@ -4037,7 +4037,7 @@ ember-cli-normalize-entity-name@^1.0.0:
   dependencies:
     silent-error "^1.0.0"
 
-ember-cli-page-object@^1.15.0-beta.3:
+ember-cli-page-object@1.15.1, ember-cli-page-object@^1.15.0-beta.3:
   version "1.15.1"
   resolved "https://registry.npmjs.org/ember-cli-page-object/-/ember-cli-page-object-1.15.1.tgz#da1f870638584b17e183d0014b4efb15465fadd5"
   integrity sha512-/oUkiha+CLUNQGkQLHJ+mw9rm/V6Gi3VGgzKo7laEGZe6Mk8jl13otxEKWKI2NTJmL69fZxPPfFsqQqpzN+0UA==
