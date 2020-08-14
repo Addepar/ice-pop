@@ -174,9 +174,8 @@ export default class BasePopMenuComponent extends Component {
     let possibleRootElements = self.document.querySelectorAll(rootElementSelector);
 
     assert(
-      `ember-popper with popperContainer selector "${rootElementSelector}" found ${
-        possibleRootElements.length
-      } possible containers when there should be exactly 1`,
+      `ember-popper with popperContainer selector "${rootElementSelector}" found` +
+        ` ${possibleRootElements.length} possible containers when there should be exactly 1`,
       possibleRootElements.length === 1
     );
 
