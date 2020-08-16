@@ -121,6 +121,13 @@ export default class BasePopMenuComponent extends Component {
     return this._openPopoverHandler();
   }
 
+  /**
+   * Closes the popover programatically
+   */
+  close() {
+    return this._closePopoverHandler();
+  }
+
   // ----- Private Variables -----
 
   /**
