@@ -1948,9 +1948,9 @@ broccoli-debug@^0.6.1, broccoli-debug@^0.6.3, broccoli-debug@^0.6.4, broccoli-de
     symlink-or-copy "^1.1.8"
     tree-sync "^1.2.2"
 
-"broccoli-esdoc@https://github.com/pzuraq/broccoli-esdoc.git#93c5d0042fd751cec468fb01687c7f4e1aa447ea":
+"broccoli-esdoc@git+https://github.com/pzuraq/broccoli-esdoc.git#93c5d0042fd751cec468fb01687c7f4e1aa447ea":
   version "0.0.1"
-  resolved "https://github.com/pzuraq/broccoli-esdoc.git#93c5d0042fd751cec468fb01687c7f4e1aa447ea"
+  resolved "git+https://github.com/pzuraq/broccoli-esdoc.git#93c5d0042fd751cec468fb01687c7f4e1aa447ea"
   dependencies:
     broccoli-caching-writer "^3.0.3"
     esdoc "https://github.com/pzuraq/esdoc.git#bcd3f55bada45f0555f491cc3789c4dc3970d703"
@@ -3216,14 +3216,6 @@ elegant-spinner@^1.0.1:
   resolved "https://registry.npmjs.org/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
   integrity sha1-2wQ1IcldfjA/2PNFvtwzSc+wcp4=
 
-ember-ajax@^3.0.0:
-  version "3.1.3"
-  resolved "https://registry.npmjs.org/ember-ajax/-/ember-ajax-3.1.3.tgz#f51b8e3e36765575a2698c8660e377d4d6371642"
-  integrity sha512-C+BmWxXECGWuv7T17OHSQySpVuoCalmxI/NLUr+3eSlBeCD0xwI3mRRL1CbmAWXdyNwzK3je+lFCSuMaJu2miA==
-  dependencies:
-    ember-cli-babel "^6.16.0"
-    najax "^1.0.3"
-
 ember-assign-polyfill@^2.2.0:
   version "2.6.0"
   resolved "https://registry.npmjs.org/ember-assign-polyfill/-/ember-assign-polyfill-2.6.0.tgz#07847e3357ee35b33f886a0b5fbec6873f6860eb"
@@ -3295,10 +3287,10 @@ ember-cli-broccoli-sane-watcher@^2.0.4:
     rsvp "^3.0.18"
     sane "^2.4.1"
 
-ember-cli-dependency-checker@^2.0.0:
-  version "2.2.1"
-  resolved "https://registry.npmjs.org/ember-cli-dependency-checker/-/ember-cli-dependency-checker-2.2.1.tgz#1eb728258dc7d528951c391d39b365e1beedecca"
-  integrity sha512-DmxayycdIPx6wZLpfwXq+MOtKtxhFbCw05kdGaQEyKKNSMeSdywsUjZyxneEpGb8Ztrm+kBwFW3eseydnYLWyw==
+ember-cli-dependency-checker@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/ember-cli-dependency-checker/-/ember-cli-dependency-checker-3.2.0.tgz#9202ad9e14d6fda33cffc22a11c343c2a8885330"
+  integrity sha512-dkSmcJ/jY/2ms/S6ph2jXSfOW5VfOpLfg5DFEbra0SaMNgYkNDFF1o0U4OdTsG37L5h/AXWNuVtnOa4TMabz9Q==
   dependencies:
     chalk "^2.3.0"
     find-yarn-workspace-root "^1.1.0"
@@ -3306,7 +3298,7 @@ ember-cli-dependency-checker@^2.0.0:
     resolve "^1.5.0"
     semver "^5.3.0"
 
-ember-cli-esdoc@~0.0.2:
+ember-cli-esdoc@~0.0.4:
   version "0.0.4"
   resolved "https://registry.npmjs.org/ember-cli-esdoc/-/ember-cli-esdoc-0.0.4.tgz#a3e8932f259d99d2b378078bd36c57c8b8b31ea3"
   integrity sha1-o+iTLyWdmdKzeAeL02xXyLizHqM=
@@ -4128,9 +4120,9 @@ esdoc-publish-html-plugin@latest:
     marked "0.3.19"
     taffydb "2.7.2"
 
-"esdoc-publish-module-html-plugin@https://github.com/pzuraq/esdoc-publish-module-html-plugin.git#fa1c2dbb20521f5dc477a764ab03272fb74f7d37":
+"esdoc-publish-module-html-plugin@git+https://github.com/pzuraq/esdoc-publish-module-html-plugin.git#fa1c2dbb20521f5dc477a764ab03272fb74f7d37":
   version "0.0.12"
-  resolved "https://github.com/pzuraq/esdoc-publish-module-html-plugin.git#fa1c2dbb20521f5dc477a764ab03272fb74f7d37"
+  resolved "git+https://github.com/pzuraq/esdoc-publish-module-html-plugin.git#fa1c2dbb20521f5dc477a764ab03272fb74f7d37"
   dependencies:
     babel-generator "6.11.4"
     cheerio "0.22.0"
@@ -6220,11 +6212,6 @@ jest-validate@^23.5.0:
     leven "^2.1.0"
     pretty-format "^23.6.0"
 
-jquery-deferred@^0.3.0:
-  version "0.3.1"
-  resolved "https://registry.npmjs.org/jquery-deferred/-/jquery-deferred-0.3.1.tgz#596eca1caaff54f61b110962b23cafea74c35355"
-  integrity sha1-WW7KHKr/VPYbEQlisjyv6nTDU1U=
-
 jquery@^3.2.1:
   version "3.3.1"
   resolved "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
@@ -7482,15 +7469,6 @@ mute-stream@0.0.7:
   resolved "https://registry.npmjs.org/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   integrity sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
 
-najax@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/najax/-/najax-1.0.4.tgz#63fd8dbf15d18f24dc895b3a16fec66c136b8084"
-  integrity sha512-wsSacA+RkgY1wxRxXCT3tdqzmamEv9PLeoV/ub9SlLf2RngbPMSqc3A7H35XJDfURC0twMmZsnPdsYPkuuFSVg==
-  dependencies:
-    jquery-deferred "^0.3.0"
-    lodash.defaultsdeep "^4.6.0"
-    qs "^6.2.0"
-
 nan@^2.9.2:
   version "2.13.0"
   resolved "https://registry.npmjs.org/nan/-/nan-2.13.0.tgz#7bdfc27dd3c060c46e60b62c72b74012d1a4cd68"
@@ -8245,7 +8223,7 @@ qs@6.7.0:
   resolved "https://registry.npmjs.org/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-qs@^6.2.0, qs@^6.4.0:
+qs@^6.4.0:
   version "6.6.0"
   resolved "https://registry.npmjs.org/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
   integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
